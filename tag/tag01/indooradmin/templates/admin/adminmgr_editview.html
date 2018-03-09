@@ -1,0 +1,466 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script language=javascript src="{$mediaServer}commonjs/date.js"></script>
+<link rel="stylesheet" type="text/css" href="{$mediaServer}css/imgareaselect-default.css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery.imgareaselect.min.js"></script>
+<script language="javascript" src="js/common.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+var cmail = true;
+var cmobile = true;
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+$(document).ready(function(){
+	$("chkAll").bind("click", function(){
+		$(obj).attr("ago",$("chkAll").attr("checked"));
+	});
+
+	$("checkDream").bind("click", function(){
+		$(obj).attr("back",$("checkDream").attr("checked"));
+	});
+	$("#PROV").change(function(){
+		ajaxLink("CITY","val="+$(this).val()+"&flag=false",new Array());
+	});
+});
+
+function EditSubmit(){
+	if(checkForm() && cmail && cmobile){
+		$("#myForm").submit();
+	}
+}
+
+//ajax验证邮箱
+function ajaxCheckNAME(){
+	var email = $('#EMAIL').val();
+	var name = $('#user_name').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=AdminMgr/AjaxCheckEMAIL',
+		data	:  {email : email , name : name},
+		success :  function(result){
+			if(result){
+				cmail = false;
+				$('#namemsg').show();
+				return false;
+			}else{
+				cmail = true;
+				$('#namemsg').hide();
+			}
+		}
+	});
+}
+
+//ajax验证手机号码唯一性
+function ajaxCheckMobile(){
+	if ($('#MOBILE').val() != '')
+	{
+		
+	//var reg = /(^13[0-9]|15[6-9]|150|151|153|180|18[5-9])[0-9]{8}$/;
+	var reg = /(^13|14|15|18)[0-9]{9}$/;
+	if($('#MOBILE').val().length != 11 || !reg.test($('#MOBILE').val()))
+	{
+		alert('手机号码不正确！');
+		$('#MOBILE').focus();
+		cmobile = false;
+		//return false;
+	}
+	}
+	var mobile = $('#MOBILE').val();
+	var name = $('#user_name').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=AdminMgr/AjaxCheckMobile',
+		data	:  {mobile : mobile , name : name},
+		success :  function(result){
+			if(result){
+				cmobile = false;
+				$('#mobilemsg').show();
+			}else{
+				cmobile = true;
+				$('#mobilemsg').hide();
+			}
+		}
+	});
+}
+
+function checkForm()
+{
+	if($('#changepass').val()){
+		if ($('#PASSWD').val() != '' && $('#PASSWD1').val() != $('#PASSWD').val())
+		{
+			alert('两次输入的密码不一致！');
+			$('#PASSWD').val('');
+			$('#PASSWD1').val('');
+			$('#PASSWD').focus();
+			return false;
+		}
+		if($('#PASSWD').val() == '' || $('#PASSWD1').val() == '')
+		{
+			alert("密码不能为空！");
+			return false;
+		}
+		if(strlen($('#PASSWD').val())<5){
+			alert("密码长度不能小于六位");
+			$('#PASSWD').value = '';
+			$('#PASSWD1').value = '';
+			$('#PASSWD').focus();
+			return false;
+		}
+		return true;
+	}else{
+		if($('#NICK_NAME').val() == ''){
+			alert('请填写昵称！');
+			$('#NICK_NAME').focus();
+			return false;
+		}
+		if(strlen($('#NICK_NAME').val())>30){
+			alert('昵称不能多于15个字！');
+			$('#NICK_NAME').focus();
+			return false;
+		}
+		if(strlen($('#REAL_NAME').val())>12){
+			alert('真实姓名太长，有误！');
+			$('#REAL_NAME').focus();
+			return false;
+		}
+		if ($('#EMAIL').val() == '')
+		{
+			alert('请填写电子邮箱！');
+			$('#EMAIL').focus();
+			return false;
+		}
+		var re = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+		if(!re.test($('#EMAIL').val()))
+		{
+			alert('请输入正确的邮箱格式！');
+			$('#EMAIL').focus();
+			return false;
+		}
+		return true;
+	}
+}
+
+function dateSelected()
+{
+	onloadDate();   //年月日下拉框填充
+	var options = document.getElementById("year").options;
+	for (var i = 0;i < options.length;i ++)
+	{
+	  {/literal}
+	 if ({$user_info.year} == options[i].value) 
+	  {literal}
+	 {
+	      options[i].selected = true;
+	 }
+
+	}
+	var monthOption = document.getElementById("month").options;
+	
+	for (var y = 0;y < monthOption.length;y++)
+	{
+	   {/literal}
+	 if ({$user_info.month} == monthOption[y].value) 
+	   {literal}{
+		 monthOption[y].selected = true;
+	 }
+
+	}
+	
+	var dayOption = document.getElementById("day").options;
+	for (var d = 0;d< dayOption.length;d++)
+	{
+	  {/literal}
+	 if ({$user_info.day} == dayOption[d].value) 
+	  {literal}{
+		 dayOption[d].selected = true;
+	 }
+
+	}
+}
+
+//判断中英文
+function strlen(str) 
+{
+   var strlength=0;
+   for (i=0;i<str.length;i++)
+  {
+     if (isChine(str.charAt(i))==true)
+        strlength=strlength + 2;
+     else
+        strlength=strlength + 1;
+ 	}
+	return strlength;
+}
+
+function isChine(str)
+{
+   var lst = /.*[\u4e00-\u9fa5]+.*$/;
+   return lst.test(str);      
+}
+
+//上传头像
+function UpPhoto(){
+	$("#ajax_area_img").show();
+	$("#form1").submit();
+}
+
+var width_p = 0;
+var height_p = 0;
+//剪切效果
+function callback(p_name,p_filename,p_width,p_height,p_type,p_size,src_width){
+	$("#thumbnail").show();
+	$("#ajax_area_img").hide();
+	
+	width_p = p_width;
+	height_p = p_height;
+	var scl=p_width/p_height;
+	$("#thumbnail").attr("src",p_name);
+	if(height_p>200) 
+      {
+    	height_p=200;
+    	width_p=200*scl;
+      }
+    
+	$("#thumbnail").attr("height",height_p);
+	$("#thumbnail").attr("width",width_p);
+	$("#minw").val(width_p);
+	$("#head_now").attr("src",p_name);
+	var scaleX = 100 / 120; 
+	var scaleY = 100 / 120;
+	$('#head_now').css({ 
+		width: Math.round(scaleX * width_p) + 'px', 
+	    height: Math.round(scaleY * height_p) + 'px',
+		marginLeft: '0px', 
+		marginTop: '0px'
+	});
+	$("#pname").val(p_name);
+	$("#photo_name").val(p_filename);
+	$("#ptype").val(p_type);
+	$("#psize").val(p_size);
+	$("#src_width").val(src_width);
+	
+	$('#thumbnail').imgAreaSelect({ 
+		x1: 0, 
+		y1: 0, 
+		x2: 120, 
+		y2: 120,
+		minHeight:100,
+		minWidth:100,
+		handles: true,
+		selectionOpacity: 0.2, 
+		keys: { arrows: 10, shift: 5 },
+		aspectRatio: '1:1',
+		onSelectChange: preview
+	});
+	$('#x1').val(0);
+	$('#y1').val(0);
+	$('#x2').val(120);
+	$('#y2').val(120);
+	$('#w').val(120);
+	$('#h').val(120);
+}
+
+function preview(img, selection) {
+	var scaleX = 100 / selection.width; 
+	var scaleY = 100 / selection.height; 
+	
+	$('#head_now').css({ 
+		width: Math.round(scaleX * width_p) + 'px', 
+		height: Math.round(scaleY * height_p) + 'px',
+		marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px', 
+		marginTop: '-' + Math.round(scaleY * selection.y1) + 'px' 
+	});
+	$('#x1').val(selection.x1);
+	$('#y1').val(selection.y1);
+	$('#x2').val(selection.x2);
+	$('#y2').val(selection.y2);
+	$('#w').val(selection.width);
+	$('#h').val(selection.height);
+}
+
+function Alert(msg){
+	alert(msg);
+	$("#ajax_area_img").hide();
+}
+
+</script>
+{/literal}
+<iframe name='hidden_frame' id="hidden_frame" style="display:none;" ></iframe>
+<div class="content">
+  <div class="main">
+  {if $editPass}
+  <div class="crumb"><span>当前位置：<a href="ea.php?r=rUserContentMgr/Impression">内容管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=AdminMgr">用户管理</a>&nbsp;&gt;&nbsp;修改用户{$user_info.NAME}密码</span></div>
+  {else}
+  <div class="crumb"><span>当前位置：<a href="ea.php?r=UserContentMgr/Impression">内容管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=AdminMgr">用户管理</a>&nbsp;&gt;&nbsp;修改用户{$user_info.NAME}资料</span></div>
+  {/if}
+  <input type="hidden" id="subbarFlag" value="admin_mgr_bar" />
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> {if $editPass}修改用户密码{else}修改用户基本资料{/if}</font></td>
+					<td width="50%" align="right"><a href="javascript:history.go(-1);"><font color="#666" style="font-weight:bold;font-size:14px">[返回上一页]</font></a></td>
+				</tr>
+			</table>
+<table class="itable">
+               <tr class="row0">
+                    <td align="center">
+						<table border="0" cellspacing="0" cellpadding="0">
+						<form id="myForm" name="myForm" method="post" action="ea.php?r=AdminMgr/DoEdit" style="margin:0px;padding:0px;" onsubmit="return checkForm();">
+							<tr>
+        						<td align="right" style="border:0px;width:12%">用 户 名：</td>
+    						    <td align="left" style="border:0px;width:40%">{$user_info.NAME} 
+    						    <input type="hidden" name="user_name" id="user_name" value="{$user_info.NAME}" />
+    						    <input type="hidden" name="subs_id" value="{$user_info.SUBS_ID}" /></td>
+    						    {if !$editPass}<td align="right" style="border:0px;"><font color="red" style="font-size:12px;">*</font>昵称：</td>
+    						    <td align="left" style="border:0px;"><input name="NICK_NAME" type="text" id="NICK_NAME" value="{$user_info.NICK_NAME}" maxlength="20" /></td>
+    						{/if}</tr>
+    						{if $editPass}
+    						<tr>
+    						    <td align="right" width="36%" style="border:0px;"><font color="red" style="font-size:12px;">*</font>修改密码：
+    						    <input type="hidden" id="changepass" value="admin">
+    						    </td>
+    						    <td align="left" style="border:0px;"><input name="PASSWD" type="password" id="PASSWD" maxlength="20" style="font-size:12px;" /></td>
+						    </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;"><font color="red" style="font-size:12px;">*</font>确认密码：</td>
+    						    <td align="left" style="border:0px;"><input name="PASSWD1" type="password" id="PASSWD1" maxlength="20" style="font-size:12px;" />
+    						    <input type="hidden" name="user_name" value="{$user_info.NAME}" />
+    						    <input type="hidden" name="subs_id" value="{$user_info.SUBS_ID}" />
+    						    </td>
+						    </tr>
+						    {else}
+    						<tr>
+    						    <td align="right" style="border:0px;">真实姓名：</td>
+    						    <td align="left" style="border:0px;"><input name="REAL_NAME" type="text" id="REAL_NAME" value="{$user_info.REAL_NAME}" maxlength="20" /></td>
+    						    
+                                <td align="right" style="border:0px;">性别：</td>
+                                <td align="left" style="border:0px;"><input name="GENDER" type="radio" id="GENDER" value="G" class="intxt2" tabindex="4" checked="checked" {if $user_info.GENDER eq 'G'}{/if}/>男&nbsp;&nbsp;&nbsp;&nbsp;<input name="GENDER" type="radio" id="GENDER" value="M" class="intxt2" tabindex="5" {if $user_info.GENDER eq 'M'}checked="checked"{/if}/>女
+                                </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;"><font color="red" style="font-size:12px;">*</font>电子邮箱：</td>
+    						    <td align="left" style="border:0px;"><input name="EMAIL" type="text" id="EMAIL" value="{$user_info.EMAIL}" size="40" maxlength="60" onchange="ajaxCheckNAME();"/><span id="namemsg" class="prompt" style="display:none; color:red;">该邮箱已存在</span></td>
+						        <td align="right" style="border:0px;"> 生日：</td>
+                                <td align="left" style="border:0px;"><select id="year" name="year" tabindex="7" onchange="changeYear();"></select>年
+                                <select id="month" name="month" onchange="changeMonth();" tabindex="8"></select>月<select id="day" name="day" tabindex="9" ></select>日</td>
+                                </tr>
+                            <tr>
+    						    <td align="right" style="border:0px;">安全邮箱：</td>
+    						    <td align="left" style="border:0px;">{$user_info.SAFE_EMAIL}</td>
+						        <td align="right" style="border:0px;"> 绑定平台：</td>
+                                <td align="left" style="border:0px;">{if $API}{foreach from=$API item=api}{$api.APINAME}&nbsp;{/foreach}{/if}</td>
+                                </tr>    
+						    <tr>
+						        <td align="right" style="border:0px;">积分：</td>
+    						    <td align="left" style="border:0px;">{$user_info.MONEY }</td>
+						        <!--<td align="right" style="border:0px;">用户角色：</td>
+    						    <td align="left" style="border:0px;">
+									<select id="ROLE" name="ROLE">
+									{if $user_info.ROLE}{html_options options=$role_list selected=$user_info.ROLE}
+									{else}{html_options options=$role_list selected='USER'}{/if}</select>
+								</td>-->
+						    </tr>
+						    <tr>
+    						    <td align="right" style="border:0px;">手机号码：</td>
+    						    <td align="left" style="border:0px;"><input name="MOBILE" type="text" id="MOBILE" value="{$user_info.MOBILE}" size="40" maxlength="60" onchange="ajaxCheckMobile();"/><span id="mobilemsg" class="prompt" style="display:none;color:red;">此手机号已绑定</span></td>
+						        <td align="right" style="border:0px;">所属地区：</td>
+    						    <td align="left" style="border:0px;">
+									<strong>省</strong>
+	       	                        <select id="PROV" name="PROV" style="font-size:12px;width:100px" >
+	       	                        <option value="">- 请选择 -</option>
+	       	                        {html_options options=$allProv selected=$user_info.PROV}	
+	       	                        </select>
+                                    <strong>城市</strong>
+	       	                        <select id="CITY" name="CITY" class="CITY" style="font-size:12px;width:138px">
+	       	                        <option value="">- 请选择 -</option>
+	       	                        {html_options options=$allCity selected=$user_info.CITY}	       	                        
+			                   </select>
+        	                   </td>
+						    </tr>   
+    						<tr>
+    						    <td align="right" style="border:0px;">联系地址：</td>
+    						    <td align="left" style="border:0px;"><input name="ADDRESS" type="text" id="ADDRESS" value="{$user_info.ADDRESS}" size="40" maxlength="60" /></td>
+    						    <td align="right" style="border:0px;">邮政编码：</td>
+    						    <td align="left" style="border:0px;"><input name="POST_CODE" type="text" id="POST_CODE" value="{$user_info.POST_CODE}" size="40" maxlength="60" />
+    						        <input type="hidden" name="x1" value="" id="x1" />
+									<input type="hidden" name="y1" value="" id="y1" />
+									<input type="hidden" name="x2" value="" id="x2" />
+									<input type="hidden" name="y2" value="" id="y2" />
+									<input type="hidden" name="w" value="" id="w" />
+									<input type="hidden" name="h" value="" id="h" />
+									<input type="hidden" name="photo_name" value="" id="photo_name" />
+									<input type="hidden" name="pname" value="" id="pname" />
+									<input type="hidden" name="ptype" value="" id="ptype" />
+									<input type="hidden" name="psize" value="" id="psize" />
+									<input type="hidden" name="src_width" value="" id="src_width" />
+									<input type="hidden" name="minw" value="200" id="minw" />
+    						    </td>
+						    </tr>
+						    </form>
+    						<tr>
+    						    <td align="right" style="border:0px;">选择头像：</td>
+    						    <td align="left" style="border:0px;">
+    						        <form id="form1" name="form1" action="ea.php?r=AdminMgr/SavePhoto&subs_id={$user_info.SUBS_ID}" method="post" target="hidden_frame" enctype="multipart/form-data">
+									<input type="file" id="PIC" name="file" class="inp-box"  size="25" onchange="UpPhoto();"/>
+									<span>（支持JPG、PNG、GIF，且小于5M）</span>
+									<img id="ajax_area_img" width="30" height="26" style="vertical-align:middle;display:none" src="{$mediaServer}images/loading.gif">
+									</form>
+    						    </td>
+    						</tr>
+						    <tr>
+    						    <td align="right" style="border:0px;">头像预览：</td>
+    						    <td align="left" style="border:0px;">
+    						    <div style="background:none repeat scroll 0 0 #E7E7E7;display:table-cell;text-align:center;vertical-align:center;width:200px;height:200px;float:left;">
+    						        <img src="" style="display:none;" width="200px;" height="200px" id="thumbnail"/></div>
+    						    <div class="chose-photo" style="border:50px solid #FCFCFC;position:relative; overflow:hidden; width:100px; height:100px;float:left;">
+								    <img {if $imgUrl}src="{$img_server}{$imgUrl}"{else}src="{$img_server}{$default_user_logo}"{/if} id="head_now" style="position: relative;width:100px;height:100px;"/></div>
+								
+			                    </td>
+						    </tr>
+						    {/if}
+						</table>
+					</td>
+                </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="30" align="center" valign="bottom">
+						<input type="button" onclick="EditSubmit();" value="确定修改" style="font-size:12px;width:70px;height:20px;" />
+						{if $user_info.STATE eq 'A'}
+						<input type="button" value="禁用" style="font-size:12px;width:65px;height:20px;" onclick="window.location='ea.php?r=AdminMgr/UserDisable&subs_id={$user_info.SUBS_ID}';"  />
+						{elseif $user_info.STATE eq 'X'}
+						<input type="button" value="激活" style="font-size:12px;width:65px;height:20px;" onclick="window.location='ea.php?r=AdminMgr/UserActive&subs_id={$user_info.SUBS_ID}';"  />
+						{elseif $user_info.STATE eq 'P'}
+						<input type="button" value="禁用" style="font-size:12px;width:65px;height:20px;" onclick="window.location='ea.php?r=AdminMgr/UserDisable&subs_id={$user_info.SUBS_ID}';"  />
+						<input type="button" value="激活" style="font-size:12px;width:65px;height:20px;" onclick="window.location='ea.php?r=AdminMgr/UserActive&subs_id={$user_info.SUBS_ID}';"  />
+						{/if}
+						<input type="button" value="返回上一页" style="font-size:12px;width:70px;height:20px;" onclick="history.go(-1);" />
+					</td>
+				</tr>
+			</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="usercontentmgr">
+   </div>
+   <script>dateSelected();</script>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

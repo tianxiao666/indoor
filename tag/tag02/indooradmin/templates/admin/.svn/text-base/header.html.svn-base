@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <title>::室内数据管理系统::</title>
+        <link href="{$mediaServer}css/thickbox.css" rel="stylesheet" type="text/css" />
+        <link href="{$mediaServer}css/index.css" rel="stylesheet" type="text/css" />
+        <link href="{$mediaServer}css/header.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="{$mediaServer}js/jquery/jquery-1.4.2.min.js">
+        </script>
+        <script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.validate.js">
+        </script>
+        <script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/juery.validate.additional-methods.js">
+        </script>
+        <script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.jfvalidate.helper.js">
+        </script>
+        <script type="text/javascript" src="{$mediaServer}js/calendar/my97datepicker/WdatePicker.js">
+        </script>
+        <script type="text/javascript" src="{$mediaServer}js/menuBar.js">
+        </script>
+        <script type="text/javascript" src="{$mediaServer}js/json/json2.js">
+        </script>
+        {literal}
+        <script language="javascript" type="text/javascript">
+            function confirmLogout(){
+                if (confirm('您确定要退出登录吗？')) {
+                    $('#java_loginout').attr("src", "{/literal}{$javaurl}slogout?userid={$userinfo.NAME}{literal}");
+                    return true;
+                }
+                return false;
+            }
+            
+            function showSecondMenu(li_node){
+                hiddenSecondMenu
+                var child_list = li_node.children;
+                var divnode;
+                for (var i = 0; i < child_list.length; i++) {
+                    if (child_list[i].className == "tabox" && child_list[i].tagName == "DIV") {
+                        divnode = child_list[i];
+                        break;
+                    }
+                }
+                if (divnode != null) {
+                    divnode.style.display = "block";
+                }
+                li_node.className = "visited";
+                
+            }
+            
+            function hiddenSecondMenu(){
+                var child_list = document.getElementById("nav_menu").children;
+                for (var i = 0; i < child_list.length; i++) {
+                    if (child_list[i].className == "visited" && child_list[i].tagName == "LI") {
+                        child_list[i].className = "";
+                        var second_childlist = child_list[i].children;
+                        for (var j = 0; j < second_childlist.length; j++) {
+                        
+                            if (second_childlist[j].className == "tabox" && second_childlist[j].tagName == "DIV") {
+                                second_childlist[j].style.display = "none";
+                            }
+                        }
+                        //     alert(i+"bb");
+                    }
+                }
+            }
+        </script>
+        {/literal}
+    </head>
+    <body>
+        <div class="warp">
+            <div class="top">
+                <iframe id="java_loginout" name="java_loginout" src="about:blank" width="0" height="0" frameborder="0" scrolling="no">
+                </iframe>
+                <span>欢迎您:<a>{if $userinfo.REAL_NAME}{$userinfo.REAL_NAME}{else}{$userinfo.NAME}{/if}</a><a href="ea.php?r=UserInfoSet&subs_id={$userinfo.SYS_SUBS_ID}">个人资料</a><a href="ea.php?r=UserInfoSet&flag=1&subs_id={$userinfo.SYS_SUBS_ID}">修改密码</a><a href="ea.php?r=Login/Logout" onclick="return confirmLogout();">退出登录</a></span>
+                <h1><a target="_blank" href="{$SFBaseUrl}ea.php">室内数据管理平台</a></h1>
+            </div>
+            <div class="nav">
+                <ul class="nav-list" id="nav_menu" onmouseout="hiddenSecondMenu();">
+                    <li id="header" onmouseover="showSecondMenu(this);" class="">
+                        <a href="ea.php?r=BuildingMgr" id="building" class="menu">场所管理</a>
+                    </li>
+                    {if $userinfo.ROLE.ADMIN || $userinfo.per.NOT}
+                    <li class="se">
+                    </li>
+                    <li onmouseover="showSecondMenu(this);" class="">
+                        <a href="ea.php?r=roleMgr" id="backmanager" class="menu">系统设置</a>
+                        <div class="tabox" style="display:none">
+                            <div class="c">
+                            </div>
+                            {include file="second_menu.html" name="role_mgr_bar" type="backmgr"}
+                            <div class="c">
+                            </div>
+                        </div>
+                    </li>{/if}
+                </ul>
+            </div>

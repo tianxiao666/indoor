@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/srcsvn/indoor/!svn/ver/1/sf/library/phpmailer
+END
+class.pop3.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/phpmailer/class.pop3.php
+END
+CPhpMailer.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/phpmailer/CPhpMailer.php
+END
+class.smtp.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/phpmailer/class.smtp.php
+END

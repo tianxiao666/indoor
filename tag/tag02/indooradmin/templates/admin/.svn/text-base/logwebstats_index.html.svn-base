@@ -1,0 +1,154 @@
+
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;网站日志</span></div>
+  <input type="hidden" id="subbarFlag" value="log_mgr_bar" />
+
+  <input type="hidden" id="c_name" value="web_log" />
+  {include file="stat_left_menu.html"}
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+ 
+	<div class="scenic_list">
+<table class="itable">
+<thead>
+<tr>
+ 	<th width="5%" align="left">序号</th>
+ 	<th width="18%">项目</th>
+ 	<th width="18%" align="left">统计对象</th>
+ 	<th width="18%" align="left">统计目的</th>
+ 	<th width="18%" align="left">统计规则</th>
+ 	<th width="12%" align="left">统计频率</th>
+ 	<th width="10%" align="left">操作</th>
+</tr>
+</thead>
+<tbody>
+    <tr class="row0">
+       <td align="left">1</td>
+       <td align="left">注册用户数</td>
+       <td align="left">用户注册行为</td>
+       <td align="left">了解用户从网站注册的数量</td>
+       <td align="left">用户每注册一个用户则记录一次</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=StatConversion/SearchStatcr&FUNC=注册&APP=WEB">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+     <tr class="row0">
+       <td align="left">2</td>
+       <td align="left">每个频道的访问量</td>
+       <td align="left">网站每个频道首页</td>
+       <td align="left">了解用户从首页进来之后的去向</td>
+       <td align="left">对每个频道首页进行访问统计，并对来源进行分组与筛选，选出从网站首页进来的访问量</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=FunctionQuery&URL={$func_url.scenic}&APP=WEB">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+    <tr class="row0">
+       <td align="left">3</td>
+       <td align="left">用户登录次数</td>
+       <td align="left">用户登录行为</td>
+       <td align="left">了解用户使用网站登录的次数</td>
+       <td align="left">用户每登录一次即记录</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=LogOtherStats/CleOtherStats&type=login&app_type=WEB">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+    
+    <tr class="row0">
+       <td align="left">4</td>
+       <td align="left">风景搜索功能使用情况</td>
+       <td align="left">搜索功能</td>
+       <td align="left">功能使用量</td>
+       <td align="left">搜索功能被使用一次，则记录一次，分页不算</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=Syslogs&APP=WEB&GET_URL={$func_url.allsearch}&APP=WEB&LIKE=Y">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+    <tr class="row0">
+       <td align="left">5</td>
+       <td align="left">全文搜索功能使用情况</td>
+       <td align="left">搜索功能</td>
+       <td align="left">功能使用量</td>
+       <td align="left">搜索功能被使用一次，则记录一次，分页不算</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=Syslogs&APP=WEB&GET_URL={$func_url.search}&APP=WEB&LIKE=Y">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+     <tr class="row0">
+       <td align="left">6</td>
+       <td align="left">风景频道访问量的来源（站内和站外）和去向</td>
+       <td align="left">风景频道</td>
+       <td align="left">分析风景频道访问量来源以及用户行为轨迹</td>
+       <td align="left">统计风景频道所有访问量，并对其进行来源分组。记录用户到达频道后，进入的下一个页面，即用户去向。可与第2点结合，去向：输入风景频道地址是作为来源地址，所有访问地址。</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=LogTrackStats&url={$func_url.scenic}">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+    
+    <tr class="row0">
+       <td align="left">7</td>
+       <td align="left">首页访问量的来源和去向</td>
+       <td align="left">网站首页</td>
+       <td align="left">分析首页访问量来源以及用户行为轨迹</td>
+       <td align="left">统计首页所有访问量，并对其进行来源分组。记录用户到达频道后，进入的下一个页面，即用户去向。</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=LogTrackStats&url={$func_url.home}">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+    <tr class="row0">
+       <td align="left">8</td>
+       <td align="left">统计所有访问的用户，有多少用户是登录状态（每天统计一次，统计总用户数和登录用户数</td>
+       <td align="left">注册用户</td>
+       <td align="left">分析用户注册后，有多少人会进行登录</td>
+       <td align="left">将所有访问的用户中，登录状态的用户筛选出来，并进行统计。</td>
+       <td align="left">每天统计一次</td>
+       <td align="left"><a href="ea.php?r=StatConversion/SearchStatcr&FUNC=登录&APP=WEB">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    
+    
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+	<input type="hidden" id="headMenu" value="statmanager">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+   </div>
+   </div> 
+   </div>
+
+{include file="footer.html"}
+
+

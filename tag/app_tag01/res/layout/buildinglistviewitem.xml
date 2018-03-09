@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/icon_iv"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginLeft="1sp"
+        android:layout_marginRight="1sp"
+        android:background="@drawable/icon_indoormap"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/buildingname_tv"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3sp"
+        android:layout_marginRight="3sp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="金山大厦"
+        android:textColor="#ff0066FF"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/distance_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3sp"
+        android:text="10千米"
+        android:textColor="#ff0066FF"
+        android:textSize="14sp" />
+
+</LinearLayout>

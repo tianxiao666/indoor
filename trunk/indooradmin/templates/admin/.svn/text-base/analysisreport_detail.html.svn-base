@@ -1,0 +1,118 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+function Log_Submit(){
+	var start = $("#START_TIME").val();
+	var end   = $("#END_TIME").val();
+	if( start!='' && end!='' && end < start)
+	{
+		alert(app+"开始日期不能大于终止日期！");
+		return false;
+	}
+	$("#log_search_form").submit();
+}
+</script>
+{/literal}
+<input type="hidden" id="app_name" value="{if $data.APP}{$data.APP}{else}WEB{/if}">
+<div class="content">
+	<div class="main">
+	    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;分析报表&nbsp;&gt;&nbsp;{$func_name}</span></div>
+		<div class="tabtext" id="tabtext1" >
+			<table>
+				<tr>
+					<td valign="top"  style="padding: 10px 10px 0;">
+						<table border="0" cellspacing="0" cellpadding="0" >
+							<tr> 
+								<td valign="top" colspan="2">
+									<div class="scenic_search" style="margin-left: 8px;">
+										<div class="chose">
+											<form action="ea.php?r=AnalysisReport/ReportDetail" id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px;width:600px;">
+												<input type="hidden" name="FLAG" value="1">
+												<input type="hidden" name="func" value="{$data.func}">
+												<table border="0" cellspacing="0" cellpadding="0">
+													<tbody>
+														<tr>
+															<td height="25" align="left" class="formTitle"><span>起始日期：</span></td>
+															<td><input type="text" id="START_TIME" name="START_TIME" value="{$data.START_TIME}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true,dateFmt:'yyyy-MM-dd 00:00:00'}{/literal})" /></td>
+															<td height="25" align="left" class="formTitle"><span>结束日期：</span></td>
+															<td><input type="text" id="END_TIME" name="END_TIME" class="Wdate" value="{$data.END_TIME}" onfocus="WdatePicker({literal}{readOnly:true,dateFmt:'yyyy-MM-dd 00:00:00'}{/literal})" /></td>
+															<td><div class="btn_search"><a onclick="Log_Submit();" style="cursor:pointer;"></a></div></td>
+														</tr>
+													</tbody>
+												</table>
+											</form>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" style="padding:10px 0px 0px 10px">
+									<span style="font-size:14px;">{$func_name}：</span><span style="font-size:14px;color:red">{if $func_cnt.CNT}{$func_cnt.CNT}{else}0{/if}</span>
+								</td>
+								<td align="right" width="50%" style="padding: 10px 10px 0pt;">
+									<a href="ea.php?r=AnalysisReport/Report&START_TIME={$data.START_TIME}&END_TIME={$data.END_TIME}&FLAG=1">
+									<font color="#666" style="font-weight:bold;font-size:14px">[返回列表页]</font>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top" style="padding:10px 10px 0;" colspan="2">
+								{if (!$func_list)}
+								<div class="scenic_list">
+									<table class="itable">
+										<thead>
+											<tr>
+												<td width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></td>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								{else}
+								<div class="scenic_list">
+									<table class="itable">
+									<thead>
+									<tr>
+										<th width="{if $data.func=='U'||$data.func=='V'}25%{else}33%{/if}" align="left">序号</th>
+										<th>日期</th>
+										{if $data.func=='U'||$data.func=='V'}
+										<th width="25%" align="left">独立IP数</th>
+										{/if}
+										<th width="{if $data.func=='U'||$data.func=='V'}25%{else}33%{/if}" align="left">总数</th>
+									</tr>
+									</thead>
+									<tbody>
+									{foreach from=$func_list item=item name=func}
+									<tr class="{cycle values='row0,row1'}">
+										<td align="left">{$smarty.foreach.func.iteration+$page.page*$page.pagesize-$page.pagesize}</td>
+										<td align="left">{if $data.func=='U'||$data.func=='V'}{$item.ADD_TIME}{else}{$item.ADD_TIME|date_format:"%Y-%m-%d"}{/if}</td>
+										{if $data.func=='U'||$data.func=='V'}
+										<td width="25%" align="left">{if $item.OTHER_CNT}{$item.OTHER_CNT}{else}0{/if}</td>
+										{/if}
+										<td align="left">{if $item.CNT}{$item.CNT}{else}0{/if}</td>
+									</tr>
+									{/foreach}
+									</tbody>
+									</table>
+								</div>
+								{/if}
+								</td>
+							</tr>
+							<tr> 
+								<td valign="top" style="padding:10px;" colspan="2">
+									<div class="pagebreak">
+										<div class="page">
+										{include file="page_info.html"}
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div> 
+</div>
+{include file="footer.html"}

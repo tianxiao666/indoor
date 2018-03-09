@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/templates/admin
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/templates/admin/readme.txt
+END
+error.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/templates/admin/error.html
+END
+page_info.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/templates/admin/page_info.html
+END
+header.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/templates/admin/header.html
+END
+footer.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/templates/admin/footer.html
+END

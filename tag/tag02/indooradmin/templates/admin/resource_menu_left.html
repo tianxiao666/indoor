@@ -1,0 +1,94 @@
+{literal}
+<style type="text/css">
+.resource_menu_left {
+	float:left;
+	padding:10px;
+	width:125px;
+	margin:10px;
+}
+.resource_menu_left .menu_title {
+    border: 1px solid #666666;
+    font-size: 16px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+	font-weight:bold;
+}
+.resource_menu_left .menu_links {
+}
+.resource_menu_left .menu_links ul{ list-style-type: none; margin:0px; padding:0px; }
+.resource_menu_left .menu_links ul li {     border: 1px solid #666666;
+    clear: both;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    width: 105px; 
+	margin-top:10px;} 
+.resource_menu_left .menu_links ul li.disabled {color:#999;}
+.resource_menu_left .menu_links ul li.third {    line-height: 20px;  border: medium none;
+    height: 20px;
+    margin: 0;
+    padding: 0;}
+.resource_menu_left .menu_links ul li .disabled{color:#999;}
+.resource_menu_left .menu_links ul li.cur {background-color:#DDDDDD;}
+.resource_menu_left .menu_links ul li.cur a{ font-weight:bold;color:#e27135; }
+.resource_menu_left .menu_links ul li a{ display:block; width: 100%; text-decoration:none;}
+.resource_menu_left .menu_links ul li a:visited{}
+.resource_menu_left .menu_links ul li a:hover{text-decoration:underline;color:#e27135;}
+</style>
+{/literal}
+<div class="resource_menu_left">
+  <div class="menu_title">相关信息目录 </div>
+  <div class="menu_links">
+  {if $resource_menu_file}
+  {include file=$resource_menu_file info=$info}
+  {else}
+    <ul>
+      <!--1-->
+      <li class="first{if $cur==1} cur{/if}">{if $info.FACL_ID}<a href="ea.php?r=Diet/Update&id={$info.FACL_ID}">基础信息（必填）</a>{else}<span class="{if $cur!=1} disabled{/if}">基础信息（必填）</span>{/if}
+      </li>
+      <!--2-->
+      <li class="first{if $cur==2} cur{/if}">{if $info.FACL_ID}<a href="ea.php?r=Diet/AddPosition&id={$info.FACL_ID}">位置信息（必填）</a>{else}<span class="disabled">位置信息（必填）</span>{/if}
+      </li>
+      <!--3-->
+      <li class="first{if $cur==3} cur{/if}">{if $info.FACL_ID}<a href="ea.php?r=Diet/AddFood&id={$info.FACL_ID}">特色菜（选填）</a>{else}<span class="disabled">特色菜（选填）</span>{/if}
+      </li>
+      {if $cur==3 || $foodid}
+      {foreach from=$menu.food item=food}
+      <li class="third{if $foodid==$food.PROD_ID} cur{/if}">
+      	<a href="ea.php?r=Diet/UpdateFood&id={$food.PROD_ID}" title="{$food.NAME|strip_tags}">
+      	--{$food.NAME|strip_tags}
+        </a>
+      </li>
+      {/foreach}
+      {/if}
+      <!--4-->
+      <li class="first{if $cur==4} cur{/if}">{if $info.FACL_ID}<a href="ea.php?r=Diet/AddConsume&id={$info.FACL_ID}">消费信息（选填）</a>
+        {else}<span class="disabled">消费信息（选填）{/if}</span>
+      </li>
+      <!--6-->
+      <li class="first{if $cur==6} cur{/if}">{if $info.FACL_ID}<a href="ea.php?r=Diet/AddFacility&id={$info.FACL_ID}">餐厅配套（选填）</a>{else}<span class="disabled">餐厅配套（选填）{/if}</span></li>
+      {if $cur==6}
+      {foreach from=$menu.facility item=facility}
+      <li class="third">
+      	<a href="ea.php?r=Diet/AddFacility&id={$info.FACL_ID}" title="{$facility|strip_tags}">
+      	--{$facility|strip_tags}
+        </a>
+      </li>
+      {/foreach}
+      {/if}
+      <!--7-->
+      <li class="first{if $cur==7} cur{/if}">{if $info.FACL_ID}<a href="ea.php?r=Facl/EditFaclRelaArea&FACL_ID={$info.FACL_ID}&flag=true">添加关联景区</a>{else}<span class="disabled">添加关联景区</span>{/if}
+      </li>
+      <li class="third{if $cur==8} cur{/if}">
+      {if $info.relaAreaList}
+      	<a href="ea.php?r=Facl/QueryFaclRelaArea&FACL_ID={$info.FACL_ID}" title="{$facility|strip_tags}">
+      	--已有关联景区
+        </a>
+      {/if}
+      </li>
+    </ul>
+  {/if}
+  </div>
+</div>

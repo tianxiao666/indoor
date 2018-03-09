@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp
+END
+api.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/api.php
+END
+define.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/define.php
+END
+sharerac
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/sharerac
+END
+admin.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/admin.php
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/index.php
+END
+sharerac.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/sharerac.php
+END
+test_index.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/webapp/test_index.php
+END

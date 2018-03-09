@@ -1,0 +1,46 @@
+10
+
+dir
+410
+http://svn.hgicreate.com/srcsvn/indoor
+http://svn.hgicreate.com/srcsvn/indoor
+
+
+
+2016-11-04T03:54:18.827642Z
+410
+chao.xj
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+19b6460e-13a2-11e3-9178-4142410dca1f
+
+app
+dir
+
+appinterface
+dir
+
+publicbase
+dir
+
+sf
+dir
+
+tag
+dir
+
+trunk
+dir
+

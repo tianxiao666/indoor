@@ -1,0 +1,135 @@
+
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+
+
+function SearchLog()
+{   
+	var start = document.getElementById("startDate").value;
+	var end   = document.getElementById("endDate").value;
+	if( (start!='') && (end!='') && (end < start))
+	{
+		alert("起始时间不能大于终止时间！");
+	}
+	else 
+	{
+	  var frm = document.log_search_form;
+	  frm.action='ea.php?r=LogOtherStats/CleOtherStats';
+	  frm.submit();
+	}
+}
+
+
+function statsExport(){
+	  var frm = document.log_search_form;
+	  frm.action='ea.php?r=LogOtherStats/OtherStatsExport';
+	  frm.submit();
+}
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=FunctionQuery">功能查询 </a>&nbsp;&gt;&nbsp;<a href="ea.php?r=LogOtherStats/CleOtherStats">其他统计</a>&nbsp;&gt;&nbsp;登录次数统计</span></div>
+  <input type="hidden" id="subbarFlag" value="log_mgr_bar" />
+
+  <input type="hidden" id="c_name" value="func_query" />
+  
+  {include file="stat_left_menu.html" type="other_login"}
+  
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+    <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  <div class="scenic_search">
+   <div class="chose">
+	<form id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px; width: 940px;">
+						<input id="type" name="type" type="hidden" value="{$data.type}" />
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+							    <td height="25" align="left" class="formTitle"><span>平台：</span></td>
+							    <td>
+							    <select name="app_type">
+							    <option value="">- 选择平台 -</option>
+							    {html_options options=$appType selected = $data.app_type}
+							    </select>
+							    </td>
+                                <td height="25" align="left" class="formTitle"><span>起始时间：</span></td>
+                                <td><input type="text" id="startDate" name="startDate" value="{$data.startDate}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td height="25" align="left" class="formTitle"><span>终止时间：</span></td>
+                                <td><input type="text" id="endDate" name="endDate" class="Wdate" value="{$data.endDate|date_format:'%Y-%m-%d'}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td><input type="button" value="查询日志" style=" width: 80px; height: 30px;" onclick="SearchLog();" />
+                                </td>
+                                  <td width="10px"></td>
+                            </tr>
+                        </table>
+						</form>
+						</div>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:4px 10px 0;">
+ 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="left" class="nameFunction" style="padding:4px 0px 0px 10px;"><font color="#a40000" style="font-weight: bold; font-size: 14px">
+				  总计：{$statsSum|default:'0'}
+				  </font></td>
+				   <td width="50%" align="right"><a href="#!" onclick="statsExport();" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[导出Excel]</font></a></td>
+			</tr>
+		</table>
+	<div class="scenic_list">
+<table class="itable">
+<thead>
+<tr>
+	<th width="20%" align="left">应用平台</th>
+ 	<th width="20%" align="left">用户ID</th>
+ 	<th width="20%">日期</th>
+ 	<th width="20%" align="left">登录次数</th>
+ 	<th width="20%" align="left">操作</th>
+</tr>
+</thead>
+<tbody>
+	{if $statsList}
+	{foreach from=$statsList item=stats}
+    <tr class="{cycle values='row0,row1'}">
+       <td align="left">{$stats.APP_CN}</td>
+       <td align="left">{$stats.SUBS_ID}</td>
+       <td align="left">{$stats.ADD_TIME|date_format:"%Y-%m-%d"}</td>
+       <td align="left">{$stats.CR_CNT}</td>
+       <td align="left"><a href="ea.php?r=Syslogs&APP={$stats.APP}&startDate={$stats.ADD_TIME|date_format:'%Y-%m-%d'}&endDate={$stats.ADD_TIME|date_format:'%Y-%m-%d'}&GET_URL={$stats.REFER}&ID={$stats.SUBS_ID}&LIKE=Y">
+						<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+						<font color="#9900CC">查看</font></a></td>
+    </tr>
+    {/foreach}
+    {else}
+    <tr>
+    <td align="center" colspan="5"><font style="color: red;font-weight: bold;">无查询记录</font></td>
+    </tr>
+    {/if}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+	<input type="hidden" id="headMenu" value="statmanager">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+   </div>
+   </div> 
+   </div>
+
+{include file="footer.html"}
+
+

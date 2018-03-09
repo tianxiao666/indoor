@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/srcsvn/indoor/!svn/ver/1/sf/caching
+END
+CCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/srcsvn/indoor/!svn/ver/1/sf/caching/CCache.php
+END
+CMemCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/srcsvn/indoor/!svn/ver/1/sf/caching/CMemCache.php
+END
+CApcCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/srcsvn/indoor/!svn/ver/1/sf/caching/CApcCache.php
+END

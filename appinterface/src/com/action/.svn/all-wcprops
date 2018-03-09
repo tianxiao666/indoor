@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/srcsvn/indoor/!svn/ver/372/appinterface/src/com/action
+END
+CheckHasNewVersionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/CheckHasNewVersionAction.java
+END
+GetIndoormapBuildingFloorMapUrlAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/GetIndoormapBuildingFloorMapUrlAction.java
+END
+GetNearbyIndoormapBuildingListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/GetNearbyIndoormapBuildingListAction.java
+END
+TriangulationLocationAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/371/appinterface/src/com/action/TriangulationLocationAction.java
+END
+GetIndoormapBuildingFloorFastSearchKeyListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/GetIndoormapBuildingFloorFastSearchKeyListAction.java
+END
+GetIndoormapBuildingFloorListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/GetIndoormapBuildingFloorListAction.java
+END
+DoIndoormapBuildingFloorSearchAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/DoIndoormapBuildingFloorSearchAction.java
+END
+TriangulationLocationAction.bak.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/372/appinterface/src/com/action/TriangulationLocationAction.bak.java
+END
+GetCenterLocationAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/GetCenterLocationAction.java
+END
+SignalHandleAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/SignalHandleAction.java
+END
+test.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/action/test.java
+END

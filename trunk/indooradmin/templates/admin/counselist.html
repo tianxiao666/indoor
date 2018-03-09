@@ -1,0 +1,468 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js"></script>
+<script type="text/javascript"
+	src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js"></script>
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css"
+	rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.itable td {
+	padding: 3px 0 3px 10px;
+	border: 1px solid #ccc;
+	color: #666;
+}
+
+.jqmWindow {
+	display: none;
+	position: absolute;
+	vertical-align: middle;
+	left: 55%;
+	top: 25%;
+	width: 650px;
+	background-color: #fff;
+	color: #333;
+	border: 1px solid black;
+	padding: 0, 12px, 12px, 12px;
+}
+</style>
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+	var pagesize=$('#pagesize').val();
+	for (i = 0; i < pagesize; i++)
+	{
+		$('#divAdvice'+i).jqm({
+			toTop:true,
+			overlay: 70
+		});
+		$('#divNote'+i).jqm({
+			toTop:true,
+			overlay: 70
+		});
+	}
+});
+function showAdviceForm(key){
+	$('#divAdvice'+key).jqmShow();
+}
+function showNoteForm(key){
+	$('#divNote'+key).jqmShow();
+}
+function showTasklist(task,key,pagesize){
+	var x = $('#task'+key).offset().left-882;
+	var y = $('#task'+key).offset().top-50;
+	for (i = 0; i < pagesize; i++)
+	{
+		if(i!=key)
+		{
+			$('#task'+i).attr('className','atask'); 
+			$('#taskList'+i).hide();
+		}
+	}
+	if(task.className=='atask'){
+		task.className='atask2'; 
+		$('#taskList'+key).css({ 'position': 'absolute', 
+								'border-radius': '5px 5px 5px 5px',
+								'top': y, 
+								'left': x, 
+								'padding': '9px', 
+								'margin-top': '2px', 
+								'margin-left': '2px', 
+								'border': '1px solid #a6c9e2', 
+								'width': '850px',
+								'float': 'left',
+								'z-index': '10'});
+		document.getElementById("cover").style.display = "block";
+		$('#taskList'+key).show();
+	}else{ 
+		task.className='atask'; 
+		$('#taskList'+key).hide();
+	}
+}
+function hideTask(key){
+	$('#task'+key).attr('className','atask'); 
+	document.getElementById("cover").style.display = "none"; 
+	$('#taskList'+key).hide();
+}
+function showConfirmTask(key,result){
+	
+	$('#RESULT'+key).val(result);
+	$('#confirmTask'+key).show();
+}
+function confirmTask(key){
+	if(!$('#FINISH_TIME'+key).val())
+	{
+		alert('请选择确认时间');
+		return false;
+	}
+	$('#confirm_task'+key).submit();
+}
+
+function hideConfirmTask(key){
+	$('#confirmTask'+key).hide();
+}
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+function CheckDate()
+{
+	var start = $("#startDate").val();
+	var end   = $("#endDate").val();
+	if(end < start)
+	{
+		alert("起始时间不能大于终止时间！");
+		return false;
+	}
+}
+function CheckAdvice(key)
+{
+	var advice = $("#ADVICE"+key).val();
+	if(!advice)
+	{
+		alert("请填写客户建议！");
+		return false;
+	}
+	var frm = document.getElementById('adviceForm');
+	frm.action = 'ea.php?r=CounseLing/SetAdvice';
+	frm.submit();
+}
+function CheckNote(key)
+{
+	var note = $("#NOTE"+key).val();
+	if(!note)
+	{
+		alert("请填写备注内容！");
+		return false;
+	}
+	var frm = document.getElementById('noteForm');
+	frm.action = 'ea.php?r=CounseLing/SetNote';
+	frm.submit();
+}
+function ExportLog()
+{   
+	var frm = document.getElementById('expForm');
+	frm.action = 'ea.php?r=CounseLing/Export';
+	frm.submit();
+}
+</script>
+<style>
+.showtask #tipsArrow {
+	position: absolute;
+	top: 45px;
+	left: 868px
+}
+
+#cover {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 150%;
+	background-color: #000;
+	filter: alpha(opacity =         50); /*对应IE*/
+	-moz-opacity: 0.5; /*对应FF*/
+	opacity: 0.5; /*对应Opera*/
+	display: none;
+}
+</style>
+{/literal}
+<div id="cover"></div>
+<div class="content">
+<div class="main">
+<div class="crumb"><span>当前位置：<a href="ea.php?r=CounseLing/CounseList">客服管理</a>&nbsp;&gt;&nbsp;受理单列表</span></div>
+ <input type="hidden"	id="subbarFlag" value="counse_list_bar" />
+
+<div class="tabtext" id="tabtext1">{foreach from=$work_list
+item=work key=key}
+<div id="divAdvice{$key}" class="jqmWindow"
+	style="text-align: center; width: 500px; height: 340px; padding: 0px; border: none; border-radius: 10px 10px 10px 10px; background-color: #fff;">
+<div style="float: left; padding: 5px;width:460px;text-align:left;"><font color="#a40000"
+	style="font-weight: bold; font-size: 14px">来电内容:</font><span
+	title="{$work.TITLE|strip_tags}">{$work.TITLE}</span></div>
+<div style="float: right; padding: 5px;"><a href="#"
+	class="jqmClose"><img src="images/close.jpg" title="关闭" /></a></div>
+<form action="" method="post" id="adviceForm" name="adviceForm">
+<table style="float: left">
+	<tr>
+		<td style="padding: 10px;"><font
+			style="font-weight: bold; font-size: 16px">客户建议</font></td>
+	</tr>
+	<tr>
+		<td><textarea id="ADVICE{$key}-{$s_key}" name="ADVICE" rows="3"
+			cols="40" maxLength="512"
+			{if $work.ADVICE}readonly{/if}
+						style="overflow-y: scroll; height: 200px; width: 90%; border: 1px #ccc solid;">{$work.ADVICE}</textarea></td>
+	</tr>
+	<tr>
+		<td style="padding: 10px;"><input type="button" value="确定"
+			style="font-size: 12px; width: 70px; height: 25px;"
+			{if $work.ADVICE}disabled{/if} onclick="CheckAdvice('{$key}-{$s_key}');">
+		<input type="button" value="取消"
+			style="font-size: 12px; width: 70px; height: 25px;" class="jqmClose">
+		<input type="hidden" value="{$work.WORK_ID}" name="WORK_ID"
+			style="font-size: 12px; width: 70px; height: 25px;"></td>
+	</tr>
+</table>
+</form>
+</div>
+<div id="divNote{$key}" class="jqmWindow"
+	style="text-align: center; width: 500px; height: 340px; padding: 0px; border: none; border-radius: 10px 10px 10px 10px; background-color: #fff;">
+<div style="float: left; padding: 5px;width:460px;text-align:left;"><font color="#a40000"
+	style="font-weight: bold; font-size: 14px">来电内容:</font><span
+	title="{$work.TITLE|strip_tags}">{$work.TITLE}</span></div>
+<div style="float: right; padding: 5px;"><a href="#"
+	class="jqmClose"><img src="images/close.jpg" title="关闭" /></a></div>
+<form action="" method="post" id="noteForm" name="noteForm">
+<table style="float: left">
+	<tr>
+		<td style="padding: 10px;"><font
+			style="font-weight: bold; font-size: 16px">备注</font></td>
+	</tr>
+	<tr>
+		<td><textarea id="NOTE{$key}-{$s_key}" name="NOTE" rows="3"
+			cols="40" maxLength="512"
+			style="overflow-y: scroll; height: 200px; width: 90%; border: 1px #ccc solid;">{$work.NOTE}</textarea></td>
+	</tr>
+	<tr>
+		<td style="padding: 10px;"><input type="button" value="确定"
+			style="font-size: 12px; width: 70px; height: 25px;"
+			onclick="CheckNote('{$key}-{$s_key}');"> <input type="button"
+			value="取消" style="font-size: 12px; width: 70px; height: 25px;"
+			class="jqmClose"> <input type="hidden"
+			value="{$work.WORK_ID}" name="WORK_ID"
+			style="font-size: 12px; width: 70px; height: 25px;"></td>
+	</tr>
+</table>
+</form>
+</div>
+<div id="taskList{$key}" style="display: none; background: #ffffff;"
+	class="showTask"><img id='tipsArrow' src='images/arrow.png'
+	alt='' style="position: absolute; top: 45px; left: 868px" />
+<div style="float: left; width: 830px;"><font color="#a40000"
+	style="font-weight: bold; font-size: 14px">来电内容:</font><span
+	title="{$work.TITLE|strip_tags}">{$work.TITLE}</span></div>
+<div style="float: right"><a href="#!"><img
+	src="images/close.jpg" title="关闭" onclick="hideTask({$key});" /></a></div>
+<table class="itable">
+	<thead>
+		<tr>
+			<th width="9%" align="left">任务</th>
+			<th width="47%" align="left">解答内容</th>
+			<th width="10%" align="left">受理时间</th>
+			<th width="10%" align="left">确认时间</th>
+			<th width="7%" align="left">状态</th>
+			<th width="8%" align="left">受理人</th>
+			<th align="left">操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		{if $work.TASK_LIST} {foreach from=$work.TASK_LIST item=task
+		key=s_key}
+		<tr class="{cycle values='row0,row1'}">
+			<td align="left">{$task.TITLE|strip_tags}</td>
+			<td align="left"><span title="{$task.NOTE}">{$task.NOTE}</span></td>
+			<td align="left"><span title="{$task.ENTER_TIME}">{$task.ENTER_TIME|date_format:"%Y-%m-%d"}</span></td>
+			<td align="left"><span title="{$task.FINISH_TIME}">{$task.FINISH_TIME|date_format:"%Y-%m-%d"}</span></td>
+			<td align="left">{if $task.RESULT=='UNFISH'}<font color="#ff0000">未完成 </font>{elseif
+			$task.RESULT=='COMP'}<font color="#0000ff">完成</font> {elseif $task.RESULT=='UNCOMP'}无法完成{/if}</td>
+			<td align="left">{if
+			$task.REAL_NAME}{$task.REAL_NAME|strip_tags}{else}{$task.NAME|strip_tags}{/if}</td>
+			<td align="left">{if $work.STATUS=='A' && ($task.IsCurrent || !$task.REAL_NAME)
+			 && $work.RESULT!='UNCOMP' && $task.RESULT=='UNFISH'}<a href="#!"
+				onclick="showConfirmTask('{$key}-{$s_key}','comp');"><font
+				color="#9900CC">完成任务</font></a> {else}完成任务{/if} {if $work.STATUS=='A' &&
+			$task.IsCurrent && $work.RESULT!='UNCOMP' && $task.RESULT=='UNFISH'}<a
+				href="#!" onclick="showConfirmTask('{$key}-{$s_key}','uncomp');"
+				style="display: none;"><font color="#9900CC"> | 无法完成</font></a>
+			{/if}</td>
+		</tr>
+
+		<tr id="confirmTask{$key}-{$s_key}" class="cl_tit"
+			style="display: none; background: #EDEDED;">
+			<td align="center" colspan="8" style="padding: 0px;">
+			<form id="confirm_task{$key}-{$s_key}" name="confirm_task"
+				method="post" action='ea.php?r=CounseLing/ChgTaskResult'>
+			<table style="border: 2px solid #7EC0EE;">
+				<tr>
+					<td align="right" width="20%"><font style="font-weight: bold;">解答内容:</font></td>
+					<td colspan="3"><textarea id="NOTE{$key}-{$s_key}" name="NOTE"
+						rows="3" cols="40"
+						style="overflow-y: scroll; height: 50px; width: 96%; border: 1px #ccc solid;">{$task.NOTE}</textarea></td>
+				</tr>
+				<tr>
+					<td align="right"><font style="font-weight: bold;">完成时间:</font></td>
+					<td><input type="text" id="FINISH_TIME{$key}-{$s_key}"
+						name="FINISH_TIME" value="{$now}" class="Wdate"
+						onfocus="WdatePicker({literal}{readOnly:true,lang:'zh-cn',dateFmt:'yyyy-M-d H:mm:ss'}{/literal})" /><input
+						id="TASK_ID{$key}-{$s_key}" name="TASK_ID" type="hidden"
+						value="{$task.TASK_ID}"><input id="WORK_ID{$key}-{$s_key}"
+						name="WORK_ID" type="hidden" value="{$task.WORK_ID}"><input
+						id="RESULT{$key}-{$s_key}" name="RESULT" type="hidden" value=""></td>
+					<td align="right"><font style="font-weight: bold;">处理人:</font></td>
+					<td><input type="text" name="DISPOSE"
+						id="DISPOSE{$key}-{$s_key}" maxLength="10"><input type="hidden" name="OWNER_ID"
+						id="OWNER_ID{$key}-{$s_key}" value="{$user.SYS_SUBS_ID}"></td>
+				</tr>
+				<tr>
+					<td align="center" colspan="4">
+					<div class="tablist" style="float: none"><span class="on">
+					<input type="button" value="确认"
+						onclick="confirmTask('{$key}-{$s_key}');"> <input
+						type="button" value="取消"
+						onclick="hideConfirmTask('{$key}-{$s_key}');"></div>
+					</td>
+				</tr>
+			</table>
+			</form>
+			</td>
+		</tr>
+		{/foreach} {else}
+		<tr class="{cycle values='row0,row1'}">
+			<td align="left" colspan=8>
+			<div align="center" style="color: red;">没有找到任何记录</div>
+			</td>
+		</tr>
+		{/if}
+	</tbody>
+</table>
+</div>
+{/foreach}
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td valign="top" style="padding: 10px 10px 0;">
+		<div class="scenic_search">
+		<div class="chose">
+		<form id="log_search_form" name="log_search_form"
+			{if $condition.OWNER_ID}action="ea.php?r=CounseLing/CounseList&owner=1&flag=1"{else}action="ea.php?r=CounseLing/CounseList&flag=1"{/if} method="post"
+			style="margin: 0px; padding: 0px; width: 1300px;"
+			onsubmit="return CheckDate();">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+
+					<td height="25" align="left" class="formTitle"><span>类别：
+					<select class="ipt2" name="BUSI_CODE" id="BUSI_CODE">
+						<option value="">- 请选择 -</option>
+						{html_options options=$ask_type selected=$condition.BUSI_CODE}
+					</select> </span> <span>联系号码： <input name="MOBILE" id="MOBILE" type="text"
+						style="font-size: 12px;" maxLength="15"
+						value="{$condition.MOBILE}" maxlength="20" /> </span> <span>鹿鹿卡号：
+					<input name="CARD_NO" id="CARD_NO" type="text"
+						style="font-size: 12px;" maxLength="12"
+						value="{$condition.CARD_NO}" maxlength="20" /> </span> <span>客户姓名：
+					<input name="REAL_NAME" id="REAL_NAME" type="text"
+						style="font-size: 12px;" value="{$condition.REAL_NAME}"
+						maxlength="20" /> </span> &nbsp;&nbsp; <span>开始时间： <input
+						type="text" id="startDate" name="startDate" class="Wdate"
+						value="{$condition.startDate}"
+						onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /> </span>
+					&nbsp;&nbsp; <span>结束时间： <input type="text" id="endDate"
+						name="endDate" class="Wdate" value="{$condition.endDate}"
+						onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /> </span></td>
+					<td><input type="submit" value="查询"
+						style="font-size: 12px; width: 60px; height: 20px;" /></td>
+					<td width="10px"></td>
+				</tr>
+		</table>
+		</form>
+		</div>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" style="padding: 10px 10px 0;">
+		<div class="scenic_list">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="50%" align="left" class="nameFunction"><img
+					src="images/icon/m_user.gif" border="0" align="absmiddle" /><font
+					color="#a40000" style="font-weight: bold; font-size: 14px">
+				受理单列表</font>({if $condition.OWNER_ID}<a
+					href="ea.php?r=CounseLing/CounseList"
+					style="font-size: 14px; font-weight: bold;color:#0a4;">全部受理单</a>{else}<a
+					href="ea.php?r=CounseLing/CounseList&flag=1&owner=1"
+					style="font-size: 14px; font-weight: bold;color:#0a4;">我的受理单</a>{/if})</td>
+				<td width="50%" align="right" class="nameFunction"><input
+					type="button" value="导出Excel"
+					style="font-size: 12px; width: 70px; height: 25px;"
+					onclick="ExportLog();" /></td>
+			</tr>
+		</table>
+		<form action="" method="post" id="expForm" name="expForm">
+		<table class="itable">
+			<thead>
+				<tr>
+					<th align="left" width="5%">类别</th>
+					<th align="left" width="8%">受理日期</th>
+					<th align="left" width="6%">客户姓名</th>
+					<th align="left" width="8%">邮箱地址</th>
+					<th align="left" width="8%">手机号码</th>
+					<th align="left" width="8%">联系电话</th>
+					<th align="left" width="8%">鹿鹿卡号</th>
+					<th align="left" width="20%">来电内容</th>
+					<th align="left" width="5%">完成状态</th>
+					<th align="left" width="6%">信息来源</th>
+					<th align="left">&nbsp;相关操作</th>
+				</tr>
+			</thead>
+			{if $work_list}
+			<tbody id="route">
+
+				{foreach from=$work_list item=work key=key}
+				<tr class="{cycle values='row0,row1'}">
+					<td align="left">{$work.BUSI_NAME|strip_tags}</td>
+					<td align="left"><span title="{$work.CREATE_TIME}">{$work.CREATE_TIME|date_format:"%Y-%m-%d"}</span></td>
+					<td align="left">{if
+					$work.NAME|strip_tags}{$work.NAME|strip_tags}{else}{$work.REAL_NAME|strip_tags}{/if}</td>
+					<td align="left">{$work.EMAIL}</td>
+					<td align="left">{$work.MOBILE}</td>
+					<td align="left">{$work.TEL}</td>
+					<td align="left">{$work.CARD_NO}</td>
+					<td align="left"><span title="{$work.TITLE}">{$work.TITLE}</span></td>
+					<td align="left">{if $work.RESULT eq 'UNFISH'}<font color="#f00">未完成 </font>{elseif
+					$work.RESULT eq 'COMP'}<font color="#00f">完成</font> {elseif $work.RESULT eq
+					'UNCOMP'}无法完成{/if}</td>
+					<td align="left">{$work.SOURCE}</td>
+					<td align="left"><a href="#!" class="atask" id="task{$key}"
+						onclick="showTasklist(this,{$key},{$work.page.pagesize});"
+						style="color: #9900cc"> 查看子任务</a> | <a href="#!"
+						onclick="showAdviceForm({$key});" {if $work.ADVICE}style="color:#f00"{/if}>客户建议</a> | <a href="#!"
+						onclick="showNoteForm({$key});" {if $work.NOTE!=' '}style="color:#f00"{/if}>备注</a></td>
+				</tr>
+				{/foreach}
+
+
+			</tbody>
+			{else}
+			<tbody>
+				<tr class="{cycle values='row0,row1'}">
+					<td align="center" style="color: red" colspan="6">没有找到相关的信息</td>
+
+				</tr>
+			</tbody>
+			{/if}
+		</table>
+		</form>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" style="padding: 10px;">
+		<div class="pagebreak">
+		<div class="page">{include file="page_info.html"}</div>
+		</div>
+		</td>
+	</tr>
+</table>
+<input type="hidden" id="headMenu" value="custserv"><input
+	type="hidden" id="pagesize" value={$page.pagesize} /></div>
+</div>
+</div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0"
+	frameborder="0" scrolling="no"></iframe>

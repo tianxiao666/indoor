@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/srcsvn/indoor/!svn/ver/1/sf/exception
+END
+CException.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/srcsvn/indoor/!svn/ver/1/sf/exception/CException.php
+END
+CExceptionEvent.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/exception/CExceptionEvent.php
+END
+CHttpException.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/1/sf/exception/CHttpException.php
+END
+CErrorHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/1/sf/exception/CErrorHandler.php
+END
+CErrorEvent.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/1/sf/exception/CErrorEvent.php
+END

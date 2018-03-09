@@ -1,0 +1,800 @@
+package com.iscreate.mobile.indoormap.activity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.iscreate.mobile.indoormap.R;
+import com.iscreate.mobile.util.AccelerometerEvent;
+import com.iscreate.mobile.util.AnalyseWave;
+import com.iscreate.mobile.util.StepDetecter;
+
+public class testStepCountActivity extends Activity {
+	private SensorManager sensorManager = null;
+	private List<String> loglist = new ArrayList<String>();
+	private ListView log_lv = null;
+	private boolean islog_lvTouch = false;
+	private CountDownTimer countDownTimer = null;
+	private long startTime = 0;
+	private boolean hasAccelerometer = false;
+	private boolean hasMagneticField = false;
+	private boolean hasOrientation = false;
+	private Boolean isOrientation = null;
+	private StepDetecter stepDetecter = null;
+	private final int WHAT_UPDATEACC = 0;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+		List<Sensor> sensorlist = sensorManager.getSensorList(Sensor.TYPE_ALL);
+		for (Sensor sensor : sensorlist) {
+			if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+				hasAccelerometer = true;
+			}
+			if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+				hasMagneticField = true;
+			}
+			if (sensor.getType() == Sensor.TYPE_ORIENTATION) {
+				hasOrientation = true;
+			}
+		}
+		if (!hasAccelerometer) {
+			Toast.makeText(this, "该设备没有加速力传感器!", Toast.LENGTH_SHORT).show();
+			finish();
+		}
+		setContentView(R.layout.sensor);
+		final Button stop_btn = (Button) findViewById(R.id.stop_btn);
+		final Button shake_btn = (Button) findViewById(R.id.shake_btn);
+		final Button move_btn = (Button) findViewById(R.id.move_btn);
+		stop_btn.setBackgroundResource(R.drawable.bg_button);
+		shake_btn.setBackgroundResource(R.drawable.bg_button);
+		move_btn.setBackgroundResource(R.drawable.bg_button);
+		stop_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Button btn = (Button) v;
+				loglist.clear();
+				if (btn.getTag() == null) {
+					setButton(stop_btn, true);
+					setButton(shake_btn, false);
+					setButton(move_btn, false);
+					ErrorFileName = "stop.log";
+					startTime = System.currentTimeMillis();
+					accelerometerEventList.clear();
+					steps = 0;
+					eraseErrorLog();
+				} else {
+					setButton(stop_btn, false);
+					setButton(shake_btn, false);
+					setButton(move_btn, false);
+					if (accelerometerEventList != null) {
+						List<AccelerometerEvent> accelerometerEventList1 = new ArrayList<AccelerometerEvent>();
+						accelerometerEventList1.addAll(accelerometerEventList);
+						accelerometerEventList.clear();
+						ErrorFileName = "stop.log";
+						eraseErrorLog();
+						writeErrorLog("\tC\tY\tZ");
+						if (accelerometerEventList1.size() > 0) {
+							startTime = accelerometerEventList1.get(0).t;
+						}
+						for (AccelerometerEvent accelerometerEvent : accelerometerEventList1) {
+							float difft = ((float) (accelerometerEvent.t - startTime)) / 10;
+							writeErrorLog("" + DecimalFormatCoord(difft) + "\t"
+									+ DecimalFormatCoord(accelerometerEvent.a)
+									+ "\t"
+									+ DecimalFormatCoord(accelerometerEvent.y)
+									+ "\t"
+									+ DecimalFormatCoord(accelerometerEvent.z));
+						}
+						ErrorFileName = "stopfilter.log";
+						eraseErrorLog();
+						writeErrorLog("\tCF\tYF\tZF");
+						accelerometerEventList1 = filterEvent(accelerometerEventList1);
+						if (accelerometerEventList1.size() > 0) {
+							startTime = accelerometerEventList1.get(0).t;
+						}
+						for (AccelerometerEvent accelerometerEvent : accelerometerEventList1) {
+							float difft = ((float) (accelerometerEvent.t - startTime)) / 10;
+							writeErrorLog("" + DecimalFormatCoord(difft) + "\t"
+									+ DecimalFormatCoord(accelerometerEvent.a)
+									+ "\t"
+									+ DecimalFormatCoord(accelerometerEvent.y)
+									+ "\t"
+									+ DecimalFormatCoord(accelerometerEvent.z));
+						}
+					}
+					ErrorFileName = null;
+				}
+			}
+		});
+		shake_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				loglist.clear();
+				Button btn = (Button) v;
+				if (btn.getTag() == null) {
+					setButton(stop_btn, false);
+					setButton(shake_btn, true);
+					setButton(move_btn, false);
+					ErrorFileName = "shake.log";
+					startTime = System.currentTimeMillis();
+					eraseErrorLog();
+				} else {
+					setButton(stop_btn, false);
+					setButton(shake_btn, false);
+					setButton(move_btn, false);
+					ErrorFileName = null;
+				}
+			}
+		});
+		move_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				loglist.clear();
+				Button btn = (Button) v;
+				if (btn.getTag() == null) {
+					setButton(stop_btn, false);
+					setButton(shake_btn, false);
+					setButton(move_btn, true);
+					ErrorFileName = "move.log";
+					startTime = System.currentTimeMillis();
+					eraseErrorLog();
+				} else {
+					setButton(stop_btn, false);
+					setButton(shake_btn, false);
+					setButton(move_btn, false);
+					ErrorFileName = null;
+				}
+			}
+		});
+		log_lv = (ListView) findViewById(R.id.log_lv);
+		log_lv.setFastScrollEnabled(true);
+		log_lv.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				int action = event.getAction() & 0x000000ff;
+				switch (action) {
+				case MotionEvent.ACTION_DOWN:
+					if (countDownTimer != null) {
+						countDownTimer.cancel();
+					}
+					islog_lvTouch = true;
+					break;
+				case MotionEvent.ACTION_UP:
+					countDownTimer = new CountDownTimer(2000, 2000) {
+						@Override
+						public void onTick(long millisUntilFinished) {
+						}
+
+						@Override
+						public void onFinish() {
+							islog_lvTouch = false;
+							countDownTimer = null;
+						}
+					};
+					countDownTimer.start();
+					break;
+				}
+				return false;
+			}
+		});
+		log_lv.setOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				switch (scrollState) {
+				case OnScrollListener.SCROLL_STATE_IDLE:
+					break;
+				case OnScrollListener.SCROLL_STATE_FLING:
+					break;
+				case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+					break;
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+			}
+		});
+		Button function_btn = (Button) findViewById(R.id.function_btn);
+		function_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (log_lv.getVisibility() == View.VISIBLE) {
+					log_lv.setVisibility(View.GONE);
+				} else {
+					log_lv.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+		log_lv.setVisibility(View.VISIBLE);
+		/*
+		 * ErrorFileName = "stop.log"; eraseErrorLog(); ErrorFileName =
+		 * "shake.log"; eraseErrorLog(); ErrorFileName = "move.log";
+		 * eraseErrorLog();
+		 */
+		ErrorFileName = null;
+		stepDetecter = new StepDetecter() {
+			@Override
+			public void onStep() {
+				++steps;
+				// updateLog("他算:" + steps);
+			}
+		};
+		startTime = System.currentTimeMillis();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (hasAccelerometer) {
+			sensorManager.registerListener(sensorEventListener,
+					sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+					SensorManager.SENSOR_DELAY_NORMAL);
+		}
+		if (hasMagneticField) {
+			sensorManager.registerListener(sensorEventListener,
+					sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+					SensorManager.SENSOR_DELAY_NORMAL);
+		}
+		if (hasOrientation) {
+			sensorManager.registerListener(sensorEventListener,
+					sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
+					SensorManager.SENSOR_DELAY_NORMAL);
+		}
+	}
+
+	@Override
+	protected void onPause() {
+		sensorManager.unregisterListener(sensorEventListener);
+		super.onPause();
+	}
+
+	private float[] value_TYPE_ACCELEROMETER = null;
+	private float[] value_TYPE_ORIENTATION = null;
+	private float[] value_TYPE_MAGNETIC_FIELD = null;
+
+	private SensorEventListener sensorEventListener = new SensorEventListener() {
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			switch (event.sensor.getType()) {
+			case Sensor.TYPE_ACCELEROMETER:
+				value_TYPE_ACCELEROMETER = event.values.clone();
+				initTimer();
+				analyseAccelerometerEvent(event);
+				break;
+			case Sensor.TYPE_ORIENTATION:
+				value_TYPE_ORIENTATION = event.values.clone();
+				analyseOrientationEvent(event);
+				break;
+			case Sensor.TYPE_MAGNETIC_FIELD:
+				value_TYPE_MAGNETIC_FIELD = event.values.clone();
+				break;
+			}
+
+		}
+
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		}
+	};
+
+	private Float AnalyseSensorEvent() {
+		if ((value_TYPE_ACCELEROMETER != null)
+				&& (value_TYPE_ORIENTATION != null)) {
+			float azimuth = value_TYPE_ORIENTATION[SensorManager.DATA_X];
+			float pitch = value_TYPE_ORIENTATION[SensorManager.DATA_Y];
+			float roll = value_TYPE_ORIENTATION[SensorManager.DATA_Z];
+			float[] fy = getHorizontalForceInY(pitch,
+					value_TYPE_ACCELEROMETER[1]);
+			float[] fz = getHorizontalForceInZ(pitch,
+					value_TYPE_ACCELEROMETER[2]);
+			float fh = fy[0] + fz[0];
+			float fv = fy[1] + fz[1];
+			return (fh);
+		}
+		return (null);
+	}
+
+	private Float AnalyseSensorEvent1() {
+		if (value_TYPE_ORIENTATION != null) {
+			float azimuth = value_TYPE_ORIENTATION[SensorManager.DATA_X];
+			float pitch = value_TYPE_ORIENTATION[SensorManager.DATA_Y];
+			float roll = value_TYPE_ORIENTATION[SensorManager.DATA_Z];
+			final int matrix_size = 16;
+			float[] R = new float[matrix_size];
+			float[] outR = new float[matrix_size];
+			float[] I = new float[matrix_size];
+			float[] values = new float[3];
+			if ((value_TYPE_ACCELEROMETER != null)
+					&& (value_TYPE_MAGNETIC_FIELD != null)) {
+				SensorManager.getRotationMatrix(R, I, value_TYPE_ACCELEROMETER,
+						value_TYPE_MAGNETIC_FIELD);
+				SensorManager.getOrientation(R, values);
+				boolean resutl = SensorManager.remapCoordinateSystem(R,
+						SensorManager.AXIS_Z, SensorManager.AXIS_MINUS_Y, outR);
+				float incl = SensorManager.getInclination(I);
+				float x1 = (float) Math.toDegrees(values[0]);
+				float y1 = (float) Math.toDegrees(values[1]);
+				float z1 = (float) Math.toDegrees(values[2]);
+				float i1 = (float) Math.toDegrees(incl);
+				float[] fy = getHorizontalForceInY(pitch,
+						value_TYPE_ACCELEROMETER[1]);
+				float[] fz = getHorizontalForceInZ(pitch,
+						value_TYPE_ACCELEROMETER[2]);
+				float fh = fy[0] + fz[0];
+				float fv = fy[1] + fz[1];
+				Log.e("test", "" + roll);
+				return (fh);
+			}
+		}
+		return (null);
+	}
+
+	private float[] getHorizontalForceInY(float pitch, float forceinY) {
+		float[] force = new float[2];
+		force[0] = (float) ((forceinY) * Math.cos(Math.toRadians(pitch)));
+		force[1] = (float) ((forceinY) * (Math.sin(Math.toRadians(180 + pitch))));
+		return (force);
+	}
+
+	private float[] getHorizontalForceInZ(float pitch, float forceinZ) {
+		float[] force = new float[2];
+		pitch = pitch - 90;
+		force[0] = (float) ((forceinZ) * Math.cos(Math.toRadians(pitch)));
+		force[1] = (float) ((forceinZ) * (Math.sin(Math.toRadians(180 + pitch))));
+		return (force);
+	}
+
+	private void setButton(Button btn, boolean clicked) {
+		if (clicked) {
+			btn.setTag("");
+			btn.setBackgroundResource(R.drawable.bg_button_focus);
+		} else {
+			btn.setTag(null);
+			btn.setBackgroundResource(R.drawable.bg_button);
+		}
+	}
+
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case WHAT_UPDATEACC:
+				stepDetecter.updateData();
+				break;
+			}
+		}
+	};
+
+	private List<AccelerometerEvent> filterEvent(
+			List<AccelerometerEvent> accelerometerList) {
+		List<AccelerometerEvent> accelerometerListnew = new ArrayList<AccelerometerEvent>();
+		int i = 0;
+		int count = accelerometerList.size();
+		AccelerometerEvent accelerometerEventi;
+		AccelerometerEvent newaccelerometerEventlast = null;
+		long stime = 0;
+		while (i < count) {
+			accelerometerEventi = accelerometerList.get(i);
+			if (accelerometerListnew.size() == 0) {
+				newaccelerometerEventlast = accelerometerEventi;
+				stime = newaccelerometerEventlast.t;
+				accelerometerListnew.add(newaccelerometerEventlast);
+				accelerometerList.remove(i);
+				--count;
+			} else {
+				long needtime = stime
+						+ ((newaccelerometerEventlast.t - stime) / 10 + 1) * 10;
+				if (accelerometerEventi.t <= needtime) {
+					newaccelerometerEventlast = accelerometerEventi;
+					accelerometerListnew.add(newaccelerometerEventlast);
+					accelerometerList.remove(i);
+					--count;
+				} else {
+					if (accelerometerEventi.t > needtime) {
+						AccelerometerEvent accelerometerEventtemp = new AccelerometerEvent();
+						accelerometerEventtemp.t = needtime;
+						accelerometerEventtemp.a = getRightValue(
+								newaccelerometerEventlast.t - stime,
+								newaccelerometerEventlast.a,
+								accelerometerEventi.t - stime,
+								accelerometerEventi.a, needtime - stime);
+						accelerometerEventtemp.x = getRightValue(
+								newaccelerometerEventlast.t - stime,
+								newaccelerometerEventlast.x,
+								accelerometerEventi.t - stime,
+								accelerometerEventi.x, needtime - stime);
+						accelerometerEventtemp.y = getRightValue(
+								newaccelerometerEventlast.t - stime,
+								newaccelerometerEventlast.y,
+								accelerometerEventi.t - stime,
+								accelerometerEventi.y, needtime - stime);
+						accelerometerEventtemp.z = getRightValue(
+								newaccelerometerEventlast.t - stime,
+								newaccelerometerEventlast.z,
+								accelerometerEventi.t - stime,
+								accelerometerEventi.z, needtime - stime);
+						newaccelerometerEventlast = accelerometerEventtemp;
+						accelerometerListnew.add(newaccelerometerEventlast);
+					} else {
+						++i;
+					}
+				}
+			}
+		}
+		i = 0;
+		count = accelerometerListnew.size();
+		while (i < count) {
+			accelerometerEventi = accelerometerListnew.get(i);
+			if ((accelerometerEventi.t - stime) % 10 != 0) {
+				accelerometerListnew.remove(i);
+				--count;
+			} else {
+				++i;
+			}
+		}
+		return (accelerometerListnew);
+	}
+
+	private float getRightValue(long x0, float y0, long x1, float y1, long x) {
+		if (y0 != y1) {
+			double a = (double) (y1 - y0) / (double) (x1 - x0);
+			double b = (((double) y0 * (double) x1) - ((double) y1 * (double) x0))
+					/ (double) (x1 - x0);
+			float y = (float) (a * (double) x + b);
+			Log.e("y0", "" + y0);
+			Log.e("y ", "" + y);
+			Log.e("y1", "" + y1);
+			return (y);
+		}
+		return (y0);
+	}
+
+	private List<AccelerometerEvent> accelerometerEventList = null;
+	private long steps = 0;
+	private Timer timer = null;
+	public final long INTERVAL_MS = 1000 / 30;
+
+	private void initTimer() {
+		if (timer == null) {
+			timer = new Timer("UpdateData", false);
+			TimerTask task = new TimerTask() {
+				@Override
+				public void run() {
+					Message msg = handler.obtainMessage();
+					msg.what = WHAT_UPDATEACC;
+					handler.sendMessage(msg);
+				}
+			};
+			timer.schedule(task, 0, INTERVAL_MS);
+		}
+	}
+
+	int stepsss = -1;
+	private float pitch = 0;
+
+	private void analyseAccelerometerEvent(SensorEvent event) {
+		AccelerometerEvent accelerometerEvent = new AccelerometerEvent();
+		accelerometerEvent.t = System.currentTimeMillis();
+		accelerometerEvent.x = event.values[SensorManager.DATA_X];
+		accelerometerEvent.y = event.values[SensorManager.DATA_Y];
+		accelerometerEvent.z = event.values[SensorManager.DATA_Z];
+		accelerometerEvent.a = accelerometerEvent.a = (float) Math
+				.sqrt(accelerometerEvent.x * accelerometerEvent.x
+						+ accelerometerEvent.y * accelerometerEvent.y
+						+ accelerometerEvent.z * accelerometerEvent.z);
+		/*
+		 * float[] forcey = getPitchForceInY(accelerometerEvent.y); float[]
+		 * forcez = getPitchForceInZ(accelerometerEvent.z); if (forcey != null
+		 * && forcez != null) { float a = forcey[0] + forcez[0]; float b =
+		 * forcey[1] + forcez[1]; accelerometerEvent.a = (float) Math.sqrt(a * a
+		 * + b * b); accelerometerEventList.add(accelerometerEvent); }
+		 */
+		if (accelerometerEventList == null) {
+			accelerometerEventList = new ArrayList<AccelerometerEvent>();
+		}
+		// Log.e("test", "" + accelerometerEvent.a);
+		// Log.e("test", "" + accelerometerEvent.x + "  - " +
+		// accelerometerEvent.y
+		// + " - " + accelerometerEvent.z);
+		accelerometerEventList.add(accelerometerEvent);
+		// List<AccelerometerEvent> accelerometerEventList1 = new
+		// ArrayList<AccelerometerEvent>();
+		// accelerometerEventList1.addAll(accelerometerEventList);
+		// AnalyseWave.FilterAccelerometerEventList(accelerometerEventList1);
+		// updateLog("    波峰: "
+		// + AnalyseWave.getWaveCrestCount(accelerometerEventList1)
+		// + "    步数: "
+		// + AnalyseWave
+		// .CountStepsAccelerometerEventList(accelerometerEventList1)
+		// + "    WIFI计算步数: " + steps);
+		stepDetecter.setLastAcc(event.values);
+	}
+
+	private void analyseOrientationEvent(SensorEvent event) {
+		float x = event.values[SensorManager.DATA_X];
+		pitch = event.values[SensorManager.DATA_Y];
+		float z = event.values[SensorManager.DATA_Z];
+		float[] values = new float[3];
+		float[] R = new float[9];
+		float[] I = new float[16];
+		if ((value_TYPE_ACCELEROMETER != null)
+				&& (value_TYPE_MAGNETIC_FIELD != null)) {
+			SensorManager.getRotationMatrix(R, I, value_TYPE_ACCELEROMETER,
+					value_TYPE_MAGNETIC_FIELD);
+			SensorManager.getOrientation(R, values);
+			float x1 = (float) Math.toDegrees(values[0]);
+			float y1 = (float) Math.toDegrees(values[1]);
+			float z1 = (float) Math.toDegrees(values[2]);
+			// Log.e("test0", "" + x + " - " + pitch + " - " + z);
+			// Log.e("test1", "" + x1 + " - " + y1 + " - " + z1);
+			float incl = SensorManager.getInclination(I);
+			final double rad2deg = (double) (180.0d / Math.PI);
+			// Log.d("Compass", "yaw: " + (values[0] * rad2deg) + "  pitch: "
+			// + (values[1] * rad2deg) + "  roll: "
+			// + (values[2] * rad2deg) + "  incl: " + (incl * rad2deg));
+		}
+	}
+
+	private String getDerectionString(SensorEvent event) {
+		float x = event.values[0];
+		float y = event.values[1];
+		float z = event.values[2];
+		int derection = (int) (x / 90);
+		String derectionstr = "";
+		switch (derection) {
+		case 0:
+			break;
+		case 3:
+		case 1:
+		case 2:
+		}
+		return (derectionstr);
+	}
+
+	private void AccelerometerEventListFliter(
+			List<AccelerometerEvent> accelerometerEventList) {
+		int mode = 2;
+		int i = 0;
+		int count = accelerometerEventList.size();
+		while (i < count) {
+			switch (mode) {
+			case 2:
+				if (AnalyseWave.isWaveTrough(accelerometerEventList, i)) {
+					mode = 1;
+				} else {
+					if (AnalyseWave.isWaveCrest(accelerometerEventList, i)) {
+						mode = 0;
+					}
+				}
+				break;
+			case 0:
+				if (AnalyseWave.isWaveTrough(accelerometerEventList, i)) {
+					mode = 1;
+				}
+				break;
+			case 1:
+				if (AnalyseWave.isWaveCrest(accelerometerEventList, i)) {
+					mode = 0;
+				}
+				break;
+			}
+			++i;
+		}
+	}
+
+	private int seekWakeDiff(AccelerometerEvent accelerometerEvent,
+			List<AccelerometerEvent> accelerometerEventList, int start) {
+		while (start < accelerometerEventList.size()) {
+			if ((accelerometerEvent.a != accelerometerEventList.get(start).a)
+					&& (accelerometerEventList.get(start).a != 0)) {
+				return (start);
+			}
+			++start;
+		}
+		return (-1);
+	}
+
+	private int analyseAccelerometerEventList(
+			List<AccelerometerEvent> accelerometerEventList) {
+		int WaveCount = 0;
+		int mode = 2;
+		int position = 0;
+		int modestart = 2;
+		int i = 0;
+		int count = accelerometerEventList.size();
+		while (i < count) {
+			switch (mode) {
+			case 2:
+				if (AnalyseWave.isWaveTrough(accelerometerEventList, i)) {
+					mode = 1;
+					modestart = 0;
+					position = i;
+				} else {
+					if (AnalyseWave.isWaveCrest(accelerometerEventList, i)) {
+						mode = 0;
+						modestart = 1;
+						position = i;
+					}
+				}
+				break;
+			case 0:
+				if (AnalyseWave.isWaveTrough(accelerometerEventList, i)) {
+					if (mode == modestart) {
+						if (AnalyseWave.isStepTimeDiff(accelerometerEventList
+								.get(i).t
+								- accelerometerEventList.get(position).t)) {
+							++WaveCount;
+						}
+					}
+					mode = 1;
+					position = i;
+				}
+				break;
+			case 1:
+				if (AnalyseWave.isWaveCrest(accelerometerEventList, i)) {
+					if (mode == modestart) {
+						if (AnalyseWave.isStepTimeDiff(accelerometerEventList
+								.get(i).t
+								- accelerometerEventList.get(position).t)) {
+							++WaveCount;
+						}
+					}
+					mode = 0;
+					position = i;
+				}
+				break;
+			}
+			++i;
+		}
+		// updateLog("" + WaveCount);
+		return (WaveCount);
+	}
+
+	private void updateLog(String log) {
+		loglist.add(log);
+		log_lv.setAdapter(new BaseAdapter() {
+
+			@Override
+			public int getCount() {
+				return loglist.size();
+			}
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				TextView tv = new TextView(testStepCountActivity.this);
+				tv.setTextColor(Color.RED);
+				tv.setText(loglist.get(position));
+				return tv;
+			}
+
+			@Override
+			public Object getItem(int position) {
+				return null;
+			}
+
+			@Override
+			public long getItemId(int position) {
+				return 0;
+			}
+
+		});
+	}
+
+	private static String DecimalFormatCoord(float f) {
+		DecimalFormat df = new DecimalFormat("0.00000000000000000000000000000");
+		String s = df.format(f);
+		if (s.indexOf("E") != -1) {
+			s = "" + f;
+		}
+		return (s);
+	}
+
+	private static String ErrorFileName = null;
+
+	private static boolean eraseErrorLog() {
+		if (Environment.MEDIA_MOUNTED.equals(Environment
+				.getExternalStorageState())) {
+			File extsddir = Environment.getExternalStorageDirectory();
+			if (extsddir.canWrite()) {
+				String photofolderpath = Environment
+						.getExternalStorageDirectory() + "/iscreate";
+				File pathFile = new File(photofolderpath);
+				if ((!pathFile.exists()) || (!pathFile.isDirectory())) {
+					pathFile.mkdirs();
+				}
+				String photoPath = photofolderpath + "/" + ErrorFileName;
+				File file = new File(photoPath);
+				FileOutputStream fos = null;
+				try {
+					if (file.exists()) {
+						fos = new FileOutputStream(file, false);
+					}
+				} catch (Exception e) {
+				}
+				if (fos != null) {
+					try {
+						fos.close();
+					} catch (IOException e) {
+					}
+				}
+			}
+		}
+		return (false);
+	}
+
+	private static boolean writeErrorLog(String error) {
+		if (error == null) {
+			error = "\n";
+		} else {
+			error = error + "\n";
+		}
+		if (Environment.MEDIA_MOUNTED.equals(Environment
+				.getExternalStorageState())) {
+			File extsddir = Environment.getExternalStorageDirectory();
+			if (extsddir.canWrite()) {
+				String photofolderpath = Environment
+						.getExternalStorageDirectory() + "/iscreate";
+				File pathFile = new File(photofolderpath);
+				if ((!pathFile.exists()) || (!pathFile.isDirectory())) {
+					pathFile.mkdirs();
+				}
+				String photoPath = photofolderpath + "/" + ErrorFileName;
+				File file = new File(photoPath);
+				FileOutputStream fos = null;
+				try {
+					if (file.exists()) {
+						fos = new FileOutputStream(file, true);
+					} else {
+						fos = new FileOutputStream(file);
+					}
+				} catch (Exception e) {
+				}
+				if (fos != null) {
+					try {
+						fos.write(error.getBytes());
+						return (true);
+					} catch (Exception e) {
+					} finally {
+						try {
+							fos.close();
+						} catch (Exception e) {
+						}
+					}
+				}
+			}
+		}
+		return (false);
+	}
+}

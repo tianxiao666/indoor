@@ -1,0 +1,629 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin
+END
+pop_menu_left.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/pop_menu_left.html
+END
+dictmgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/dictmgr_index.html
+END
+codemgr_addview.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/codemgr_addview.html
+END
+index_not_login.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/index_not_login.html
+END
+areaprivmgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/areaprivmgr_index.html
+END
+analysisreport_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/analysisreport_list.html
+END
+report_retention_rate.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/report_retention_rate.html
+END
+sysdept_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/sysdept_list.html
+END
+login.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/login.html
+END
+rolemgr_addview.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/rolemgr_addview.html
+END
+logmgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logmgr_index.html
+END
+sysuser_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/sysuser_list.html
+END
+draw.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/draw.html
+END
+user_editview.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/user_editview.html
+END
+recommendAreaMgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/recommendAreaMgr_index.html
+END
+building_planegraph_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/building_planegraph_list.html
+END
+footer.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/footer.html
+END
+sysuser_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/sysuser_add.html
+END
+keywordchange.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/keywordchange.html
+END
+location_succeed.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/location_succeed.html
+END
+locationInformation_change.html
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/locationInformation_change.html
+END
+sysdept_edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/sysdept_edit.html
+END
+draw_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/draw_index.html
+END
+buildingFloor_change.html
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/buildingFloor_change.html
+END
+adminmgr_ajaxadduser.html
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/adminmgr_ajaxadduser.html
+END
+resource_menu_left.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/resource_menu_left.html
+END
+logotherstats_busi.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logotherstats_busi.html
+END
+diet_add_consume.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/diet_add_consume.html
+END
+sysuser_edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/sysuser_edit.html
+END
+draw_status.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/draw_status.html
+END
+building_planegraph_edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/building_planegraph_edit.html
+END
+poi_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/poi_add.html
+END
+dictmgr_editview.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/dictmgr_editview.html
+END
+popup.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/popup.html
+END
+building_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/building_list.html
+END
+logotherstats_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logotherstats_index.html
+END
+poi_change.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/poi_change.html
+END
+keywordmanager_edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/keywordmanager_edit.html
+END
+adminmgr_editview.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/adminmgr_editview.html
+END
+areawiki_ajaxaddview.html
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/areawiki_ajaxaddview.html
+END
+stat_cr_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/stat_cr_list.html
+END
+dictoptionmgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/dictoptionmgr_index.html
+END
+destalbum_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/destalbum_index.html
+END
+counseling_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/counseling_index.html
+END
+ajax_page_info.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/ajax_page_info.html
+END
+page_info.html
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/page_info.html
+END
+track_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/track_index.html
+END
+privmgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/privmgr_index.html
+END
+trafficmgr.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/trafficmgr.html
+END
+prew_html_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/prew_html_detail.html
+END
+cutprice_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/cutprice_index.html
+END
+keywordadd.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/keywordadd.html
+END
+building_edit.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/building_edit.html
+END
+counselist.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/counselist.html
+END
+rolemgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/rolemgr_index.html
+END
+dictoptionmgr_addview.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/dictoptionmgr_addview.html
+END
+sysuser_edit_dept.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/sysuser_edit_dept.html
+END
+page_nav.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/page_nav.html
+END
+poi_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/poi_list.html
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/index.html
+END
+commentlist_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/commentlist_index.html
+END
+privmgr_addview.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/privmgr_addview.html
+END
+picmgr.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/picmgr.html
+END
+second_menu.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/second_menu.html
+END
+tool_resize_table.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/tool_resize_table.html
+END
+dictmgr_addview.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/dictmgr_addview.html
+END
+drawmgr_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/drawmgr_list.html
+END
+error.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/error.html
+END
+relate_wiki_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/relate_wiki_list.html
+END
+privmgr_editview.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/privmgr_editview.html
+END
+buildingfloor_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/buildingfloor_list.html
+END
+codemgr_editview.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/codemgr_editview.html
+END
+selmap.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/selmap.html
+END
+dictoptionmgr_editview.html
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/dictoptionmgr_editview.html
+END
+logotherstats_activate.html
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logotherstats_activate.html
+END
+adminmgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/adminmgr_index.html
+END
+pv_statistics.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/pv_statistics.html
+END
+tool_resize_images.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/tool_resize_images.html
+END
+beautypic_bigpic.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/beautypic_bigpic.html
+END
+locationInformation_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/locationInformation_add.html
+END
+login_bak.html
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/login_bak.html
+END
+sysdept_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/sysdept_add.html
+END
+op_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/op_index.html
+END
+adminmgr_addview.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/adminmgr_addview.html
+END
+searchmgr.html
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/searchmgr.html
+END
+header.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/header.html
+END
+statanaryse_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/statanaryse_index.html
+END
+rolemgr_editview.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/rolemgr_editview.html
+END
+stat_left_menu.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/stat_left_menu.html
+END
+logtrackstats_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logtrackstats_index.html
+END
+locationInformation_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/locationInformation_list.html
+END
+svg.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/svg.html
+END
+logwebstats_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logwebstats_index.html
+END
+upload_tmp_file.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/upload_tmp_file.html
+END
+syslogs_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/syslogs_list.html
+END
+analysisreport_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/analysisreport_detail.html
+END
+codemgr_index.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/codemgr_index.html
+END
+location_message.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/location_message.html
+END
+logotherstats_login.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logotherstats_login.html
+END
+logotherstats_keyword.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/logotherstats_keyword.html
+END
+tool_resize.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/tool_resize.html
+END
+economymgr.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/economymgr.html
+END
+buildingFloor_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/buildingFloor_add.html
+END
+edit_support.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/178/tag/tag01/indooradmin/templates/admin/edit_support.html
+END

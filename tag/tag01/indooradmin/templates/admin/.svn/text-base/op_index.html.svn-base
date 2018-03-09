@@ -1,0 +1,152 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+//获取功能
+function ajaxGetOP()
+{
+	var app = $("#APP").val();
+	if(app != ''){
+		$.ajax({
+			url : "ea.php?r=OPQuery/GetOPList",
+			type : "get",
+			dataType : "text",
+			data : {
+				app : app
+			},
+			success : function(data){
+				$("#OP").empty();
+				$("#OP").append(data);
+			},
+			error : function(data){
+				return false;
+			}
+		});
+		return true;
+	}
+	return false;
+}
+function Log_Submit(){
+	var start = $("#START_TIME").val();
+	var end   = $("#END_TIME").val();
+	if( start!='' && end!='' && end < start)
+	{
+		alert("开始时间不能大于终止时间！");
+		return false;
+	}
+	$("#log_search_form").submit();
+}
+</script>
+{/literal}
+<div class="content">
+	<div class="main">
+	    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;功能查询&nbsp;&gt;&nbsp;OP统计</span></div>
+		{include file="stat_left_menu.html" type="op_statistics"}
+		<div class="tabtext" id="tabtext1" >
+			<table>
+				<tr>
+					<td valign="top">
+						<table border="0" cellspacing="0" cellpadding="0" >
+							<tr> 
+								<td valign="top" colspan="2">
+									<div class="scenic_search" style="margin-left: 8px;">
+										<div class="chose">
+											<form action="ea.php?r=OPQuery" id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px;width:900px;">
+												<input type="hidden" name="FLAG" value="1">
+												<table border="0" cellspacing="0" cellpadding="0">
+													<tbody>
+														<tr>
+															<td height="25" align="left" class="formTitle"><span>应用平台：</span></td>
+															<td height="25" align="left" class="formTitle">
+																<select name="APP" id="APP" style="width:90px;" onchange="ajaxGetOP()">
+																<option value="">- 请选择 -</option>
+																{html_options options=$APP selected=$data.APP}
+																</select>
+															</td>
+															<td height="25" align="left" class="formTitle"><span>OP：</span></td>
+															<td height="25" align="left" class="formTitle">
+																<select name="OP" id="OP" style="width:150px;" >
+																{if $op_list}
+																<option value="{$item.OP}">- 请选择  -</option>
+																{foreach from=$op_list item=item}
+																<option value="{$item.OP}" {if $item.OP==$data.OP}selected{/if}>{$item.OP}</option>
+																{/foreach}
+																{else}
+																<option value="">- 请选择平台 -</option>
+																{/if}
+																</select>
+															</td>
+															<td height="25" align="left" class="formTitle"><span>起始时间：</span></td>
+															<td><input type="text" id="START_TIME" name="START_TIME" value="{$data.START_TIME}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td height="25" align="left" class="formTitle"><span>终止时间：</span></td>
+															<td><input type="text" id="END_TIME" name="END_TIME" class="Wdate" value="{$data.END_TIME}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td><div class="btn_search"><a onclick="Log_Submit();" style="cursor:pointer;"></a></div></td>
+														</tr>
+													</tbody>
+												</table>
+											</form>
+										</div>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+							<td align="left" style="padding:20px 0px 0px 10px"><span><b>总计：</b><font style="color:red;font-size:14px;">{$op_sum.CNT}</font></span></td>
+							</tr>
+							
+							<tr>
+								<td valign="top" style="padding:10px 10px 0;" colspan="2">
+								{if (!$stat_op_list)}
+								<div class="scenic_list">
+									<table class="itable">
+										<thead>
+											<tr>
+												<td width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></td>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								{else}
+								<div class="scenic_list">
+									<table class="itable">
+									<thead>
+									<tr>
+										<th width="25%" align="left">应用平台</th>
+										<th>OP</th>
+										<th width="25%" align="left">日期</th>
+										<th width="25%" align="left">浏览量</th>
+									</tr>
+									</thead>
+									<tbody>
+									{foreach from=$stat_op_list item=op}
+									<tr class="{cycle values='row0,row1'}">
+										<td align="left">{$op.APP}</td>
+										<td align="left">{$op.OP}</td>
+										<td align="left">{$op.ADD_TIME|date_format:'%Y-%m-%d'}</td>
+										<td align="left">{$op.OP_CNT}</td>
+									</tr>
+									{/foreach}
+									</tbody>
+									</table>
+								</div>
+								{/if}
+								</td>
+							</tr>
+							<tr> 
+								<td valign="top" style="padding:10px;" colspan="2">
+									<div class="pagebreak">
+										<div class="page">
+										{include file="page_info.html"}
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div> 
+</div>
+{include file="footer.html"}

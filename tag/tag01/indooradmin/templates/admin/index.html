@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>::{$site_name}-{$text_logo}::后台管理系统::</title>
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+function itravel(){
+
+	if (GBrowserIsCompatible()) {
+	  var map = new GMap(document.getElementById("map"));
+
+	  map.addControl(new GLargeMapControl());
+	  map.addControl(new GMapTypeControl());
+	  map.centerAndZoom(new GPoint(104.765625,38.54816542304656), 13);
+	  map.enableScrollWheelZoom();
+	  map.enableContinuousZoom();
+	}
+}
+</script>
+{/literal}
+</head>
+
+<body>
+{include file="header.html"}
+<div class="content">
+  <div class="main">
+  
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pic">
+   <span><img src="./images/photo/pic1.jpg" /></span>
+   </div>
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="header">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+</body>
+</html>

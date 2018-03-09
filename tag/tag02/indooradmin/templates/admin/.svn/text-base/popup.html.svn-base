@@ -1,0 +1,32 @@
+<link href="css/popup.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="js/jquery/popup.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery/jquery.easydrag.handler.beta2.js"></script>
+<div class="divPopup" id="divPopup">
+  <div class="popup">
+    <div class="p-box">
+      <div class="p-title" id="drag_handler">
+        <div class="p-title-content">{$popup_title|strip_tags}</div>
+        <span><a href="javascript:;" class="pop_Content_close jqmClose" title="¹Ø±Õ">¹Ø±Õ</a></span>
+      </div>
+      <div class="p-main clear">
+      	<div class="content"></div>
+        <iframe id="frmPopup" class="frmPopup" src="" frameborder="0" scrolling="auto"></iframe>
+      </div>
+      <div class="p-bom clear"></div>
+    </div>
+  </div>
+</div>
+{literal} 
+<script language="javascript">
+jQuery(document).ready(function($){
+	$(".pop_Content_close").hover(
+		function(){
+			$(this).css("background-position","0 -23px");
+		},
+		function(){
+			$(this).css("background-position","0 0");
+		}
+	).css("cursor","pointer");
+});
+</script> 
+{/literal}

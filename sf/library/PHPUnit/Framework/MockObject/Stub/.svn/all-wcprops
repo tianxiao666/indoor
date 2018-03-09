@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub
+END
+ConsecutiveCalls.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub/ConsecutiveCalls.php
+END
+ReturnArgument.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub/ReturnArgument.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub/Exception.php
+END
+MatcherCollection.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub/MatcherCollection.php
+END
+Return.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub/Return.php
+END
+ReturnCallback.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub/ReturnCallback.php
+END

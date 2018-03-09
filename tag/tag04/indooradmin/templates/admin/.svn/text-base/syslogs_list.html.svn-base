@@ -1,0 +1,177 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+
+function changePage()
+{
+	var sep = (arguments[0].indexOf('?') != -1) ? '&' : '?';
+	location.href = arguments[0] + sep + 'page=' + arguments[1];
+}
+
+function SearchLog()
+{   
+	var start = document.getElementById("startDate").value;
+	var end   = document.getElementById("endDate").value;
+	if( (start!='') && (end!='') && (end < start))
+	{
+		alert("起始时间不能大于终止时间！");
+	}
+	else 
+	{
+	  var frm = document.log_search_form;
+	  frm.action='ea.php?r=Syslogs';
+	  frm.submit();
+	}
+}
+function drop_mouseover(pos){
+	 try{window.clearTimeout(timer);}catch(e){}
+	}
+	function drop_mouseout(pos){
+	 var posSel=document.getElementById(pos+"Sel").style.display;
+	 if(posSel=="block"){
+	  timer = setTimeout("drop_hide('"+pos+"')", 1000);
+	 }
+	}
+	function drop_hide(pos){
+	 document.getElementById(pos+"Sel").style.display="none";
+	}
+	function search_show(pos,searchType,href){
+	    document.getElementById(pos+"SearchType").value=searchType;
+	    document.getElementById(pos+"Sel").style.display="none";
+	    document.getElementById(pos+"Slected").innerHTML=href.innerHTML;
+	    document.getElementById(pos+'q').focus();
+	 try{window.clearTimeout(timer);}catch(e){}
+	 return false;
+	}
+	
+	function ExportLog()
+	{   
+		var frm = document.getElementById('log_search_form');
+		frm.action = 'ea.php?r=Syslogs/Export';
+		frm.submit();
+	}
+	
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;日志详情</span></div>
+  <input type="hidden" id="subbarFlag" value="log_mgr_bar" />
+  {include file="stat_left_menu.html" type="syslogs_list"}
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  <div class="scenic_search">
+   <div class="chose">
+	<form id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px; width: 100%;">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+							    <td height="25" align="left" class="formTitle"><span>用户名：</span></td>
+							    <td ><input type="text" name="NAME" id="NAME" value="{$condition.NAME}" style="width:80px"></td>
+							    
+							    <td height="25" align="left" class="formTitle"><span>IP：</span></td>
+							    <td ><input type="text" name="LOG_IP" id="LOG_IP" value="{$condition.LOG_IP}" style="width:100px"></td>
+							    
+							    <td height="25" align="left" class="formTitle"><span>页面地址：</span></td>
+							    <td ><input type="text" name="GET_URL" id="GET_URL" value="{if $condition.GET_URL!='NULL'}{$condition.GET_URL}{/if}" style="width:150px"></td>
+								   
+								<td height="25" align="left" class="formTitle"><span>来源地址：</span></td>
+							    <td ><input type="text" name="REFER" id="REFER" value="{if $condition.REFER!='NULL'}{$condition.REFER}{/if}" style="width:150px"></td>
+							    
+							    <td height="25" align="left" class="formTitle"><span>模糊查询：</span></td>
+							    <td ><select name="LIKE" id="LIKE" size="1">
+								    <option value="" >否</option>
+								    <option value="Y" {if $condition.LIKE=='Y'}selected{/if}>是</option>
+								
+							    <td height="25" align="left" class="formTitle"><span>平台：</span></td>
+								<td ><select name="APP" id="APP" size="1">
+								    <option value="">-请选择-</option>
+								    <option value="WEB" {if $condition.APP=='WEB'}selected{/if}>WEB网站</option>
+								    <option value="WAP" {if $condition.APP=='WAP'}selected{/if}>WAP网站</option>
+								    <option value="API" {if $condition.APP=='API'}selected{/if}>客户端</option>
+								    </select>
+								</td>
+								<td height="25" align="left" class="formTitle"><span>起始：</span></td>
+                                <td><input style="width:90px" type="text" id="startDate" name="startDate" value="{$condition.startDate}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                
+                                <td height="25" align="left" class="formTitle"><span>终止：</span></td>
+                                <td><input style="width:90px" type="text" id="endDate" name="endDate" class="Wdate" value="{$condition.endDate}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td><input type="button" value="查询日志" style="font-size: 12px; width: 60px; height: 20px;" onclick="SearchLog();" />
+                                </td>
+                                
+                            </tr>
+                        </table>
+						</form>
+						</div>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  <span style="font-size:14px;">总计：</spna><span style="font-size:14px;color:red">{if $page.total}{$page.total}{else}0{/if}</span>
+  <input type="button" onclick="ExportLog();" value="导出Excel" style="float: right" />
+  {if (!$syslog_list)}
+  <div class="scenic_list">
+<table class="itable">
+<thead>
+<tr>
+ 	<th width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></th>
+</thead>
+
+</table>
+   </div>
+  {else}
+	<div class="scenic_list">
+		
+<table class="itable">
+<thead>
+<tr>
+ 	<th width="7%" align="left">应用台平</th>
+ 	<th width="6%" align="left">用户ID</th>
+ 	<th width="7%" align="left">用户名</th>
+ 	<th width="10%" align="left">IP</th>
+ 	<th width="30%" align="left">访问URL</th>
+ 	<th width="30%" align="left">来源URL</th>
+ 	<th width="10%" align="left">访问时间</th>
+ 	
+</tr>
+</thead>
+<tbody>
+		{foreach from=$syslog_list item =li}
+			    <tr class="{cycle values='row0,row1'}">
+                	<td align="left">{if $li.APP=='WEB'}WEB网站{elseif $li.APP=='API'}客户端{elseif $li.APP=='WAP'}WAP网站{/if}</td>
+                    <td align="left">{$li.SUBS_ID}</td>
+                    <td align="left">{$li.NAME}</td>
+                    <td align="left">{$li.LOG_IP}</td>
+                    <td align="left">{$li.GET_URL}</td>
+                    <td align="left">{$li.REFER}</td>
+                    <td align="left">{$li.CREATE_TIME|date_format:"%Y-%m-%d"}</td>
+                </tr>
+		{/foreach}
+</tbody>
+</table>
+   </div>
+   {/if}
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+	<input type="hidden" id="headMenu" value="statmanager">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+   </div>
+   </div> 
+   </div>
+
+{include file="footer.html"}

@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/srcsvn/indoor/!svn/ver/406/publicbase/models
+END
+CCDAOCB_IDEALAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/406/publicbase/models/CCDAOCB_IDEALAP.php
+END
+CCDAOSYS_SUBS.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_SUBS.php
+END
+CCDAOSYS_REGION.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_REGION.php
+END
+CCDAOSYS_ROLE.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_ROLE.php
+END
+CCDAOCB_PIC.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOCB_PIC.php
+END
+CCDAOCB_POI.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOCB_POI.php
+END
+CCDAOCB_MTSIGNAL.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/412/publicbase/models/CCDAOCB_MTSIGNAL.php
+END
+CCDAODM_LAYER_POINT.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAODM_LAYER_POINT.php
+END
+CCDAOCB_FLOOR.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOCB_FLOOR.php
+END
+CCDAOSYS_LOG.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_LOG.php
+END
+CCDAOCB_BUILDING.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOCB_BUILDING.php
+END
+CCDAOCB_LOCATION.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOCB_LOCATION.php
+END
+CCDAOSYS_ADMIN_PRIV.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_ADMIN_PRIV.php
+END
+CCDAODM_DRAW_MAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAODM_DRAW_MAP.php
+END
+CCDAODM_LAYER_ELEMENT_ATTR.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAODM_LAYER_ELEMENT_ATTR.php
+END
+CCDAOSYS_DEPT_SUBS.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_DEPT_SUBS.php
+END
+CCDAOSYS_DEPT.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_DEPT.php
+END
+CCDAODM_LAYER_ELEMENT.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAODM_LAYER_ELEMENT.php
+END
+CCDAODM_PLANE_LAYER.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAODM_PLANE_LAYER.php
+END
+CCDAOSYS_TYPE_CODE.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_TYPE_CODE.php
+END
+CCDAOAP_EQUIPMENT.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOAP_EQUIPMENT.php
+END
+CCDAOSYS_OPTION_CODE.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_OPTION_CODE.php
+END
+CCDAOCB_PLANE_MEDIA.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOCB_PLANE_MEDIA.php
+END
+CCDAOSYS_PRIV.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/278/publicbase/models/CCDAOSYS_PRIV.php
+END

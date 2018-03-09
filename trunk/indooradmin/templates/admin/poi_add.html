@@ -1,0 +1,360 @@
+<link href="{$mediaServer}css/search.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/index.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/public.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/thickbox.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/header.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}js/calendar/my97hourpicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<script src="{$mediaServer}js/jquery/jquery_1_3_2.js">
+</script>
+<script src="{$mediaServer}js/calendar/my97hourpicker/WdatePicker.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/common.js" type="text/javascript">
+</script>
+<script language="javascript" type="text/javascript" src="{$mediaServer}/js/changepage.js">
+</script>
+{literal}
+<script language="javascript" type="text/javascript">
+	/**
+	 * 选择FLOOR_ID取相应的DRAW_MAP_ID
+	 */
+	function choose_floor_id(){
+		var FLOOR_ID=$('#FLOOR_ID').val();
+		$.ajax({
+            url: "ea.php?r=Poi/choose_floor_id&FLOOR_ID=" + FLOOR_ID,
+            data: {},
+            type: "post",
+            success: function(msg){
+                $('#DRAW_MAP_ID').html(msg);
+            }
+        });
+	}
+	/**
+	 * 选择DRAW_MAP_ID取相应的LAYER_ID
+	 */
+	function choose_draw_map_id(){
+		var DRAW_MAP_ID=$('#DRAW_MAP_ID').val();
+		$.ajax({
+            url: "ea.php?r=Poi/choose_DRAW_MAP_ID&DRAW_MAP_ID=" + DRAW_MAP_ID,
+            data: {},
+            type: "post",
+			dataType: 'json',
+            success: function(json){
+				$('#LAYER_ID').html(json.POI_LAYER);
+				$('#SVG_ID').html(json.SVG_ID_LIST);
+            }
+        });
+	}
+	
+	/**
+	 *信息内容检测是否合法 
+	 */
+    function checkForm(){
+		var re_kong = /^\s*$/;
+        var re_LOCAT_X = /^([0-9]{1,4})(\.[0-9]+?)?$/;
+        var re_LOCAT_Y = /^([0-9]{1,4})(\.[0-9]+?)?$/;
+        if ($('#POI_NAME').val() == ''||re_kong.test($('#POI_NAME').val())) {
+            alert('POI名称不能为空,最多64个字符！');
+            $('#POI_NAME').focus();
+            return false;
+        }
+        if ($('#FLOOR_ID').val() == '') {
+            alert('请选择所属楼层！');
+            $('#FLOOR_ID').focus();
+            return false;
+        }
+		if ($('#DRAW_MAP_ID').val() == '') {
+            alert('请选择该设备所属平面图！');
+            $('#DRAW_MAP_ID').focus();
+            return false;
+        }
+        
+        if ($('#LAYER_ID').val() == '') {
+            alert('请选择该设备所属图层！');
+            $('#LAYER_ID').focus();
+            return false;
+        }
+        if ($('#SVG_ID').val() == '') {
+            alert('请选择该设备所属图层元素！');
+            $('#SVG_ID').focus();
+            return false;
+        }
+        if ($('#POI_TYPE').val() == '') {
+            alert('请选择类别！');
+            $('#POI_TYPE').focus();
+            return false;
+        }
+        if ($('#STATUS').val() == '') {
+            alert('请选择状态！');
+            $('#STATUS').focus();
+            return false;
+        }
+        if ($('#POSITION_X').val() == '' || !re_LOCAT_X.test($('#POSITION_X').val())) {
+            alert('请填写与边界X轴距离，最多为4位(小数点最多保留2位)！');
+            $('#POSITION_X').focus();
+            return false;
+        }
+        if ($('#POSITION_Y').val() == '' || !re_LOCAT_Y.test($('#POSITION_Y').val())) {
+            alert('请填写与边界Y轴距离，最多为4位(小数点最多保留2位)！');
+            $('#POSITION_Y').focus();
+            return false;
+        }
+        if ($('#POI_NOTE').val() == ''||re_kong.test($('#POI_NOTE').val())) {
+            alert('POI简介不能为空！');
+            $('#POI_NOTE').focus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+	 *提交数据 
+	 */
+    function addPoi(){
+        if (checkForm()) {
+			var LAYER_ID=$('#LAYER_ID').val();
+			$('#hidden_layer_id').val(LAYER_ID);
+			$("#form1").submit();
+        }
+    }
+	
+	/**
+	 *检测文件飞否为图片 
+	 */
+    function onUploadImgChange(sender){
+        var file = sender.files[0];
+        if (file.type.indexOf("image") != -1) {
+			return true;
+        }else {
+            alert('图片格式无效！');
+			$('#file').val('');
+			return false;
+        }
+    }
+</script>
+{/literal}
+<div>
+    <link type="text/css" rel="stylesheet" href="css/popup.css">
+    <script src="js/jquery/popup.js" type="text/javascript" language="javascript">
+    </script>
+    <script src="js/jquery/jquery.easydrag.handler.beta2.js" type="text/javascript" language="javascript">
+    </script>
+    <div id="divPopup" class="divPopup" style="top: 25%; left: 25%; display: none; position: absolute; z-index: 1378959600; moveable:true;">
+        <div class="popup" style="width: 560px;">
+            <div class="p-box">
+                <div id="drag_handler" class="p-title" style="cursor: move;">
+                    <div class="p-title-content">
+                    </div>
+                    <span><a title="关闭" class="pop_Content_close jqmClose" href="ea.php?r=BuildingFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&NAME={$NAME}" style="cursor: pointer; background-position: 0px 0px;">关闭</a></span>
+                </div>
+                <div class="p-main clear">
+                    <div class="content" style="display: none;">
+                    </div>
+                    <iframe scrolling="auto" frameborder="0" class="frmPopup" id="frmPopup" style="display: inline; height: 380px;">
+                    </iframe>
+                </div>
+                <div class="p-bom clear">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript">
+        jQuery(document).ready(function($){
+            $(".pop_Content_close").hover(function(){
+                $(this).css("background-position", "0 -23px");
+            }, function(){
+                $(this).css("background-position", "0 0");
+            }).css("cursor", "pointer");
+        });
+    </script>
+    <div id="u312" class="u312_container" border="1">
+        <form id="form1" name="form1" method="post" action="ea.php?r=Poi/PoiAdd&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&FLOOR_ID={$floor_id_sel}" style="margin: 0px; padding: 0px;" enctype="multipart/form-data">
+            <table width="100%" id="add" border="2" cellspacing="1" cellpadding="4" bordercolor="#FFFFFF" bgcolor="" align="center" frame="box">
+                <tr>
+                    <td>
+                        <table width="100%" id="add" border="0" cellspacing="1" cellpadding="4" bordercolor="#FFFFFF" bgcolor="" align="center" frame="box">
+                            <tr>
+                                <td align="left" style="width:15%;font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    所在场所:
+                                </td>
+                                <td style="border: 0px; height: 40px;width:23%;">
+                                    <font color="#a40000" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;">
+                                        {$BUILDING_NAME}
+                                    </font>
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;width:11%;">
+                                  POI名称:   
+                                </td>
+								<td align="left" style="border: 0px; height: 40px;" colspan="5">
+                                    <input name="POI_NAME" type="text" id="POI_NAME" maxlength="64" value="" style="height: 20px;width:93%"/>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    所属楼层:
+                                </td>
+                                <td align="left"  colspan="2">
+                                    <select name="FLOOR_ID" id="FLOOR_ID" style="height: 20px;width:90%" onchange="choose_floor_id();">
+									{$FLOOR_ID}
+									</select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+								<td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;width:18%;">
+                                   所属楼层平面图:
+                                </td>
+                                <td align="left" style="border: 0px; height: 40px;width:33%;" colspan="2">
+                                    <select style="height:20px;width:90%" name="DRAW_MAP_ID" id="DRAW_MAP_ID" style="width: 50px;" onchange="choose_draw_map_id();">
+                                        {$DRAW_MAP_ID_LIST}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr height="20px">
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    平面图图层:
+                                </td>
+                                <td align="left" style="border: 0px; height: 40px;" colspan="2">
+                                    <select style="height:20px;width:90%" disabled="true" name="LAYER_ID" id="LAYER_ID" class="u279" style="width: 50px;" onchange="choose_layer_id();">
+                                        <option value="0">-POI图层-</option>
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+									<input type="hidden" id="hidden_layer_id" name="LAYER_ID" value="">
+                                </td>
+								<td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                  图层元素:
+                                </td>
+                                <td align="left" style="border: 0px; height: 40px;" colspan="2">
+                                    <select style="height:20px;width:90%" name="SVG_ID" id="SVG_ID" style="height: 22px;">
+                                        <option value="0">-请选择-</option>
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    类别:
+                                </td>
+                                <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="2">
+                                    <select style="height:20px;width:90%" name="POI_TYPE" id="POI_TYPE" style="height: 22px;">
+                                        <option selected="" value="">--请选择--</option>
+                                        {html_options options=$POI_TYPE}
+                                    </select>
+                                	<font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+								<td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                   状态:
+                                </td>
+                                <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="3">
+                                    <select style="height:20px;width:90%" name="STATUS" id="STATUS" style="height: 22px;" value="">
+                                        <option selected="" value="">--请选择--</option>
+                                        {html_options options=$POI_STATUS}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                            </tr>
+							<tr>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    距离边界X轴:
+                                </td>
+                                <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="2">
+                                    <span><input name="POSITION_X" type="text" id="POSITION_X" maxlength="4" style="height:20px;width:82%" value="" />
+                                        <font style="font-family:Arial;font-size:14px;font-weight:normal;font-style:normal;text-decoration:none;color:#333333;">
+                                            米
+                                        </font>
+                                    </span>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+								<td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                   距离边界Y轴:
+                                </td>
+                                <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="3">
+                                    <input name="POSITION_Y" type="text" id="POSITION_Y" maxlength="4" style="height:20px;width:81%" value="" />
+                                    <font style="font-family:Arial;font-size:14px;font-weight:normal;font-style:normal;text-decoration:none;color:#333333;">
+                                        米
+                                    </font>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    电话:
+                                </td>
+                                <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="2">
+                                     <input name="PHONE" type="text" id="PHONE" maxlength="256" style="height:20px;width:90%" value="" />
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    上传图片:
+                                </td>
+                                <td align="left" style="border:0px;height:40px;">
+                                    <input type="file" onchange="onUploadImgChange(this)" id="file" name="file" style="font-size:12px;height:20px;width:95%">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    详细地址:
+                                </td>
+                                <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="5">
+                                    <input name="ADDRESS" type="text" id="ADDRESS" maxlength="128" value="" style="height:20px;width:95%"/>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="7%" valign="top" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    介绍说明:
+                                </td>
+                                <td valign="top" align="left" style="border:0px;font-size:14px;height:40px;" colspan="5">
+                                <div class="cl_tit">
+                                    <textarea name="POI_NOTE" id="POI_NOTE" rows="1" cols="2" style="overflow-y:scroll;height:45px;width:95%;font-size:14px;border:1px #ccc solid;"></textarea>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </div>
+                            </td>
+                            </tr>
+                            <tr>
+                                <td width="7%" valign="top" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    备注:
+                                </td>
+                                <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="5">
+                                    <div class="cl_tit">
+                                        <textarea name="NOTE" id="NOTE" rows="1" cols="2" style="overflow-y:scroll;height:45px;width:95%;font-size:14px;border:1px #ccc solid;"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="height:30px;" width="100%">
+                            <tr>
+                                <td width="40%" align="right">
+                                    <input type="button" name="button" id="button" onclick="addPoi()" value="保存" valign="center"/>
+                                </td>
+                                <td width="5%">
+                                </td>
+                                <td width="40%" align="left">
+                                    <input type="reset" value="重设" valign="center" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

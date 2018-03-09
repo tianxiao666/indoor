@@ -1,0 +1,62 @@
+/*=================================
+弹出层
+dateTime: 2011-3-04
+author: binzhao
+=================================*/
+#centerWin{
+	 width:400px;
+	 height:200px;
+	 padding:1px;
+	 border:#00a8ff 1px solid;
+	 font-size:12px;
+	 display:none;
+	 background:#ffffff;
+ position:absolute;
+}
+#winheader{
+	 padding:1px;
+	 height:25px;
+	 background:#C2DDEE;
+	 border-bottom:1px solid #00a8ff;
+}
+#wintitle{
+	 width:360px;
+	 float:left;
+	 padding-top:5px;
+	 text-align:left;
+	 padding-left:10px;
+}
+#winaction{
+	 width:28px;
+	 float:left;
+	 padding-top:5px;
+	 text-align:center;
+	 cursor:pointer;
+}
+#winbody{
+	 width:300px;
+	 text-align:left;
+	 padding:30px 0px 0px 98px;
+	 background:#ffffff;
+	 display:inline-block;
+}
+.inputclass{
+	 width:140px;
+	 height:18px;
+	 border:1px solid #00a8ff;
+}
+.inputbtn{
+	 width:60px;
+	 height:23px;
+	 border:1px solid #00a8ff;
+	 background:#c2ddee;
+	 text-align:center;
+	 padding-top:3px;
+}
+#empty{
+	 padding:0px 10px;
+}
+#blank{
+	/*以下是空白div高度，目的在于拉长页面，出现滚动条，以测试滚顶效果*/
+	 height:2000px;
+}

@@ -1,0 +1,27 @@
+/*=================================
+智能旅游登录页
+dateTime: 2010-12-29
+author: Monny
+=================================*/
+/*导入公共样式*/
+@import url("public.css");
+html,body{ background:#eee;}
+.signinbox{width:710px; height:300px; margin:85px auto 0;  background:url(../images/signin/bg_login.jpg) center center no-repeat; position:relative;}
+.signin { position:absolute; float:left; width:358px; top:20px; left:170px;}
+.signin .title { float:left; width:334px; height:40px; background:url(../images/signin/bg_stit.jpg) 12px 3px no-repeat;  overflow:hidden; margin-top:14px; padding: 5px 6px 0 12px; }
+.signin .m { float:left; width:348px;  overflow:hidden; padding:0px 1px 10px 1px; }
+.signin .bot { float:left; width:358px; height:10px; }
+.signin .title .left { float:left; height:40px;  padding:0px 18px 0px 0px; margin:1px 0px 0px 8px; display:inline;}
+.signin .title .left span { float:left;}
+.signin .title .left strong { float:left; padding:6px 0px 5px 7px; font-size:14px; font-weight:bold; color:#333;  position:relative; right:1px;}
+.signin .title .left strong a { color:#333;}
+.signin .m .cont1 { float:left; width:280px; padding:2px 0px 10px 44px;}
+.signin .m .cont1 .text { float:left; width:280px; padding:8px 0px 5px 0px;}
+.signin .m .cont1 .text .l { float:left; width:72px; padding:7px 0px 0px 3px; font-size:14px; color:#333;}
+.signin .m .cont1 .text .r { float:left; }
+.signin .m .cont1 .text .r span{float:left; display:block; padding-left:5px; }
+.signin .m .cont1 .text .r span img{ vertical-align:middle; }
+.signin .m .cont1 .text .r input {float:left; width:170px; height:22px; line-height:22px; }
+.signin .m .cont2 { float:left; width:358px; height:52px; text-align:center;}
+.signin .m .cont2 a { display:inline-block; margin:13px 4px 0px 4px;}
+.signin .m .cont2 a img{ border:0;}

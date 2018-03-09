@@ -1,0 +1,179 @@
+{include file="header.html" }
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+var cdept = true;
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+//ajax部门名唯一
+function ajaxCheckDept(){
+	var dept_name = $('#DEPT_NAME').val();
+	if(dept_name == '') return false;
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=DeptMgr/AjaxCheckDept',
+		data	:  {dept_name:dept_name},
+		success :  function(result){
+			if(result){
+				cdept = false;
+				showMsg("deptmsg", "部门名已被使用");
+				return false;
+			}else{
+				hideErrMsg("deptmsg");
+				cdept = true;
+			}
+		}
+	});
+}
+
+function checkForm()
+{
+    if ($('#DEPT_NAME').val() == '')
+	{
+		alert('请填写部门名称！');
+		$('#DEPT_NAME').focus();
+		return false;
+	}
+    if(cdept){
+        getSelValue();
+    }
+   //$('#DeptForm').submit();
+	
+}
+
+function getSelValue(){
+	  var code;
+	  var content;
+	  var multisel = document.getElementById("ROLE_LEFT");
+      var codeString=""
+	  var contentString="";
+	 
+	  for(var h=0;h<multisel.options.length;h++)
+	     {
+	       if(multisel.options[h].selected){
+	           code = multisel.options[h].value;
+	           content = multisel.options[h].text;
+	           contentString += (content+",");
+	           codeString += (code+",");
+	           }
+	      }
+	var subsid=codeString.substring(0,codeString.length-1);
+	
+	var deptname  = $('#DEPT_NAME').val();
+	var pdept     = $('#P_DEPT_ID').val();
+	
+	$.ajax({
+		type	:	"POST",
+		url		:	"ea.php?r=DeptMgr/AjaxDoAdd",
+		data	:	{DEPT_NAME : deptname , P_DEPT_ID : pdept , SYS_SUBS_ID : subsid},
+		success :   function(msg){
+			if(msg){
+				alert("新增成功！");
+				parent.location.href = 'ea.php?r=DeptMgr';
+				}else{
+				alert("新增失败！");
+			}
+		}
+	});
+	}
+	
+function hideErrMsg(obj_id){
+	$('#'+obj_id).hide();
+}
+
+function showMsg(objId , msg){
+	$('#'+objId).html(msg);
+	$('#'+objId).show();
+}
+</script>
+<style type="text/css">
+.invalid{
+	color: red;
+}
+</style>
+{/literal}
+<div class="content">
+  <div class="main">
+<div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;部门管理</span></div>
+  <input type="hidden" id="subbarFlag" value="dept_mgr_bar" />
+<br/>
+ <form id="DeptForm" name="DeptForm" method="post" target="bf" style="margin:0px;padding:0px;"> <div class="tabtext" id="tabtext1" >
+   <input type="hidden" id="DEPT_ID" name="DEPT_ID" value="{$deptinfo.DEPT_ID}" />
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" border="0" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> 新增部门</font></td>
+					<td width="50%" align="right"><a href="javascript:history.go(-1);"><font color="#666" style="font-weight:bold;font-size:14px">[返回上一页]</font></a></td>
+				</tr>
+			</table>
+<table class="itable" border="0">
+               <tr class="row0">
+                    <td align="center">
+						<table border="0" cellspacing="0" cellpadding="0">
+    						<tr>
+        						<td align="right" width="40%" style="border:0px;">部门名称:</td>
+    						    <td align="left" style="border:0px;"><input type="text" name="DEPT_NAME" id = "DEPT_NAME" maxlength="20" value="{$deptinfo.DEPT_NAME}" onblur="ajaxCheckDept();" onkeyup="hideErrMsg('deptmsg');" style="font-size:12px;width:250px"/><font color="red" style="font-size:12px;">  *</font>
+    						    <span id="deptmsg" class="prompt" style="display:none;color:red;"></span>
+    						    </td>
+    						</tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">所属部门:</td>
+    						    <td align="left" style="border:0px;">
+    						    <select id="P_DEPT_ID" name="P_DEPT_ID" style="font-size:12px;" >
+										<option value="">请选择</option>
+											   {foreach from=$dept_list key=key item=type}
+											       <option value="{$type.DEPT_ID}" {if $type.DEPT_ID == $deptinfo.P_DEPT_ID}selected {/if}>{$type.DEPT_NAME}</option>
+							 						 {if $type.child}{foreach from=$type.child item=m}<option value="{$m.DEPT_ID}" {if $m.DEPT_ID == $deptinfo.P_DEPT_ID}selected {/if}>&nbsp;&nbsp;{$m.DEPT_NAME}</option>
+							 						 {/foreach}
+							 						 {/if}
+											   {/foreach}
+											    
+									</select></td>
+						    </tr>
+						    <tr>
+    						    <td align="right" style="border:0px;">部门成员:</td>
+    						    <td align="left" style="border:0px;">
+    						     <select id="ROLE_LEFT" name="ROLE" multiple="multiple" style= "height:250px;width:200px">
+    						    {html_options options=$userlist }
+    						    </select>
+    						    </td>
+    						</tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">&nbsp;</td>
+    						    <td align="left" style="border:0px;">按Ctrl可多选</td>
+    						</tr>   						
+						</table>
+					</td>
+                </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="30" align="center" valign="bottom"><input type="button" value="保存" onclick="checkForm();" style="font-size:14px;width:80px;height:40px;" /> 
+					
+				</tr>
+			</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </form>
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

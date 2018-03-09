@@ -1,0 +1,659 @@
+{include file="header.html"}
+<link href="{$mediaServer}css/sceniczone.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/xsbortsImg.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/area_select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js">
+</script>
+<script src="{$mediaServer}js/xsbortsImageBrowser.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/thickmsg.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_004.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_005.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_003.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_002.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js">
+</script>
+<script src="{$mediaServer}js/areaSelect/jobarea_array_c.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/popup.js">
+</script>
+<script src="{$mediaServer}js/common.js" type="text/javascript">
+</script>
+<link href="{$mediaServer}css/popup.css" rel="stylesheet" type="text/css" />
+<script src="{$mediaServer}js/ajax/getpcda.js" type="text/javascript">
+</script>
+{literal}
+<script type="text/javascript" language="JavaScript">
+    
+    
+    function getConinentList(){//ajax根据城国家查询区
+        var coninent = document.getElementById("CONTINENT"); //country是当前select标签的id
+        var coninent_val = coninent.options[coninent.selectedIndex].value;
+        ajaxLink("countrySearchType", "val=" + coninent_val + "&flag=true", new Array('provSearchType', 'citySearchType', 'districtSearchType'));//需要返回当前所选国家的经纬度
+        //city是存储城市的select标签的ID
+    }
+    
+    function getCountryList(){//ajax根据城国家查询区
+        var country = document.getElementById("COUNTRY"); //country是当前select标签的id
+        var country_val = country.options[country.selectedIndex].value;
+        ajaxLink("provSearchType", "val=" + country_val + "&flag=true", new Array('citySearchType', 'districtSearchType'));//需要返回当前所选国家的经纬度
+        //city是存储城市的select标签的ID
+    }
+    
+    function getProvList(){//ajax根据城国家查询区
+        var prov = document.getElementById("PROV"); //country是当前select标签的id
+        var prov_val = prov.options[prov.selectedIndex].value;
+        ajaxLink("citySearchType", "val=" + prov_val + "&flag=true", new Array('districtSearchType'));//需要返回当前所选国家的经纬度
+        //city是存储城市的select标签的ID
+    }
+    
+    function getCityList(){//ajax根据城国家查询区
+        var city = document.getElementById("CITY"); //country是当前select标签的id
+        var city_val = city.options[city.selectedIndex].value;
+        ajaxLink("districtSearchType", "val=" + city_val + "&flag=true", new Array());//需要返回当前所选国家的经纬度
+        //city是存储城市的select标签的ID
+    }
+    
+    function isIdValueEmpty(idinfo){
+        var id = idinfo[0];
+        if ($('#' + id).val() == "") {
+            var tips = "请";
+            if (idinfo[1] == "1") {
+                tips = tips + "选择";
+            }
+            else {
+                tips = tips + "填写";
+            }
+            tips = tips + idinfo[2] + "!";
+            alert(tips);
+            $('#' + id).focus();
+            return (true);
+        }
+        return (false);
+    }
+    
+    function isIdValueMath(idinfo){
+        var id = idinfo[0];
+        var idval = $('#' + id).val();
+        if (idval != "") {
+            var reg = new RegExp(idinfo[2]);
+            if (!reg.test(idval)) {
+                alert(idinfo[1]);
+                $('#' + id).focus();
+                return (false);
+            }
+        }
+        return (true);
+    }
+    
+    function checkForm(){
+        var notEmptyIdList = new Array(new Array("BUILDING_NAME", "0", "名称"), new Array("BUILD_TYPE", "1", "类型"), new Array("CONTINENT", "1", "洲"), new Array("COUNTRY", "1", "国家"), new Array("PROV", "1", "省份"), new Array("CITY", "1", "城市"), new Array("STATUS", "1", "状态"), new Array("TOTAL_FLOOR", "0", "总楼层数"));
+        var i = 0;
+        while (i < notEmptyIdList.length) {
+            if (isIdValueEmpty(notEmptyIdList[i])) {
+                return (false);
+            }
+            ++i;
+        }
+        var onlyDigitalIdList = new Array(new Array("POSTALCODE", "邮编只能为小于11位的数字！", "^[0-9]{1,10}$"), new Array("LONGITUDEL", "经度只能为小于180的数字！", "^(((([0-9]{0,2})|(0[0-9]{2})|(1[0-7][0-9]))(\\.[0-9]+)?)|180(\\.0+)?)$"), new Array("LATITUDEL", "纬度只能为小于180的数字！", "^(((([0-9]{0,2})|(0[0-9]{2})|(1[0-7][0-9]))(\\.[0-9]+)?)|180(\\.0+)?)$"), new Array("ROTATION_ANGEL", "夹角只能为小360数字！", "^(((([0-9]{0,2})|([0-2][0-9]{2})|(3[0-5][0-9]))(\\.[0-9]+)?)|360(\\.0+)?)$"), new Array("TOTAL_FLOOR", "总楼层数只能为小于6位的整数！", "^[0-9]{1,5}$"), new Array("PHONE", "请输入正确的电话号码格式！", "^(([0-9]+(\\-[0-9]+)*)|(((\\([0-9]{3,4}\\))|([0-9]{3,4}\\-))?[0-9]{7,8}))$"), new Array("OPEN_START", "营业开始时间只能使用24小时制HH:MI格式,请输入正确的时间格式！", "^(((0|1)[0-9])|(2[0-3])):([0-5][0-9])$"), new Array("OPEN_END", "营业结束时间只能使用24小时制HH:MI格式,请输入正确的时间格式！", "^(((0|1)[0-9])|(2[0-3])):([0-5][0-9])$"), new Array("ACREAGE", "总面积只能为小于10位的数字！", "^([0-9]{0,9})(\\.[0-9]+)?$"));
+        i = 0;
+        while (i < onlyDigitalIdList.length) {
+            if (!isIdValueMath(onlyDigitalIdList[i])) {
+                return (false);
+            }
+            ++i;
+        }
+        return (true);
+    }
+    
+    function doSubmit(){
+        if (checkForm()) {
+            $("#FORM_BUILDING").submit();
+        }
+    }
+    
+    function ajaxPostResult(result){
+    
+    }
+    
+    function ajaxPost(url, params, classArray){
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            dataType: "json",
+            success: function(result){
+                ajaxPostResult(result);
+            }
+        });
+    }
+</script>
+<style type="text/css">
+    .invalid {
+        color: red;
+    }
+    
+    .itable .wikishow {
+        background: #089E61;
+        color: #fff;
+    }
+    
+    .wikihide {
+        display: none;
+    }
+</style>
+<style type="text/css">
+    .pop_menu_left {
+        background: #f2f2f2;
+        float: left;
+        padding: 10px;
+        width: 125px;
+        margin: 10px;
+        border-radius: 5px;
+    }
+    
+    .pop_menu_left .menu_event {
+        text-align: right;
+    }
+    
+    .pop_menu_left .menu_event .menu_event_obj {
+        cursor: pointer;
+    }
+    
+    .pop_menu_left .menu_links {
+        border-bottom: 1px solid #c4c4c4;
+    }
+    
+    .pop_menu_left .menu_links ul {
+        list-style-type: none;
+        margin-top: 10px;
+        padding: 0px;
+    }
+    
+    .pop_menu_left .menu_links ul li {
+        border-left: 1px solid #c4c4c4;
+        border-right: 1px solid #c4c4c4;
+        border-top: 1px solid #c4c4c4;
+        clear: both;
+        display: inline-block;
+        height: 28px;
+        line-height: 28px;
+        overflow: hidden;
+        width: 100%;
+        text-indent: 1em;
+    }
+    
+    .pop_menu_left .menu_links ul li.second {
+        padding-left: 20px;
+        width: 85px;
+    }
+    
+    .pop_menu_left .menu_links ul li.disabled {
+        color: #999;
+    }
+    
+    .pop_menu_left .menu_links ul li.cur {
+        background-color: #DDDDDD;
+    }
+    
+    .pop_menu_left .menu_links ul li.cur a {
+        color: #e27135;
+    }
+    
+    .pop_menu_left .menu_links ul li.last {
+        border-bottom: 1px solid #666666;
+    }
+    
+    .pop_menu_left .menu_links ul li.basename {
+        height: auto;
+        line-height: normal;
+    }
+    
+    .pop_menu_left .menu_links ul li a {
+        color: #333333;
+        display: block;
+        width: 100%;
+        text-decoration: none;
+    }
+    
+    .pop_menu_left .menu_links ul li a:visited {
+    }
+    
+    .pop_menu_left .menu_links ul li a:hover {
+        text-decoration: underline;
+        color: #e27135;
+    }
+    
+    .pop_menu_left .menu_links ul li .disabled {
+        color: #999;
+    }
+</style>
+{/literal}
+<div class="content">
+    <div class="crumb">
+        <span>当前位置：<a href="ea.php?r=BuildingMgr">场所管理</a>&nbsp;&gt;&nbsp;<a href="">{if $buildinginfo}编缉{else}添加{/if}场所</a></span>
+    </div>
+    <div class="tabtext" id="tabtext1" align="middle" style="padding:15px">
+        <table width="100%">
+            <tr>
+                <td width="1%" valign="top">
+                	{if $buildinginfo}
+                    {literal}
+                    <style type="text/css">
+                        .pop_menu_left {
+                            background: #f2f2f2;
+                            float: left;
+                            padding: 10px;
+                            width: 125px;
+                            margin: 10px;
+                            border-radius: 5px;
+                        }
+                        
+                        .pop_menu_left .menu_event {
+                            text-align: right;
+                        }
+                        
+                        .pop_menu_left .menu_event .menu_event_obj {
+                            cursor: pointer;
+                        }
+                        
+                        .pop_menu_left .menu_links {
+                            border-bottom: 1px solid #c4c4c4;
+                        }
+                        
+                        .pop_menu_left .menu_links ul {
+                            list-style-type: none;
+                            margin-top: 10px;
+                            padding: 0px;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li {
+                            border-left: 1px solid #c4c4c4;
+                            border-right: 1px solid #c4c4c4;
+                            border-top: 1px solid #c4c4c4;
+                            clear: both;
+                            display: inline-block;
+                            height: 28px;
+                            line-height: 28px;
+                            overflow: hidden;
+                            width: 100%;
+                            text-indent: 1em;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li.second {
+                            padding-left: 20px;
+                            width: 85px;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li.disabled {
+                            color: #999;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li.cur {
+                            background-color: #DDDDDD;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li.cur a {
+                            font-weight: bold;
+                            color: #e27135;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li.last {
+                            border-bottom: 1px solid #666666;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li.basename {
+                            height: auto;
+                            line-height: normal;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li a {
+                            color: #333333;
+                            display: block;
+                            width: 100%;
+                            text-decoration: none;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li a:visited {
+                        }
+                        
+                        .pop_menu_left .menu_links ul li a:hover {
+                            text-decoration: underline;
+                            color: #e27135;
+                        }
+                        
+                        .pop_menu_left .menu_links ul li .disabled {
+                            color: #999;
+                        }
+                    </style>
+                    {/literal}
+                    <div class="pop_menu_left">
+                        <div class="menu_event">
+                            <img class="menu_event_obj" alt="收缩" src="images/gzsdot5a.gif">
+                        </div>
+                        <div id="menu_links" class="menu_links">
+							<ul>
+                                	<li class="" style="background-color:#d8fdfa;">
+                                            <font color="black" size="2px"  style="font-weight:bold;">
+                                                基本信息
+                                            </font>
+                                    </li>
+                                    <li class="">
+                                        <a href="ea.php?r=BuildingFloor&BUILDING_NAME={$buildinginfo.BUILDING_NAME}&BUILDING_ID={$buildinginfo.BUILDING_ID}">
+                                            <font color="black" size="2px">
+                                                楼层管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="ea.php?r=BuildingFloorPlanegraphMgr&BUILDING_NAME={$buildinginfo.BUILDING_NAME}&BUILDING_ID={$buildinginfo.BUILDING_ID}">
+                                            <font color="black" size="2px">
+                                                楼层平面图管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                       <a href="ea.php?r=LocationInformation&BUILDING_NAME={$buildinginfo.BUILDING_NAME}&BUILDING_ID={$buildinginfo.BUILDING_ID}">
+                                        <font size="2px">
+                                            定位信息管理
+                                        </font>
+										</a>
+                                    </li>
+                                    <li class="">
+                                    	<a href="ea.php?r=Poi&BUILDING_NAME={$buildinginfo.BUILDING_NAME}&BUILDING_ID={$buildinginfo.BUILDING_ID}">
+                                        <font size="2px">
+                                            POI管理
+                                        </font>
+										</a>
+                                    </li>
+                                </ul>
+                        </div>
+                    </div>
+                    {literal}
+                    <script language="javascript">
+                        var height = "";
+                        var width = "";
+                        jQuery(document).ready(function($){
+                            height = $(".pop_menu_left").height();
+                            width = $(".pop_menu_left").width();
+                            $(".menu_event_obj").toggle(function(){
+                                $(".pop_menu_left").animate({
+                                    "width": "15" + "px"
+                                }, {
+                                    "duration": 500
+                                }).animate({
+                                    "height": "15" + "px"
+                                }, {
+                                    "duration": 500
+                                });
+                                setTimeout('document.getElementById("menu_links").style.display="none";', 1000);
+                                $(this).attr("src", "images/gzsdot5b.gif");
+                            }, function(){
+                                $(".pop_menu_left").show().animate({
+                                    "height": height + "px"
+                                }, {
+                                    "duration": 500
+                                }).animate({
+                                    "width": width + "px"
+                                }, {
+                                    "duration": 500
+                                });
+                                setTimeout('document.getElementById("menu_links").style.display="block";', 1000);
+                                $(this).attr("src", "images/gzsdot5a.gif");
+                            });
+                            
+                        });
+                    </script>
+                    {/literal}
+					{else}
+					<div style="width:120px;">
+						
+					</div>
+					{/if}
+                </td>
+                <td valign="top">
+                    <form action="{$phpSelf}?r=BuildingMgr/DoEdit" method="POST" id="FORM_BUILDING" enctype="multipart/form-data">
+                        <input class="hidden" name="FORM_BUILDINGINFO[BUILDING_ID]" type="text" value="{$buildinginfo.BUILDING_ID}" />
+                        <table width="85%">
+                            <tr>
+                                <td align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" width="10%">
+                                    名称:
+                                </td>
+                                <td colspan= "2">
+                                    <input id = "BUILDING_NAME" name="FORM_BUILDINGINFO[BUILDING_NAME]" type="text" style="width:90%;" value="{$buildinginfo.BUILDING_NAME}" maxlength="100"/>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                                <td width="10%">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    洲:
+                                </td>
+                                <td width="12%">
+                                    <select id="CONTINENT" name="FORM_BUILDINGINFO[CONTINENT]" style="font-size:12px; width:80%;" onchange="getConinentList();">
+                                        <option value="">-请选择-</option>
+                                        {foreach from=$coninentList item=region}
+                                        {if $region.REGION_ID==$buildinginfo.CONTINENT}<option value="{$region.REGION_ID}" selected="selected">{$region.REGION_NAME}</option>
+                                        {else}<option value="{$region.REGION_ID}">{$region.REGION_NAME}</option>
+                                        {/if}
+                                        {/foreach}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                                <td width="7%" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    国家:
+                                </td>
+                                <td width="12%">
+                                    <select id="COUNTRY" onchange="getCountryList();" name="FORM_BUILDINGINFO[COUNTRY]" style="width:80%;" class="countrySearchType">
+                                        <option value="">-请选择-</option>
+                                        {foreach from=$countryList item=region}
+                                        {if $region.REGION_ID==$buildinginfo.COUNTRY}<option value="{$region.REGION_ID}" selected="selected">{$region.REGION_NAME}</option>
+                                        {else}<option value="{$region.REGION_ID}">{$region.REGION_NAME}</option>
+                                        {/if}
+                                        {/foreach}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font
+                                </td>
+                                <td width="4%" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    省:
+                                </td>
+                                <td width="12%">
+                                    <select id="PROV" name="FORM_BUILDINGINFO[PROV]" style="font-size:12px;width:80%" onchange="getProvList();" class="provSearchType">
+                                        <option value="">-请选择-</option>
+                                        {foreach from=$provList item=region}
+                                        {if $region.REGION_ID==$buildinginfo.PROV}<option value="{$region.REGION_ID}" selected="selected">{$region.REGION_NAME}</option>
+                                        {else}<option value="{$region.REGION_ID}">{$region.REGION_NAME}</option>
+                                        {/if}
+                                        {/foreach}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                                <td width="4%" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    城市:
+                                </td>
+                                <td width="12%">
+                                    <select id="CITY" name="FORM_BUILDINGINFO[CITY]" style="font-size:12px; width:80%" onchange="getCityList();" class="citySearchType">
+                                        <option value="">-请选择-</option>
+                                        {foreach from=$cityList item=region}
+                                        {if $region.REGION_ID==$buildinginfo.CITY}<option value="{$region.REGION_ID}" selected="selected">{$region.REGION_NAME}</option>
+                                        {else}<option value="{$region.REGION_ID}">{$region.REGION_NAME}</option>
+                                        {/if}
+                                        {/foreach}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                                <td width="2%" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    区:
+                                </td>
+                                <td width="12%">
+                                    <select id="DISTRICT" name="FORM_BUILDINGINFO[DISTRICT]" style="font-size: 12px;width:80%;" class="districtSearchType">
+                                        <option value="">-请选择-</option>
+                                        {foreach from=$districtList item=region}
+                                        {if $region.REGION_ID==$buildinginfo.DISTRICT}<option value="{$region.REGION_ID}" selected="selected">{$region.REGION_NAME}</option>
+                                        {else}<option value="{$region.REGION_ID}">{$region.REGION_NAME}</option>
+                                        {/if}
+                                        {/foreach}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    状态:
+                                </td>
+                                <td>
+                                    <select id="STATUS" name="FORM_BUILDINGINFO[STATUS]" style="width:80%;">
+                                        <option value="">-请选择-</option>
+                                        {html_options options=$BUILD_STATUS selected=$buildinginfo.STATUS}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    类型:
+                                </td>
+                                <td>
+                                    <select id="BUILD_TYPE" name="FORM_BUILDINGINFO[BUILD_TYPE]" style="width:80%;">
+                                        <option value="">-请选择-</option>
+                                        {html_options options=$BUILD_TYPE selected=$buildinginfo.BUILD_TYPE}
+                                    </select>
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    地址:
+                                </td>
+                                <td colspan= "3">
+                                    <input name="FORM_BUILDINGINFO[ADDRESS]" style="width:93%;" type="text" value="{$buildinginfo.ADDRESS}" maxlength="256"/>
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    邮编:
+                                </td>
+                                <td>
+                                    <input id = "POSTALCODE" name="FORM_BUILDINGINFO[POSTALCODE]" style="width:80%;" type="text" value="{$buildinginfo.POSTALCODE}" maxlength="10"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    经度:
+                                </td>
+                                <td>
+                                    <input id = "LONGITUDEL" name="FORM_BUILDINGINFO[LONGITUDEL]" style="width:90%;" type="text" value="{$buildinginfo.LONGITUDEL}" />
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    纬度:
+                                </td>
+                                <td>
+                                    <input id = "LATITUDEL" name="FORM_BUILDINGINFO[LATITUDEL]" style="width:80%;" type="text" value="{$buildinginfo.LATITUDEL}" />
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    夹角:
+                                </td>
+                                <td>
+                                    <input id = "ROTATION_ANGEL" name="FORM_BUILDINGINFO[ROTATION_ANGEL]" style="width:80%;" type="text" value="{$buildinginfo.ROTATION_ANGEL}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    咨询电话:
+                                </td>
+                                <td>
+                                    <input id="PHONE" name="FORM_BUILDINGINFO[PHONE]" style="width:90%;" type="text" value="{$buildinginfo.PHONE}" maxlength="250"/>
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    官方网站:
+                                </td>
+                                <td colspan = "3">
+                                    <input name="FORM_BUILDINGINFO[SITE]" style="width:92%;" type="text" value="{$buildinginfo.SITE}" maxlength="256"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    营业开始时间:
+                                </td>
+                                <td>
+                                    <input type="text" id="OPEN_START" style="width:90%;" name="FORM_BUILDINGINFO[OPEN_START]" value="{$buildinginfo.OPEN_START}" />
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    总楼层数:
+                                </td>
+                                <td>
+                                    <input id="TOTAL_FLOOR" name="FORM_BUILDINGINFO[TOTAL_FLOOR]" style="width:80%;" type="text" value="{$buildinginfo.TOTAL_FLOOR}" />
+                                    <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                        *
+                                    </font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100px" align="right" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    营业结束时间:
+                                </td>
+                                <td>
+                                    <input type="hidden" id="headMenu" value="building"><input type="text" id="OPEN_END" name="FORM_BUILDINGINFO[OPEN_END]" style="width:90%;" value="{$buildinginfo.OPEN_END}" />
+                                </td>
+                                <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    总面积:
+                                </td>
+                                <td>
+                                    <input id="ACREAGE" name="FORM_BUILDINGINFO[ACREAGE]" style="width:80%;" type="text" value="{$buildinginfo.ACREAGE}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100px" align="right" valign="top" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    简介:
+                                </td>
+                                <td colspan= "5">
+                                    <textarea name="FORM_BUILDINGINFO[BUILDING_DESC]" style="width:95%;height:100px;" maxlength="4000">{$buildinginfo.BUILDING_DESC}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                    备注:
+                                </td>
+                                <td colspan= "5">
+                                    <textarea name="FORM_BUILDINGINFO[NOTE]" style="width:95%; height:100px;" maxlength="4000">{$buildinginfo.NOTE}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="35%" align="right">
+                                            <input type="button" value="&nbsp;保存&nbsp;" onClick="doSubmit();"/>
+                                        </td>
+                                        <td width="5%">
+                                        </td>
+                                        <td width="60%">
+                                            <input type="button" value="&nbsp;取消&nbsp;" onClick="history.go(-1);"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>{include file="footer.html"}

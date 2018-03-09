@@ -1,0 +1,182 @@
+{include file="header.html"}
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_1_3_2.js"></script>
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css"  rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js"></script>
+{literal}
+<style>
+.itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+
+</style>
+{/literal}
+<script language="javascript" type="text/javascript" src="./js/changepage.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function deleteAdmin()
+{
+	if(confirm('您确定要删除这个用户吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function toSubmit(){
+	var frm = document.headSearchForm;
+	  frm.action='ea.php?r=AdminMgr/SearchUser';
+	  frm.submit();
+}
+
+function dodisable()
+{
+	if(confirm('您确定要禁用吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function doactive()
+{
+	if(confirm('您确定要激活吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+$(document).ready(function(){
+	$(':iframe').attr("scrolling" , "no");
+	$('#addUsers').click(function(){
+		$("#addUsers").popup({now:true, url:"ea.php?r=AdminMgr/BatchCreateUser" ,width:574 ,height:153 ,top:'32%' ,left:'30%' , title:'批量生成用户' }); 
+	});
+});
+
+function showMessage(msg){
+	$.popup({now:true,title:'批量生成用户',type:2,content:"<div style='line-height:50px;text-align:center;width:300px'>"+msg+"</div>" ,width:340 , height:50 , top:'50%'});
+	setTimeout("refresh()",2000);
+}
+
+function closeFrm()
+{
+	$("#closeBtn").popup({"close":true});
+}
+
+function refresh(){
+	$.popup({"close":true});
+	location.reload();
+}
+</script>
+{/literal}
+
+{include file="popup.html"}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=UserContentMgr/Impression">内容管理</a>&nbsp;&gt;&nbsp;用户管理</span></div>
+  <input type="hidden" id="subbarFlag" value="admin_mgr_bar" />
+
+
+ 
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+   <tr>
+   <td valign="top" style="padding:10px 10px 0;">
+   <div class="scenic_search">
+   <div class="chose">
+   <form method="post" name="headSearchForm" id="headSearchForm" >
+   <span>用户名/真实名：</span><input type="text" name="NAME" id="NAME" class="intxt" tabIndex="1" value="{$condition.NAME}"/>
+   <span>手机号：</span><input type="text" name="MOBILE" id="MOBILE" class="intxt" tabIndex="1" value="{$condition.MOBILE}"/>
+   <span>邮箱：</span><input type="text" name="EMAIL" id="EMAIL" class="intxt" tabIndex="1" value="{$condition.EMAIL}"/>
+   <select name="PROD_NAME" id="PROD_NAME" size="1" ><option value="">-会员等级-</option>
+   {html_options options=$prod_name selected=$condition.PROD_NAME}
+   </select>
+   <input type="button" value="搜索" style="font-size: 12px; width: 60px; height: 20px;" onclick="toSubmit();">
+   </form></div></div>
+   </td></tr>
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /> <font color="#a40000" style="font-weight:bold;font-size:14px">用户列表</font></td>
+					<td width="50%" align="right">
+					<a href="#!" id="addUsers" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[批量生成用户]</font></a>
+					{if $userinfo.ROLE.ADMIN || $userinfo.per.USEINO}<a href="ea.php?r=AdminMgr/addView" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增用户]</font></a>{/if}
+					</td>
+				</tr>
+			</table>
+<table class="itable">
+<thead>
+ <tr>
+                    <th width="20%" align="left">用户名</th>
+                    <th width="10%">真实姓名</th>
+                    <th width="15%" align="left">电子邮箱</th>
+                    <th width="10%" align="left">绑定平台</th>
+                    <th width="10%" align="left">会员等级</th>
+					<th width="10%" align="left">状态</th>
+					{if $userinfo.ROLE.ADMIN || $userinfo.per.USEINO}<th align="left">&nbsp;相关操作</th>{/if}
+                </tr>
+</thead>
+<tbody>
+	{section name=i loop=$admin_list}
+		<tr class="{cycle values='row0,row1'}">
+			<td align="left">{$admin_list[i].NAME}</td>
+			<td align="left">{$admin_list[i].REAL_NAME}</td>
+			<td align="left">{$admin_list[i].EMAIL}</td>
+			<td align="left">{if $admin_list[i].API}{foreach from=$admin_list[i].API item=api}{$api.APINAME}&nbsp;{/foreach}{/if}</td>
+            <td align="left">{$admin_list[i].PROD_NAME}</td>
+            <td align="left">{$admin_list[i].STATE}</td>
+            {if $userinfo.ROLE.ADMIN || $userinfo.per.USEINO}
+			<td align="left">
+				<table border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="30%" style="border:0px;"><a href="ea.php?r=AdminMgr/editView&subs_id={$admin_list[i].SUBS_ID}"><img src="images/icon/s_edit.gif" border="0" align="absmiddle" /><font color="#666">修改资料</font></a></td>
+						<!--<td style="border:0px;"><a href="ea.php?r=AdminMgr/DeleteAdmin&subs_id={$admin_list[i].SUBS_ID}&name={$admin_list[i].NAME}" target="bf" onclick="return deleteAdmin();"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">删除用户</font></a></td>-->
+						<td width="30%" style="border:0px;"><a href="ea.php?r=AdminMgr/editView&subs_id={$admin_list[i].SUBS_ID}&flag=1"><img src="images/icon/s_edit.gif" border="0" align="absmiddle" /><font color="#666">修改密码</font></a></td>
+						{if $admin_list[i].STATE eq '正常'}
+						<td width="40%" style="border:0px;"><a href="ea.php?r=AdminMgr/UserDisable&subs_id={$admin_list[i].SUBS_ID}" onclick="return dodisable()"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">禁用</font></a></td>
+						{elseif $admin_list[i].STATE eq '禁用'}
+						<td width="40%" style="border:0px;"><a href="ea.php?r=AdminMgr/UserActive&subs_id={$admin_list[i].SUBS_ID}" onclick="return doactive()"><img src="images/icon/s_active.gif" border="0" align="absmiddle" /><font color="#666">激活</font></a></td>
+						{elseif $admin_list[i].STATE eq '已注册未验证'}
+						<td width="20%" style="border:0px;"><a href="ea.php?r=AdminMgr/UserDisable&subs_id={$admin_list[i].SUBS_ID}" onclick="return dodisable()"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">禁用</font></a></td>
+						<td width="20%" style="border:0px;"><a href="ea.php?r=AdminMgr/UserActive&subs_id={$admin_list[i].SUBS_ID}" onclick="return doactive()"><img src="images/icon/s_active.gif" border="0" align="absmiddle" /><font color="#666">激活</font></a></td>
+						{/if}
+					</tr>
+				</table>
+			</td>
+			{/if}
+    	</tr>
+	{/section}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+	<input type="hidden" id="headMenu" value="usercontentmgr">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

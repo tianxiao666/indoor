@@ -1,0 +1,192 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js"></script>
+<!--<meta http-equiv="refresh" content="5;URL=ea.php?r=LsArea/AreaList">-->
+{literal}
+<script type="text/javascript">
+function setLoading(){
+
+	alert("sdfsdf");
+		//$("#user_action_search_form").submit();
+	}
+function deletekml(kml_id,area_id)
+{
+	var album = $('#album').val();
+	location.href = "ea.php?r=LocationMgr/Del&kml_id="+kml_id+"&area_id="+area_id+"&album="+album;
+}
+	
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+<input type="hidden" name="album" value="{$album}" id="album" >
+   <div class="tabtext" id="tabtext1" >
+  
+   <table width="60%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+   <td valign="top" style="padding:10px 10px 0;" width="15%">
+  
+    <p style="font-size: 20px">重合的信息</p>
+	<div class="scenic_list">
+	<table class="itable">
+	<tr>
+	<td>景区({$result_area|@count}个):</td>
+	</tr>
+  	 <tr>
+  		<td>{$result_area}</td>
+  	 </tr>
+  </table>
+    </div>
+    <div class="scenic_list">
+	<table class="itable">
+	<tr>
+		<td>景点({$success_spot|@count}个):</td>
+  	</tr>
+  	{foreach from=$success_spot item=spot key=key}
+  	 <tr>
+  		<td>{$spot}</td>
+  	 </tr>
+  	{/foreach}
+  </table>
+    </div>
+    <div class="scenic_list">
+	<table class="itable">
+	<tr><td> POI({$success_poi|@count}个):</td></tr>
+  	{foreach from=$success_poi item=poi key=key}
+  	 <tr>
+  		<td>{$poi}</td>
+  	 </tr>
+  	{/foreach}
+  </table>
+  </div>
+  <div class="scenic_list">
+	<table class="itable">
+	<tr>
+		<td>景区区域({$success_area_qua|@count}个):</td>
+  	</tr>
+  	{foreach from=$success_area_qua item=qua_area key=key}
+  	 <tr>
+  		<td>{$qua_area}</td>
+  	 </tr>
+  	{/foreach}
+  </table>
+    </div>
+    <div class="scenic_list">
+	<table class="itable">
+	<tr>
+		<td>景点区域({$success_spot_qua|@count}个):</td>
+  	</tr>
+  	{foreach from=$success_spot_qua item=qua_spot key=key}
+  	 <tr>
+  		<td>{$qua_spot}</td>
+  	 </tr>
+  	{/foreach}
+  </table>
+    </div>
+    <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>用餐点({$dining|@count}个):</td></tr>
+     	{foreach from=$dining item=dining key=key}
+     		<tr><td>{$dining}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+     <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>住宿点({$lodge|@count}个):</td></tr>
+     	{foreach from=$lodge item=lodge key=key}
+     		<tr><td>{$lodge}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+     <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>购物点({$shop|@count}个):</td></tr>
+     	{foreach from=$shop item=shop key=key}
+     		<tr><td>{$shop}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+     <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>休闲娱乐({$func|@count}个):</td></tr>
+     	{foreach from=$func item=func key=key}
+     		<tr><td>{$func}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+  </td>
+   <td valign="top" style="padding:10px 10px 0;" width="15%">
+     <p style="font-size: 20px">数据库有的信息KML没有</p>
+      <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>景点({$tablenoname|@count}个):</td></tr>
+     	{foreach from=$tablenoname item=noname}
+     	<tr><td>{$noname.SPOT_NAME}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+     <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>POI({$poitableno|@count}个):</td></tr>
+     	{foreach from=$poitableno item=poiname}
+     		<tr><td>{$poiname.POI_NAME}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+   </td>
+   <td valign="top" style="padding:10px 10px 0;" width="15%">
+     <p style="font-size: 20px">KML有的信息数据库没有</p>
+      <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>景点({$spotsnoname|@count}个):</td></tr>
+     	{foreach from=$spotsnoname item=spots_noname key=key}
+     	 <tr><td>{$spots_noname}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+     <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>POI({$poinoname|@count}个):</td></tr>
+     	{foreach from=$poinoname item=poi key=key}
+     		<tr><td>{$poi}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+     <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>配套设施({$fpoint|@count}个):</td></tr>
+     	{foreach from=$fpoint item=fpoint key=key}
+     		<tr><td>{$fpoint}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+     <div class="scenic_list">
+     <table class="itable">
+     	<tr><td>轨迹({$track_name|@count}个):</td></tr>
+     	{foreach from=$track_name item=track_name key=key}
+     		<tr><td>{$track_name}</td></tr>
+     	{/foreach}
+     </table>
+     </div>
+   </td>
+ 	</tr>
+ 	<tr>
+ 	<td> 
+ 	 <form id="user_action_search_form" name="user_action_search_form" method="post" action="ea.php?r=LocationMgr/doUpdateUpload&album={$album}"  enctype="multipart/form-data" style="margin:20px;padding:0px;">
+    <input type="hidden" name="pathname" value="{$path}"/>
+    <input type="hidden" name="areaid" value="{$area_id}" />
+     <input type="hidden" name="kml_id" value="{$kml_id}" />
+    <input style="width:60px;height:25px;" type="submit" value="更新信息"/>
+   <input style="width:60px;height:25px;" type="button" onclick="deletekml({$kml_id},{$area_id})" value="放弃更新 "/>
+    </form></td>
+ 	 </tr>
+  </table>
+   
+
+  <br>
+  </div>
+  </div>
+  </div>
+{include file="footer.html"}

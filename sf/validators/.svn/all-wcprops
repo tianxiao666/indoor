@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/srcsvn/indoor/!svn/ver/1/sf/validators
+END
+CInlineValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/validators/CInlineValidator.php
+END
+CFilterValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/validators/CFilterValidator.php
+END
+CustomJsValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/validators/CustomJsValidator.php
+END
+CRangeValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/validators/CRangeValidator.php
+END
+CEmailValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/validators/CEmailValidator.php
+END
+CCaptchaValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/validators/CCaptchaValidator.php
+END
+CUniqueValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/validators/CUniqueValidator.php
+END
+CStringValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/validators/CStringValidator.php
+END
+CExistValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/validators/CExistValidator.php
+END
+CDefaultValueValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/validators/CDefaultValueValidator.php
+END
+CRegularExpressionValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/1/sf/validators/CRegularExpressionValidator.php
+END
+CSafeValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/validators/CSafeValidator.php
+END
+CUrlValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/1/sf/validators/CUrlValidator.php
+END
+CNumberValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/validators/CNumberValidator.php
+END
+CUnsafeValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/validators/CUnsafeValidator.php
+END
+CBooleanValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/validators/CBooleanValidator.php
+END
+CRegularExpValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/1/sf/validators/CRegularExpValidator.php
+END
+CValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/1/sf/validators/CValidator.php
+END
+CRequiredValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/1/sf/validators/CRequiredValidator.php
+END
+CCompareValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/validators/CCompareValidator.php
+END
+CFileValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/validators/CFileValidator.php
+END
+CTypeValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/validators/CTypeValidator.php
+END

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/_files
+END
+bank-account-after-deposits.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/_files/bank-account-after-deposits.xml
+END
+bank-account-after-withdrawals.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/_files/bank-account-after-withdrawals.xml
+END
+bank-account-after-new-account.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/_files/bank-account-after-new-account.xml
+END
+bank-account-seed.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/_files/bank-account-seed.xml
+END

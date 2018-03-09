@@ -1,0 +1,193 @@
+<link href="{$mediaServer}css/search.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/index.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/public.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/thickbox.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/header.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}js/calendar/my97hourpicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<script src="{$mediaServer}js/jquery/jquery_1_3_2.js">
+</script>
+<script src="{$mediaServer}js/calendar/my97hourpicker/WdatePicker.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/common.js" type="text/javascript">
+</script>
+<script language="javascript" type="text/javascript" src="{$mediaServer}/js/changepage.js">
+</script>
+{literal}
+<script language="javascript" type="text/javascript">
+	/**
+	 *信息内容检测是否合法 
+	 */
+    function checkForm(){
+		var re_kong = /^\s*$/;
+        var re_FLOOR_NAME = /^.{1,10}$/;
+        if ($('#FLOOR_NAME').val() == '' || !re_FLOOR_NAME.test($('#FLOOR_NAME').val())||re_kong.test($('#FLOOR_NAME').val())) {
+            alert('请填写楼层名称(10个字符以内)！');
+            $('#FLOOR_NAME').focus();
+            return false;
+        }
+		if ($('#BASEMENT').val() == '') {
+            alert('请选择楼层为地上或地下！');
+            $('#BASEMENT').focus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+	 *提交数据 
+	 */
+    function SaveFloor(){
+        if (checkForm()) {
+             $("#form1").submit();
+        }
+    }
+	
+	/**
+	 *检测文件飞否为图片 
+	 */
+    function onUploadImgChange(sender){
+        var file = sender.files[0];
+        if (file.type.indexOf("image") != -1) {
+			return true;
+        }else {
+            alert('图片格式无效！');
+			$('#file').val('');
+			return false;
+        }
+    }
+</script>
+{/literal}
+<div>
+    <link type="text/css" rel="stylesheet" href="css/popup.css">
+    <script src="js/jquery/popup.js" type="text/javascript" language="javascript">
+    </script>
+    <script src="js/jquery/jquery.easydrag.handler.beta2.js" type="text/javascript" language="javascript">
+    </script>
+    <div id="divPopup" class="divPopup" style="top: 25%; left: 25%; display: none; position: absolute; z-index: 1378959600; moveable:true;">
+        <div class="popup" style="width: 560px;">
+            <div class="p-box">
+                <div id="drag_handler" class="p-title" style="cursor: move;">
+                    <div class="p-title-content">
+                    </div>
+                    <span><a id="close_window" title="关闭" class="pop_Content_close jqmClose" href="ea.php?r=BuildingFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&NAME={$NAME}" style="cursor: pointer; background-position: 0px 0px;">关闭</a></span>
+                </div>
+                <div class="p-main clear">
+                    <div class="content" style="display: none;">
+                    </div>
+                    <iframe scrolling="auto" frameborder="0" class="frmPopup" id="frmPopup" style="display: inline; height: 380px;">
+                    </iframe>
+                </div>
+                <div class="p-bom clear">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript">
+        jQuery(document).ready(function($){
+            $(".pop_Content_close").hover(function(){
+                $(this).css("background-position", "0 -23px");
+            }, function(){
+                $(this).css("background-position", "0 0");
+            }).css("cursor", "pointer");
+        });
+    </script>
+    {section name=i loop=$floor_list}
+    <form id="form1" name="form1" method="post" action="ea.php?r=BuildingFloor/SaveFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$floor_list[i].BUILDING_ID}" style="margin: 0px; padding: 0px;" enctype="multipart/form-data">
+        <table style="border: 0px; width: 100%;">
+            <tr class="row0">
+                <td align="center">
+                    <table width="100%" id="add" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="20%" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                所在场所:
+                            </td>
+                            <td align="left" style="border:0px;height:40px;">
+                                <font color="#a40000" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;">
+                                    <input type="hidden" id="STATUS" name="STATUS" value="{$floor_list[i].STATUS}"><input type="hidden" id="PHYSICAL_FLOOR_1" name="PHYSICAL_FLOOR_1" value="{$floor_list[i].PHYSICAL_FLOOR}"><input type="hidden" id="FLOOR_ID" name="FLOOR_ID" value="{$floor_list[i].FLOOR_ID}">{$BUILDING_NAME}
+                                </font>
+                            </td>
+                        </tr>
+						<tr>
+                        <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" >
+                            楼层名称:
+                        </td>
+                        <td align="left" style="border:0px;height:40px;">
+                            <input name="FLOOR_NAME" type="text" id="FLOOR_NAME" maxlength="10" style="height: 22px;width:90%;" value="{$floor_list[i].FLOOR_NAME}"/>
+                            <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                *
+                            </font>
+                        </td>
+						<td width="3%">
+						</td>
+                        <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" width="17%">
+                            楼层类型:
+                        </td>
+                        <td align="left" style="border:0px;height:40px;width:30%;">
+							<select style="height:22px;width:90%" name="FLOOR_TYPE" id="FLOOR_TYPE">
+                                    <option value="">--请选择--</option>
+                                    {html_options options=$FLOOR_TYPE selected=$floor_list[i].FLOOR_TYPE}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" width="17%">
+                            物理层数:
+                        </td>
+                        <td align="left" style="border:0px;height:40px;width:30%;">
+                            <input name="PHYSICAL_FLOOR" type="text" id="PHYSICAL_FLOOR" maxlength="5" style="height: 22px;width:90%;" value="{$floor_list[i].PHYSICAL_FLOOR}"/>
+                            </td>
+						<td width="3%">
+						</td>
+                        <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                            地上地下:
+                        </td>
+                        <td align="left" style="border:0px;height:40px;">
+                            <select id="BASEMENT" name="BASEMENT" style="height:22px;width:90%;">
+								<option value="">--请选择--</option>
+                            	{html_options options=$BASEMENT selected=$floor_list[i].BASEMENT}
+                            </select>
+                            <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                *
+                            </font>
+                        </td>
+                    </tr>
+					<tr>
+						<td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" width="17%">
+                            上传图片:
+                        </td>
+						<td colspan="4" align="left" style="border:0px;height:40px;">
+							<input type="file" onchange="onUploadImgChange(this)" id="file" name="file" style="font-size:12px;height:22px;width:98%">
+						</td>
+                    </tr>
+                        <tr>
+                            <td align="left" valign="top" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                简介:
+                            </td>
+                            <td align="left" style="border:0px;font-size:18px;height:40px;" colspan="4">
+                                <div class="cl_tit">
+                                    <textarea name="FLOOR_NOTE" id="FLOOR_NOTE" rows="1" cols="2" style="overflow-y:scroll;height:100px;width:70%;border:1px #ccc solid;">{$floor_list[i].FLOOR_NOTE}</textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td align="right" style="border:0px;height:50px;font-size:16px;" width="40%">
+                                    <input type="button" name="button" id="button" onclick="SaveFloor();" value="保存" />
+                                </td>
+                                <td width="10%">
+                                </td>
+                                <td align="left" style="border:0px;height:50px;font-size:16px;">
+                                    <input type="reset" value="重设" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </td>
+        </tr>
+    </table>
+</form>{/section}
+</div>

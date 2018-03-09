@@ -1,0 +1,58 @@
+
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style type="text/css">
+.content .main .form .notice p a {
+	color: #00F;
+}
+</style>
+<style>
+.form {
+	margin:auto;
+	padding:10px;
+	background-color:#EEE;
+	border:1px solid #CACACA;
+    text-align: center;
+}
+.form form {
+    margin: auto;
+    text-align: left;
+    width: 333px;
+}
+</style>
+{/literal}
+
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;角色管理</span></div>
+  
+  
+<div class="form">
+  <form id="form1" name="form1" enctype="multipart/form-data" method="post" action="ea.php?r=tool">
+    <p>
+      <label for="img">选择一张图片</label>
+      <input type="file" name="img" id="img" />
+    </p>
+    <p><label for="submit">重设图片为270宽 -></label>
+      <input type="submit" name="submit" id="submit" value="重设尺寸" />
+    </p>
+  </form>
+  <div>{if $new_img}新图片：<img src="{$new_img}" alt="" />{/if}</div>
+  
+  <div class="notice">
+  	<br />
+  	<p style="display:none">此页面仅为示例视图，请点击&nbsp;<a href="ea.php?r=Tool/Resize_Table">这里</a>&nbsp;进入实际修改页面。</p>
+  	<p>此页面仅为示例视图，请点击&nbsp;<a href="ea.php?r=Tool/ResizeImages">这里</a>&nbsp;进入“重新生成缩略图”页面实际修改页面。</p>
+  </div>
+</div>
+
+</div> <!-- end of main -->
+   </div><!--end of content -->
+<input type="hidden" id="headMenu" value="backmanager">
+<input type="hidden" id="subbarFlag" value="tool_mgr_bar" />
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+

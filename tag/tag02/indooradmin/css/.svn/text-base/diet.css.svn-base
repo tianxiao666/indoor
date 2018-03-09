@@ -1,0 +1,67 @@
+.other_cooking {
+	display:none;
+	background:#efefef;
+	padding:10px;
+}
+.clear {
+	clear:both;
+}
+.invalid {
+	color:#F30;
+}
+.diet_table td {
+	vertical-align:top;
+}
+#LS_FACL {
+	margin-top:15px;
+}
+.support {
+	width:90%;
+}
+.support td {
+height: 24px;
+    line-height: 24px;
+    padding: 5px;
+}
+.support td.title {
+	text-align:right;
+	width:100px;
+}
+#FACL_NOTE,#FOOD_NOTE,#NOTE{
+    height: 130px;
+    width: 600px;
+}
+.resource_menu_left_td {
+	width:130px;
+}
+.form_title {
+	border:1px solid #333;
+	padding:10px;
+	font-size:14px;
+}
+.right_td{
+    border-left: 1px solid #000000;
+    padding-left: 10px;
+}
+.add_pic_div .title {
+	color:#009;
+}
+textarea {
+	font-size:12px;
+	width:100%;
+}
+.pics_div,.pics_div form,.pics_div form span  {
+	height:50px;
+	line-height:50px;
+}
+.del {
+	cursor:point;
+}
+.error {
+	color:#F00;
+}
+#doSubmit{
+	width:100px;
+	height:50px;
+	margin-left:150px;
+}

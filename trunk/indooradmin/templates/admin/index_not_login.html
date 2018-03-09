@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>::{$site_name}::后台管理系统</title>
+<link href="./css/signin.css" rel="stylesheet" type="text/css" />
+<script src="./js/jquery/jquery_1_3_2.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+function checkLoginForm()
+{
+	if($('#userName').val() == '')
+	{
+		$('#message').html('请填写登录帐号！');
+		return false;
+	}
+	if($('#userPassword').val() == '')
+	{
+		$('#message').html('请填写登录密码！');
+		return false;
+	}
+	if($('#pass').val() == '')
+	{
+		$('#message').html('请填写验证码！');
+		return false;
+	}
+	return true;
+}
+</script>
+{/literal}
+</head>
+
+<body>
+<div class="signinbox">
+<div class="c"></div>
+ <div class="signin">
+	<div class="title">
+		<div class="left"><strong>用户登录</strong></div>
+
+	</div>
+	<form id="LoginForm" name="LoginForm" method="post" action="ea.php?r=login/login" target='bf' onsubmit="return checkLoginForm();">
+	<div class="m">
+		<div class="cont1">
+			<div id="message" align="center" style="color:red">
+			&nbsp;
+			</div>
+			<div class="text">
+				<div class="l">用&nbsp;户&nbsp;名</div>
+				<div class="r"><input name="userName" id="userName" type="text" style="width:170px;" tabindex='1'/></div>
+			</div>
+
+			<div class="text">
+				<div class="l">用户密码</div>
+				<div class="r"><input name="userPassword" type="password" id="userPassword" style="width:170px;" tabindex='2'/>
+				</div>
+			</div>
+			<div class="text">
+				<div class="l">验&nbsp;证&nbsp;码</div>
+
+				<div class="r"><input name="pass" type="text" id="pass" style="width:60px;" tabindex='3'/><script>document.write('<img src="ea.php?r=Login/authImage&session_mode=1&', Math.random(), '" />');</script>
+				</div>
+			</div>
+		</div>
+		<div class="cont2"><input type="image" src="./images/signin/enter_btn_1.jpg"  tabindex='4'/></div>
+	</div>
+	</form>
+	<div class="bot"></div>
+</div> 
+<div class="c"></div> 
+</div>
+
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+</body>
+</html>

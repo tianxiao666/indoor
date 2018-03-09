@@ -1,0 +1,54 @@
+
+/*=================================
+newspageÑùÊ½  
+dateTime: 2011-04-21
+author: binzhao
+=================================*/
+
+/*.content {  float:left;width:100%; background:#ffffff; padding-bottom:0;}*/
+
+.content .part_m { float:left; width:100%;}
+.part_m .cont1 { float:left; width:100%; }
+
+.part_m .cont1 .mt1 { float:left; width:100%; height:auto; padding:0px 0px 13px 0px; background:url(../images/iphone_br.jpg) bottom repeat-x; display:inline-block; overflow:hidden; position:relative; }	
+.part_m .cont1 .mt1 .text { float:left; padding:8px 30px 0px 10px;}
+.part_m .cont1 .mt1 .text .er1 { width:100%; line-height:25px;}
+.part_m .cont1 .mt1 .text .er1 strong { font-size:16px; color:#333;}
+.part_m .cont1 .mt1 .text .er1 strong a { color:#333;}
+.part_m .cont1 .mt1 .text .er1 span { font-size:14px; color:#666; padding-right:24px;}
+.part_m .cont1 .mt1 .text .er2 { width:100%; color:#666; font-size:13px; padding:5px 0px 0px 0px;}
+.part_m .cont1 .mt1 .text .er2 a { color:#666;}
+.part_m .cont1 .mt1 .text .er3 { width:100%; color:#666; font-size:13px; padding:5px 0px 0px 0px;}
+.part_m .cont1 .mt1 .text .er3 a { color:#666;}
+.part_m .cont1 .mt1 .text2 { float:right; padding:33px 13px 0px 0px; position:absolute; top:0px; right:0px; }
+.part_m .cont1 .mt1 .text2 span { float:left;}
+.part_m .cont1 .mt2 { float:left; height:auto; padding:10px 10px 13px 10px; overflow:hidden; word-break:break-all;}
+.part_m .cont1 .mt2 .text{ width:100%; height:auto;  background:#fff; font-size:15px; line-height:22px; color:#333; }
+.part_m .cont1 .mt2 .text span { text-align:left; width:100%; word-break:break-all;}
+.part_m .cont1 .mt2 .text p { margin:0px auto; text-align:left; width:100%; display:inline-block;}
+.part_m .cont2 { float:left; width:100%; border-top:1px solid #bbb; }
+.part_m .cont2 .mt { float:left; width:100%; height:auto; padding:0px 0px 13px 0px; background:url(../images/iphone_br_r2.jpg) bottom repeat-x; display:inline-block; overflow:hidden; position:relative; }	
+.part_m .cont2 .mt .text { float:left; margin:8px 45px 0px 10px;}
+.part_m .cont2 .mt .text .er1 { width:100%; color:#666; font-size:13px; word-wrap:break-word;}
+.part_m .cont2 .mt .text .er2 a { color:#666;}
+.part_m .cont2 .mt .text .er1 span { font-size:14px; color:#666; padding-right:24px;}
+.part_m .cont2 .mt .text .er2 { width:100%; color:#666; font-size:13px; padding:5px 0px 0px 0px;}
+.part_m .cont2 .mt .text .er2 a { color:#666;}
+.part_m .cont2 .mt .text .er3 { width:100%; line-height:25px; padding:5px 0px 0px 0px;}
+.part_m .cont2 .mt .text .er3 strong { font-size:15px; color:#333;}
+.part_m .cont2 .mt .text .er3 strong a { color:#333;}
+.part_m .cont2 .mt .text .er4 { width:100%;  padding:5px 0px 0px 0px;}
+.part_m .cont2 .mt .text .er4 .pic { padding:0px 5px 6px 0px; background:url(../images/iphone_pic_r2.png) right bottom no-repeat; display:inline-block;}
+.part_m .cont2 .mt .text .er4 .pic span { float:left;}
+.part_m .cont2 .mt .text .er4 .pic img { border:1px solid #999;}
+.part_m .cont2 .mt .text2 { float:right; padding:11px 10px 0px 10px; position:absolute; top:0px; right:0px;  }
+.part_m .cont2 .mt .text2 span { float:left; font-size:14px; color:#f14f00;}
+
+
+
+
+
+
+
+
+

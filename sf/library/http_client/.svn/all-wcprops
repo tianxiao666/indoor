@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/srcsvn/indoor/!svn/ver/1/sf/library/http_client
+END
+PEAR.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/1/sf/library/http_client/PEAR.php
+END
+HTTP.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/1/sf/library/http_client/HTTP.php
+END
+Client.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/library/http_client/Client.php
+END
+Request.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/library/http_client/Request.php
+END

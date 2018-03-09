@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DB/MetaData
+END
+PgSQL.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DB/MetaData/PgSQL.php
+END
+Sqlite.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DB/MetaData/Sqlite.php
+END
+InformationSchema.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DB/MetaData/InformationSchema.php
+END
+MySQL.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DB/MetaData/MySQL.php
+END
+Oci.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DB/MetaData/Oci.php
+END

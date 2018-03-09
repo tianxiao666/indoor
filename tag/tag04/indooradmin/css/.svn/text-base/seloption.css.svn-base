@@ -1,0 +1,29 @@
+.selOption {
+      -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: -moz-use-text-color #6A80A9 #6A80A9;
+    border-right: 1px solid #6A80A9;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+    max-height: 150px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    width: 120px;
+    z-index: 9999;
+}
+
+.selOption li {
+    line-height: 20px;
+	padding-left: 5px;
+}
+
+.selOption li:hover{
+   background-color: #9393FF;
+   cursor:pointer;
+   color: #FFFFFF;
+}

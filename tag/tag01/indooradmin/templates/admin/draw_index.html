@@ -1,0 +1,269 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js"></script>
+<script src="js/default.js" type="text/javascript"></script>
+<script src="js/thickmsg.js" type="text/javascript"></script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js"></script>
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css"  rel="stylesheet" type="text/css" />
+{literal}
+<style>
+ .itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+	jQuery(document).ready(function($){
+		  $(".change_status").click(function(){
+			  var areaid = $(this).attr("tid");
+		      $(this).popup({
+		          url:"ea.php?r=AreaDraw/UpdateMapStatus&map_id="+areaid,
+		          title:"更改状态",
+		          type:1,
+		          now:true,
+		          width:450,
+		          height:250
+		      });
+		  });
+		});
+	jQuery(document).ready(function($){
+		  $(".uploadFile").click(function(){
+			  var areaid = $(this).attr("tid");
+		      $(this).popup({
+		          url:"ea.php?r=AreaDraw/Create&area_id="+areaid,
+		          title:"上传制图",
+		          type:1,
+		          now:true,
+		          width:574,
+		          height:517
+		      });
+		  });
+		});
+	jQuery(document).ready(function($){
+		  $(".EditFile").click(function(){
+			  var map_id = $(this).attr("tid");
+		      $(this).popup({
+		          url:"ea.php?r=AreaDraw/EditAreaMap&id="+map_id,
+		          title:"编辑制图",
+		          type:1,
+		          now:true,
+		          width:574,
+		          height:517
+		      });
+		  });
+		});
+	jQuery(document).ready(function($){
+		  $(".selPic").click(function(){
+			  var map_id = $(this).attr("tid");
+		      $(this).popup({
+		          url:"ea.php?r=AreaDraw/SelMap&map_id="+map_id,
+		          title:"查看大图",
+		          type:1,
+		          now:true,
+		          width:574,
+		          height:420
+		      });
+		  });
+		});
+}) 
+function closeChangeStatus(index)
+{
+	$("#TOURISM_"+index).popup({"close":true});
+}
+function getUpTrack()
+{
+	
+	var sjb_right = $("#route > tr > td > input");
+	  var mapIdarr = new Array();
+		for(var i=0;i<sjb_right.length;i++){
+			var cb = sjb_right[i];
+			if(cb.checked){	
+				var mapid = $(cb).attr("value");
+				mapIdarr.push(mapid);
+			}
+		}
+		if(mapIdarr == ''){
+			alert("请选择图片");
+			return false;
+		}
+		var status = $('#trackStatus').val();
+		if(status==''){
+	        alert('请选择更改状态！');
+	        return false;
+		}
+		if(mapIdarr.length > 1 && status == 'A'){
+            alert('一次只能更新一张图片为正常状态!');
+            return false;
+		}
+		var statusFlag = document.getElementById("statusFlag");
+		if( statusFlag && status == 'A'){
+            if(!confirm('此操作会把此景区状态为正常的图片更改为编辑中,是否继续?')){
+                    return false;
+                }
+		}
+		var area_id = $('#AREA_ID').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=AreaDraw/AjaxChangeStatus',
+		data	:  {status : status , map_id : mapIdarr,area_id : area_id},
+		success :  function(result){
+			if(result){
+				alert('更改成功！');
+				parent.location.reload();
+			}else{
+				alert('更改失败！');
+				parent.location.reload();
+			}
+		}
+	});
+}
+function selCheckBox(){
+    var flag = document.getElementById("checkall").checked;
+	  var ckboxes = document.getElementsByName("TASK_STA[]");
+	  for(i=0; i < ckboxes.length; i++) {
+	       ckboxes[i].checked = flag;
+	  }
+ }
+</script>
+{/literal}
+{if $statusFlag eq 'true'}<!-- 如果已经有正常状态的图片存在,则又此隐藏标签 -->
+ <input type ="hidden" id="statusFlag" value="true">
+{/if}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=LsArea/AreaList">旅游数据管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=LsArea/AreaList">景区管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=scenicZone/Index&id={$areaList.AREA_ID}">编辑{$areaList.AREA_NAME}</a>&nbsp;&gt;&nbsp;景区制图管理</span></div>
+  <div class="tabtext" id="tabtext1" >
+   <table>
+     <tr>
+       <td valign="top" width="1%">
+        {include file="pop_menu_left.html" info=$areaList pop_menu_file="area_menu_left.html" cur=14} 
+       </td>
+       <td valign="top" style="padding:10px 0;">
+        <div class="con_left">
+         <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+         
+         <tr>
+           <td>
+             <div class="scenic_search">
+		   		<div class="chose">
+		       			<form id="log_search_form" name="log_search_form" action="ea.php?r=AreaDraw&area_id={$areaList.AREA_ID}" method="post" style="margin: 0px; padding: 0px; width: 300px;">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									
+									<td height="25" align="left" class="formTitle">
+										<span>状态：
+										   <select name="STATUS" id="STATUS">
+										     <option value="">--请选择--</option>
+										     {foreach from=$mapStatus item=m_sta key=key}
+										      <option value="{$key}" {if $key==$condition.STATUS}selected=true{/if}>{$m_sta}</option>
+										     {/foreach}
+										   </select>
+										  </span>
+										   &nbsp;&nbsp;
+										  </td>
+	                                <td><input type="submit" value="查询" style="font-size: 12px; width: 60px; height: 20px;" />
+	                                </td>
+	                                  <td width="10px"></td>
+	                            </tr>
+	                        </table>
+							</form>
+					</div>
+	   			</div>
+           </td>
+         </tr>
+         <tr>
+           <td>
+           <input type="hidden" id="AREA_ID" value="{$areaList.AREA_ID}">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px">{$areaList.AREA_NAME}的制图管理[共搜索到{$count.COUNT}条记录]</font></td>
+						<td width="50%" align="right"><a href="#!" class="uploadFile" tid="{$areaList.AREA_ID}" ><font color="#666" style="font-weight:bold;font-size:14px">[上传制图]</font></a></td>
+					</tr>
+				</table>
+           </td>
+         </tr>
+	  <tr> 
+	  <td valign="top" style="padding:10px 10px 0;">
+		<div class="scenic_list">
+	<table class="itable">
+	<thead>
+	<tr>
+                    <th style="width: 50px;"><label><input name="checkall" value="" id="checkall" type="checkbox" onclick="selCheckBox();">全选</label></th>
+                    <th  align="left" style="width: 90px">缩略图</th>
+                    <th align="left" style="width: 90px">状态</th>
+                    <th align="left" style="width: 90px">类型</th>
+                    <th  style="width: 90px">东经度</th>
+                    <th  style="width: 90px">北纬度</th>
+                    <th  style="width: 90px">西经度</th>
+                    <th  style="width: 90px">南纬度</th>
+                    <th  style="width: 90px">横向切片数</th>
+                    <th  style="width: 90px">纵向切片数</th>
+                    <th  style="">创建时间</th>
+                    <th style="width: 120px">操作</th>
+                </tr>
+</thead>
+{if $Mapinfo}
+<tbody id="route">
+		{foreach from=$Mapinfo item=map key=key}
+                <tr class="{cycle values='row0,row1'}">
+                	<td ><input type="checkbox" name="TASK_STA[]" value="{$map.MAP_ID}"></td>
+                    <td align="left"><a title="点击查看大图" href="#!" class="selPic" tid="{$map.MAP_ID}"><img id="" src="{$map.PATH}{$map.FILENAME}" onload="ResizeImage(this,100,100);" /></a></td>
+                    <th align="left">{if $map.STATUS=='X'}<span style="color:#C00">{$map.STATUSNAME}</span>{elseif $map.STATUS=='A'}<span style="color:green">{$map.STATUSNAME}</span>{else}<span style="color:blue">{$map.STATUSNAME}</span>{/if}</th>
+                   <th align="left">{if $map.MAP_TYPE eq 'AUTO'}自动导游图{else}手工导游图{/if}</th>
+                    <th align="left">{$map.E_LONGITUDE}</th>
+                    <th align="left">{$map.N_LATITUDE}</th>
+                    <th align="left">{$map.W_LONGITUDE}</th>
+                    <th align="left">{$map.S_LATITUDE}</th>
+                    <th align="left">{$map.W_TILES}</th>
+                    <th align="left">{$map.H_TILES}</th>
+                    <th align="left">{$map.CREATE_TIME}</th>
+					<td align="left">
+						<a href="#!" class="EditFile" tid="{$map.MAP_ID}">编辑 </a> 
+					</td>
+                </tr>
+				{/foreach}
+</tbody>
+{else}
+	<tbody>
+  <tr class="{cycle values='row0,row1'}">
+	<td align="center" style="color:red" colspan="8">没有找到相关的信息</td>
+                   
+  </tr>
+</tbody>
+{/if}
+</table>
+   </div>
+    <input type="hidden" name="CardType" value="{$condition.TYPE}" id="CARDTYPE">
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+  </tr>
+  <tr id="track_status">
+    <td style="padding-right: 30px;padding-top: 5px;">
+        <select name="trackStatus" id="trackStatus">
+          <option value="">--更改状态--</option>
+          {foreach from=$mapStatus item=m_sta key=key}
+			 <option value="{$key}">{$m_sta}</option>
+		{/foreach}
+        </select>
+             <input type="button" value="批量更改状态" style="font-size: 12px; width: 120px; height: 20px;cursor:pointer;" onclick="getUpTrack();">
+    </td>
+  </tr>
+</table>
+</div>
+       </td>
+     </tr>
+   </table>
+<input type="hidden" id="headMenu" value="lsareamanager">
+   </div>
+   </div> 
+   </div>
+   {include file="popup.html" }
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

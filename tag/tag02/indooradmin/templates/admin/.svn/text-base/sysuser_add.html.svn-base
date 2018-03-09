@@ -1,0 +1,297 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script language=javascript src="{$mediaServer}commonjs/date.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+var cmobile = true;
+var cemial  = true;
+var cname   = true; 
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function EditSubmit(){
+	if(checkForm() ){
+		setTimeout("Submit()",300);
+	}
+}
+
+function Submit(){
+	if(cmobile && cemial && cname){
+		$("#myForm").submit();
+	}
+}
+
+
+
+//ajax验证手机号码唯一性
+function ajaxCheckMobile(){
+	if ($('#MOBILE').val() != '')
+	{		
+		//var reg = /(^13[0-9]|15[6-9]|150|151|153|180|18[5-9])[0-9]{8}$/;
+		var reg = /(^13|14|15|18)[0-9]{9}$/;
+		if($('#MOBILE').val().length != 11 || !reg.test($('#MOBILE').val()))
+		{
+			alert('手机号码不正确！');
+			$('#MOBILE').focus();
+			cmobile = false;
+			return false;
+		}
+	}
+	var mobile = $('#MOBILE').val();
+	var subsid = $('#user_id').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=SysUserMgr/AjaxCheckMobile',
+		data	:  {mobile : mobile , subsid : subsid},
+		success :  function(result){
+			if(result){
+				cmobile = false;
+				$('#mobilemsg').show();
+			}else{
+				cmobile = true;
+				$('#mobilemsg').hide();
+			}
+		}
+	});
+}
+
+function hideError(userMsg){
+	$("#"+userMsg).hide();
+}
+
+function checkForm()
+{
+	if ($('#NAME').val() == '')
+	{
+		alert('请填写账号！');
+		$('#NAME').focus();
+		return false;
+	}
+	if ($('#EMAIL').val() == '')
+	{
+		alert('请填写电子邮箱！');
+		$('#EMAIL').focus();
+		return false;
+	}
+	
+	var re = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+	if(!re.test($('#EMAIL').val()))
+	{
+		alert('请输入正确的邮箱格式！');
+		$('#EMAIL').focus();
+		return false;
+	}
+	if($('#QQ').val() != ''){
+		if(isNaN($('#QQ').val())){
+			alert('QQ请填写数字！');
+			$('#QQ').focus();
+			return false;
+		}
+	}
+	if ($('#PASSWD').val() == '')
+	{
+		alert('请填写登录密码！');
+		$('#PASSWD').focus();
+		return false;
+	}
+	if ($('#PASSWD1').val() == '')
+	{
+		alert('请填写确认密码！');
+		$('#PASSWD1').focus();
+		return false;
+	}
+	if ($('#PASSWD1').val() != $('#PASSWD').val())
+	{
+		alert('两次输入的密码不一致！');
+		$('#PASSWD').value = '';
+		$('#PASSWD1').value = '';
+		$('#PASSWD1').focus();
+		return false;
+	}
+	if(strlen($('#PASSWD').val())<5){
+		alert("密码长度不能小于六位");
+		$('#PASSWD').value = '';
+		$('#PASSWD1').value = '';
+		$('#PASSWD').focus();
+		return false;
+	}
+	return true;
+}
+
+//ajax验证用户名
+function ajaxCheckNAME(){
+	var name = $('#NAME').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=SysUserMgr/AjaxCheckNAME',
+		data	:  {name : name},
+		success :  function(result){
+			if(result){
+				cname = false;
+				$('#namemsg').show();
+				return false;
+			}else{
+				cname = true;
+				$('#namemsg').hide();
+			}
+		}
+	});
+}
+
+//ajax验证邮箱
+function ajaxCheckEMAIL(){
+	var email = $('#EMAIL').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=SysUserMgr/AjaxCheckEMAIL',
+		data	:  {email : email},
+		success :  function(result){
+			if(result){
+				cemial = false;
+				$('#emailmsg').show();
+				return false;
+			}else{
+				cemial = true;
+				$('#emailmsg').hide();
+			}
+		}
+	});
+}
+
+//判断中英文
+function strlen(str) 
+{
+   var strlength=0;
+   for (i=0;i<str.length;i++)
+  {
+     if (isChine(str.charAt(i))==true)
+        strlength=strlength + 2;
+     else
+        strlength=strlength + 1;
+ 	}
+	return strlength;
+}
+
+function isChine(str)
+{
+   var lst = /.*[\u4e00-\u9fa5]+.*$/;
+   return lst.test(str);      
+}
+
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+  <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;<a href="">员工管理</a>&nbsp;&gt;&nbsp;新增员工</span></div>
+  
+ <form id="myForm" name="myForm" method="post" action="ea.php?r=SysUserMgr/UserAdd" style="margin:0px;padding:0px;" > 
+ <div class="tabtext" id="tabtext1">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> 员工基本资料</font></td>
+					<td width="50%" align="right"><a href="javascript:history.go(-1);"><font color="#666" style="font-weight:bold;font-size:14px">[返回上一页]</font></a></td>
+				</tr>
+			</table>
+<table class="itable">
+               <tr class="row0">
+                    <td align="center">
+						<table id="add" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+        						<td align="right" style="border:0px;width:15%;font-size:16px;font-weight: bold;">账号：</td>
+    						    <td align="left" style="border:0px;width:35%;"> <input name="NAME" type="text" id="NAME" style="width:300px;height:25px" onchange="ajaxCheckNAME();"/><font style="color:red">*</font>
+    						    <span id="namemsg" class="prompt" style="display:none;color:red;">账号已注册！</span></td>
+    						    <td align="right" style="border:0px;width:10%;font-size:16px;font-weight: bold;">姓名：</td>
+    						    <td align="left" style="border:0px;"><input name="REAL_NAME" type="text" id="REAL_NAME" style="width:300px;height:25px" /></td>
+    						 </tr>
+    						 <tr>
+    						    <td align="right" style="border:0px;font-size:16px;font-weight: bold;">职位：</td>
+    						    <td align="left" style="border:0px;"> <input name="POSITION" type="text" id="POSITION" style="width:300px;height:25px" /></td>
+    						    <td align="right" style="border:0px;font-size:16px;font-weight: bold;">MSN：</td>
+    						    <td align="left" style="border:0px;"><input name="MSN" type="text" id="MSN" style="width:300px;height:25px" /></td>
+						    </tr>
+						    <tr>
+    						    <td align="right" style="border:0px;font-size:16px;font-weight: bold;">邮箱：</td>
+    						    <td align="left" style="border:0px;"> <input name="EMAIL" type="text" id="EMAIL" style="width:300px;height:25px" onchange="ajaxCheckEMAIL();"/><font style="color:red">*</font>
+    						    <span id="emailmsg" class="prompt" style="display:none;color:red;">邮箱已注册！</span></td>
+    						    <td align="right" style="border:0px;font-size:16px;font-weight: bold;">QQ：</td>
+    						    <td align="left" style="border:0px;"><input name="QQ" type="text" id="QQ" style="width:300px;height:25px" />
+						    </tr>				
+    						<tr>
+    						    <td align="right" style="border:0px;font-size:16px;font-weight: bold;">密码：</td>
+    						    <td align="left" style="border:0px;"><input name="PASSWD" type="password" id="PASSWD" style="width:300px;height:25px" /><font style="color:red">*</font></td>
+    						    <td align="right" style="border:0px;font-size:16px;font-weight: bold;">手机号码：</td>
+    						    <td align="left" style="border:0px;"><input name="MOBILE" type="text" id="MOBILE" style="width:300px;height:25px" onchange="ajaxCheckMobile();" onkeyup="hideError('mobilemsg');"/>
+    						        <span id="mobilemsg" class="prompt" style="display:none;color:red;">此手机号已绑定</span></td>
+						    </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;font-size:18px;font-weight: bold;"> 确认密码：</td>
+                                <td align="left" style="border:0px;"><input name="PASSWD1" type="password" id="PASSWD1" style="width:300px;height:25px" /><font style="color:red">*</font></td>
+                                <td align="right" style="border:0px;font-size:18px;font-weight: bold;">性别：</td>
+                                <td align="left" style="border:0px;"><input name="GENDER" type="radio" name="GENDER" value="G" class="intxt2" tabindex="4" checked="checked" />男&nbsp;&nbsp;&nbsp;&nbsp;<input name="GENDER" type="radio" name="GENDER" value="M" class="intxt2" tabindex="5" {if $user_info.GENDER eq 'M'}checked="checked"{/if}/>女
+                            </tr>
+                            <tr>
+						        <td align="right" style="border:0px;font-size:16px;font-weight: bold;">所属部门：</td>
+                                <td align="left" style="border:0px;">
+                                    <select id="DEPT" name="DEPT[]"  multiple="multiple" style= "height:200px;width:180px">
+										{foreach from=$dept_list key=key item=type}
+									       <option value="{$type.DEPT_ID}" {if $type.DEPT_ID == $userdept.DEPT_ID}selected {/if}>{$type.DEPT_NAME}</option>
+					 						 {if $type.child}{foreach from=$type.child item=m}<option value="{$m.DEPT_ID}" {if $m.DEPT_ID == $userdept.DEPT_ID}selected {/if}>&nbsp;&nbsp;{$m.DEPT_NAME}</option>
+					 						 {if $m.child}{foreach from=$m.child item=n}<option value="{$n.DEPT_ID}" {if $n.DEPT_ID == $userdept.DEPT_ID}selected {/if}>&nbsp;&nbsp;&nbsp;&nbsp;{$n.DEPT_NAME}</option>
+					 						 {/foreach}{/if}
+					 						 {/foreach}
+					 						 {/if}
+									   {/foreach}
+									</select></td>
+								<td align="right" style="border:0px;font-size:16px;font-weight: bold;">用户角色：</td>
+    						    <td align="left" style="border:0px;">
+    						    <select id="ROLE" name="ROLE[]"  multiple="multiple" style= "height:200px;width:180px">
+    						        {foreach from=$role_list key=key item=type}
+    						        <option value="{$type.ROLE_CODE}" >{$type.ROLE_NAME}</option>
+    						        {/foreach}
+								<!--{html_checkboxes name='ROLE' options=$role_list selected=$role separator="&nbsp;"}-->
+								</select>
+								</td>
+						    </tr>
+						    <tr>
+    						    <td align="right" style="border:0px;">&nbsp;</td>
+    						    <td align="left" style="border:0px;">按Ctrl可多选</td>
+    						    <td align="right" style="border:0px;">&nbsp;</td>
+    						    <td align="left" style="border:0px;">按Ctrl可多选</td>
+    						</tr>
+						</table>
+					</td>
+                </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="30" align="center" valign="bottom">
+						<input type="button" onclick="EditSubmit();" value="保存" style="font-size:12px;width:100px;height:30px;" />
+						<input type="button" value="返回上一页" style="font-size:12px;width:100px;height:30px;" onclick="history.go(-1);" />
+					</td>
+				</tr>
+			</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </form>
+   </div> 
+   </div>
+{include file="footer.html"}

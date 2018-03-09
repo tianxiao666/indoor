@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/srcsvn/indoor/!svn/ver/372/appinterface/src/com/dao
+END
+SignalInfoDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/dao/SignalInfoDao.java
+END
+SignalDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/dao/SignalDao.java
+END
+SignalRegionCenterDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/166/appinterface/src/com/dao/SignalRegionCenterDao.java
+END

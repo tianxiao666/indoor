@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm
+END
+cf_commands.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf_commands.cfm
+END
+cf_basexml.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf_basexml.cfm
+END
+connector.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/connector.cfm
+END
+cf_upload.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf_upload.cfm
+END
+cf_util.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf_util.cfm
+END
+cf5_upload.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf5_upload.cfm
+END
+cf5_connector.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf5_connector.cfm
+END
+ImageObject.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/ImageObject.cfc
+END
+image.cfc
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/image.cfc
+END
+cf_connector.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf_connector.cfm
+END
+upload.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/upload.cfm
+END
+config.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/config.cfm
+END
+cf_io.cfm
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/srcsvn/indoor/!svn/ver/400/tag/tag04/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/cfm/cf_io.cfm
+END

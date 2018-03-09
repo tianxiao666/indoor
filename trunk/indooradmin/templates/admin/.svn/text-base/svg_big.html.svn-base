@@ -1,0 +1,124 @@
+<link href="css/sceniczone.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/xsbortsImg.css" rel="stylesheet" type="text/css" />
+<link href="css/area_select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js">
+</script>
+<script src="js/xsbortsImageBrowser.js" type="text/javascript">
+</script>
+<script src="js/areaSelect/Base.js" type="text/javascript">
+</script>
+<script src="js/thickmsg.js" type="text/javascript">
+</script>
+<script src="js/areaSelect/Base_004.js" type="text/javascript">
+</script>
+<script src="js/areaSelect/Base_005.js" type="text/javascript">
+</script>
+<script src="js/areaSelect/Base_003.js" type="text/javascript">
+</script>
+<script src="js/areaSelect/Base_002.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js">
+</script>
+<script src="js/areaSelect/jobarea_array_c.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/popup.js">
+</script>
+<script src="{$mediaServer}js/common.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery-1.4.2.min.js">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.validate.js">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/juery.validate.additional-methods.js">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.jfvalidate.helper.js">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/calendar/my97datepicker/WdatePicker.js">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/menuBar.js">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/json/json2.js">
+</script>
+<link href="{$mediaServer}css/popup.css" rel="stylesheet" type="text/css" />
+<script src="{$mediaServer}js/ajax/getpcda.js" type="text/javascript">
+</script>
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript">
+    var width = '{$width}';//svg弹出层的宽
+    var height = '{$height}';//svg弹出层的高
+    var typeJson = null;
+    (function(){
+        typeJson = eval('(' + '{$typeJson}' + ')');
+    })();
+    function showLayerInfo(){
+        $("#svgsvg").mousedown(function(evt){
+            var svg_id = evt.originalTarget.id;
+            var title = $($($('#' + svg_id).parent()).children()[0]).html();
+            var desc = $($($('#' + svg_id).parent()).children()[1]).html();
+            var type = (typeJson == null) ? desc : typeJson[desc];
+            var top = evt.pageY;
+            var left = evt.pageX;
+            if (top > (height - 100 - 38)) {
+                top = evt.pageY - 100 - 10;
+            }
+            if (left > (width - 200 - 38)) {
+                left = evt.pageX - 200 - 10;
+            }
+            $("#divPopup").css({
+                'left': left,
+                'top': top,
+                'z-index': 1378959600,
+                'moveable': true,
+                'width': 200,
+                'height': 100
+            });
+            $("#title").html(title);
+            $("#desc").html(type);
+            $("#divPopup").show();
+        });
+    }
+    
+    //关闭放大弹出窗口
+    function closeSvg(){
+        $("#divPopup").hide();
+    }
+</script>
+<div id="divPopup" class="divPopup" style="display: none; position: absolute; z-index: 1378959600; moveable:true;width:100px;height:100px;">
+    <div class="popup" style="width:200;height:100;">
+        <div class="p-box" style="height:100">
+            <div id="drag_handler" class="p-title" style="cursor: move;">
+                <div class="p-title-content">
+                </div>
+                <span><a title="关闭" class="pop_Content_close jqmClose" href="#" style="cursor: pointer; background-position: 0px 0px;" onclick="closeSvg();">关闭</a></span>
+            </div>
+            <div class="p-main clear">
+                <div class="content" style="display: none;">
+                </div>
+                <div id="svgInfo" style="height:100%;width:100%;">
+                    <table style="width:100%">
+                        <tr>
+                            <td>
+                                所属图层:
+                            </td>
+                            <td id="title">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                图层类型:
+                            </td>
+                            <td id="desc">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="svgsvg" onclick="showLayerInfo();">
+    {$filetxt}
+</div>

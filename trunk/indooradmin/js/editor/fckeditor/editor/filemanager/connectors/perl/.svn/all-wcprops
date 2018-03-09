@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl
+END
+commands.pl
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/commands.pl
+END
+io.pl
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/io.pl
+END
+basexml.pl
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/basexml.pl
+END
+connector.cgi
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/connector.cgi
+END
+config.pl
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/config.pl
+END
+upload.cgi
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/upload.cgi
+END
+util.pl
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/util.pl
+END
+upload_fck.pl
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/js/editor/fckeditor/editor/filemanager/connectors/perl/upload_fck.pl
+END

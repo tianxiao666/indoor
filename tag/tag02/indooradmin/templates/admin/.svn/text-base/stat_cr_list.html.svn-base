@@ -1,0 +1,167 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+
+function changePage()
+{
+	var sep = (arguments[0].indexOf('?') != -1) ? '&' : '?';
+	location.href = arguments[0] + sep + 'page=' + arguments[1];
+}
+
+function SearchLog()
+{   
+	var start = document.getElementById("startDate").value;
+	var end   = document.getElementById("endDate").value;
+	if( (start!='') && (end!='') && (end < start))
+	{
+		alert("起始时间不能大于终止时间！");
+	}
+	else 
+	{
+	  var frm = document.log_search_form;
+	  frm.action='ea.php?r=StatConversion/SearchStatcr';
+	  frm.submit();
+	}
+}
+function drop_mouseover(pos){
+	 try{window.clearTimeout(timer);}catch(e){}
+	}
+	function drop_mouseout(pos){
+	 var posSel=document.getElementById(pos+"Sel").style.display;
+	 if(posSel=="block"){
+	  timer = setTimeout("drop_hide('"+pos+"')", 1000);
+	 }
+	}
+	function drop_hide(pos){
+	 document.getElementById(pos+"Sel").style.display="none";
+	}
+	function search_show(pos,searchType,href){
+	    document.getElementById(pos+"SearchType").value=searchType;
+	    document.getElementById(pos+"Sel").style.display="none";
+	    document.getElementById(pos+"Slected").innerHTML=href.innerHTML;
+	    document.getElementById(pos+'q').focus();
+	 try{window.clearTimeout(timer);}catch(e){}
+	 return false;
+	}
+	
+	function ExportLog()
+	{   
+		var frm = document.getElementById('expForm');
+		frm.action = 'ea.php?r=StatConversion/Export';
+		frm.submit();
+	}
+	
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;转化率统计</span></div>
+  <input type="hidden" id="subbarFlag" value="log_mgr_bar" />
+  {include file="stat_left_menu.html" type="stat_cr_list"}
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  <div class="scenic_search">
+   <div class="chose">
+	<form id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px; width: 940px;">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td height="25" align="left" class="formTitle"><span>平台：</span></td>
+								<td width="140"><select name="APP" id="APP" size="1">
+								    <option value="">-请选择-</option>
+								    <option value="WEB" {if $condition.APP=='WEB'}selected{/if}>WEB网站</option>
+								    <option value="API" {if $condition.APP=='API'}selected{/if}>客户端</option>
+								    </select>
+								</td>
+								<td height="25" align="left" class="formTitle"><span>功能：</span></td>
+								<td width="140"><select name="FUNC" id="FUNC" size="1">
+								    <option value="">-请选择-</option>
+								    <option value="注册" {if $condition.FUNC=='注册'}selected{/if}>注册</option>
+								    <option value="登录" {if $condition.FUNC=='登录'}selected{/if}>登录</option>
+								    </select>
+								</td>
+								<td height="25" align="left" class="formTitle"><span>起始时间：</span></td>
+                                <td><input type="text" id="startDate" name="startDate" value="{$condition.startDate}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td height="25" align="left" class="formTitle"><span>终止时间：</span></td>
+                                <td><input type="text" id="endDate" name="endDate" class="Wdate" value="{$condition.endDate}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td><input type="button" value="查询日志" style="font-size: 12px; width: 60px; height: 20px;" onclick="SearchLog();" />
+                                </td>
+                                  <td width="10px"></td>
+                            </tr>
+                        </table>
+						</form>
+						</div>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  <span style="font-size:14px;">总计：</spna><span style="font-size:14px;color:red">{if $cnt}{$cnt}{else}0{/if}</span>
+  <input type="button" onclick="ExportLog();" value="导出Excel" style="float: right" />
+  {if (!$statcr_list)}
+  <div class="scenic_list">
+<table class="itable">
+<thead>
+<tr>
+ 	<th width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></th>
+</thead>
+
+</table>
+   </div>
+  {else}
+	<div class="scenic_list">
+<form action="" method="post" id="expForm" name="expForm">	
+<table class="itable">
+<thead>
+<tr>
+ 	<th width="15%" align="left">应用台平</th>
+ 	<th width="15%" align="left">功能</th>
+ 	<th width="15%" align="left">日期</th>
+ 	<th width="15%" align="left">统计人数</th>
+ 	<th width="15%" align="left">访问总人数</th>
+ 	<th width="15%" align="left">操作</th>
+</tr>
+</thead>
+<tbody>
+		{foreach from=$statcr_list item =li}
+			{if $li}
+                <tr class="{cycle values='row0,row1'}">
+                	<td align="left">{if $li.APP=='WEB'}WEB网站{elseif $li.APP=='API'}客户端{/if}</td>
+                    <td align="left">{$li.FUNC}</td>
+                    <td align="left">{$li.ADD_TIME|date_format:"%Y-%m-%d"}</td>
+                    <td align="left">{$li.CR_CNT}</td>
+                    <td align="left">{$li.CR_TOTAL}</td>
+                    <td align="left">
+                    <a target="_blamk" {if $li.URL}href="ea.php?r=Syslogs&APP={$li.APP}&startDate={$li.ADD_TIME|date_format:"%Y-%m-%d"}&endDate={$li.ADD_TIME|date_format:"%Y-%m-%d"}&GET_URL={$li.URL}&LIKE=Y"{else}href="ea.php?r=Syslogs&APP={$li.APP}&startDate={$li.ADD_TIME|date_format:"%Y-%m-%d"}&endDate={$li.ADD_TIME|date_format:"%Y-%m-%d"}"{/if}>查看详情</a>
+                    
+                    </td>
+                </tr>
+                {/if}
+				{/foreach}
+</tbody>
+</table></form>
+   </div>
+   {/if}
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+	<input type="hidden" id="headMenu" value="statmanager">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+   </div>
+   </div> 
+   </div>
+
+{include file="footer.html"}

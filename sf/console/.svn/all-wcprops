@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/srcsvn/indoor/!svn/ver/1/sf/console
+END
+CHelpCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/srcsvn/indoor/!svn/ver/1/sf/console/CHelpCommand.php
+END
+CConsoleCommandRunner.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/1/sf/console/CConsoleCommandRunner.php
+END
+CConsoleCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/1/sf/console/CConsoleCommand.php
+END
+CConsoleApplication.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/console/CConsoleApplication.php
+END

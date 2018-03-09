@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="popupbtt" mce_bogus="1" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/popupbtt_enter</item>
+        <item name="android:windowExitAnimation">@anim/popupbtt_exit</item>
+    </style>
+
+    <style name="popupttb" mce_bogus="1" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/popupttb_enter</item>
+        <item name="android:windowExitAnimation">@anim/popupttb_exit</item>
+    </style>
+
+    <style name="button">
+        <item name="android:button">@null</item>
+    </style>
+
+</resources>

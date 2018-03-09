@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>你的好友制定了旅行计划</title>
+</head>
+
+<body style="font-size:14px;color:#333333;background:#ffffff;">
+<table width="602" border="0" cellspacing="0" cellpadding="0" style="margin:0;padding:0"> 
+  <tr>
+    <td style="background:url({$shareraBaseUrl}images/title_bg.jpg) no-repeat;width:602px;height:84px">
+    <ul style="list-style:none;float:right;line-height:20px;font-size:14px;margin-top:20px;color:#0082cb;text-decoration:none;cursor:pointer">
+<li style="border-right:1px dotted #0082CB;padding:0 10px;height:20px;float:left;color:#0082cb;text-decoration:none;cursor:pointer"><a target="_blank" href="{$web_url}">首页</a></li>
+<li style="border-right:1px dotted #0082CB;padding:0 10px;height:20px;float:left;color:#0082cb;text-decoration:none;cursor:pointer"><a target="_blank" href="{$web_url}dest">目的地</a></li>
+<li style="border-right:1px dotted #0082CB;padding:0 10px;height:20px;float:left;color:#0082cb;text-decoration:none;cursor:pointer"><a target="_blank" href="{$web_url}card">鹿鹿卡</a></li>
+<li style="border-right:1px dotted #0082CB;padding:0 10px;height:20px;float:left;color:#0082cb;text-decoration:none;cursor:pointer"><a target="_blank" href="{$web_url}download">应用下载</a></li>
+<li style="padding:0 10px;height:20px;float:left;float:left;color:#0082cb;text-decoration:none;cursor:pointer"><a target="_blank" href="{$web_url}topic">专题</a></li>
+</ul></td>
+  </tr>
+  <tr> 
+  <td style="border-left:1px solid #f4f4f4;border-right:1px solid #f4f4f4;">
+  <div style="width:550px;margin:10px 25px 5px 25px">
+  <p style="line-height:30px;">Hi，&nbsp;&nbsp;旅行家email_to_nick_name，</p>
+  <p style="line-height:30px;">email_to_note：
+  <span style="color:#0082cb;text-decoration:none;cursor:pointer">
+   email_Note
+  </span>，email_detail_note</p>
+  </div>
+  <div style="width:550px;margin:5px 25px 5px 25px">
+  <div><img src="{$shareraBaseUrl}images/ico.jpg" /></div>
+</div>
+</td></tr>
+  <tr>
+    <td background="{$shareraBaseUrl}images/foot_bg.jpg" width="602">
+    <div style="font-size:12px;color:#9b9a9a;line-height:24px;margin-left:25px;margin-right:25px;width:552px;height:165px;margin-top:25px">此邮件无需直接回复，如有任何问题或建议请使用以下联系方式：<br />
+tripdata客服热线: 4008-1919-29  周一至周日 9:00 - 18:00<br />
+私信新浪官方微博：@tripdata风景网 <br />
+</div></td>
+  </tr>
+</table>
+</body>
+</html>

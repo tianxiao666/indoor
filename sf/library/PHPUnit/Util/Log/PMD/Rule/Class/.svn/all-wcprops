@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Class
+END
+EfferentCoupling.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Class/EfferentCoupling.php
+END
+ExcessiveClassLength.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Class/ExcessiveClassLength.php
+END
+TooManyFields.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Class/TooManyFields.php
+END
+DepthOfInheritanceTree.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Class/DepthOfInheritanceTree.php
+END
+ExcessivePublicCount.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Class/ExcessivePublicCount.php
+END

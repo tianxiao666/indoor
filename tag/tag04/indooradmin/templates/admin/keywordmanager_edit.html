@@ -1,0 +1,200 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+{/literal}
+
+<form action="ea.php?r=KeywordManager" id="mainForm" method="post">
+</form>
+<div class="content">
+  	<div class="main">
+  
+	<div class="crumb">
+	    <span>
+	    	当前位置：<a href="#">用户内容管理</a>&nbsp;&gt;&nbsp;关键字管理
+	    </span>
+	</div>
+	<input type="hidden" id="subbarFlag" value="keyword_manager_bar" />
+
+
+<div class="tabtext" id="tabtext1">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+   <tr>
+   <td valign="top" style="padding:10px 10px 0;">
+   <div class="scenic_search">
+   <div class="chose">
+   <form action="ea.php?r=KeywordManager/SearchPageData" id="searchForm" method="post">
+   <span>关键字：</span>
+   <input type="text" name="keywordvalue" id="keywordvalue" class="intxt" tabIndex="1">
+   <span>状态：</span>
+   <select name="keywordstate" id="keywordstate" style="width:100px" size="1">
+					   <option value="">全部</option>
+					   {foreach from=$state key=key item=value}
+							   <option value="{$key}">{$value}</option>
+						{/foreach} 
+					   </select>
+   <span>级别：</span>
+   <select name="keywordlevel" id="keywordlevel" style="width:100px"  size="1">
+					    <option value="">全部</option>
+                        {foreach from=$level key=key item=value}
+                                <option value="{$key}">{$value}</option>
+                        {/foreach}
+                         </select>
+   <input type="button" id="button_search" value="&nbsp;搜&nbsp;索&nbsp;" style="font-size: 12px; width: 60px; height: 20px;">
+
+   </form></div></div>
+   </td></tr>
+</table> 
+  <div id="tabtext1">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr>
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /> <font color="#a40000" style="font-weight:bold;font-size:14px">关键字列表</font></td>
+				    <td width="50%" align="right"><a href="ea.php?r=KeywordManager/EditAddKeyword" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增关键字]</font></a></td>
+				
+				</tr>
+			</table>
+	<table class="itable">
+	<thead>
+	 <tr>
+                    <th width="35%" align="left">关键字</th>
+                    <th width="15%">状态</th>
+                    <th width="15%">级别</th>
+                    <th width="15%" align="left">创建时间</th>
+					<th width="20%">&nbsp;相关操作</th>
+                </tr>
+</thead>
+<tbody>
+
+		
+		
+		
+ {if $keywordList}
+		{section name=i loop=$keywordList}
+                <tr class="{cycle values='row0,row1'}">
+                    <td align="left">{$keywordList[i].WORD}</td>
+                    <td align="left">{$keywordList[i].STATE}</td>
+                    <td align="left"><div>{$keywordList[i].LEVEL}</div>
+                    </td>
+                    <td align="left">{$keywordList[i].CREATE_TIME}</td>
+					<td align="left">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<!--<td style="border:0px;"><a href="ea.php?r=TagManager/TagDetail&TAG={$tagList[i].TAG}"><img src="images/icon/s_edit.gif" border="0" align="absmiddle" /><font color="#666">查看标签详细</font></a></td>-->
+								<td style="border:0px;">
+									<table>
+									   <tr>
+											<td style="border:0px;">
+												<!-- <a href="ea.php?r=KeywordManager/&TAG={$tagList[i].TAG}">
+												  <img src="images/icon/s_edit.gif" border="0" align="absmiddle" />
+												  <font color="#666">修改关键字</font>
+												</a>
+												 -->
+												 <a href="ea.php?r=KeywordManager/EditKeyword&keywordId={$keywordList[i].DICT_ID}" >
+												   <img src="images/icon/s_edit.gif" border="0" align="absmiddle" />
+												   <font color="#666">修改关键字</font>
+												 </a>
+											</td>
+											<td style="border:0px;">
+											    <a href="ea.php?r=KeywordManager/DeleteKeyword&keywordId={$keywordList[i].DICT_ID}" onclick="return deleteKeyword();">
+												    <img src="images/icon/s_delete.gif" border="0" align="absmiddle" />
+												    <font color="#666">删除关键字</font>
+											    </a>
+											 </td>
+									   </tr>
+									</table>
+									
+								</td>
+							</tr>
+						</table>
+					</td>
+               </tr>
+				{/section}
+				
+	{else}
+	<tr>
+		<td colspan='5'><center><h4><div style="color:#FF5000">没有查询到任何记录</div></h4></center></td>
+	</tr>
+	{/if}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+   <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="usercontentmgr"></div>
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+{literal}
+<script language="javascript" type="text/javascript">
+function deleteKeyword()
+{
+	if(confirm('您确定要删除这个关键字吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+$(document).ready(function(){
+	
+	$("#button_search").click(function(){
+		var keywordvalue = $("#keywordvalue").val();
+		var keywordstate = $("#keywordstate").val();
+        var keywordlevel = $("#keywordlevel").val();
+	    document.getElementById("searchForm").submit();
+	});
+	$("#button_add").click(function(){
+		if(confirm("确定添加此关键字?"))
+		{
+			var add_keywordvalue = $("#add_keywordvalue").val();
+			var add_keywordstate = $("#add_keywordstate").val();
+	        var add_keywordlevel = $("#add_keywordlevel").val();
+			if($.trim(add_keywordvalue) == '' || add_keywordvalue == undefined){//关键字为空
+				alert("请输入关键字！");
+				$("#add_keywordvalue").focus();
+				return false;
+		    }//end if
+		    //alert(1);
+			$.ajax({
+			       url:'ea.php?r=KeywordManager/AddKeywordAjax', //后台处理程序
+			       type:'post',         //数据发送方式
+			       dataType:'json',     //接受数据格式
+			       data: 'add_keywordvalue='+add_keywordvalue+'&add_keywordstate='+add_keywordstate+
+			             '&add_keywordlevel='+add_keywordlevel, 
+			       //data: 'one='+one+'&two='+two,          //要传递的数据
+			       success:function(json){ //回传函数(这里是函数名)
+			    	  if(json.existFlag == 'true'){
+			    		  alert("此关键字已经存在,不能重复添加!");
+			    		  return false;
+			    	   }//end if(json.existFlag)
+			    	   else if(json.existFlag == "false"){
+			    		   alert("添加成功!");
+			    		   document.getElementById("mainForm").submit();
+			    		   return false;
+			    	   }//end else if
+			    	 }//end success:function(json)
+			      });//end .ajax
+		}
+	});
+});
+</script>
+{/literal}

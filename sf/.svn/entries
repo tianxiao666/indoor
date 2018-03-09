@@ -1,0 +1,169 @@
+10
+
+dir
+410
+http://svn.hgicreate.com/srcsvn/indoor/sf
+http://svn.hgicreate.com/srcsvn/indoor
+
+
+
+2013-12-30T10:11:35.299482Z
+278
+xiang.zc
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+19b6460e-13a2-11e3-9178-4142410dca1f
+
+SF.php
+file
+
+
+
+
+2017-02-21T07:08:24.132000Z
+d3d6e963e09cbbc73ebd63186d37b0ba
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+497
+
+SFBase.php
+file
+
+
+
+
+2017-02-21T07:08:24.074000Z
+3cdfcde26dfa2a00bf1869708e2e4c26
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+23459
+
+SFCli.php
+file
+
+
+
+
+2017-02-21T07:08:23.747000Z
+fed78f400cdd1d9a47cffb8c13e9889e
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+844
+
+caching
+dir
+
+cli
+dir
+
+collections
+dir
+
+console
+dir
+
+core
+dir
+
+db
+dir
+
+exception
+dir
+
+interface
+dir
+
+library
+dir
+
+logging
+dir
+
+test
+dir
+
+utils
+dir
+
+validators
+dir
+

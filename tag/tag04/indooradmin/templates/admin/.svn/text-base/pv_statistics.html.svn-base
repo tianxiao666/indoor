@@ -1,0 +1,185 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+//获取功能
+function ajaxGetFunc()
+{
+	var app = $("#APP").val();
+	var url = $("#SEL_URL").val();
+	if(app != ''){
+		$.ajax({
+			url : "ea.php?r=FunctionQuery/GetFunctionList",
+			type : "get",
+			dataType : "text",
+			data : {
+				app : app,
+				url : url,
+			},
+			success : function(data){
+				$("#URL").empty();
+				$("#URL").append(data);
+			},
+			error : function(data){
+				alert(data);
+				return false;
+			}
+		});
+		return true;
+	}else{
+		$("#URL").empty();
+		$("#URL").append('<option value="">- 暂无选项 -</option>');
+	}
+	return false;
+}
+function checkUrl(){
+	var url = $("#URL").val();
+	if(url != ''){
+		$("#URL_TEXT").attr("disabled","disabled");
+	}
+	else{
+		$("#URL_TEXT").removeAttr("disabled");
+	}
+}
+function checkUrlText(){
+	var url_text = $("#URL_TEXT").val();
+	if(url_text.replace(/^\s*|\s*$/g,'')!=''){
+		$("#URL").attr("disabled","disabled");
+	}
+	else{
+		$("#URL").removeAttr("disabled");
+	}
+}
+function Log_Submit(){
+	var start = $("#START_TIME").val();
+	var end   = $("#END_TIME").val();
+	if( start!='' && end!='' && end < start)
+	{
+		alert("开始时间不能大于终止时间！");
+		return false;
+	}
+	$("#log_search_form").submit();
+}
+$(function(){
+	ajaxGetFunc();
+})
+</script>
+{/literal}
+<div class="content">
+	<div class="main">
+	    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;功能查询&nbsp;&gt;&nbsp;PV统计</span></div>
+		{include file="stat_left_menu.html" type="pv_statistics"}
+		<div class="tabtext" id="tabtext1" >
+			<table>
+				<tr>
+					<td valign="top">
+						<table border="0" cellspacing="0" cellpadding="0" >
+							<tr> 
+								<td valign="top" colspan="2">
+									<div class="scenic_search" style="margin-left: 8px;">
+										<div class="chose">
+											<form action="ea.php?r=FunctionQuery" id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px;width:1100px;">
+												<input type="hidden" name="FLAG" value="1">
+												<table border="0" cellspacing="0" cellpadding="0">
+													<tbody>
+														<tr>
+															<td height="25" align="left" class="formTitle"><span>应用平台：</span></td>
+															<td height="25" align="left" class="formTitle">
+																<select name="APP" id="APP" style="width:90px;" onchange="ajaxGetFunc()">
+																<option value="">- 请选择 -</option>
+																{html_options options=$APP selected=$data.APP}
+																</select>
+															</td>
+															<td height="25" align="left" class="formTitle"><span>功能：</span></td>
+															<td height="25" align="left" class="formTitle">
+															<input type="hidden" name="SEL_URL" id="SEL_URL" value="{$data.URL}"/>
+																<select name="URL" id="URL" style="width:120px;" onchange="checkUrl()">
+																<option value="">- 暂无选项 -</option>
+																</select>
+															</td>
+															<td height="25" align="left" class="formTitle"><span>URL：</span></td>
+															<td><input type="text" id="URL_TEXT" name="URL_TEXT" value="{$data.URL_TEXT}" style="height:20px;" onkeyup="checkUrlText();" {if $data.URL!=null}disabled{/if}/></td>
+															<td height="25" align="left" class="formTitle"><span>起始时间：</span></td>
+															<td><input type="text" id="START_TIME" name="START_TIME" value="{$data.START_TIME}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td height="25" align="left" class="formTitle"><span>终止时间：</span></td>
+															<td><input type="text" id="END_TIME" name="END_TIME" class="Wdate" value="{$data.END_TIME}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td><div class="btn_search"><a onclick="Log_Submit();" style="cursor:pointer;"></a></div></td>
+														</tr>
+													</tbody>
+												</table>
+											</form>
+										</div>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+							<td align="left" style="padding:20px 0px 0px 10px"><span><b>总计：</b><font style="color:red;font-size:14px;">{$pv_count}</font></span></td>
+							<td align="right" style="padding:10px 10px 0px 00px">
+								<input type="button" value="  导出Excel  " onclick="javascript:;window.location.href='ea.php?r=FunctionQuery/ExportPV&APP={$data.APP}&URL={$data.URL}&URL_TEXT={$data.URL_TEXT}&START_TIME={$data.START_TIME}&END_TIME={$data.END_TIME}'">
+							</td>
+							</tr>
+							
+							<tr>
+								<td valign="top" style="padding:10px 10px 0;" colspan="2">
+								{if (!$stat_pv_list)}
+								<div class="scenic_list">
+									<table class="itable">
+										<thead>
+											<tr>
+												<td width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></td>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								{else}
+								<div class="scenic_list">
+									<table class="itable">
+									<thead>
+									<tr>
+										<th width="10%" align="left">应用平台</th>
+										<th>功能页面</th>
+										<th width="15%" align="left">日期</th>
+										<th width="15%" align="left">浏览量</th>
+										<th width="10%" align="left">操作</th>
+									</tr>
+									</thead>
+									<tbody>
+									{foreach from=$stat_pv_list item=list}
+									<tr class="{cycle values='row0,row1'}">
+										<td align="left">{$list.APP}</td>
+										<td align="left">{$list.FUNC_URL}</td>
+										<td align="left">{$list.ADD_TIME|date_format:'%Y-%m-%d'}</td>
+										<td align="left">{$list.PV_CNT}</td>
+										<td align="left"><a href="ea.php?r=Syslogs&APP={$list.APP}&GET_URL={$list.FUNC}&startDate={$list.ADD_TIME|date_format:'%Y-%m-%d'}&endDate={$list.ADD_TIME|date_format:'%Y-%m-%d'}">查看详情</a></td>
+									</tr>
+									{/foreach}
+									</tbody>
+									</table>
+								</div>
+								{/if}
+								</td>
+							</tr>
+							
+							<tr>
+								<td style="padding:10px;"><a href="ea.php?r=FunctionQuery/FuncUrlView">功能-URL对照表</a></td>
+							</tr>
+							
+							<tr> 
+								<td valign="top" style="padding:10px;" colspan="2">
+									<div class="pagebreak">
+										<div class="page">
+										{include file="page_info.html"}
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div> 
+</div>
+{include file="footer.html"}

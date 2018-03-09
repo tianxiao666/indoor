@@ -1,0 +1,10 @@
+/* ·­Ò³Ð§¹û start */
+.pagebreak,  .pagebreak .page span { float:left; white-space:nowrap;}
+.pagebreak .page { float:right;}
+.pagebreak a { float:left; padding:3px 6px 2px 6px; background:#D8D6D6; border:1px solid #999; margin-right:4px; display:inline-block; color:#666;}
+.pagebreak a:hover { background:#099C65; color:#fff; text-decoration:none;}
+.pagebreak .cur { background:#099C65; color:#fff; text-decoration:none;}
+.pagebreak .la_off,.pagebreak .ne_off,  .pagebreak .jump,  .pagebreak .right { display:none;}
+.pagebreak .la_off,  .pagebreak .ne_off{ background:#ededed; border:1px solid #d0d0d0;}
+.num a {}
+

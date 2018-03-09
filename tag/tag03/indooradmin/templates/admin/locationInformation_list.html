@@ -1,0 +1,602 @@
+{include file="header.html"}
+<link href="{$mediaServer}css/public.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/search.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/index.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/thickbox.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/header.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="{$mediaServer}/js/changepage.js">
+</script>
+{literal}
+<style>
+    .itable td {
+        padding: 3px 0 3px 10px;
+        border: 1px solid #ccc;
+        color: #666;
+    }
+</style>
+<script language="javascript" type="text/javascript">
+    
+    function confirmLogout(){
+        if (confirm('您确定要退出登录吗？')) {
+            return true;
+        }
+        return false;
+    }
+    
+    function deleteAdmin(){
+        if (confirm('您确定要删除这个用户吗？')) {
+            return true;
+        }
+        return false;
+    }
+    
+    function checkForm(){
+        var re_EQUT_SSID = /^.{1,16}$/;
+        if ($('#NAME').val() != '' && !re_EQUT_SSID.test($('#NAME').val())) {
+            alert('输入的关键字不能超过16个字符！');
+            $('#NAME').focus();
+            return false;
+        }
+        return true;
+    }
+    
+    function toSubmit(){
+        if (checkForm()) {
+            $("#Form").submit();
+        }
+    }
+    
+    /**
+     * 添加场所Equt
+     */
+    function AddEqut(BUILDING_NAME, BUILDING_ID){
+        var width1 = 670;
+        var height1 = 430;
+        var top1 = (screen.availHeight - height1) / 4;
+        var left1 = (screen.availWidth - width1) / 2;
+        $.popup({
+            type: 1,
+            now: true,
+            url: "ea.php?r=LocationInformation/AddEqut&BUILDING_NAME=" + BUILDING_NAME + "&BUILDING_ID=" + BUILDING_ID,
+            width: width1,
+            height: height1,
+            top: top1,
+            left: left1,
+            title: "添加定位信息"
+        });
+    }
+	
+    /**
+     * 添加楼层Equt
+     */
+    function Add_Floor_Equt(BUILDING_NAME, BUILDING_ID,FLOOR_ID){
+        var width1 = 670;
+        var height1 = 430;
+        var top1 = (screen.availHeight - height1) / 4;
+        var left1 = (screen.availWidth - width1) / 2;
+        $.popup({
+            type: 1,
+            now: true,
+            url: "ea.php?r=LocationInformation/AddEqut&BUILDING_NAME=" + BUILDING_NAME + "&BUILDING_ID=" + BUILDING_ID+ "&FLOOR_ID=" + FLOOR_ID,
+            width: width1,
+            height: height1,
+            top: top1,
+            left: left1,
+            title: "添加定位信息"
+        });
+    }
+	
+    /**
+     * 修改场所Equt
+     */
+    function Equt_change(BUILDING_NAME, BUILDING_ID, AP_ID){
+        var width1 = 670;
+        var height1 = 430;
+        var top1 = (screen.availHeight - height1) / 4;
+        var left1 = (screen.availWidth - width1) / 2;
+        $.popup({
+            type: 1,
+            now: true,
+            url: "ea.php?r=LocationInformation/EditEqut&BUILDING_NAME=" + BUILDING_NAME + "&BUILDING_ID=" + BUILDING_ID + "&AP_ID=" + AP_ID,
+            width: width1,
+            height: height1,
+            top: top1,
+            left: left1,
+            title: "修改定位信息"
+        });
+    }
+	
+    /**
+     *修改楼层Equt 
+     */
+    function Equt_change_sel(BUILDING_NAME, BUILDING_ID, AP_ID,FLOOR_ID){
+        var width1 = 670;
+        var height1 = 430;
+        var top1 = (screen.availHeight - height1) / 4;
+        var left1 = (screen.availWidth - width1) / 2;
+        $.popup({
+            type: 1,
+            now: true,
+            url: "ea.php?r=LocationInformation/EditEqut&BUILDING_NAME=" + BUILDING_NAME + "&BUILDING_ID=" + BUILDING_ID + "&AP_ID=" + AP_ID + "&FLOOR_ID=" + FLOOR_ID,
+            width: width1,
+            height: height1,
+            top: top1,
+            left: left1,
+            title: "修改定位信息"
+        });
+    }
+    
+	/**
+	 * 全选按钮触发事件
+	 */
+    function checkboxAll(checkNode){
+        var checkboxlist = document.getElementsByName("checkbox[]");
+        for (var i = 0; i < checkboxlist.length; i++) {
+            checkboxlist[i].checked = checkNode.checked;
+        }
+    }
+    
+    /**
+     *
+     * 批量修改楼层状态
+     */
+    function submitChangeStatus(BUILDING_NAME, BUILDING_ID){
+        var status = document.getElementById("changestatus").value;
+        var checkboxlist = document.getElementsByName("checkbox[]");
+        var statuslist = document.getElementsByName("status");
+        if (status == '') {
+            alert("请选择状态!");
+            return false;
+        }
+        var equt_id_list = '';
+        for (var i = 0; i < checkboxlist.length; i++) {
+            if (checkboxlist[i].checked) {
+                equt_id_list += checkboxlist[i].value + ",";
+            }
+        }
+        if (equt_id_list.length == 0) {
+            alert("请选择楼层!");
+            return false;
+        }
+        $.ajax({
+            url: "ea.php?r=LocationInformation/ChangeStateAll&BUILDING_ID=" + BUILDING_ID + "&BUILDING_NAME=" + BUILDING_NAME,
+            data: {
+                "equt_id_list": equt_id_list,
+                "status": status
+            },
+            type: "post",
+            success: function(msg){
+                $.popup({
+                    content: msg,
+                    now: true,
+                    type: 2,
+                    width: 150,
+                    height: 100,
+                    top: 300,
+                    title: "提示消息"
+                });
+                setTimeout(windowRefresh, 1500);//关闭提示信息
+            }
+        });
+    }
+    
+	/**
+	 * 刷新当前页面
+	 */
+    function windowRefresh(){
+        $.popup({
+            close: true
+        });
+		window.location.reload();
+    }
+</script>
+{/literal}
+<div class="content">
+    <link type="text/css" rel="stylesheet" href="css/popup.css">
+    <script src="js/jquery/popup.js" type="text/javascript" language="javascript">
+    </script>
+    <script src="js/jquery/jquery.easydrag.handler.beta2.js" type="text/javascript" language="javascript">
+    </script>
+    <div id="divPopup" class="divPopup" style="top: 25%; left: 25%; display: none; position: absolute; z-index: 1378959600; moveable:true;">
+        <div class="popup" style="width: 560px;">
+            <div class="p-box">
+                <div id="drag_handler" class="p-title" style="cursor: move;">
+                    <div class="p-title-content">
+                    </div>
+                    <span><a title="关闭" class="pop_Content_close jqmClose" href="ea.php?r=LocationInformation&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}" style="cursor: pointer; background-position: 0px 0px;">关闭</a></span>
+                </div>
+                <div class="p-main clear">
+                    <div class="content" style="display: none;">
+                    </div>
+                    <iframe scrolling="auto" frameborder="0" class="frmPopup" id="frmPopup" style="display: inline; height: 380px;">
+                    </iframe>
+                </div>
+                <div class="p-bom clear">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript">
+        jQuery(document).ready(function($){
+            $(".pop_Content_close").hover(function(){
+                $(this).css("background-position", "0 -23px");
+            }, function(){
+                $(this).css("background-position", "0 0");
+            }).css("cursor", "pointer");
+        });
+    </script>
+    <div class="main">
+        <div class="crumb">
+            <span>当前位置：<a href="ea.php?r=BuildingMgr">场所管理</a>&nbsp;&gt;&nbsp;{if $FLOOR_ID neq ""}<a href="ea.php?r=BuildingFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}">楼层管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=LocationInformation&FLOOR_ID={$FLOOR_ID}&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&flag=1">定位信息管理</a>{else}<a href="ea.php?r=LocationInformation&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&flag=1">定位信息管理</a>{/if}</span>
+        </div>
+        <input type="hidden" id="subbarFlag" value="sysuser_mgr_bar" />
+        <div class="tabtext" id="tabtext1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="1%" valign="top">
+                        {literal}
+                        <style type="text/css">
+                            .pop_menu_left {
+                                background: #f2f2f2;
+                                float: left;
+                                padding: 10px;
+                                width: 125px;
+                                margin: 10px;
+                                border-radius: 5px;
+                            }
+                            
+                            .pop_menu_left .menu_event {
+                                text-align: right;
+                            }
+                            
+                            .pop_menu_left .menu_links {
+                                border-bottom: 1px solid #c4c4c4;
+                            }
+                            
+                            .pop_menu_left .menu_links ul {
+                                list-style-type: none;
+                                margin-top: 10px;
+                                padding: 0px;
+                            }
+                            
+                            .pop_menu_left .menu_links ul li {
+                                border-left: 1px solid #c4c4c4;
+                                border-right: 1px solid #c4c4c4;
+                                border-top: 1px solid #c4c4c4;
+                                clear: both;
+                                display: inline-block;
+                                height: 28px;
+                                line-height: 28px;
+                                overflow: hidden;
+                                width: 100%;
+                                text-indent: 1em;
+                            }
+                            
+                            .pop_menu_left .menu_links ul li.disabled {
+                                color: #999;
+                            }
+                            
+                            .pop_menu_left .menu_links ul li.last {
+                                border-bottom: 1px solid #666666;
+                            }
+                            
+                            .pop_menu_left .menu_links ul li a {
+                                color: #333333;
+                                display: block;
+                                width: 100%;
+                                text-decoration: none;
+                            }
+                            
+                            .pop_menu_left .menu_links ul li a:visited {
+                            }
+                            
+                            .pop_menu_left .menu_links ul li a:hover {
+                                text-decoration: underline;
+                                color: #e27135;
+                            }
+                            
+                            .pop_menu_left .menu_links ul li .disabled {
+                                color: #999;
+                            }
+                            
+                            _left .menu_links ul li a:visited {
+                            }
+                        </style>
+                        {/literal}
+                        <div class="pop_menu_left">
+                            <div class="menu_event">
+                                <div onclick="" class="menu_event_obj">
+                                    <a>收缩</a>
+                                </div>
+                            </div>
+                            <div id="menu_links" class="menu_links">
+                            	{if $FLOOR_ID eq ""}
+                                <ul>
+                                    <li class="">
+                                        <a href="ea.php?r=BuildingFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}">
+                                            <font color="black" size="2px">
+                                                楼层管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                   <li class="">
+                                        <a href="ea.php?r=BuildingFloorPlanegraphMgr&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}">
+                                            <font color="black" size="2px">
+                                                楼层平面图管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="ea.php?r=LocationInformation&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&flag=1">
+                                            <font size="2px" style="font-weight:bold;">
+                                                定位信息管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                    	<a href="ea.php?r=Poi&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&flag=1">
+                                        <font size="2px">
+                                            POI管理
+                                        </font>
+										</a>
+                                    </li>
+                                </ul>
+								{else}
+								<ul>
+                                    <li class="">
+                                        <a href="ea.php?r=BuildingFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}">
+                                            <font color="black" size="2px">
+                                                楼层管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                   <li class="">
+                                        <a href="ea.php?r=BuildingFloorPlanegraphMgr&FLOOR_ID={$FLOOR_ID}&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}">
+                                            <font color="black" size="2px">
+                                                楼层平面图管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="ea.php?r=LocationInformation&FLOOR_ID={$FLOOR_ID}&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&flag=1">
+                                            <font size="2px" style="font-weight:bold;">
+                                                定位信息管理
+                                            </font>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                    	<a href="ea.php?r=Poi&FLOOR_ID={$FLOOR_ID}&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&flag=1">
+                                        <font size="2px">
+                                            POI管理
+                                        </font>
+										</a>
+                                    </li>
+                                </ul>
+								{/if}
+                            </div>
+                        </div>
+                        {literal}
+                        <script language="javascript">
+                            var height = "";
+                            var width = "";
+                            jQuery(document).ready(function($){
+                                height = $(".pop_menu_left").height();
+                                width = $(".pop_menu_left").width();
+                                $(".menu_event_obj").toggle(function(){
+                                    $(".pop_menu_left").animate({
+                                        "width": "15" + "px"
+                                    }, {
+                                        "duration": 500
+                                    }).animate({
+                                        "height": "15" + "px"
+                                    }, {
+                                        "duration": 500
+                                    });
+                                    setTimeout('document.getElementById("menu_links").style.display="none";', 1000);
+                                    $(this).attr("src", "images/gzsdot5b.gif");
+                                }, function(){
+                                    $(".pop_menu_left").show().animate({
+                                        "height": height + "px"
+                                    }, {
+                                        "duration": 500
+                                    }).animate({
+                                        "width": width + "px"
+                                    }, {
+                                        "duration": 500
+                                    });
+                                    setTimeout('document.getElementById("menu_links").style.display="block";', 1000);
+                                    $(this).attr("src", "images/gzsdot5a.gif");
+                                });
+                            });
+                        </script>
+                        {/literal}
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                            	<td align="left" class="nameFunction" style="padding: 5px 0px 0px;">
+                                	<img src="images/icon/m_user.gif" border="0" align="absmiddle" />
+                                	<font color="#a40000" style="font-weight:bold;font-size:14px">
+                                    	{$BUILDING_NAME}&nbsp;&gt;&nbsp;{if $FLOOR_ID}{$FLOOR_NAME}&nbsp;&gt;&nbsp;{/if}定位信息列表(共搜索到{$total}条记录)
+                                	</font>
+                            	</td>
+                            </tr>
+                            <tr>
+                                <td valign="top" style="padding:0px 5px 0px 0px;">
+                                    <div class="scenic_list">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td style="width:100%;" align="left">
+                                                <div class="scenic_search" style="width:99%;">
+                                                    <div class="chose" style="width:80%;float:left;">
+                                                        <form method="post" name="Form" id="Form" action='ea.php?r=LocationInformation&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&flag=1'>
+                                                            关键字：<input type="text" name="NAME" id="NAME" value="{$whereSql.NAME}" maxlength="16" size="20" style="height: 20px;"> 楼层：
+                                                            <select style="height:20px;width:192px" name="FLOOR_ID" id="FLOOR_ID" style="height: 20px;">
+                                                                {$FLOOR_ID_LIST}
+                                                            </select>
+                                                            类别：
+                                                            <select style="height:20px;width:120px" name="EQUT_TYPE" id="EQUT_TYPE" style="height: 22px;">
+                                                                <option value="">-请选择-</option>
+                                                                {html_options options=$EQUT_TYPE selected=$whereSql.EQUT_TYPE}
+                                                            </select>
+                                                            状态：
+                                                            <select style="height:20px;width:120px" name="STATUS" id="STATUS" style="height: 22px;">
+                                                                <option value="">-请选择-</option>
+                                                                {html_options options=$EQUT_STATUS selected=$whereSql.STATUS}
+                                                            </select>
+                                                            <input type="hidden" id="building_id" value="{$BUILDING_ID}"><input type="hidden" id="building_name" value="{$BUILDING_NAME}"><input type="button" value="搜索" style="font-size: 12px; width: 60px; height: 20px;height: 22px;" onclick="toSubmit();"/>
+                                                        </form>
+                                                    </div>
+                                                    <div align="right">
+                                                        {if $FLOOR_ID}<a onclick="Add_Floor_Equt('{$BUILDING_NAME}','{$BUILDING_ID}','{$FLOOR_ID}');">
+                                                            <font color="#666" style="font-weight:bold;font-size:14px">
+                                                                [添加定位信息]
+                                                            </font>
+                                                        </a>
+                                                        {else}<a onclick="AddEqut('{$BUILDING_NAME}','{$BUILDING_ID}');">
+                                                            <font color="#666" style="font-weight:bold;font-size:14px">
+                                                                [添加定位信息]
+                                                            </font>
+                                                        </a>
+                                                        {/if}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                        <table class="itable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="4%">
+                                                        <input type="checkbox" onclick="checkboxAll(this);">
+                                                    </th>
+                                                    <th width="16%" align="left">
+                                                        <font style="font-weight:bold;font-size:14px">
+                                                            设备标识SSID
+                                                        </font>
+                                                    </th>
+                                                    <th width="12%" align="left">
+                                                        <font style="font-weight:bold;font-size:14px">
+                                                            类别
+                                                        </font>
+                                                    </th>
+                                                    <th width="17%" align="left">
+                                                        <font style="font-weight:bold;font-size:14px">
+                                                            所在楼层
+                                                        </font>
+                                                    </th>
+                                                    <th width="15%" align="left">
+                                                        <font style="font-weight:bold;font-size:14px">
+                                                            MAC地址
+                                                        </font>
+                                                    </th>
+                                                    <th width="16%" align="left">
+                                                        <font style="font-weight:bold;font-size:14px">
+                                                            位置(单位：米)
+                                                        </font>
+                                                    </th>
+                                                    <th width="10%" align="left">
+                                                        <font style="font-weight:bold;font-size:14px">
+                                                            状态
+                                                        </font>
+                                                    </th>
+                                                    <th width="10%" align="left">
+                                                        <font style="font-weight:bold;font-size:14px">
+                                                            操作
+                                                        </font>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {if $Equt_list}
+                                                {section name=i loop=$Equt_list}
+                                                <tr class="{cycle values='row0,row1'}">
+                                                    <td>
+                                                        <input type="checkbox" value="{$Equt_list[i].AP_ID}" name="checkbox[]">
+                                                    </td>
+                                                    <td>
+                                                    	<a href="#" onclick="Equt_change('{$BUILDING_NAME}','{$BUILDING_ID}','{$Equt_list[i].AP_ID}');">
+                                                        {$Equt_list[i].EQUT_SSID}
+														</a>
+                                                    </td>
+                                                    <td>
+                                                    	{$EQUT_TYPE[$Equt_list[i].EQUT_TYPE]}
+                                                    </td>
+                                                    <td>
+                                                        {$Equt_list[i].FLOOR_ID}
+                                                    </td>
+                                                    <td>
+                                                        {$Equt_list[i].MAC_BSSID}
+                                                    </td>
+                                                    <td>
+                                                        <div style=" width:40%;float:left;">
+                                                            X:{$Equt_list[i].POSITION_X} 
+                                                        </div>
+                                                        <div style="width:40%;float:left;">
+                                                            Y:{$Equt_list[i].POSITION_Y}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                    	{if $Equt_list[i].STATUS eq 'A'}<img src="images/icon/lamp_on.png" border="0" align="absmiddle" />正常{/if}
+                                                        {if $Equt_list[i].STATUS eq 'X'}<img src="images/icon/lamp_off.png" border="0" align="absmiddle" />禁用{/if}
+														{if $Equt_list[i].STATUS eq 'E'}<img border="0" src="images/icon/s_edit.gif" align="absmiddle" />编辑中{/if}
+                                                    </td>
+                                                    <td align="left">
+                                                        <div>
+                                                            <div style="float:left;">
+															{if $FLOOR_ID}
+																<a href="#" onclick="Equt_change_sel('{$BUILDING_NAME}','{$BUILDING_ID}','{$Equt_list[i].AP_ID}','{$FLOOR_ID}');">
+                                                                    <font color="#666">
+                                                                        <img border="0" src="images/icon/s_edit.gif" />编辑
+                                                                    </font>
+                                                                </a>
+															{else}
+                                                                <a href="#" onclick="Equt_change('{$BUILDING_NAME}','{$BUILDING_ID}','{$Equt_list[i].AP_ID}');">
+                                                                    <font color="#666">
+                                                                        <img border="0" src="images/icon/s_edit.gif" />编辑
+                                                                    </font>
+                                                                </a>
+															{/if}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>{/section}
+                                                {else}
+                                                <th width="15%" align="left" colspan="8">
+                                                    <div align="center" style="color: red;">
+                                                        没有找到任何记录
+                                                    </div>
+                                                </th>
+                                                {/if}
+                                                </table>
+                                                <div style="align:left;padding-top:10px">
+                                                    <select style="height:20px;width:120px" name="changestatus" id="changestatus" style="height: 22px;">
+                                                        <option value="">-请选择-</option>
+                                                        {html_options options=$EQUT_STATUS}
+                                                    </select>
+                                                    <input type="button" style="height:25px" onclick="submitChangeStatus('{$BUILDING_NAME}','{$BUILDING_ID}')" value="批量更改状态">
+                                                </div>
+                                                <table>
+                                                <tr>
+                                                    <td valign="top" style="padding:10px;" colspan="7">
+                                                        <div class="pagebreak">
+                                                            <div class="page">
+                                                                {include file="page_info.html"}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                                </table>
+                            </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" id="headMenu" value="building">
+                        </div>
+                    </div>
+                    </div>{include file="footer.html"}
+                    <iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no">
+                    </iframe>

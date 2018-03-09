@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/TextUI
+END
+Command.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/TextUI/Command.php
+END
+ResultPrinter.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/TextUI/ResultPrinter.php
+END
+TestRunner.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/TextUI/TestRunner.php
+END

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/srcsvn/indoor/!svn/ver/318/tag/app_tag02/res/anim
+END
+start_animation.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/318/tag/app_tag02/res/anim/start_animation.xml
+END
+popupbtt_exit.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/318/tag/app_tag02/res/anim/popupbtt_exit.xml
+END
+popupttb_exit.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/318/tag/app_tag02/res/anim/popupttb_exit.xml
+END
+popupbtt_enter.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/318/tag/app_tag02/res/anim/popupbtt_enter.xml
+END
+popupttb_enter.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/318/tag/app_tag02/res/anim/popupttb_enter.xml
+END

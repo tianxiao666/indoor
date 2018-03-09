@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/libs/armeabi
+END
+libapp_BaiduMapApplib_v2_1_2.so
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/libs/armeabi/libapp_BaiduMapApplib_v2_1_2.so
+END
+liblocSDK3.so
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/libs/armeabi/liblocSDK3.so
+END
+libvi_voslib.so
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/libs/armeabi/libvi_voslib.so
+END

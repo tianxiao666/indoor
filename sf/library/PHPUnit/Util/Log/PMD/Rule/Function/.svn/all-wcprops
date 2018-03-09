@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Function
+END
+CyclomaticComplexity.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Function/CyclomaticComplexity.php
+END
+ExcessiveMethodLength.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Function/ExcessiveMethodLength.php
+END
+CRAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Function/CRAP.php
+END
+NPathComplexity.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Function/NPathComplexity.php
+END
+ExcessiveParameterList.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Function/ExcessiveParameterList.php
+END
+CodeCoverage.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/PMD/Rule/Function/CodeCoverage.php
+END

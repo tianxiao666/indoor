@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BowlingGame
+END
+BowlingGameSpec.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BowlingGame/BowlingGameSpec.php
+END
+BowlingGame.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BowlingGame/BowlingGame.php
+END
+BowlingGameTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BowlingGame/BowlingGameTest.php
+END

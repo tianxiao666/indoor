@@ -1,0 +1,120 @@
+10
+
+dir
+410
+http://svn.hgicreate.com/srcsvn/indoor/tag/tag03/indooradmin/images/draw
+http://svn.hgicreate.com/srcsvn/indoor
+
+
+
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+19b6460e-13a2-11e3-9178-4142410dca1f
+
+COMPASS.png
+file
+
+
+
+
+2017-02-21T07:09:12.209000Z
+c10e8ce63c9742a8761073f2bc89a0f6
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1907
+
+YUANDIAN.png
+file
+
+
+
+
+2017-02-21T07:09:12.551000Z
+1de8bb1d3ecefdbedcec45d658de1d77
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+996
+
+area
+dir
+
+background
+dir
+
+ding
+dir
+
+fac
+dir
+
+func
+dir
+
+room
+dir
+
+shop
+dir
+
+spot
+dir
+

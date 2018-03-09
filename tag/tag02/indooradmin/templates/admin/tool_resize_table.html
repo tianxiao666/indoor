@@ -1,0 +1,69 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.form {
+	margin:auto;
+	padding:10px;
+	background-color:#EEE;
+	border:1px solid #CACACA;
+    text-align: center;
+}
+.form form {
+	border:1px solid #C3C3C3;
+	margin:auto;
+	width:600px;
+}
+.form table td{
+	padding:10px;
+}
+</style>
+{/literal}
+
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;角色管理</span></div>
+  
+<div class="form">
+  <form id="form1" name="form1" method="post" action="ea.php?r=tool/resize_table">
+  <table>
+  <tr>
+    <td align="right"><label for="table_name2">表名：</label></td>
+    <td><input type="text" name="table_name" id="table_name" tabindex="1" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><label for="column_name">路径字段名：</label></td>
+    <td><input type="text" name="path_name" id="path_name" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><label for="column_name">文件名字段名：</label></td>
+    <td><input type="text" name="file_name" id="file_name" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td><input type="submit" name="submit" id="submit" value="重新生成手机缩略图" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">默认的手机缩略图文件夹为：equal，如果您所要操作的表对应的手机缩略图文件夹非equal，请在这里填上文件夹名称：</td>
+    <td><input type="text" name="folder_name" id="folder_name" /></td>
+  </tr>
+</table>
+
+  </form>
+    <p>{if $state}{if $state neq 'OK'}<img src="images/icon_msg.jpg" alt="Error" name="state" id="state" />{else}<img src="images/msg_ok.jpg" alt="OK" name="state" id="state" />{/if}{/if}	</p>
+    <p>{$image_state}</p>
+    <p>{$error_msg}</p>
+</div><!-- end of form -->
+
+</div> <!-- end of main -->
+   </div><!--end of content -->
+<input type="hidden" id="headMenu" value="backmanager">
+<input type="hidden" id="subbarFlag" value="tool_mgr_bar" />
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+

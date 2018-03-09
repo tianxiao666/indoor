@@ -1,0 +1,245 @@
+{include file="header.html"}
+<link href="css/sceniczone.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/xsbortsImg.css" rel="stylesheet" type="text/css" />
+<link href="css/area_select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js">
+</script>
+<script src="{$mediaServer}js/xsbortsImageBrowser.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/thickmsg.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_004.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_005.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_003.js" type="text/javascript">
+</script>
+<script src="{$mediaServer}js/areaSelect/Base_002.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js">
+</script>
+<script src="{$mediaServer}js/areaSelect/jobarea_array_c.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/popup.js">
+</script>
+<script src="{$mediaServer}js/common.js" type="text/javascript">
+</script>
+<link href="{$mediaServer}css/popup.css" rel="stylesheet" type="text/css" />
+<script src="{$mediaServer}js/ajax/getpcda.js" type="text/javascript">
+</script>
+<link href="{$mediaServer}css/public.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/search.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script type="text/javascript" language="JavaScript">
+     
+    function windowRefresh(){//关闭弹出层,并刷新当前页面
+        $.popup({
+            close: true
+        });
+        window.location = "ea.php?r=BuildingMgr&flag=2";
+    }
+    
+    function ajaxPost(url, params, classArray){
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            dataType: "json",
+            success: function(result){
+                ajaxPostResult(result);
+            }
+        });
+    }
+    
+    function doIdealApSearch(){
+        $("#FORM_SEARCHIDEALAP").submit();
+    }
+</script>
+<style type="text/css">
+    .invalid {
+        color: red;
+    }
+    
+    .itable .wikishow {
+        background: #089E61;
+        color: #fff;
+    }
+    
+    .wikihide {
+        display: none;
+    }
+</style>
+{/literal}
+<div class="content">
+    <link type="text/css" rel="stylesheet" href="css/popup.css">
+    <script src="js/jquery/popup.js" type="text/javascript" language="javascript">
+    </script>
+    <script src="js/jquery/jquery.easydrag.handler.beta2.js" type="text/javascript" language="javascript">
+    </script>
+    <div id="divPopup" class="divPopup" style="top: 25%; left: 25%; display: none; position: absolute; z-index: 1378959600; moveable:true;">
+        <div class="popup" style="width: 560px;">
+            <div class="p-box">
+                <div id="drag_handler" class="p-title" style="cursor: move;">
+                    <div class="p-title-content">
+                    </div>
+                    <span><a title="关闭" class="pop_Content_close jqmClose" href="ea.php?r=BuildingFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&NAME={$NAME}" style="cursor: pointer; background-position: 0px 0px;">关闭</a></span>
+                </div>
+                <div class="p-main clear">
+                    <div class="content" style="display: none;">
+                    </div>
+                    <iframe scrolling="auto" frameborder="0" class="frmPopup" id="frmPopup" style="display: inline; height: 380px;">
+                        <html>
+                            fhfshffhrhrhrhhrhrr
+                        </html>
+                    </iframe>
+                </div>
+                <div class="p-bom clear">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript">
+        jQuery(document).ready(function($){
+            $(".pop_Content_close").hover(function(){
+                $(this).css("background-position", "0 -23px");
+            }, function(){
+                $(this).css("background-position", "0 0");
+            }).css("cursor", "pointer");
+        });
+    </script>
+    <div class="crumb">
+        <span>当前位置：<a href="ea.php?r=IdeaApMgr">理想AP管理</a></span>
+    </div>
+    <div class="tabtext" id="tabtext1" align="middle" style="padding:5px">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+            	<td colspan="8" align="left" class="nameFunction">
+                    <img src="images/icon/m_user.gif" border="0" align="absmiddle" />
+                    <font color="#a40000" style="font-weight:bold;font-size:14px">
+                        <span>理想AP列表</span>
+                    </font>
+                    <font color="#a40000" style="font-weight:bold;font-size:14px">
+                        [共搜索到{if $page.total}{$page.total}{else}0{/if}条记录]
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <div class="scenic_search" style="width:99%;">
+                    	<div style="width:90%;float:left;">
+                    		<form action="{$phpSelf}?r=IdeaApMgr&flag=2" method="POST" id="FORM_SEARCHIDEALAP" enctype="multipart/form-data">
+                            <span style="font-size:12px;">城市：</span>
+                            <input name = "IDEALAPSEARCHINFO[CITYNAME]" type="text" value="{$IDEALAPSEARCHINFO.CITYNAME}" size="20" style="height:20px;">
+                            <span style="font-size:12px;">起始时间：</span>
+                            <input type="text" id="startDate" name="IDEALAPSEARCHINFO[startDate]" value="{$IDEALAPSEARCHINFO.startDate}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" />
+ 							<span style="font-size:12px;">终止时间：</span>
+ 							<input type="text" id="endDate" name="IDEALAPSEARCHINFO[endDate]" class="Wdate" value="{$IDEALAPSEARCHINFO.endDate}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" />
+                            <input type="button" value="搜索" style="font-size: 12px; padding:0px 10px 0px 10px;margin-bottom:3px" onclick="doIdealApSearch();">
+                            </input>
+                        </form>
+                    	</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="itable">
+            <thead>
+                <tr>
+                    <th width="4%" align="left">
+                        <span>&nbsp;城市</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;建筑物</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;楼层</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;图层</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;经度</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;纬度</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;信号强度列表</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;X坐标</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;Y坐标</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;采集时间</span>
+                    </th>
+                    <th width="4%" align="left">
+                        <span>&nbsp;手机方向</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {if $building_list}
+                {foreach from = $building_list item=building}
+                <tr>
+                    <td>
+                    	<a href="ea.php?r=BuildingMgr/ViEdit&BUILDING_NAME={$building.BUILDING_NAME}&buildingID={$building.BUILDING_ID}">
+                        	{$building.REGION_NAME}
+						</a>
+                    </td>
+                    <td>
+                        {$building.BUILDING_NAME}
+                    </td>
+                    <td>
+                        {$building.FLOOR_NAME}
+                    </td>
+                    <td>
+						{$building.DM_TOPIC}
+                    </td>
+                    <td>
+                        {$building.LONGITUDE}
+                    </td>
+                    <td>
+                        {$building.LATITUDE}
+                    </td>
+                    <td>
+                        {$building.AP_LEVELS}
+                    </td>
+                    <td>
+                        {$building.PLANE_X}
+                    </td>
+                    <td>
+                        {$building.PLANE_Y}
+                    </td>
+                    <td>
+                        {$building.MEA_DATE}
+                    </td>
+                    <td>
+                        {$building.PHONE_DIRECTION}
+                    </td>
+                </tr>
+                {/foreach}
+                {/if}
+            </tbody>
+        </table>
+        <table>
+            <tr>
+                <td colspan = "8">
+                    <div class="pagebreak">
+                        <div class="page">
+                            {include file="page_info.html"}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="headMenu" value="datamanager">
+{include file="footer.html"}

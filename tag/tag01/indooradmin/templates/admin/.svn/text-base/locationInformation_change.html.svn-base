@@ -1,0 +1,338 @@
+<link href="{$mediaServer}css/search.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/index.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/public.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/thickbox.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/header.css" rel="stylesheet" type="text/css" />
+<script src="{$mediaServer}js/jquery/jquery_1_3_2.js">
+</script>
+{literal}
+<script language="javascript" type="text/javascript">
+    function checkForm(){
+        var re_MAC_BSSID = /^([0-9]|[a-z]|[A-Z]|[\\:]){1,20}$/;
+        var re_POSITION_X = /^([0-9]{1,4})(\.[0-9]+?)?$/;
+        var re_POSITION_Y = /^([0-9]{1,4})(\.[0-9]+?)?$/;
+        var re_RATE = /^[0-9]{1,5}$/;
+        var re_CHANNEL = /^[0-9]{1,5}$/;
+        if ($('#FLOOR_ID').val() == '') {
+            alert('请选择所属楼层！');
+            $('#FLOOR_ID').focus();
+            return false;
+        }
+        if ($('#EQUT_SSID').val() == '') {
+            alert('设备别名不能为空！');
+            $('#EQUT_SSID').focus();
+            return false;
+        }
+        if ($('#EQUT_TYPE').val() == '') {
+            alert('请选择类别！');
+            $('#EQUT_TYPE').focus();
+            return false;
+        }
+        if ($('#STATUS').val() == '') {
+            alert('请选择状态！');
+            $('#STATUS').focus();
+            return false;
+        }
+        if ($('#POSITION_X').val() == '' || !re_POSITION_X.test($('#POSITION_X').val())) {
+            alert('请填写与边界X轴距离，最多为4位(小数点最多保留2位)！');
+            $('#POSITION_X').focus();
+            return false;
+        }
+        if ($('#MAC_BSSID').val() == '' || !re_MAC_BSSID.test($('#MAC_BSSID').val())) {
+            alert('MAC不能为空，由数字和大小写英文字母及冒号组成（格式一般为c4:ca:d9:59:93:30）！');
+            $('#MAC_BSSID').focus();
+            return false;
+        }
+        if ($('#POSITION_Y').val() == '' || !re_POSITION_Y.test($('#POSITION_Y').val())) {
+            alert('请填写与边界Y轴距离，最多为4位(小数点最多保留2位)！');
+            $('#POSITION_Y').focus();
+            return false;
+        }
+        if (($('#RATE').val() != '' && !re_RATE.test($('#RATE').val())) || ($('#RATE').val() != '' && $('#RATE').val() == 0)) {
+            alert('频率最多为5位数字,不能为0！');
+            $('#RATE').focus();
+            return false;
+        }
+        if (($('#CHANNEL').val() != '' && !re_CHANNEL.test($('#CHANNEL').val())) || ($('#CHANNEL').val() != '' && $('#CHANNEL').val() == 0)) {
+            alert('信道最多为2位数字，不能为0！');
+            $('#CHANNEL').focus();
+            return false;
+        }
+        return true;
+    }
+    
+    
+    function SaveEqut(EQUT_ID, OLD_POSITION_X, OLD_POSITION_Y, OLD_FLOOR_ID){
+        if (checkForm()) {
+			var floor_id_sel = $("#floor_id_sel").val();
+            var BUILDING_NAME = $("#BUILDING_NAME").val();
+            var BUILDING_ID = $("#BUILDING_ID").val();
+            var OLD_FLOOR_ID = OLD_FLOOR_ID;
+            var OLD_POSITION_X = OLD_POSITION_X;
+            var OLD_POSITION_Y = OLD_POSITION_Y;
+            var FLOOR_ID = $("#FLOOR_ID").val();
+            var EQUT_SSID = $("#EQUT_SSID").val();
+            var FACTORY = $("#FACTORY").val();
+            var BRANDS = $("#BRANDS").val();
+            var EQUT_TYPE = $("#EQUT_TYPE").val();
+            var STATUS = $("#STATUS").val();
+            var EQUT_MODEL = $("#EQUT_MODEL").val();
+            var MAC_BSSID = $("#MAC_BSSID").val();
+            var POSITION_Y = $("#POSITION_Y").val();
+            var POSITION_X = $("#POSITION_X").val();
+            var INSTALL_LOCAT = $("#INSTALL_LOCAT").val();
+            var RATE = $("#RATE").val();
+            var CHANNEL = $("#CHANNEL").val();
+            var EQUT_NOTE = $("#EQUT_NOTE").val();
+			if(floor_id_sel){
+				url="ea.php?r=LocationInformation/SaveEqut&BUILDING_NAME=" + BUILDING_NAME + "&BUILDING_ID=" + BUILDING_ID + "&EQUT_ID=" + EQUT_ID+ "&FLOOR_ID=" + floor_id_sel;
+			}else{
+				url="ea.php?r=LocationInformation/SaveEqut&BUILDING_NAME=" + BUILDING_NAME + "&BUILDING_ID=" + BUILDING_ID + "&EQUT_ID=" + EQUT_ID;
+			}
+            $.ajax({
+                url: url,
+                data: {
+                    OLD_FLOOR_ID: OLD_FLOOR_ID,
+                    OLD_POSITION_X: OLD_POSITION_X,
+                    OLD_POSITION_Y: OLD_POSITION_Y,
+                    FLOOR_ID: FLOOR_ID,
+                    EQUT_SSID: EQUT_SSID,
+                    FACTORY: FACTORY,
+                    BRANDS: BRANDS,
+                    EQUT_TYPE: EQUT_TYPE,
+                    EQUT_MODEL: EQUT_MODEL,
+                    MAC_BSSID: MAC_BSSID,
+                    POSITION_Y: POSITION_Y,
+                    POSITION_X: POSITION_X,
+                    INSTALL_LOCAT: INSTALL_LOCAT,
+                    RATE: RATE,
+                    CHANNEL: CHANNEL,
+                    EQUT_NOTE: EQUT_NOTE,
+                    STATUS: STATUS
+                },
+                type: "post",
+                success: function(msg){
+                    $.popup({
+                        content: msg,
+                        now: true,
+                        type: 2,
+                        width: 150,
+                        height: 100,
+                        top: 120,
+                        title: "提示消息"
+                    });
+                }
+            });
+        }
+    }
+</script>
+{/literal}
+<div>
+    <link type="text/css" rel="stylesheet" href="css/popup.css">
+    <script src="js/jquery/popup.js" type="text/javascript" language="javascript">
+    </script>
+    <script src="js/jquery/jquery.easydrag.handler.beta2.js" type="text/javascript" language="javascript">
+    </script>
+    <div id="divPopup" class="divPopup" style="top: 25%; left: 25%; display: none; position: absolute; z-index: 1378959600; moveable:true;">
+        <div class="popup" style="width: 560px;">
+            <div class="p-box">
+                <div id="drag_handler" class="p-title" style="cursor: move;">
+                    <div class="p-title-content">
+                    </div>
+                    <span><a title="关闭" class="pop_Content_close jqmClose" href="ea.php?r=BuildingFloor&BUILDING_NAME={$BUILDING_NAME}&BUILDING_ID={$BUILDING_ID}&NAME={$NAME}" style="cursor: pointer; background-position: 0px 0px;">关闭</a></span>
+                </div>
+                <div class="p-main clear">
+                    <div class="content" style="display: none;">
+                    </div>
+                    <iframe scrolling="auto" frameborder="0" class="frmPopup" id="frmPopup" style="display: inline; height: 380px;">
+                    </iframe>
+                </div>
+                <div class="p-bom clear">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript">
+        jQuery(document).ready(function($){
+            $(".pop_Content_close").hover(function(){
+                $(this).css("background-position", "0 -23px");
+            }, function(){
+                $(this).css("background-position", "0 0");
+            }).css("cursor", "pointer");
+        });
+    </script>
+    {section name=i loop=$Equt_list}
+    <form id="form1" name="form1" method="post" action="" style="margin: 0px; padding: 0px;">
+        <table width="100%" id="add" border="2" cellspacing="1" cellpadding="4" bordercolor="#FFFFFF" bgcolor="" align="center" frame="box">
+            <tr>
+                <td>
+                    <table width="100%" id="add" border="0" cellspacing="1" cellpadding="4" bordercolor="#FFFFFF" bgcolor="" align="center" frame="box">
+                        <tr>
+                            <td width="16%" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                所在场所:
+                            </td>
+                            <td style="border: 0px; height: 40px;" width="18%">
+                                <font color="#a40000" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;">
+                                    {$BUILDING_NAME}
+                                </font>
+                            </td>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" width="11%">
+                                所属楼层:
+                            </td>
+                            <td align="left" colspan="2">
+                                <select name="FLOOR_ID" id="FLOOR_ID" style="height: 22px;width:67%">
+                                    {$FLOOR_ID}
+                                </select>
+                                <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                    *
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" width="12%">
+                                设备ID别名:
+                            </td>
+                            <td align="left" style="border: 0px; height: 40px;" colspan="3">
+                                <input name="EQUT_SSID" type="text" id="EQUT_SSID" maxlength="16" value="{$Equt_list[i].EQUT_SSID}" style="height: 22px;width:93%"/>
+                                <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                    *
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                厂家:
+                            </td>
+                            <td align="left" style="border: 0px; height: 40px;" colspan="2">
+                                <select style="height:20px;width:90%" name="FACTORY" id="FACTORY" class="u279" style="height: 22px;width: 50px;" value="{$Equt_list[i].FACTORY}">
+                                    {if {$Equt_list[i].FACTORY} eq ''}<option value="">-请选择-</option>{/if}
+                                    {html_options options=$EQUT_FACTORY selected=$Equt_list[i].FACTORY}
+                                </select>
+                            </td>
+                            <td width="17%" align="center" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                品牌:
+                            </td>
+                            <td align="left" style="border: 0px; height: 40px;" colspan="2">
+                                <select style="height:20px;width:90%" name="BRANDS" id="BRANDS" style="height: 22px;">
+                                    {if {$Equt_list[i].BRANDS} eq ''}<option value="">-请选择-</option>{/if}
+                                    {html_options options=$EQUT_BRANDS selected=$Equt_list[i].BRANDS}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                类别:
+                            </td>
+                            <td align="left" style="border: 0px; height: 40px;" colspan="2">
+                                <select style="height:20px;width:90%" name="EQUT_TYPE" id="EQUT_TYPE" style="height: 22px;">
+                                    {if {$Equt_list[i].EQUT_TYPE} eq ''}<option value="">-请选择-</option>{/if}
+                                    {html_options options=$EQUT_TYPE selected=$Equt_list[i].EQUT_TYPE}
+                                </select>
+                                <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                    *
+                                </font>
+                            </td>
+                            <td align="center" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                状态:
+                            </td>
+                            <td align="left" style="border: 0px; height: 40px;" colspan="2">
+                                <select style="height:20px;width:90%" name="STATUS" id="STATUS" style="height: 22px;" value="{$Equt_list[i].STATUS}">
+                                    {if {$Equt_list[i].STATUS} eq ''}<option value="">-请选择-</option>{/if}
+                                    {html_options options=$EQUT_STATUS selected=$Equt_list[i].STATUS}
+                                </select>
+                                <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                    *
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                设备型号:
+                            </td>
+                            <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="3">
+                                <input name="EQUT_MODEL" type="text" id="EQUT_MODEL" maxlength="64" value="{$Equt_list[i].EQUT_MODEL}" style="height:20px;width:93%"/>
+                            </td>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;" width="17%">
+                                距离边界X轴:
+                            </td>
+                            <td align="left" style="border:0px;font-size:14px;height:40px;">
+                                <input name="POSITION_X" type="text" id="POSITION_X" maxlength="7" style="height:20px;width:71%" value="{$Equt_list[i].POSITION_X}" /><span style="font-family:Arial;font-size:14px;font-weight:normal;font-style:normal;text-decoration:none;color:#333333;">米</span>
+                                <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                    *
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                MAC地址:
+                            </td>
+                            <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="3">
+                                <input name="MAC_BSSID" type="text" id="MAC_BSSID" maxlength="20" value="{$Equt_list[i].MAC_BSSID}" style="height:20px;width:93%"/>
+                                <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                    *
+                                </font>
+                            </td>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                距离边界Y轴:
+                            </td>
+                            <td align="left" style="border:0px;font-size:14px;height:40px;">
+                                <input name="POSITION_Y" type="text" id="POSITION_Y" maxlength="7" style="height:20px;width:71%" value="{$Equt_list[i].POSITION_Y}" /><span style="font-family:Arial;font-size:14px;font-weight:normal;font-style:normal;text-decoration:none;color:#333333;">米</span>
+                                <font style="font-size:14px;font-style:normal;text-decoration:none;color:red;">
+                                    *
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                安装位置说明:
+                            </td>
+                            <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="3">
+                                <input name="INSTALL_LOCAT" type="text" id="INSTALL_LOCAT" maxlength="64" value="{$Equt_list[i].INSTALL_LOCAT}" style="height:20px;width:93%"/>
+                            </td>
+                            <td colspan="2" rowspan="2" valign="top" style="font-family:Arial;font-size:14px;font-weight:normal;font-style:normal;text-decoration:none;color:#333333;">
+                                设备的位置定位，以建筑物与北向平行的为Y轴，与北向垂直的为X轴，左上角为0，0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="7%" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                频率:
+                            </td>
+                            <td style="border: 0px; height: 40px;">
+                                <input name="RATE" type="text" id="RATE" maxlength="5" value="{$Equt_list[i].RATE}" style="height:20px;width:90%"/>
+                            </td>
+                            <td align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                信道: 
+                            </td>
+                            <td align="left">
+                                <input name="CHANNEL" type="text" id="CHANNEL" maxlength="2" value="{$Equt_list[i].CHANNEL}" style="height:20px;width:80%"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="7%" valign="top" align="left" style="font-family:Arial;font-size:14px;font-style:normal;text-decoration:none;color:#333333;">
+                                说明:
+                            </td>
+                            <td align="left" style="border:0px;font-size:14px;height:40px;" colspan="5">
+                                <div class="cl_tit">
+                                    <textarea name="EQUT_NOTE" id="EQUT_NOTE" rows="1" cols="2" style="overflow-y:scroll;height:45px;width:97%;font-size:14px;border:1px #ccc solid;">{$Equt_list[i].EQUT_NOTE}</textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="height:30px;" width="100%">
+                        <tr>
+                            <td width="40%" align="right">
+                            	<input type="hidden" value="{$floor_id_sel}" id="floor_id_sel">
+                                <input type="hidden" value="{$BUILDING_NAME}" id="BUILDING_NAME"><input type="hidden" value="{$BUILDING_ID}" id="BUILDING_ID"><input type="button" name="button" id="button" onclick="SaveEqut('{$Equt_list[i].EQUT_ID}','{$Equt_list[i].POSITION_X}','{$Equt_list[i].POSITION_Y}','{$Equt_list[i].FLOOR_ID}');" value="保存" valign="center"/>
+                            </td>
+                            <td width="5%">
+                            </td>
+                            <td width="40%" align="left">
+                                <input type="reset" value="重设" valign="center" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>{/section}
+</div>

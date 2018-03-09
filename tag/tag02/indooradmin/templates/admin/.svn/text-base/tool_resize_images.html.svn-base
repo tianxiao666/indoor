@@ -1,0 +1,178 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.error {
+	color:red;
+}
+.form {
+	margin:auto;
+	padding:10px;
+	background-color:#EEE;
+	border:1px solid #CACACA;
+    text-align: center;
+}
+.form form {
+	border:1px solid #C3C3C3;
+	margin:auto;
+	width:600px;
+}
+.form table td{
+	padding:10px;
+}
+</style>
+{/literal}
+
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;角色管理</span></div>
+  
+<div class="form">
+  <form id="form1" name="form1" method="post" action="ea.php?r=tool/DoResize">
+  <table>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td align="left" style="font-weight:bold;">重新生成缩略图</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><label for="table_name2">表名：</label></td>
+    <td align="left"><input type="text" name="table_name" id="table_name" tabindex="1" value="LS_AREA_PIC" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><label for="column_name">路径字段名：</label></td>
+    <td align="left"><input type="text" name="path_name" id="path_name" value="PATH" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right"><label for="column_name">文件名字段名：</label></td>
+    <td align="left"><input type="text" name="file_name" id="file_name" value="FILENAME" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">文件夹名称：</td>
+    <td align="left"><input type="text" name="folder_name" id="folder_name" value="cel" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">宽：</td>
+    <td align="left"><input type="text" name="image_width" value="{$image_width}" id="image_width" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">高：</td>
+    <td align="left"><input type="text" name="image_height" id="image_height" value="{$image_height}" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">生成类型：</td>
+    <td align="left"><input type="text" name="image_type" id="image_type" value="{$image_type}" maxlength="1" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">部分生成
+      <input type="checkbox" name="image_number" id="image_number" /></td>
+    <td align="left"><div id="image_number_label">编号从
+        <input type="text" name="image_start" id="image_start" size="8" />
+      到
+      <input type="text" name="image_end" id="image_end" size="8" />
+    (从1开始)</div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right">重新生成：</td>
+    <td align="left" colspan="2"><input type="checkbox" name="regenerate" id="regenerate" />
+        <label for="regenerate">
+      勾选将覆盖已存在的缩略图</label></td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+    <td align="left" colspan="2"><div>*填写数值，2代表自动，3代表优先适用高度而宽度自适应，<br />4代表优先适用宽度而高度自适应，5代表图片宽高相等</div></td>
+  </tr>
+  <tr>
+    <td align="right">&nbsp;</td>
+    <td align="left"><input type="submit" name="submit" id="submit" value="生成缩略图" /></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+  </form>
+</div><!-- end of form -->
+
+</div> <!-- end of main -->
+   </div><!--end of content -->
+<input type="hidden" id="headMenu" value="backmanager">
+<input type="hidden" id="subbarFlag" value="tool_mgr_bar" />
+{literal}
+<script language="javascript" type="text/javascript">
+$("#form1").validate({
+	rules:{
+		"table_name":{"required":true},
+		"path_name":{"required":true},
+		"file_name":{"required":true},
+		"folder_name":{"required":true},
+		"image_width":{"required":true},
+		"image_height":{"required":true},
+		"image_type":{"required":true,"digits":true},
+		"image_start":{"digits":true},
+		"image_end":{"digits":true}
+	},
+	messages:{
+		"table_name":{"required":"*"},
+		"path_name":{"required":"*"},
+		"file_name":{"required":"*"},
+		"folder_name":{"required":"*"},
+		"image_width":{"required":"*"},
+		"image_height":{"required":"*"},
+		"image_type":{"required":"*","digits":"必须为正整数"},
+		"image_start":{"digits":"必须为正整数"},
+		"image_end":{"digits":"必须为正整数"}
+	}
+});
+function setpartgenerate(obj)
+{
+	if(obj.attr("checked"))
+	{
+		$("#image_number_label").slideDown();
+	}
+	else
+	{
+		$("#image_start").val("");
+		$("#image_end").val("");
+		$("#image_number_label").slideUp("slow");
+	}
+}
+$("#image_number").click(function(){
+	setpartgenerate($(this));
+});
+setpartgenerate($("#image_number"));
+function checkNumber()
+{
+	if(Number($("#image_start").val())==Nan)
+	{
+		$("#image_start").val($("#image_start").val().substr(0,$("#image_start").val().length-1));
+	}
+	if(Number($("#image_end").val())==Nan)
+	{
+		$("#image_end").val($("#image_end").val().substr(0,$("#image_end").val().length-1));
+	}
+}
+$("#image_start").keyup(function(){
+	checkNumber();
+}).blur(function(){
+	checkNumber();
+});
+
+$("#image_end").keyup(function(){
+	checkNumber();
+}).blur(function(){
+	checkNumber();
+});
+
+</script>
+{/literal}
+
+{include file="footer.html"}
+

@@ -1,0 +1,122 @@
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_1_3_2.js"></script>
+<link href="css/msg.css" rel="stylesheet" type="text/css" />
+<link href="css/seloption.css" rel="stylesheet" type="text/css" />
+<script src="js/suggest/kissy.js"></script>
+<script src="js/suggest/suggest.js"></script>
+<script src="js/suggest/autoComplete.js"></script>
+{literal}
+<style>
+.tab000 table td 
+{
+	padding:2px;
+	color:#666; font-size:12px; font-weight:bold;
+}
+
+.invalid{
+	color: red;
+}
+html {background: none repeat scroll 0 0 #FFFFFF;}
+
+</style>
+<script type="text/javascript">
+function FormSubmit()
+{
+	if(!isEmpty($('#wiki_name').val())){
+		$('#wikiErr').css('color' , 'red');
+		$('#wikiErr').html("请输入百科词条");
+		return false;
+	}
+	$("#wikiFrom").submit();
+}
+
+
+function ajaxGetAreaNames(){
+	var key = $('#keyword').val();
+	$('#area_id').val('');
+	$('#kindSel').width($('#keyword').width());
+	if(!key){
+		$('#kindSel').hide();
+		return false;
+	}
+	var area_id = $('#AREA_ID').val();
+	$.ajax({
+		type	:	"post",
+		url		:	"ea.php?r=AreaWiki/GetSpotNames",
+		data	:   {key : key , id : area_id},
+		success :   function(data){
+			if(data){
+				$('#kindSel').html(data);
+				$('#kindSel').show();
+			}else{
+				$('#kindSel').html(data);
+				$('#kindSel').hide();
+			}
+		}
+	});
+}
+
+$(document).ready(function(){
+	$(this).click(function(){
+		$('#kindSel').hide();
+	});
+	var area_id = $('#AREA_ID').val();
+	$.complete({id:'keyword' , url:'ea.php?r=AreaWiki/GetSpotNames&id='+area_id , selid : "spot_id"});
+});
+
+
+/*
+*判断编码是否为空
+*/
+function isEmpty(str){
+	if(str == undefined) return true;
+	badChar=" ";
+	for(var i=0;i<str.length;i++ ){
+	var c = str.charAt(i);
+	if(c!=" "){ 
+		return true; 
+		} 
+	}
+	return false; 
+}
+
+function hideErr(obj){
+	$('#'+obj).css('color' , '#999999');
+	$('#'+obj).html("添加多个关键字以空格分隔符隔开");
+}
+
+</script>
+{/literal}
+<form  action='{$phpSelf}?r=AreaWiki/AddWikiForm'  method="POST" id="wikiFrom">
+<div class="msg">
+	<div class="m">
+		<div class="cont1">
+		<div class="text">
+				<div class="l">景区名：</div>
+				<div class="r" style="padding: 8px 0 0;">
+				<span style="color:#666666;font-size: 14px">{$areaInfo.AREA_NAME}</span>
+				</div>
+		</div>
+		<div class="text" style="padding-top: 20px">
+				<div class="l">景点名：</div>
+				<div class="r">
+				<input type="hidden" name="area_id" id="AREA_ID" value="{$areaInfo.AREA_ID}"/>
+				<input type="hidden" name="spot_id" id="spot_id" value=""/>
+				<input type="text" id="keyword" name="keyword" value="{$model.LODGE_NAME}" style="width:353px;">
+				<ul style="display: none;" id="kindSel" class="selOption">
+         		</ul>
+				<br><span id="areaErr" style="line-height: 30px;color:red">&nbsp;</span>
+				</div>
+		</div>
+		<div class="text">
+				<div class="l">百科关键字：<font color="red">*</font></div>
+				<div class="r"><input type="text" onkeyup="hideErr('wikiErr');" name="wiki_name" id="wiki_name"  style="width:353px;">
+				<br><span id="wikiErr" style="line-height: 30px;color:#999999">添加多个关键字以空格分隔符隔开</span>
+				</div>
+		</div>
+	</div>
+	<div class="cont3">
+			<input type="button" style="width:70px;height:25px" value="新增" onclick="FormSubmit();">&nbsp;&nbsp;&nbsp;<input type="button" id="closeBtn" onclick="window.parent.closeFrm();" style="width:70px;height:25px"  value="关闭" >
+	</div>
+	</div>
+</div>
+</form>

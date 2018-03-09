@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs
+END
+Csv.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/Csv.php
+END
+Xml.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/Xml.php
+END
+Yaml.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/Yaml.php
+END
+Factory.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/Factory.php
+END
+DbQuery.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/DbQuery.php
+END
+FlatXml.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/FlatXml.php
+END
+DbTable.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/DbTable.php
+END
+IFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/DataSet/Specs/IFactory.php
+END

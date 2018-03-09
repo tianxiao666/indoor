@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author yzb
+ */
+
+
+class CCDAOSYS_ROLE extends CActiveRecord
+{
+	var $_table = "SYS_ROLE";
+    //¹¹Ôìº¯Êý
+    function __construct()
+    {
+        parent::__construct();
+    }
+    
+}
+?>

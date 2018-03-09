@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action
+END
+GetCenterLocationAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetCenterLocationAction.class
+END
+DoIndoormapBuildingFloorSearchAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/DoIndoormapBuildingFloorSearchAction.class
+END
+GetIndoormapBuildingFloorListAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetIndoormapBuildingFloorListAction.class
+END
+TriangulationLocationAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/TriangulationLocationAction.class
+END
+GetNearbyIndoormapBuildingListAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetNearbyIndoormapBuildingListAction.class
+END
+CheckHasNewVersionAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/CheckHasNewVersionAction.class
+END
+GetCenterLocationAction$1.class
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetCenterLocationAction$1.class
+END
+GetCenterLocationAction$2.class
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetCenterLocationAction$2.class
+END
+GetCenterLocationAction$3.class
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetCenterLocationAction$3.class
+END
+SignalHandleAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/SignalHandleAction.class
+END
+TriangulationLocationAction$1.class
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/TriangulationLocationAction$1.class
+END
+TriangulationLocationAction$2.class
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/TriangulationLocationAction$2.class
+END
+TriangulationLocationAction$3.class
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/TriangulationLocationAction$3.class
+END
+GetIndoormapBuildingFloorFastSearchKeyListAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetIndoormapBuildingFloorFastSearchKeyListAction.class
+END
+GetIndoormapBuildingFloorMapUrlAction.class
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/GetIndoormapBuildingFloorMapUrlAction.class
+END
+test.class
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/test.class
+END
+SignalHandleAction$1.class
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/SignalHandleAction$1.class
+END
+SignalHandleAction$2.class
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/srcsvn/indoor/!svn/ver/166/appinterface/WebRoot/WEB-INF/classes/com/action/SignalHandleAction$2.class
+END

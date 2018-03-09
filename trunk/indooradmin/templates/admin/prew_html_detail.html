@@ -1,0 +1,21 @@
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+ {if $templatedetailList} {section name=i loop=$templatedetailList}
+<div style="overflow-y: scroll;width: 450px;height:300px;">
+<table class="itable" border="0" style="" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="left" style="border: 0px;" valign="top" colspan="4">¾²Ì¬ÎÄ¼þÔ¤ÀÀ:</td>
+	</tr>
+	<tr>
+	{if $templatedetailList[i].File_List}
+	{foreach from=$templatedetailList[i].File_List item=file key=key name=foo}
+		<td align="left"  style="border: 0px;">{$smarty.foreach.foo.index+1}.
+		<a target="_blank" href="{$webUrl}index.php?r=ViewStatic&go={$file}&UP_TEMP_ID={$UP_TEMP_ID}&TEMP_ID={$TEMP_ID}">{$file}</a></td>
+	{if ($smarty.foreach.foo.index+1)%3==0}
+	</tr>
+	<tr>
+	{/if}
+	{/foreach}
+	{/if}
+</table>
+</div>
+{/section}{/if}

@@ -1,0 +1,240 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_1_3_2.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+var cname = true;
+var cmail = true;
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function AddSubmit(){
+	if(checkForm() && cname && cmail){
+		$("#form1").submit();
+	}
+}
+
+function checkForm()
+{	
+	if ($('#NAME').val() == '')
+	{
+		alert('请填写用户名！');
+		$('#NAME').focus();
+		return false;
+	}
+	var check = /^[a-zA-Z_]+$/;
+	if(!check.test($('#NAME').val()))
+	{
+		alert('用户名只能是字母和下划线组成！');
+		$('#NAME').focus();
+		return false;
+	}
+	if ($('#PASSWD').val() == '')
+	{
+		alert('请填写登录密码！');
+		$('#PASSWD').focus();
+		return false;
+	}
+	if ($('#PASSWD1').val() == '')
+	{
+		alert('请填写确认密码！');
+		$('#PASSWD1').focus();
+		return false;
+	}
+	if ($('#PASSWD1').val() != $('#PASSWD').val())
+	{
+		alert('两次输入的密码不一致！');
+		$('#PASSWD').value = '';
+		$('#PASSWD1').value = '';
+		$('#PASSWD1').focus();
+		return false;
+	}
+	if(strlen($('#PASSWD').val())<5){
+		alert("密码长度不能小于六位");
+		$('#PASSWD').value = '';
+		$('#PASSWD1').value = '';
+		$('#PASSWD').focus();
+		return false;
+	}
+	if ($('#REAL_NAME').val() == '')
+	{
+		alert('请填写真实姓名！');
+		$('#REAL_NAME').focus();
+		return false;
+	}
+	if ($('#EMAIL').val() == '')
+	{
+		alert('请填写电子邮箱！');
+		$('#EMAIL').focus();
+		return false;
+	}
+	
+	var re = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+	if(!re.test($('#EMAIL').val()))
+	{
+		alert('请输入正确的邮箱格式！');
+		$('#EMAIL').focus();
+		return false;
+	}
+	return true;
+}
+
+//ajax验证用户名
+function ajaxCheckNAME(){
+	var name = $('#NAME').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=AdminMgr/AjaxCheckNAME',
+		data	:  {name : name},
+		success :  function(result){
+			if(result){
+				cname = false;
+				$('#namemsg').show();
+				return false;
+			}else{
+				cname = true;
+				$('#namemsg').hide();
+			}
+		}
+	});
+}
+
+//ajax验证邮箱
+function ajaxCheckEMAIL(){
+	var email = $('#EMAIL').val();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=AdminMgr/AjaxCheckEMAIL',
+		data	:  {email : email},
+		success :  function(result){
+			if(result){
+				cmail = false;
+				$('#emailmsg').show();
+				return false;
+			}else{
+				cmail = true;
+				$('#emailmsg').hide();
+			}
+		}
+	});
+}
+
+//判断中英文
+function strlen(str) 
+{
+   var strlength=0;
+   for (i=0;i<str.length;i++)
+  {
+     if (isChine(str.charAt(i))==true)
+        strlength=strlength + 2;
+     else
+        strlength=strlength + 1;
+ 	}
+	return strlength;
+}
+
+function isChine(str)
+{
+   var lst = /.*[\u4e00-\u9fa5]+.*$/;
+   return lst.test(str);      
+}
+
+</script>
+{/literal}
+
+<div class="content">
+  <div class="main">
+  <div class="crumb"><span>当前位置：<a href="ea.php?r=UserContentMgr/Impression">内容管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=AdminMgr">用户管理</a>&nbsp;&gt;&nbsp;新增用户</span></div>
+  <input type="hidden" id="subbarFlag" value="admin_mgr_bar" />
+ <form id="form1" name="form1" method="post" action="ea.php?r=AdminMgr/doAdd" style="margin:0px;padding:0px;" onsubmit="return checkForm();"> <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> 填写用户基本资料</font></td>
+					<td width="50%" align="right"><a href="javascript:history.go(-1);"><font color="#666" style="font-weight:bold;font-size:14px">[返回上一页]</font></a></td>
+				</tr>
+			</table>
+<table class="itable">
+                 <tr class="row0">
+                    <td align="center">
+						<table border="0" cellspacing="0" cellpadding="0">
+    						<tr>
+        						<td align="right" width="40%" style="border:0px;">用 户 名</td>
+    						    <td align="left" style="border:0px;"><input name="NAME" type="text" id="NAME" maxlength="20" onchange="ajaxCheckNAME();"/><span id="namemsg" class="prompt" style="display:none; color:red;">该用户名已被注册</span></td>
+    						</tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">登录密码</td>
+    						    <td align="left" style="border:0px;"><input name="PASSWD" type="password" id="PASSWD" maxlength="20" style="font-size:12px;" /></td>
+						    </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">确认密码</td>
+    						    <td align="left" style="border:0px;"><input name="PASSWD1" type="password" id="PASSWD1" maxlength="20" style="font-size:12px;" /></td>
+						    </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">真实姓名</td>
+    						    <td align="left" style="border:0px;"><input name="REAL_NAME" type="text" id="REAL_NAME" maxlength="20" /></td>
+						    </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">电子邮箱</td>
+    						    <td align="left" style="border:0px;"><input name="EMAIL" type="text" id="EMAIL" size="40" maxlength="60" onchange="ajaxCheckEMAIL();"/><span id="emailmsg" class="prompt" style="display:none; color:red;">该邮箱已被注册</span></td>
+						    </tr>
+    						<!--<tr>
+    						    <td align="right" style="border:0px;">所属地区</td>
+    						    <td align="left" style="border:0px;">
+									<select id="AREA_CODE" name="AREA_CODE" style="font-size:12px;">
+										{html_options options=$sys_area_code}
+									</select>
+								</td>
+						    </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">用户角色</td>
+    						    <td align="left" style="border:0px;">
+								<select id="ROLE" name="ROLE">{html_options options=$role_list selected='USER'}</select>
+								</td>
+						    </tr>-->
+						    <tr>
+    						    <td align="right" style="border:0px;">会员卡号</td>
+    						    <td align="left" style="border:0px;"><input name="CARD_NO" type="text" id="CARD_NO" size="40" maxlength="60" /></td>
+						    </tr>
+						    <tr>
+    						    <td align="right" style="border:0px;">会员等级</td>
+    						    <td align="left" style="border:0px;">
+								<select id="PROD_ID" name="PROD_ID"><option value="">-请选择-</option>{html_options options=$prod_name }</select>
+								</td>
+						    </tr>
+						</table>
+					</td>
+                </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="30" align="center" valign="bottom"><input type="button" onclick="AddSubmit();" value="确定添加" style="font-size:12px;width:70px;height:20px;" /> 
+					<input type="button" value="返回上一页" style="font-size:12px;width:70px;height:20px;" onclick="history.go(-1);" /></td>
+				</tr>
+	</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="usercontentmgr">
+   </div>
+   </form>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+

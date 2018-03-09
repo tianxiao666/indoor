@@ -1,0 +1,19 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js"></script>
+<div class="content">
+  <div class="main">
+  </div>
+  <div class="tabtext" id="tabtext1" >
+    <center><p style="font-size: 15px">更新信息成功</p></center>
+    {if $album}
+     <meta http-equiv="refresh" content="1;URL=ea.php?r=scenicAlbumMgr/Index&area_id={$area_id}&album_type=O">
+    {else}
+    <meta http-equiv="refresh" content="1;URL=ea.php?r=scenicZone/Index&id={$area_id}">
+    {/if}
+  </div>
+  </div>
+  </div>
+
+{include file="footer.html"}

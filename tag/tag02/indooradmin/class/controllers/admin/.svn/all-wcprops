@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin
+END
+SyslogsController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/SyslogsController.php
+END
+SysUserMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/SysUserMgrController.php
+END
+DictMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/DictMgrController.php
+END
+RoleMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/RoleMgrController.php
+END
+BuildingMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/BuildingMgrController.php
+END
+PrivMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/PrivMgrController.php
+END
+AdminMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/AdminMgrController.php
+END
+UserInfoSetController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/UserInfoSetController.php
+END
+LoginController.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/LoginController.php
+END
+PoiController.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/PoiController.php
+END
+DictOptionMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/DictOptionMgrController.php
+END
+BuildingFloorPlanegraphMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/BuildingFloorPlanegraphMgrController.php
+END
+AdminController.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/AdminController.php
+END
+GetProvCityDistController.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/GetProvCityDistController.php
+END
+DeptMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/DeptMgrController.php
+END
+LogMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/LogMgrController.php
+END
+DrawMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/DrawMgrController.php
+END
+SvgMgrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/SvgMgrController.php
+END
+LocationInformationController.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/LocationInformationController.php
+END
+BuildingFloorController.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/controllers/admin/BuildingFloorController.php
+END

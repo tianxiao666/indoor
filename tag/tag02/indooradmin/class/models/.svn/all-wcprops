@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models
+END
+CDAOSYS_OPTION_CODE.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOSYS_OPTION_CODE.php
+END
+CDAOCB_POI.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOCB_POI.php
+END
+CDAOCB_PIC.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOCB_PIC.php
+END
+CDAODM_LAYER_POINT.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAODM_LAYER_POINT.php
+END
+CDAOCB_FLOOR.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOCB_FLOOR.php
+END
+CDAOCode.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOCode.php
+END
+CDAOPriv.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOPriv.php
+END
+CDAORole.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAORole.php
+END
+CDAOCB_BUILDING.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOCB_BUILDING.php
+END
+CDAOSYS_DEPT.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOSYS_DEPT.php
+END
+CDAOCB_LOCATION.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOCB_LOCATION.php
+END
+CDAODM_LAYER_ELEMENT.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAODM_LAYER_ELEMENT.php
+END
+CDAODM_PLANE_LAYER.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAODM_PLANE_LAYER.php
+END
+CDAODM_DRAW_MAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAODM_DRAW_MAP.php
+END
+CDAODM_LAYER_ELEMENT_ATTR.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAODM_LAYER_ELEMENT_ATTR.php
+END
+CDAOSYS_DEPT_SUBS.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOSYS_DEPT_SUBS.php
+END
+CDAOAP_EQUIPMENT.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOAP_EQUIPMENT.php
+END
+CDAOADMIN_PRIV.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOADMIN_PRIV.php
+END
+CDAOCB_PLANE_MEDIA.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOCB_PLANE_MEDIA.php
+END
+CDAOSYS_TYPE_CODE.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOSYS_TYPE_CODE.php
+END
+CDAOSYS_SUBS.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOSYS_SUBS.php
+END
+CDAOLog.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOLog.php
+END
+CDAOSYS_REGION.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/316/tag/tag02/indooradmin/class/models/CDAOSYS_REGION.php
+END

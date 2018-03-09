@@ -1,0 +1,57 @@
+.add_region_div {
+	float:left;
+	padding-left:20px;
+	padding-top:15px;
+}
+.regions {
+	float:left;
+}
+.region_div_disabled,.region_div {
+	padding-top:15px;
+}
+.tabtext {
+	background:none repeat scroll 0 0 #EEEEEE;
+	float:left;
+	width:100%;
+}
+textarea {
+	 width: 100%;
+	 font-size:12px;
+}
+table tr td {
+	padding:10px 0;
+}
+.button {
+	text-align:center;
+}
+.error {
+	color:red;
+}
+.error_span {
+	display:none;
+	color:red;
+	padding-left:10px;
+}
+.del_region {
+	cursor:pointer;
+}
+#ajax_img {
+	display:none;
+}
+#TOURISM select {
+	width:100px;
+}
+.invalid {
+	color:red;
+	padding-left:10px;
+}
+#TOURISM table .title{
+	font-weight: bold;
+}
+#TOURISM_NAME {
+	width:85%;
+}
+
+.ss_pan{
+	padding-left:10px;
+}

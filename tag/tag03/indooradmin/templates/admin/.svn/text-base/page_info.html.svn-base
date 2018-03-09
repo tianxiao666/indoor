@@ -1,0 +1,46 @@
+{if $page.totalpage gt 1}
+<link href="css/page_info.css" rel="stylesheet" type="text/css" />
+<div class="thumb">
+	{if $page.page ne $page.firstpage}<a href="{$page.url}{$page.prevpage}">上一页</a>{/if}
+	
+	{if $page.totalpage lt 7}
+		{*if less than 7 page, show all*}
+		{foreach from=$page.allpage item=num}
+			{if $page.page eq $num}
+				<a href="javascript:void(0)" class="current" >{$num}</a>
+			{else}
+				<a href="{$page.url}{$num}" >{$num}</a>
+			{/if}
+		{/foreach}
+		
+	{else}
+	
+		{*first page*}
+		{if $page.page eq $page.firstpage}
+			<a href="javascript:void(0)" class="current" >{$page.firstpage}</a>
+		{else}
+			<a href="{$page.url}{$page.firstpage}">{$page.firstpage}</a>
+		{/if}
+
+		{if $page.showPage.startPage gt 2}<a href="{$page.url}{$page.showPage.startPage-1}">...</a>{/if}
+		{foreach from=$page.showPage.num item=num}
+			{if $page.page eq $num}
+				<a href="javascript:void(0)" class="current" >{$num}</a>
+			{else}
+				<a href="{$page.url}{$num}" >{$num}</a>
+			{/if}
+		{/foreach}
+		{if $page.showPage.endPage lt $page.lastpage-1}<a href="{$page.url}{$page.showPage.endPage+1}">...</a>{/if}
+		
+		{*last page*}
+		{if $page.page eq $page.lastpage}
+			<a href="javascript:void(0)" class="current" >{$page.lastpage}</a>
+		{else}
+			<a href="{$page.url}{$page.lastpage}">{$page.lastpage}</a>
+		{/if}
+
+	{/if}
+	
+	{if $page.page ne $page.lastpage}<a href="{$page.url}{$page.nextpage}">下一页</a>{/if}
+</div>
+{/if}

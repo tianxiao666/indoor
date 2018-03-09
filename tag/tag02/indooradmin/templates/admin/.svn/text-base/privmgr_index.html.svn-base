@@ -1,0 +1,103 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+{/literal}
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function deletePriv()
+{
+	if (confirm('您确定要删除这个权限吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+</script>
+{/literal}
+
+
+<div class="content">
+  <div class="main">
+  <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;权限管理</span></div>
+  <input type="hidden" id="subbarFlag" value="priv_mgr_bar" />
+
+ 
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> 权限列表</font></td>
+					{if $user_role.ADMIN}<td width="50%" align="right"><a href="ea.php?r=PrivMgr/AddView" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增权限]</font></a></td>{/if}
+				</tr>
+			</table>
+<table class="itable">
+<thead>
+ <tr>
+                    <th width="15%" align="left">权限编号</th>
+                    <th width="15%">权限名称</th>
+                    <th width="15%" align="left">权限类型</th>
+                    <th width="15%" align="left">创建人</th>
+                    <th width="20%" align="left">权限说明</th>
+					{if $user_role.ADMIN}<th width="20%" align="left">&nbsp;相关操作</th>{/if}
+                </tr>
+</thead>
+<tbody>
+		{section name=i loop=$sys_priv}
+                <tr class="{cycle values='row0,row1'}">
+                    <td align="left">{$sys_priv[i].PRIV_CODE}</td>
+                    <td align="left">{$sys_priv[i].PRIV_NAME}</td>
+                    <td align="left">{$sys_priv[i].PRIV_TYPE_NAME}</td>
+                    <td align="left">{$sys_priv[i].OWNER_NAME}</td>
+                    <td align="left">{$sys_priv[i].NOTE}</td>
+					{if $user_role.ADMIN}
+
+					<td align="left">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td style="border:0px;"><a href="ea.php?r=PrivMgr/EditView&priv_code={$sys_priv[i].PRIV_CODE}"><img src="images/icon/s_edit.gif" border="0" align="absmiddle" /><font color="#666">修改资料</font></a></td>
+								<!--<td style="border:0px;"><a href="ea.php?r=PrivMgr/DeletePriv&priv_code={$sys_priv[i].PRIV_CODE}" target="bf" onclick="return deletePriv();"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">删除权限</font></a></td>-->
+							</tr>
+						</table>
+					</td>
+
+					{/if}
+                </tr>
+				{/section}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

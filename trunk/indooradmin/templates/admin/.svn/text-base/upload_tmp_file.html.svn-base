@@ -1,0 +1,71 @@
+
+	<link href="{$mediaServer}js/jquery/jquery_plugins/jquery.uploadify-v2.1.4/uploadify.css" type="text/css" rel="stylesheet" />
+    <!--<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.uploadify-v2.1.4/jquery-1.4.2.min.js"></script>-->
+    <script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.uploadify-v2.1.4/swfobject.js"></script>
+    <script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.uploadify-v2.1.4/jquery.uploadify.v2.1.4.min.js"></script>
+	<script type="text/javascript">
+	var shareraBaseUrl="{$shareraBaseUrl}";
+    {literal}
+    jQuery(document).ready(function($) {
+      $('#file_upload').uploadify({
+        'uploader'  : $("#uploadify_path").val()+'uploadify.swf?var=' + new Date().getTime(),
+        'script'    : shareraBaseUrl+"ea.php"+encodeURIComponent("?r=chnContract/UploadFile"),//$("#file_upload_handler").val(),
+		'scriptData':{"CONTRACT_NBR":$("#CONTRACT_NBR").val()},
+        'cancelImg' : $("#uploadify_path").val()+'cancel.png',
+		'fileDesc'   : "*.rar;*.zip",
+		'fileExt'   : "*.rar;*.zip",
+		'sizeLimit'	:8388608,
+		'onComplete'  : function(event, ID, fileObj, response, data) {
+			switch(string_trim(response))
+			{
+				case "":
+					$("#tmp_file_path").val("");
+					$("#upload_state_text").text("上传失败");
+					break;
+				case "0":
+					$("#tmp_file_path").val("");
+					$("#upload_state_text").text("请选择文件,或者先更正协议编号");
+					break;
+				case "-1":
+					$("#tmp_file_path").val("");
+					$("#upload_state_text").text("上传错误，请刷新后重试");
+					break;
+				case "-2":
+					$("#tmp_file_path").val("");
+					$("#upload_state_text").text("协议编号有误，请更正");
+					break;
+				case "-3":
+					$("#tmp_file_path").val("");
+					$("#upload_state_text").text("文件格式不正确");
+					break;
+				default :
+					$("#tmp_file_path").val(string_trim(response));
+					$("#upload_state_text").text("协议文件上传成功");
+					break;
+			}
+		}
+      });
+	  function string_trim(txt)
+	  {
+		 return txt.replace(/(^\s*)|(\s*$)/g, ""); 
+	  }
+	  $("#toupload_file").click(function(){
+		  if($("#nbr_state").val()!="")
+		  {
+			  $("#file_upload").uploadifySettings("scriptData",{"CONTRACT_NBR":$("#CONTRACT_NBR").val()},true);
+			  $("#file_upload").uploadifyUpload();
+		  }
+		  else
+		  {
+			  alert("请先填写(更正)协议编号");
+		  }
+	  });
+    });
+    </script>
+    {/literal}
+
+<input type="hidden" value="{$mediaServer}js/jquery/jquery_plugins/jquery.uploadify-v2.1.4/" id="uploadify_path" />
+<input id="file_upload" name="file_upload" type="file" />
+<span id="upload_state_text"></span>
+<input id="toupload_file" type="button" value="上传" />
+<input id="tmp_file_path" name="tmp_file_path" type="hidden" value="" />

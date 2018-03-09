@@ -1,0 +1,240 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js"></script>
+<script src="js/default.js" type="text/javascript"></script>
+<script src="js/thickmsg.js" type="text/javascript"></script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js"></script>
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css"  rel="stylesheet" type="text/css" />
+{literal}
+<style>
+ .itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+	
+	$("#divAddPic").jqm({
+		toTop:true
+	});
+	
+	var pagesize=$('#pagesize').val();
+	for (i = 0; i < pagesize; i++)
+	{
+		$('#divDetail'+i).jqm({
+			toTop:true,
+			overlay: 70
+		});
+		$('#divPreviews'+i).jqm({
+			toTop:true,
+			overlay: 70
+		});
+	}
+	
+}) 
+
+function hideAddPicForm(){
+	var area_id = $('#AREA_ID').val();
+	window.location.href="ea.php?r=ScenicAlbumMgr/Index&area_id="+area_id;
+	$("#divAddPic").jqmHide();
+	//window.location.reload();
+}
+function setLoadingAlbum(){
+	$('#uploaddivalbum').hide();
+	$('#imagedivalbum').show();
+	$("#album_action_search_form").submit();
+}
+function SearchLog()
+{   
+	var area_id = $('#AREA_ID').val();
+	 var frm = document.log_search_form;
+	 frm.action='ea.php?r=ScenicAlbumMgr/SearchLog&area_id='+area_id;
+	 frm.submit();
+	
+}
+function showDetailForm(key){
+	$('#divDetail'+key).jqmShow();
+}
+function showDetailpreviews(key)
+{
+	$('#divPreviews'+key).jqmShow();
+}
+
+function deletePriv()
+{
+	if (confirm('您确定要删除这个相片吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+function updateStatus()
+{
+	if (confirm('您确定要修改这个相片状态？'))
+	{
+		return true;
+	}
+	return false;
+}
+function Deftul()
+{
+	if (confirm('您确定要设置默认图？'))
+	{
+		return true;
+	}
+	return false;
+}
+function CheckDate()
+{
+	var start = $("#startDate").val();
+	var end   = $("#endDate").val();
+	if(end < start && end!="")
+	{
+		alert("起始时间不能大于终止时间！");
+		return false;
+	}
+}
+</script>
+
+{/literal}
+<div id="divAddPic" class="jqmWindow" style="padding:0px; border:none;width:542px; height:430px; overflow:hidden;">
+<iframe name="frmAddPic" id="frmAddPic" frameborder="0" width="100%" scrolling="no" height="100%" src="#" ></iframe>
+	</div>
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=LsArea/AreaList">旅游数据管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=LsDest">目的地管理</a>&nbsp;&gt;&nbsp;目的地相册管理</span></div>
+   <input type="hidden" id="subbarFlag" {if $album_type=='S'}value="album_S_bar" {else}value="album_O_bar" {/if}/>
+  <div class="tabtext" id="tabtext1" >
+   <table>
+     <tr>
+       <td valign="top" width="1%">
+        {include file="pop_menu_left.html" info=$destInfo pop_menu_file="lsdest_menu_left.html" cur=15} 
+       </td>
+       <td valign="top" style="padding:10px 0;">
+        <div class="con_left">
+         <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+		   <tr> 
+		  <td valign="top" style="padding:10px 10px 0;">
+		  <div class="scenic_search">
+		   <div class="chose">
+		       <form id="log_search_form" name="log_search_form" action="ea.php?r=DestinationsAlbum/Index&dest_id={$dest_id}&album_type={$album_type}" method="post" style="margin: 0px; padding: 0px; width: 900px;" onsubmit="return CheckDate();">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									
+									<td height="25" align="left" class="formTitle">
+										<span>标题：
+										  <input name="PIC_TOPIC" id="PIC_TOPIC" type="text" style="font-size:12px;" value="{$condition.PIC_TOPIC}" maxlength="20" />
+										  </span>
+										   &nbsp;&nbsp;
+										  <span>状态：
+										  <select class="ipt2" name="STATUS" id="STATUS">
+										   <option value="">- 请选择 -</option>
+									            {foreach from=$deststatus item=type key=key}
+		       	         							<option value="{$key}" {if $key==$condition.STATUS}selected=true{/if}>{$type}</option>
+		       	      							{/foreach}
+									            </select>
+										  </span>
+										  &nbsp;&nbsp;
+										  <span>开始时间：
+										  <input type="text" id="startDate" name="startDate" class="Wdate" value="{$condition.startDate}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" />
+										  </span>
+										  &nbsp;&nbsp;
+										  <span>结束时间：
+										  <input type="text" id="endDate" name="endDate" class="Wdate" value="{$condition.endDate}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" />
+										  </span>
+										  </td>
+	                                <td><input type="submit" value="查询" style="font-size: 12px; width: 60px; height: 20px;" />
+	                                </td>
+	                                  <td width="10px"></td>
+	                            </tr>
+	                        </table>
+							</form>
+							</div>
+	   </div>
+	  </td>
+	  </tr>
+	  <tr>
+	    <td style="padding-left: 30px;font-size: 25px;"><a href="ea.php?r=DestinationsAlbum/Index&dest_id={$dest_id}&album_type=S" id="album_S_bar" {if $album_type eq 'S'}style="color: red"{/if}>用户相册</a>  <a href="ea.php?r=DestinationsAlbum/Index&dest_id={$dest_id}&album_type=O" id="album_O_bar" {if $album_type eq 'O'}style="color: red"{/if}>官方相册</a></td>
+	  </tr>
+	  <tr> 
+	  <td valign="top" style="padding:10px 10px 0;">
+		<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px">{if $album_type=='S'} 用户相片列表{else}官方相片列表{/if}[共搜索到{$count.COUNT}条记录]</font></td>
+					</tr>
+				</table>
+	<table class="itable">
+	<thead>
+	<tr>
+                    <th  style="width: 230px">标题</th>
+                    <th  align="left">宽幅图片</th>
+                    <th  align="left">缩略图</th>
+                    <th style="width: 150px">所属</th>
+                    <th align="left">状态</th>
+                    <th  style="width: 90px">创建时间</th>
+                    <th style="width: 320px">操作<input
+			type="hidden" id="pagesize" value={$page.pagesize} /></th>
+                </tr>
+</thead>
+{if $destPicInfo}
+<tbody id="route">
+		{foreach from=$destPicInfo item=pic key=key}
+		<div id="divDetail{$key}" class="jqmWindow" 
+	style="background-color: #fff"><div style="float: left"><font style="font-weight:bold;font-size:14px">
+{$pic.PIC_TOPIC}</font>
+</div>	<div style="float: right">
+<a href="#" class="jqmClose"><img src="images/close.jpg" title="关闭" /></a>
+</div><img src="{$pic.PATH}mediums/{$pic.FILENAME}" onload="ResizeImage(this,600,450);"/></div>
+<div id="divPreviews{$key}" class="jqmWindow" 
+	style="background-color: #fff"><div style="float: left"><font style="font-weight:bold;font-size:14px">
+{$pic.PIC_TOPIC}</font>
+</div>	<div style="float: right">
+<a href="#" class="jqmClose"><img src="images/close.jpg" title="关闭" /></a>
+</div><img src="{$pic.PATH}previews/{$pic.FILENAME}" onload="ResizeImage(this,600,450);"/></div>
+                <tr class="{cycle values='row0,row1'}">
+                    <td align="left">{$pic.PIC_TOPIC}</td>
+                    <td align="left"><a title="点击查看大图" href="#!" onclick="showDetailpreviews({$key});"><img id="" src="{$pic.PATH}previews/{$pic.FILENAME}" onload="ResizeImage(this,100,100);" /></a></td>
+					<td align="left"><a title="点击查看大图" href="#!" onclick="showDetailForm({$key});"><img id="" src="{$pic.PATH}equal/{$pic.FILENAME}" onload="ResizeImage(this,100,100);" /></a></td>
+                    <td align="left">{if $pic.PP_DEST_NAME}{$pic.PP_DEST_NAME}--{/if}{if $pic.P_DEST_NAME}{$pic.P_DEST_NAME}--{/if}{$pic.DEST_NAME}</td>
+                    <th align="left">{if $pic.STATUS=='A'}<font color="green">正常</font>{elseif $pic.STATUS=='E'}<font color="blue">编辑中</font>{else}<font color="red">归档</font>{/if}</th>
+                    <td align="left">{$pic.CREATE_TIME|date_format:"%Y-%m-%d"}</td>
+					<td align="left">
+						<a href="ea.php?r=ScenicPriceAlbum/index&id={$pic.PIC_ID}&dest_id={$dest_id}&album_type={$album_type}">编辑 </a> | {if $pic.STATUS=='A' || $pic.STATUS=='E'}<a href="ea.php?r=ScenicAlbumMgr/UpdateStatus&pic_id={$pic.PIC_ID}&status={$pic.STATUS}&dest_id={$dest_id}&album_type={$album_type}" onclick="return updateStatus();">归档</a>{else}<a href="ea.php?r=ScenicAlbumMgr/UpdateStatus&pic_id={$pic.PIC_ID}&status={$pic.STATUS}&dest_id={$dest_id}&album_type={$album_type}" onclick="return updateStatus();">激活</a>{/if} | {if $album_type=='O'}{if $pic.PIC_ID !=$pic.YN_PIC}{if $pic.STATUS!='X'}<a href="ea.php?r=ScenicAlbumMgr/UpdateDefaultPic&pic_id={$pic.PIC_ID}&relate_id={$pic.RELATE_ID}&table_name={$pic.TABLE_NAME}&album_type={$album_type}&dest_id={$dest_id}" onclick="return Deftul();">设为默认图</a>|{/if}{/if}{/if} <a href="ea.php?r=ScenicPriceAlbum/CutPrice&pic_id={$pic.PIC_ID}&dest_id={$dest_id}&album_type={$album_type}&area=dest" >自定义缩略图</a>
+					</td>
+                </tr>
+				{/foreach}
+</tbody>
+{else}
+	<tbody>
+  <tr class="{cycle values='row0,row1'}">
+	<td align="center" style="color:red" colspan="8">没有找到相关的信息</td>
+                   
+  </tr>
+</tbody>
+{/if}
+</table>
+   </div>
+    <input type="hidden" name="CardType" value="{$condition.TYPE}" id="CARDTYPE">
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+  </tr>
+</table>
+</div>
+       </td>
+     </tr>
+   </table>
+<input type="hidden" id="headMenu" value="lsareamanager">
+   </div>
+   </div> 
+   </div>
+   {include file="popup.html" }
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

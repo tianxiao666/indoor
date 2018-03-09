@@ -1,0 +1,34 @@
+/*=================================
+智能旅游POI显示
+dateTime: 2010-12-29
+author: Monny
+=================================*/
+/*导入公共样式*/
+@import url("public.css");
+/*导入页头样式*/
+@import url("header.css");
+html,body{background: none repeat scroll 0 0 #FFFFFF;}
+.msg { float:left; width:542px; background:#fff; border:1px #999 solid; -webkit-border-radius:5px; -moz-border-radius:5px;}
+.msg .title { float:left; width:542px; height:36px;  overflow:hidden; background:url(../images/bg_title.jpg) center 0 no-repeat; margin-top:10px;}
+.msg .m { float:left; width:540px;  overflow:hidden; padding:0px 1px 0px 1px;}
+.msg .bot { float:left; width:542px; height:10px;  overflow:hidden}
+.msg .title .left { float:left; height:36px;  padding:0px 18px 0px 0px; margin:1px 0px 0px 18px; display:inline;}
+.msg .title .left span { float:left;}
+.msg .title .left strong { float:left; padding:9px 0px 5px 12px; font-size:14px; font-weight:bold; color:#fff;  position:relative; right:1px;}
+.msg .title .left strong a { color:#333;}
+.msg .m .cont1 { float:left; width:520px; padding:10px 0px 20px 20px;}
+.msg .m .cont1 .text { float:left; width:520px; padding:4px 0px 0px 0px;}
+.msg .m .cont1 .text .l { float:left; width:110px; padding:8px 0px 0px 0px; font-size:14px; color:#333;}
+.msg .m .cont1 .text .r { float:left; }
+.msg .m .cont1 .text .r input { width:353px; border:1px #ddd solid; height:22px; line-height:22px; }
+.msg .m .cont1 .text .r textarea{ width:343px; border:1px #ddd solid; height:80px; line-height:22px;padding:5px;}
+.msg .m .cont2 { float:left; width:520px; padding:10px 0px 20px 20px;}
+.msg .m .cont2 p{ line-height:30px; font-size:14px; color:#cc0000; }
+.msg .m .cont3 { float:left; width:540px; height:52px; text-align:center;}
+.msg .m .cont3 a { display:inline-block; margin:16px 10px 0px 10px;}
+.msg .m .cont3 a img{ border:0;}
+select {font-family: '微软雅黑'; height: 22px;}
+.bg_title_box{padding:0px 0px 0px 8px;float:left;width:300px;height: 25px}
+.bg_title_line{float:left;width:45%;line-height: 25px;text-align: center;background-color: #005AB5;
+			   border-radius: 8px 8px 0px 0px;color:#FFFFFF;font-weight:bold;margin-right: 8px;cursor: pointer;}
+

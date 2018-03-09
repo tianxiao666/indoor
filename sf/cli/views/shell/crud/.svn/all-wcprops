@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/shell/crud
+END
+update.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/shell/crud/update.php
+END
+controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/shell/crud/controller.php
+END
+create.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/shell/crud/create.php
+END
+test.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/shell/crud/test.php
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/cli/views/shell/crud/index.php
+END

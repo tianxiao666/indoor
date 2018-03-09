@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC 
+       "-//SPRING//DTD BEAN//EN"
+       "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+<!-- dao bean -->
+    <bean id="signalInfoDao" class="com.dao.SignalInfoDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="signalDao" class="com.dao.SignalDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="signalRegionCenterDao" class="com.dao.SignalRegionCenterDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<!-- action bean -->
+	<bean id="signalHandleAction" class="com.action.SignalHandleAction">
+		<property name="signalInfoDao" ref="signalInfoDao" />
+		<property name="signalDao" ref="signalDao" />
+		<property name="signalRegionCenterDao" ref="signalRegionCenterDao" />
+	</bean>
+	<bean id="getNearbyIndoormapBuildingListAction" class="com.action.GetNearbyIndoormapBuildingListAction">
+	</bean>
+    <bean id="getIndoormapBuildingFloorListAction" class="com.action.GetIndoormapBuildingFloorListAction">
+	</bean>
+	<bean id="getIndoormapBuildingFloorMapUrlAction" class="com.action.GetIndoormapBuildingFloorMapUrlAction">
+	</bean>
+	<bean id="getIndoormapBuildingFloorFastSearchKeyListAction" class="com.action.GetIndoormapBuildingFloorFastSearchKeyListAction">
+	</bean>
+	<bean id="doIndoormapBuildingFloorSearchAction" class="com.action.DoIndoormapBuildingFloorSearchAction">
+	</bean>
+	<bean id="checkHasNewVersionAction" class="com.action.CheckHasNewVersionAction">
+	</bean>
+	<bean id="triangulationLocationAction" class="com.action.TriangulationLocationAction">
+	    <property name="signalInfoDao" ref="signalInfoDao" />
+		<property name="signalDao" ref="signalDao" />
+		<property name="signalRegionCenterDao" ref="signalRegionCenterDao" />
+	</bean>
+	<bean id="getCenterLocationAction" class="com.action.GetCenterLocationAction">
+	    <property name="signalInfoDao" ref="signalInfoDao" />
+		<property name="signalDao" ref="signalDao" />
+		<property name="signalRegionCenterDao" ref="signalRegionCenterDao" />
+	</bean>
+	
+	
+</beans>

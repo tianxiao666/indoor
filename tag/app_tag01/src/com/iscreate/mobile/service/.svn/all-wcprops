@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/src/com/iscreate/mobile/service
+END
+HttpService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/src/com/iscreate/mobile/service/HttpService.java
+END
+GsonService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/src/com/iscreate/mobile/service/GsonService.java
+END
+ServiceClientInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/src/com/iscreate/mobile/service/ServiceClientInterface.java
+END
+MobilePackage.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/179/tag/app_tag01/src/com/iscreate/mobile/service/MobilePackage.java
+END

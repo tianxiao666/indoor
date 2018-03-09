@@ -1,0 +1,94 @@
+ {include file="header.html"}
+<input type="hidden" id="headMenu" value="lsareamanager">
+
+<link href="css/diet.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+
+<div class="content">
+  <div class="main">
+      <div class="crumb"><span>当前位置：<a href="ea.php?r=LsArea/AreaList">旅游数据管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=Diet/List">餐饮管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=Diet/Update&id={$info.FACL_ID}">编辑{$info.FACL_NAME|strip_tags}</a>&nbsp;&gt;&nbsp;消费信息</span>
+      </div>
+      <div class="tabtext" id="tabtext1" ><div class="c"></div>
+      <table width="100%" class="diet_table">
+      <tr>
+        <td class="resource_menu_left_td">
+        {include file="resource_menu_left.html" info=$info cur=4}
+        </td>
+       <td class="right_td">
+       <form action="ea.php?r=Diet/DoAddConsume" method="post" id="add_consume_form" name="add_consume_form">
+       <input type="hidden" name="FACL_ID" value="{$info.FACL_ID}" id="FACL_ID" />
+       <table class="support">
+          <tr>
+              <td colspan="4"><div class="form_title">添加信息</div></td>
+          </tr>
+          <tr>
+              <td class="title">人均消费:</td>
+              <td colspan="3">单位：元/人（多选，必填）<br />
+              {html_checkboxes options=$DIET_AVG_CONSUME_LIST labels=true name="DIET_AVG_CONSUME" selected=$info.DIET_AVG_CONSUME}
+              </td>
+          </tr>
+          <tr>
+              <td class="title">其他说明:</td>
+              <td colspan="3">
+                <textarea name="NOTE" id="NOTE">{$info.DIET_AVG_CONSUME_NOTE|strip_tags}</textarea>
+                <span class="invalid clear">（选填，限制4000个字符）</span>
+              </td>
+          </tr>
+          <tr>
+              <td class="title">&nbsp;</td>
+          	<td colspan="3">
+            <div class="button">
+                <input type="button" class="title" id="doSubmit" onclick="addconsume_submit()" value="保存">
+            </div>
+            </td>
+          </tr>
+    	</table>
+      </form>
+      	
+      </td>
+      </tr>
+      </table>
+    </div>
+   </div> 
+</div>
+{include file="popup.html"}
+{literal}
+<!--doCreate-->
+<script language="javascript">
+function addconsume_submit(){
+        var diet_avg_consume_flag = false;
+        var diet_avg_consume_check = document.getElementsByName('DIET_AVG_CONSUME[]');
+        for (var x=0; x<diet_avg_consume_check.length; x++) {
+                if(diet_avg_consume_check[x].checked){
+                        diet_avg_consume_flag = true;
+                        break;
+                }
+        }
+       if (!diet_avg_consume_flag) {
+            AlertTips('至少选择一个人均消费！');
+            return false;
+        }
+       $("#add_consume_form").submit();
+}
+//提示信息
+function AlertTips(msg){
+        var width = 200;
+        var height = 100;
+        var top = 300;
+        var left = 450;
+    $.popup({
+        content:"<font color='red'>"+msg+"</font>",
+        now:true,
+        type:2,
+                width  : width,
+                height : height,
+                top    : top,
+                left   : left,
+        title:"提示"
+    });
+    setTimeout("$.popup({close:true});",1500);
+}
+</script>
+
+{/literal}
+{include file="footer.html"}

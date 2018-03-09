@@ -1,0 +1,168 @@
+{include file="header.html" title="部门管理" curindex="10"}
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function toSubmit(){
+	  var frm = document.headSearchForm;
+	  frm.action='ea.php?r=DeptMgr/SearchDept';
+	  frm.submit();
+}
+
+function display(flag,id,imgnode){
+	if(imgnode.title == "+"){
+		imgnode.title = "-";
+		var strlist = document.getElementsByName(flag+id);
+		for(var i=0;i<strlist.length;i++){
+	       strlist[i].style.display = "";
+		}
+		imgnode.src = "images/gzsdot5a.gif";
+	}
+	else{
+		imgnode.title = "+";
+		var strlist = document.getElementsByName(flag+id);
+		for(var i=0;i<strlist.length;i++){
+	       strlist[i].style.display = "none";
+	       if(flag == "s"){//隐藏子层
+		      var tlist = document.getElementsByName("t"+id+"."+i);
+		      for(var ti=0;ti<tlist.length;ti++){
+		    		   tlist[ti].style.display = "none";
+		      }
+		      var imglist = document.getElementsByName("img"+id);
+		     for(var gi=0;gi<imglist.length;gi++){//更改图片(+-)
+		    	 imglist[gi].title = "+";
+		    	 imglist[gi].src =  "images/gzsdot5b.gif";
+		      }
+	      }
+	       
+		}
+		imgnode.src = "images/gzsdot5b.gif"; 
+	}
+}
+
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;用户管理</span></div>
+  <input type="hidden" id="subbarFlag" value="dept_mgr_bar" />
+ 
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+   <tr>
+   <td valign="top" style="padding:10px 10px 0;">
+   <div class="scenic_search">
+   <div class="chose">
+   <form method="post" name="headSearchForm" id="headSearchForm" >
+   <span>部门名称：</span><input type="text" name="D_NAME" id="D_NAME" class="intxt" tabIndex="1" value="{$condition.D_NAME}"/>
+   
+   <input type="button" value="搜索" style="font-size: 12px; width: 60px; height: 20px;" onclick="toSubmit();">
+   </form></div></div>
+   </td></tr>
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /> <font color="#a40000" style="font-weight:bold;font-size:14px">部门列表</font></td>
+					{if $user_role.ADMIN}<td width="50%" align="right"><a href="ea.php?r=DeptMgr/AddDept" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增部门]</font></a></td>{/if}
+				</tr>
+			</table>
+<table class="itable">
+<thead>
+ <tr>
+                    <th style="padding-right: 40px">部门名称</th>
+                    <th style="padding-right: 40px">所属部门</th>
+                    <th style="padding-right: 40px">创建日期</th>
+                    <th style="padding-right: 40px">相关操作</th>
+                </tr>
+</thead>
+<tbody>
+{if $dept_list}
+	{section name=i loop=$dept_list}
+		{assign var="fi" value=$smarty.section.i.index}
+                <tr>
+                    <td>{if $dept_list[i].child}
+			              <img src='images/gzsdot5a.gif' title="-" onclick="display('s','{$fi}',this);">
+			              {else}&nbsp;&nbsp;
+		              {/if}
+                    {$dept_list[i].DEPT_NAME}</td>
+                    <td>{$dept_list[i].pname}</td>
+					<td>{$dept_list[i].CREATE_TIME}</td>
+                    <td>
+						<a href="ea.php?r=DeptMgr/EditDept&id={$dept_list[i].DEPT_ID}"><img src="" border="0" align="absmiddle" /><font color="#666">编辑</font></a>
+						<a href="ea.php?r=SysUserMgr/SearchUser&id={$dept_list[i].DEPT_ID}"><font color="#666"></font>查看成员</a>
+					</td>
+                </tr>
+                {if $dept_list[i].child}
+	                {foreach from=$dept_list[i].child item=sdept key=key}
+	                <tr name="s{$fi}" id="s{$fi}"><!-- 二级 -->
+		            
+		            <td>&nbsp;&nbsp;
+		            {if $sdept.child}
+		                   <img src="images/gzsdot5a.gif" title="-" onclick="display('t','{$fi}.{$key}',this);" name="img{$fi}">
+		                   {else}&nbsp;&nbsp;
+		                {/if}
+		            {$sdept.DEPT_NAME}</td>
+		            <td>{$sdept.pname}</td>
+					<td>{$sdept.CREATE_TIME}</td>
+                    <td>
+						<a href="ea.php?r=DeptMgr/EditDept&id={$sdept.DEPT_ID}"><img src="" border="0" align="absmiddle" /><font color="#666">编辑</font></a>
+						<a href="ea.php?r=SysUserMgr/SearchUser&id={$sdept.DEPT_ID}"><font color="#666"></font>查看成员</a>
+						 <!--<td style="border:0px;"><a href="ea.php?r=DictMgr/DeleteCode&CODE_TYPE={$code_list[i].CODE_TYPE}" target="bf" onclick="return deleteAdmin();"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">删除资料</font></a></td>-->
+					</td>
+                </tr>
+                {if $sdept.child}
+			                {foreach from=$sdept.child item=tdept}
+				            <tr name="t{$fi}.{$key}" id="t{$fi}.{$key}"><!--三级 -->
+				            <td>&nbsp;&nbsp;&nbsp;&nbsp;
+				            {if $tdept.child}
+		                   <img src="images/gzsdot5a.gif" title="-" onclick="display('t','{$fi}.{$key}',this);" name="img{$fi}">
+		                   {else}&nbsp;&nbsp;
+		                {/if}
+		            {$tdept.DEPT_NAME}</td>
+		            <td>{$tdept.pname}</td>
+					<td>{$tdept.CREATE_TIME}</td>
+                    <td>
+						<a href="ea.php?r=DeptMgr/EditDept&id={$tdept.DEPT_ID}"><img src="" border="0" align="absmiddle" /><font color="#666">编辑</font></a>
+						<a href="ea.php?r=SysUserMgr/SearchUser&id={$tdept.DEPT_ID}"><font color="#666"></font>查看成员</a>
+						 <!--<td style="border:0px;"><a href="ea.php?r=DictMgr/DeleteCode&CODE_TYPE={$code_list[i].CODE_TYPE}" target="bf" onclick="return deleteAdmin();"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">删除资料</font></a></td>-->
+					</td>
+                </tr>
+                {/foreach}{/if}
+                {/foreach}{/if}
+	{/section}
+	{else}
+<th width="15%" align="left" colspan="4"><div align="center" style="color: red;">没有找到任何记录</div></th>
+{/if}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+  </tr>
+</table>
+	<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

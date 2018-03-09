@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>后台管理系统</title>
+<link href="css/header.css" rel="stylesheet" type="text/css" />
+<script src="./js/jquery/jquery_1_3_2.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+function checkLoginForm()
+{
+	if($('#userName').val() == '')
+	{
+		$('#message').html('请填写登录帐号！');
+		return false;
+	}
+	if($('#userPassword').val() == '')
+	{
+		$('#message').html('请填写登录密码！');
+		return false;
+	}
+	if($('#pass').val() == '')
+	{
+		$('#message').html('请填写验证码！');
+		return false;
+	}
+//	$('#java_login').attr("src","{/literal}{$javaurl}{literal}slogin?userid="+$('#userName').val()+"&password="+$('#userPassword').val());
+	return true;
+}
+</script>
+{/literal}
+</head>
+
+<body>
+<div class="warp">
+<div class="login">
+<div class="login-top" id="message">{$error_msg}</div>
+<div class="login-mid">
+<form id="LoginForm" name="LoginForm" method="post" action="ea.php?r=login/login"  onsubmit="return checkLoginForm();">
+<ul class="form-login">
+<li><p>用 户 名：</p> <input name="userName" id="userName"  type="text"  class="inp" size="20"/>
+</li>
+<li><p>用户密码：</p> <input name="userPassword" id="userPassword" type="password"  class="inp" size="20"/>
+</li>
+<li><p>验 证 码：</p> <input name="pass" id="pass" type="text"  class="inp" size="10"/> 
+  <script>document.write('<img src="ea.php?r=Login/authImage&session_mode=1&', Math.random(), '" />');</script></li>
+<li><span><input type="image" class="login-btn" src="images/login_btn.jpg" /></span></li>
+</ul>
+<!--<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+<iframe id="java_login" name="java_login" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+-->
+<!--<iframe id="bf" name="bf" src="about:blank" frameborder="0" height="0" scrolling="no" width="0"></iframe>
+<iframe id="java_login" name="java_login" src="about:blank" frameborder="0" height="0" scrolling="no" width="0"></iframe
+</form>-->
+</div>
+
+<div class="login-bom"></div>
+<div class="login-foot">
+  <p>广州tripdata互联网科技有限公司  </p>
+  <p> Copyright (C) 2011-2013 All Rights Reserved </p>
+</div>
+</div>
+</div>
+
+</body>
+</html>

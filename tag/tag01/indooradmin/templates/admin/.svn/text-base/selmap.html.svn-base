@@ -1,0 +1,8 @@
+{if $mapinfo}
+<img src="{$mapinfo.PATH}{$mapinfo.FILENAME}" width="500px" height="400px;"/>
+{else}
+<img src="{$path}" />
+<br/>
+<br/>
+<a href="ea.php?r=ScenicPriceAlbum/CutPrice&pic_id={$pic_id}">∑µªÿºÙ«–Õº∆¨“≥</a>
+{/if}

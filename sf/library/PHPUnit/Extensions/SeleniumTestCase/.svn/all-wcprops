@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/SeleniumTestCase
+END
+Driver.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/SeleniumTestCase/Driver.php
+END
+append.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/SeleniumTestCase/append.php
+END
+phpunit_coverage.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/SeleniumTestCase/phpunit_coverage.php
+END
+prepend.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/SeleniumTestCase/prepend.php
+END

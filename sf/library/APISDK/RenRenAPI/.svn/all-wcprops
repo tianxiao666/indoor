@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI
+END
+RenRenOauth.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/RenRenOauth.php
+END
+example.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/example.php
+END
+RenRenClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/RenRenClient.php
+END
+requires.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/requires.php
+END
+RESTClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/RESTClient.php
+END
+config.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/config.inc.php
+END

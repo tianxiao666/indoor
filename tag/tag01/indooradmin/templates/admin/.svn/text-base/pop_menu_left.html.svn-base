@@ -1,0 +1,104 @@
+{literal}
+<style type="text/css">
+.pop_menu_left {
+	background:#f2f2f2;
+	float:left;
+	padding:10px;
+	width:125px;
+	margin:10px;
+	border-radius:5px;
+}
+.pop_menu_left .menu_event {
+	text-align:right;
+}
+.pop_menu_left .menu_event .menu_event_obj { cursor:pointer; }
+.pop_menu_left .menu_links {border-bottom:1px solid #c4c4c4;}
+.pop_menu_left .menu_links ul{ list-style-type: none; margin-top:10px; padding:0px; }
+.pop_menu_left .menu_links ul li {border-left:1px solid #c4c4c4;border-right: 1px solid #c4c4c4; border-top: 1px solid #c4c4c4;
+    clear: both;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    width: 100%;text-indent:1em; } 
+.pop_menu_left .menu_links ul li.second { padding-left: 20px;width:85px; }
+.pop_menu_left .menu_links ul li.disabled {color:#999;}
+.pop_menu_left .menu_links ul li.cur {background-color:#DDDDDD;}
+.pop_menu_left .menu_links ul li.cur a{ font-weight:bold;color:#e27135; }
+.pop_menu_left .menu_links ul li.last { border-bottom: 1px solid #666666; }
+.pop_menu_left .menu_links ul li.basename { height:auto; line-height:normal;}
+.pop_menu_left .menu_links ul li a{color:#333333; display:block; width: 100%; text-decoration:none;}
+
+.pop_menu_left .menu_links ul li a:visited{}
+.pop_menu_left .menu_links ul li a:hover{text-decoration:underline;color:#e27135;}
+.pop_menu_left .menu_links ul li .disabled{color:#999;}
+</style>
+{/literal}
+<div class="pop_menu_left">
+  <div class="menu_event"> <img src="images/gzsdot5a.gif" alt="收缩" class="menu_event_obj" /> </div>
+  <div class="menu_links" id="menu_links">
+  {if $pop_menu_file}
+  {include file=$pop_menu_file info=$info cur=$cur}
+  {else}
+    <ul>
+      <!--1-->
+      <li class="{if $cur==1}cur{/if}">
+        <a href="?r=TravelArea/Create">添加旅游区</a>
+      </li>
+      <!--2-->
+      <li class="{if $cur==2} cur{/if}">
+      {if $info.TOURISM_ID}
+        <a href="?r=TravelArea/Update&id={$info.TOURISM_ID}">
+          {$info.TOURISM_NAME|strip_tags}
+        </a>
+      {else}
+        旅游区基本信息
+      {/if}
+      </li>
+      <li class="second{if $cur==22} cur{/if}">
+      {if $info.TOURISM_ID}
+        <a href="?r=TravelArea/Map&id={$info.TOURISM_ID}">旅游区地图</a>
+      {else}
+        旅游区地图
+      {/if}
+      </li>
+      <!--3-->
+      <li class="{if $cur==3}cur{/if}">
+      {if $info.TOURISM_ID}
+        <a href="?r=TravelArea/AreaList&id={$info.TOURISM_ID}">景区列表</a>
+      {else}
+        景区列表
+      {/if}
+      </li>
+      <li class="second{if $cur==31} cur{/if}">
+      {if $info.TOURISM_ID}
+        <a href="?r=TravelArea/RelateAreas&id={$info.TOURISM_ID}">关联景区</a>
+      {else}
+        关联景区
+      {/if}
+      </li>
+    </ul>
+  {/if}
+  </div>
+</div>
+<!--<script language="javascript" type="text/javascript" src="js/jquery/jquery-1.6.2.min.js"></script>-->
+{literal} 
+<script language="javascript">
+var height ="";
+var width ="";
+jQuery(document).ready(function($){
+	height = $(".pop_menu_left").height();
+	width = $(".pop_menu_left").width();
+	$(".menu_event_obj").toggle(function(){
+		$(".pop_menu_left").animate({"width":"15"+"px"},{"duration" : 500}).animate({"height":"15"+"px"},{"duration" : 500});
+		setTimeout('document.getElementById("menu_links").style.display="none";',1000);
+		$(this).attr("src","images/gzsdot5b.gif");
+	},function(){
+		$(".pop_menu_left").show().animate({"height":height+"px"},{"duration" : 500}).animate({"width":width+"px"},{"duration" : 500});
+		setTimeout('document.getElementById("menu_links").style.display="block";',1000);
+		$(this).attr("src","images/gzsdot5a.gif");
+	});
+	
+});
+</script> 
+{/literal}

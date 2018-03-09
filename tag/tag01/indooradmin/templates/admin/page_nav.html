@@ -1,0 +1,7 @@
+{if $page_nav}
+<div class="bread-nav">
+µ±«∞Œª÷√:{foreach from=$page_nav item=nav name=page_nav_name}
+<a href='{$phpSelf}?r={$nav.CONTROLLER}/{$nav.ACTION}'>{$nav.NAME}</a>{if !$smarty.foreach.page_nav_name.last}>>{/if}
+{/foreach}
+</div>
+{/if}

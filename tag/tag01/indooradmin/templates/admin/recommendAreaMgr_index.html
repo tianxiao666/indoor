@@ -1,0 +1,401 @@
+{include file="header.html"}
+{literal}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<style>
+.itable td{padding:5px 0px 5px 10px;border:1px solid #ccc;color:#666;font-size:14px; }
+</style>
+<script type="text/javascript" src="js/jquery/jquery-1.6.1.min.js" ></script>
+<script src="js/ajax/getpcda.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#addnew").click(function(){
+		$("<tr>"+
+				"<input type='hidden' class='REGION_ID' value=''>"+
+				"<td align='left' class='td_1'><input type='text' size='13' class='REGION_NAME'></td>"+
+				"<td align='left' class='td_2'><input type='text' size='10' class='REGION_GRADE'></td>"+
+				"<td align='left' class='td_3'><input type='text' size='13' class='E_LONGITUDE'></td>"+
+				"<td align='left' class='td_4'><input type='text' size='13' class='N_LATITUDE'></td>"+
+				"<td align='left' class='td_5'><input type='text' size='13' class='W_LONGITUDE'></td>"+
+				"<td align='left' class='td_6'><input type='text' size='13' class='S_LATITUDE'></td>"+
+				"<td align='left' class='td_7'><input type='text' size='13' class='LONGITUDE'></td>"+
+				"<td align='left' class='td_8'><input type='text' size='13' class='LATITUDE'></td>"+
+				"<td align='left' class='td_9'></td>"+
+//				"<td align='left' class='td_9'><input type='text' size='13' class='ACREAGE'></td>"+
+				"<td align='left' class='td_10'><input type='button' value='保存新增' onclick='R_submit(this);'><input type='button' value='删除' onclick='removeLine(this)'></td>"+
+				"</tr>").insertAfter($('#R_table'));
+	})
+})
+
+//根据经纬度计算两点距离
+var EARTH_RADIUS = 6378.137;
+function rad(d)
+{
+    return d * Math.PI / 180.0;
+}
+
+function GetDistance( lat1, lng1, lat2, lng2)
+{
+      var radLat1 = rad(lat1);
+      var radLat2 = rad(lat2);
+      var a = radLat1 - radLat2;
+      var b = rad(lng1) - rad(lng2)
+      var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
+      Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+      s = s * EARTH_RADIUS;
+      s = Math.round(s * 10000) / 10000;
+     
+   return s;
+}
+
+var removeLine = function(o){
+	$(o).parent().parent().remove();
+}
+
+var R_submit = function(o){
+	//js方式
+	//var REGION_NAME = ($(o).parent().parent())[0].getElementsByTagName("input")[0].value;
+	/*================*/
+	//jquery方式
+	var REGION_NAME = $(o).parent().parent().find(".REGION_NAME").val(); //地区名
+	var REGION_GRADE = $(o).parent().parent().find(".REGION_GRADE").val();//级别
+	var E_LONGITUDE = $(o).parent().parent().find(".E_LONGITUDE").val();//东经度
+	var N_LATITUDE = $(o).parent().parent().find(".N_LATITUDE").val();//北纬度
+	var W_LONGITUDE = $(o).parent().parent().find(".W_LONGITUDE").val();//西经度
+	var S_LATITUDE = $(o).parent().parent().find(".S_LATITUDE").val();//南纬度
+	var LONGITUDE = $(o).parent().parent().find(".LONGITUDE").val();//中心点经度
+	var LATITUDE = $(o).parent().parent().find(".LATITUDE").val();//中心点纬度
+	//var ACREAGE = $(o).parent().parent().find(".ACREAGE").val();//面积
+	
+	if(REGION_NAME.replace(/^\s*|\s*$/g,'')==''){
+		alert('地区名不能为空！');
+		return false;
+	}
+	if(REGION_GRADE !='-1' && REGION_GRADE !='0' && REGION_GRADE !='1' && REGION_GRADE !='2' && REGION_GRADE !='3'){
+		alert("级别只能为-1,0,1,2,3!");
+		return false;
+	}
+	//if(REGION_GRADE.replace(/^\s*|\s*$/g,'')==''){
+	//	alert('级别不能为空！');
+	//	return false;
+	//}
+	//var re =/^(0|100|[1-9][0-9]?)$/ ;
+	//if(!re.test(REGION_GRADE)){
+	//	alert('级别只能为整数！');
+	//	return false;
+	//}
+	if(E_LONGITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(E_LONGITUDE)){
+			alert('东经度只能为整数！');
+			return false;
+		}
+	}
+	if(N_LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(N_LATITUDE)){
+			alert('北纬度只能为整数！');
+			return false;
+		}
+	}
+	if(W_LONGITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(W_LONGITUDE)){
+			alert('西经度只能为整数！');
+			return false;
+		}
+	}
+	if(S_LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(S_LATITUDE)){
+			alert('南纬度只能为整数！');
+			return false;
+		}
+	}
+	if(LONGITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(LONGITUDE)){
+			alert('中心点经度只能为整数！');
+			return false;
+		}
+	}
+	if(LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(LATITUDE)){
+			alert('中心点纬度只能为整数！');
+			return false;
+		}
+	}
+	
+	var ACREAGE = '';
+	if(E_LONGITUDE.replace(/^\s*|\s*$/g,'')!='' && N_LATITUDE.replace(/^\s*|\s*$/g,'')!='' && W_LONGITUDE.replace(/^\s*|\s*$/g,'')!='' && S_LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		var C = GetDistance(S_LATITUDE, E_LONGITUDE, S_LATITUDE, W_LONGITUDE);
+		var D = GetDistance(S_LATITUDE, E_LONGITUDE, N_LATITUDE, E_LONGITUDE);
+		ACREAGE = Math.round(C * D);
+
+	}
+	
+	$.ajax({
+		type: "POST",
+		url: "ea.php?r=RecommendAreaMgr/AddRecommendArea",
+		data: "REGION_NAME="+REGION_NAME+"&REGION_GRADE="+REGION_GRADE+"&E_LONGITUDE="+(E_LONGITUDE * 3600 * 1000)+"&N_LATITUDE="+(N_LATITUDE * 3600 * 1000)+"&W_LONGITUDE="+(W_LONGITUDE * 3600 * 1000)+"&S_LATITUDE="+(S_LATITUDE * 3600 * 1000)+"&LONGITUDE="+(LONGITUDE * 3600 * 1000)+"&LATITUDE="+(LATITUDE * 3600 * 1000)+"&ACREAGE="+ACREAGE,
+		//beforeSend: $("<p>请等待...</p>").insertAfter($(o).parent().parent().find(".tips_saveedit")),
+		success: function(msg){
+			if(msg){
+				$(o).parent().parent().find(".REGION_ID").val(msg);
+				$(o).parent().parent().find(".td_1").html(REGION_NAME);
+				$(o).parent().parent().find(".td_2").html(REGION_GRADE);
+				$(o).parent().parent().find(".td_3").html(E_LONGITUDE);
+				$(o).parent().parent().find(".td_4").html(N_LATITUDE);
+				$(o).parent().parent().find(".td_5").html(W_LONGITUDE);
+				$(o).parent().parent().find(".td_6").html(S_LATITUDE);
+				$(o).parent().parent().find(".td_7").html(LONGITUDE);
+				$(o).parent().parent().find(".td_8").html(LATITUDE);
+				$(o).parent().parent().find(".td_9").html(ACREAGE);
+				$(o).parent().parent().find(".td_10").html("<a href='#' onclick='changeEdit(this)'>编辑</a>");
+			}
+			else{
+				alert('数据有误！');
+				return false;
+			}
+		}
+	});
+	
+}
+
+var changeEdit = function(o){
+	var REGION_NAME = $(o).parent().parent().find(".td_1").html(); //地区名
+	var REGION_GRADE = $(o).parent().parent().find(".td_2").html();//级别
+	var E_LONGITUDE = $(o).parent().parent().find(".td_3").html();//东经度
+	var N_LATITUDE = $(o).parent().parent().find(".td_4").html();//北纬度
+	var W_LONGITUDE = $(o).parent().parent().find(".td_5").html();//西经度
+	var S_LATITUDE = $(o).parent().parent().find(".td_6").html();//南纬度
+	var LONGITUDE = $(o).parent().parent().find(".td_7").html();//中心点经度
+	var LATITUDE = $(o).parent().parent().find(".td_8").html();//中心点纬度
+	var ACREAGE = $(o).parent().parent().find(".td_9").html();//面积
+	
+	$(o).parent().parent().find(".td_1").html("<input type='text' size='13' class='REGION_NAME' value='"+REGION_NAME+"'>");
+	$(o).parent().parent().find(".td_2").html("<input type='text' size='10' class='REGION_GRADE' value='"+REGION_GRADE+"'>");
+	$(o).parent().parent().find(".td_3").html("<input type='text' size='13' class='E_LONGITUDE' value='"+E_LONGITUDE+"'>");
+	$(o).parent().parent().find(".td_4").html("<input type='text' size='13' class='N_LATITUDE' value='"+N_LATITUDE+"'>");
+	$(o).parent().parent().find(".td_5").html("<input type='text' size='13' class='W_LONGITUDE' value='"+W_LONGITUDE+"'>");
+	$(o).parent().parent().find(".td_6").html("<input type='text' size='13' class='S_LATITUDE' value='"+S_LATITUDE+"'>");
+	$(o).parent().parent().find(".td_7").html("<input type='text' size='13' class='LONGITUDE' value='"+LONGITUDE+"'>");
+	$(o).parent().parent().find(".td_8").html("<input type='text' size='13' class='LATITUDE' value='"+LATITUDE+"'>");
+	//$(o).parent().parent().find(".td_9").html("<input type='text' size='13' class='ACREAGE' value='"+ACREAGE+"'>");
+	$(o).parent().parent().find(".td_10").html("<a href='#' onclick='saveEdit(this)' class='tips_saveedit'>保存编辑</a>");
+	
+}
+
+var saveEdit = function(o){
+	var REGION_ID = $(o).parent().parent().find(".REGION_ID").val(); //地区ID
+	var REGION_NAME = $(o).parent().parent().find(".REGION_NAME").val(); //地区名
+	var REGION_GRADE = $(o).parent().parent().find(".REGION_GRADE").val();//级别
+	var E_LONGITUDE = $(o).parent().parent().find(".E_LONGITUDE").val();//东经度
+	var N_LATITUDE = $(o).parent().parent().find(".N_LATITUDE").val();//北纬度
+	var W_LONGITUDE = $(o).parent().parent().find(".W_LONGITUDE").val();//西经度
+	var S_LATITUDE = $(o).parent().parent().find(".S_LATITUDE").val();//南纬度
+	var LONGITUDE = $(o).parent().parent().find(".LONGITUDE").val();//中心点经度
+	var LATITUDE = $(o).parent().parent().find(".LATITUDE").val();//中心点纬度
+	//var ACREAGE = $(o).parent().parent().find(".ACREAGE").val();//面积
+	
+	if(REGION_NAME.replace(/^\s*|\s*$/g,'')==''){
+		alert('地区名不能为空！');
+		return false;
+	}
+   if(REGION_GRADE !='-1' && REGION_GRADE !='0' && REGION_GRADE !='1' && REGION_GRADE !='2' && REGION_GRADE !='3'){
+		alert("级别只能为-1,0,1,2,3!");
+		return false;
+	}
+	//if(REGION_GRADE.replace(/^\s*|\s*$/g,'')==''){
+	//	alert('级别不能为空！');
+	//	return false;
+	//}
+	//var re =/^(0|100|[1-9][0-9]?)$/ ;
+	//if(isNaN(REGION_GRADE)){
+	//	alert('级别只能为整数！');
+	//	return false;
+	//}
+	//if(!isNaN(REGION_GRADE)){
+	//	if(!re.test(REGION_GRADE)){
+	//		alert('级别范围为0~100！');
+	//		return false;
+	//	}
+	//}
+	if(E_LONGITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(E_LONGITUDE)){
+			alert('东经度只能为整数！');
+			return false;
+		}
+	}
+	if(N_LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(N_LATITUDE)){
+			alert('北纬度只能为整数！');
+			return false;
+		}
+	}
+	if(W_LONGITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(W_LONGITUDE)){
+			alert('西经度只能为整数！');
+			return false;
+		}
+	}
+	if(S_LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(S_LATITUDE)){
+			alert('南纬度只能为整数！');
+			return false;
+		}
+	}
+	if(LONGITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(LONGITUDE)){
+			alert('中心点经度只能为整数！');
+			return false;
+		}
+	}
+	if(LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		if(isNaN(LATITUDE)){
+			alert('中心点纬度只能为整数！');
+			return false;
+		}
+	}
+	
+	var ACREAGE = '';
+	if(E_LONGITUDE.replace(/^\s*|\s*$/g,'')!='' && N_LATITUDE.replace(/^\s*|\s*$/g,'')!='' && W_LONGITUDE.replace(/^\s*|\s*$/g,'')!='' && S_LATITUDE.replace(/^\s*|\s*$/g,'')!=''){
+		var C = GetDistance(S_LATITUDE, E_LONGITUDE, S_LATITUDE, W_LONGITUDE);
+		var D = GetDistance(S_LATITUDE, E_LONGITUDE, N_LATITUDE, E_LONGITUDE);
+		ACREAGE = Math.round(C * D);
+
+	}
+	$.ajax({
+		type: "POST",
+		url: "ea.php?r=RecommendAreaMgr/EditRecommendArea",
+		data: "REGION_ID="+REGION_ID+"&REGION_NAME="+REGION_NAME+"&REGION_GRADE="+REGION_GRADE+"&E_LONGITUDE="+(E_LONGITUDE * 3600 * 1000)+"&N_LATITUDE="+(N_LATITUDE * 3600 * 1000)+"&W_LONGITUDE="+(W_LONGITUDE * 3600 * 1000)+"&S_LATITUDE="+(S_LATITUDE * 3600 * 1000)+"&LONGITUDE="+(LONGITUDE * 3600 * 1000)+"&LATITUDE="+(LATITUDE * 3600 * 1000)+"&ACREAGE="+ACREAGE,
+		//beforeSend: $("<p>请等待...</p>").insertAfter($(o).parent().parent().find(".tips_saveedit")),
+		success: function(msg){
+			if(msg != 0){
+				$(o).parent().parent().find(".td_1").html(REGION_NAME);
+				$(o).parent().parent().find(".td_2").html(REGION_GRADE);
+				$(o).parent().parent().find(".td_3").html(E_LONGITUDE);
+				$(o).parent().parent().find(".td_4").html(N_LATITUDE);
+				$(o).parent().parent().find(".td_5").html(W_LONGITUDE);
+				$(o).parent().parent().find(".td_6").html(S_LATITUDE);
+				$(o).parent().parent().find(".td_7").html(LONGITUDE);
+				$(o).parent().parent().find(".td_8").html(LATITUDE);
+				$(o).parent().parent().find(".td_9").html(ACREAGE);
+				$(o).parent().parent().find(".td_10").html("<a href='#' onclick='changeEdit(this)'>编辑</a>");
+			}
+			else{
+				alert('编辑失败！');
+				return false;
+			}
+		}
+	});
+}
+
+var toSubmit = function(){
+	var frm = document.form;
+	  frm.action="ea.php?r=RecommendAreaMgr/Search";
+	  frm.submit();
+}
+</script>
+{/literal}
+<div class="content">
+  	<div class="main">
+  	
+		<div class="crumb">
+		    <span>
+		    	当前位置：<a href="#">内容管理</a>&nbsp;&gt;&nbsp;推荐范围管理
+		    </span>
+		</div>
+	    
+		<div class="tabtext" id="tabtext1">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+		    	<tr> 
+			  		<td valign="top" style="padding:10px 10px 0;border: medium none;">
+						<div class="scenic_search">
+							<div class="chose">
+							<form method="post" name="form" style="margin: 0px; padding: 0px; width: 1000px;">
+							<table border="0" cellspacing="0" cellpadding="0" style="color:#FFF;">
+								<tbody>
+									<tr>
+										<td height="25" align="left" class="formTitle"><span>地区名：</span></td>
+										<td height="25">
+											<span style="background: none no-repeat scroll 0 0 #FFFFFF;border: 1px solid #6A80A9;float: left;width: 150px;">
+												<input class="txtSearch" name="region_name" id="work_title" value="{$region_name}" type="text" style="font-size: 12px;"/>
+											</span>
+										</td>
+										<td height="25">级别：<select id="grade" name="grade"
+											style="font-size: 12px;">
+											<option value="">--请选择--</option>
+											<option value="-1">洲</option>
+											<option value="0">国家/地区</option>
+											<option value="1">省份</option>
+											<option value="2">城市</option>
+											<option value="3">市区</option>
+										</select></td>
+										<td height="25" align="left" class="formTitle"><span>经度：</span></td>
+										<td height="25"><input type="text" name="longitude" value="{$longitude}"></td>
+										<td height="25" align="left" class="formTitle"><span>纬度：</span></td>
+										<td height="25"><input type="text" name="latitude" value="{$latitude}"></td>
+										<td height="25">
+										<div class="btn_search"><a href="javascript:toSubmit();"></a></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							</form>
+							</div>
+						</div>
+						
+			  		</td>
+		  		</tr>
+		  		
+				<tr> 
+					<td valign="top" style="padding:10px 10px 0;">
+					<div style="float: left"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> 推荐范围管理</font></div>
+					<div style="float: right"><a id="addnew" href="javascript:;" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增推荐范围]</font></a></div>
+					<table class="itable">
+						<thead id="R_table">
+						<tr>
+						 	<th width="10%" align="left">地区名</th>
+						 	<th width="8%" align="left">级别</th>
+						 	<th width="10%" align="left">东经度</th>
+						 	<th width="10%" align="left">北纬度</th>
+						 	<th width="10%" align="left">西经度</th>
+						 	<th width="10%" align="left">南纬度</th>
+						 	<th width="10%" align="left">中心点经度</th>
+						 	<th width="10%" align="left">中心点纬度</th>
+						 	<th width="10%" align="left">面积</th>
+						 	<th width="12%" align="left">操作</th>
+						</tr>
+						</thead>
+						{if $regionlist}
+							{section loop=$regionlist name=i}
+					                <tr class="itable">
+					                	<input type="hidden" class='REGION_ID' value="{$regionlist[i].REGION_ID}">
+					                    <td align="left" class="td_1">{$regionlist[i].REGION_NAME}</td>
+					                    <td align="left" class="td_2">{$regionlist[i].REGION_GRADE}</td>
+					                    <td align="left" class="td_3">{$regionlist[i].E_LONGITUDE}</td>
+					                    <td align="left" class="td_4">{$regionlist[i].N_LATITUDE}</td>
+					                    <td align="left" class="td_5">{$regionlist[i].W_LONGITUDE}</td>
+					                    <td align="left" class="td_6">{$regionlist[i].S_LATITUDE}</td>
+					                    <td align="left" class="td_7">{$regionlist[i].LONGITUDE}</td>
+					                    <td align="left" class="td_8">{$regionlist[i].LATITUDE}</td>
+					                    <td align="left" class="td_9">{$regionlist[i].ACREAGE}</td>
+					                    <td align="left" class="td_10"><a href="#" onclick="changeEdit(this)">编辑</a></td>
+					                </tr>
+							{/section}
+						{/if}
+						</table>
+					</td>
+				</tr>
+				<tr> 
+					<td valign="top" style="padding:10px;">
+						<div class="pagebreak">
+							<div class="page">
+								{include file="page_info.html"}
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+	   </div>
+   </div> 
+</div>
+<input type="hidden" id="headMenu" value="usercontentmgr">
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

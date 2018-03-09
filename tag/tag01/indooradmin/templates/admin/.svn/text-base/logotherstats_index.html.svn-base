@@ -1,0 +1,251 @@
+
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+
+
+function SearchLog()
+{   
+	var start = document.getElementById("startDate").value;
+	var end   = document.getElementById("endDate").value;
+	if( (start!='') && (end!='') && (end < start))
+	{
+		alert("起始时间不能大于终止时间！");
+	}
+	else 
+	{
+	  var frm = document.log_search_form;
+	  frm.action='ea.php?r=LogOtherStats';
+	  frm.submit();
+	}
+}
+
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;客户端日志</span></div>
+  <input type="hidden" id="subbarFlag" value="log_mgr_bar" />
+
+  <input type="hidden" id="c_name" value="clestat" />
+  {include file="stat_left_menu.html"}
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+   <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  <div class="scenic_search">
+   <div class="chose">
+	<form id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px; width: 700px;">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+                                <td height="25" align="left" class="formTitle"><span>起始时间：</span></td>
+                                <td><input type="text" id="startDate" name="startDate" value="{$data.startDate}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td height="25" align="left" class="formTitle"><span>终止时间：</span></td>
+                                <td><input type="text" id="endDate" name="endDate" class="Wdate" value="{$data.endDate|date_format:'%Y-%m-%d'}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td><input type="button" value="查询" style=" width: 80px; height: 30px;" onclick="SearchLog();" />
+                                </td>
+                                  <td width="10px"></td>
+                            </tr>
+                        </table>
+						</form>
+						</div>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+
+		<div class="scenic_list">
+		<table class="itable">
+			<thead>
+				<tr>
+					<th width="10%" align="left">功能分类</th>
+					<th width="25%" align="left">功能名称</th>
+					<th width="25%" align="left">开始时间</th>
+					<th width="25%" align="left">结束时间</th>
+					<th  align="left">浏览量</th>
+				</tr>
+			</thead>
+			<tbody>
+				{if $func_list}
+				{foreach from = $func_list item = func}
+				<tr class="row0">
+					<td align="left">PV统计</td>
+					<td align="left">{$func.FUNC_NAME}</td>
+					<td align="left">{$data.startDate|date_format:"%Y-%m-%d"}</td>
+					<td align="left">{$data.endDate|date_format:"%Y-%m-%d"}</td>
+					<td align="left">{if $func.CNT}{$func.CNT}{else}0{/if}</td>
+				</tr>
+				{/foreach}
+				{/if}
+				{if $cr_list}
+				{foreach from = $cr_list item = cr}
+				<tr class="row0">
+					<td align="left">注册登录</td>
+					<td align="left">{$cr.FUNC}</td>
+					<td align="left">{$data.startDate|date_format:"%Y-%m-%d"}</td>
+					<td align="left">{$data.endDate|date_format:"%Y-%m-%d"}</td>
+					<td align="left">{if $cr.CNT}{$cr.CNT}{else}0{/if}</td>
+				</tr>
+				{/foreach}
+				{/if}
+				{if $other_list}
+				{foreach from = $other_list item = other}
+				<tr class="row0">
+					<td align="left">业务提交</td>
+					<td align="left">{$other.FUNC}</td>
+					<td align="left">{$data.startDate|date_format:"%Y-%m-%d"}</td>
+					<td align="left">{$data.endDate|date_format:"%Y-%m-%d"}</td>
+					<td align="left">{if $other.CNT}{$other.CNT}{else}0{/if}</td>
+				</tr>
+				{/foreach}
+				{/if}
+			</tbody>
+		</table>
+		<!--  
+		<table class="itable">
+			<thead>
+				<tr>
+					<th width="5%" align="left">序号</th>
+					<th width="18%">项目</th>
+					<th width="18%" align="left">统计对象</th>
+					<th width="18%" align="left">统计目的</th>
+					<th width="18%" align="left">统计规则</th>
+					<th width="12%" align="left">统计频率</th>
+					<th width="10%" align="left">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="row0" style="display: none;">
+					<td align="left">1</td>
+					<td align="left">单个用户一周内启动客户端的次数</td>
+					<td align="left">单个用户</td>
+					<td align="left">客户端活跃率</td>
+					<td align="left">用户启动客户端时记录一次</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=LogOtherStats/CleOtherStats&type=active"> <img
+						border="0" align="absmiddle" src="images/icon/s_edit.gif"> <font
+						color="#9900CC">查看</font></a></td>
+				</tr>
+
+				<tr class="row0">
+					<td align="left">1</td>
+					<td align="left">功能点统计：九宫格各个按钮使用量</td>
+					<td align="left">九宫格各个按钮</td>
+					<td align="left">功能使用量</td>
+					<td align="left">功能启动时统计一次</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=FunctionQuery&URL={$func_url.lquery}&APP=API">
+					<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+					<font color="#9900CC">查看</font></a></td>
+				</tr>
+
+				<tr class="row0">
+					<td align="left">2</td>
+					<td align="left">客户端搜索功能使用频率</td>
+					<td align="left">搜索功能</td>
+					<td align="left">功能使用量</td>
+					<td align="left">搜索功能被使用一次，则记录一次</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=FunctionQuery&URL={$func_url.query}&APP=API"> <img
+						border="0" align="absmiddle" src="images/icon/s_edit.gif"> <font
+						color="#9900CC">查看</font></a></td>
+				</tr>
+
+
+				<tr class="row0">
+					<td align="left">3</td>
+					<td align="left">首页广告图的点击量</td>
+					<td align="left">首页广告图</td>
+					<td align="left">广告图的优化依据</td>
+					<td align="left">总计点击次数</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=FunctionQuery&URL={$func_url.recpic}&APP=API">
+					<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+					<font color="#9900CC">查看</font></a></td>
+				</tr>
+
+				<tr class="row0">
+					<td align="left">4</td>
+					<td align="left">注册用户数</td>
+					<td align="left">用户注册行为</td>
+					<td align="left">了解从客户端注册用户数</td>
+					<td align="left">从客户每注册一次记录一次</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=StatConversion/SearchStatcr&FUNC=注册&APP=API"> <img
+						border="0" align="absmiddle" src="images/icon/s_edit.gif"> <font
+						color="#9900CC">查看</font></a></td>
+				</tr>
+
+				<tr class="row0">
+					<td align="left">5</td>
+					<td align="left">用户登录次数</td>
+					<td align="left">用户登录行为</td>
+					<td align="left">了解用户使用客户端登录的次数</td>
+					<td align="left">用户每登录一次则记录一次</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=LogOtherStats/CleOtherStats&type=login&app_type=API">
+					<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+					<font color="#9900CC">查看</font></a></td>
+				</tr>
+
+				<tr class="row0" style="display: none;">
+					<td align="left">6</td>
+					<td align="left">整个客户端“我去过”“我想去”“攻略”“景区印象”的日访问数</td>
+					<td align="left">“我去过列表页”“我想去列表页”“攻略”“景区印象”四个功能</td>
+					<td align="left">分析用户操作功能的使用量</td>
+					<td align="left">用户每使用一次记录一次</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=FunctionQuery&URL={$func_url.gone}&APP=API"> <img
+						border="0" align="absmiddle" src="images/icon/s_edit.gif"> <font
+						color="#9900CC">查看</font></a></td>
+				</tr>
+
+
+				<tr class="row0">
+					<td align="left">6</td>
+					<td align="left">整个客户端“去过”“想去”“取消想去”“取消去过”“签到”“景区点评”日提交数</td>
+					<td align="left">““去过”“想去”“取消想去”“取消去过”“签到”“景区点评”功能</td>
+					<td align="left">分析用户操作功能的使用量</td>
+					<td align="left">用户每使用一次记录一次</td>
+					<td align="left">每天统计一次</td>
+					<td align="left"><a
+						href="ea.php?r=LogOtherStats/CleOtherStats&type=busi&app_type=API">
+					<img border="0" align="absmiddle" src="images/icon/s_edit.gif">
+					<font color="#9900CC">查看</font></a></td>
+				</tr>
+
+			</tbody>
+		</table>
+		-->
+		</div>
+		</td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+	<input type="hidden" id="headMenu" value="statmanager">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+   </div>
+   </div> 
+   </div>
+
+{include file="footer.html"}
+
+

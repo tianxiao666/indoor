@@ -1,0 +1,173 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+//获取功能
+function ajaxGetOP()
+{
+	var app = $("#APP").val();
+	if(app != ''){
+		if(app=='WEB')
+			$('#reg_act_chg').html("注册日期范围：");
+		else if(app=='API')
+			$('#reg_act_chg').html("激活日期范围：");
+		$.ajax({
+			url : "ea.php?r=OPQuery/GetOPList",
+			type : "get",
+			dataType : "text",
+			data : {
+				app : app
+			},
+			success : function(data){
+				$("#OP").empty();
+				$("#OP").append(data);
+			},
+			error : function(data){
+				return false;
+			}
+		});
+		return true;
+	}
+	return false;
+}
+function Log_Submit(){
+	var app_name = $('#app_name').val();
+	if(app_name=='WEB')
+		app = '注册';
+	else if(app_name=='API')
+		app = '激活';
+	var start = $("#START_TIME").val();
+	var end   = $("#END_TIME").val();
+	if( start!='' && end!='' && end < start)
+	{
+		alert(app+"开始日期不能大于终止日期！");
+		return false;
+	}
+	var start_1 = $("#SEARCH_BEGIN").val();
+	var end_1   = $("#SEARCH_END").val();
+	if( start_1!='' && end_1!='' && end < start)
+	{
+		alert("回访查询开始日期不能大于查询终止日期！");
+		return false;
+	}
+	if( start!='' && start_1!='' && start_1 < start)
+	{
+		alert("回访查询开始日期不能大于"+app+"开始日期！");
+		return false;
+	}
+	$("#log_search_form").submit();
+}
+</script>
+{/literal}
+<input type="hidden" id="app_name" value="{if $data.APP}{$data.APP}{else}WEB{/if}">
+<div class="content">
+	<div class="main">
+	    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;分析报表&nbsp;&gt;&nbsp;用户留存率</span></div>
+		{include file="stat_left_menu.html" type="report"}
+		<div class="tabtext" id="tabtext1" >
+			<table>
+				<tr>
+					<td valign="top"  style="padding: 10px 10px 0;">
+						<table border="0" cellspacing="0" cellpadding="0" >
+							<tr> 
+								<td valign="top" colspan="2">
+									<div class="scenic_search" style="margin-left: 8px;">
+										<div class="chose">
+											<form action="ea.php?r=AnalysisReport" id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px;width:1050px;">
+												<input type="hidden" name="FLAG" value="1">
+												<table border="0" cellspacing="0" cellpadding="0">
+													<tbody>
+														<tr>
+															<td height="25" align="left" class="formTitle"><span>应用平台：</span></td>
+															<td height="25" align="left" class="formTitle">
+																<select name="APP" id="APP" style="width:90px;" onchange="ajaxGetOP()">
+																{html_options options=$APP selected=$data.APP}
+																</select>
+															</td>
+															<td height="25" align="left" class="formTitle"><span id="reg_act_chg">{if $data.APP=='WEB'}注册{elseif $data.APP=='API'}激活{/if}日期范围：</span></td>
+															<td><input type="text" id="START_TIME" name="START_TIME" value="{$data.START_TIME}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td height="25" align="left" class="formTitle"><span>- </span></td>
+															<td><input type="text" id="END_TIME" name="END_TIME" class="Wdate" value="{$data.END_TIME}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td height="25" align="left" class="formTitle"><span>回访日期范围：</span></td>
+															<td><input type="text" id="SEARCH_BEGIN" name="SEARCH_BEGIN" value="{$data.SEARCH_BEGIN}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td height="25" align="left" class="formTitle"><span>- </span></td>
+															<td><input type="text" id="SEARCH_END" name="SEARCH_END" class="Wdate" value="{$data.SEARCH_END}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+															<td><div class="btn_search"><a onclick="Log_Submit();" style="cursor:pointer;"></a></div></td>
+														</tr>
+													</tbody>
+												</table>
+											</form>
+										</div>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+							<td align="left" style="padding:20px 0px 0px 10px"><span>
+							{if $reg_subs_cnt}
+							<b>注册人数：</b><font style="color:red;font-size:14px;">{$reg_subs_cnt}</font>
+							{elseif $act_subs_cnt}
+							<b>激活人数：</b><font style="color:red;font-size:14px;">{$act_subs_cnt}</font>
+							{/if}
+							</span>
+							</td>
+							</tr>
+							
+							<tr>
+								<td valign="top" style="padding:10px 10px 0;" colspan="2">
+								{if (!$visited_list)}
+								<div class="scenic_list">
+									<table class="itable">
+										<thead>
+											<tr>
+												<td width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></td>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								{else}
+								<div class="scenic_list">
+									<table class="itable">
+									<thead>
+									<tr>
+										<th width="25%" align="left">应用平台</th>
+										<th>回访天数</th>
+										<th width="25%" align="left">回访人数</th>
+										<th width="25%" align="left">留存率</th>
+									</tr>
+									</thead>
+									<tbody>
+									{foreach from=$visited_list item=item}
+									<tr class="{cycle values='row0,row1'}">
+										<td align="left">{if $data.APP=='API'}客户端{elseif $data.APP=='WEB'}WEB网站{/if}</td>
+										<td align="left">{$item.DAYS}</td>
+										<td align="left">{$item.VIS_CNT}</td>
+										<td align="left">{if $reg_subs_cnt>0}{$item.VIS_CNT/$reg_subs_cnt|string_format:"%.3f"}
+														{elseif $act_subs_cnt>0}{$item.VIS_CNT/$act_subs_cnt|string_format:"%.3f"}{else}0{/if}</td>
+									</tr>
+									{/foreach}
+									</tbody>
+									</table>
+								</div>
+								{/if}
+								<span><font style="color:red;">存留率说明：</font>某一个时间段内注册激活的用户，在过了一段时间后（0-N），仍然使用我们服务的比例</span>
+								</td>
+							</tr>
+							<tr> 
+								<td valign="top" style="padding:10px;" colspan="2">
+									<div class="pagebreak">
+										<div class="page">
+										{include file="page_info.html"}
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div> 
+</div>
+{include file="footer.html"}

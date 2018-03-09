@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC 
+       "-//SPRING//DTD BEAN//EN"
+       "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- jbpm&bizunit mysql datasource -->
+	
+	<!-- jbpm&bizunit mysql datasource -->
+	<bean id="oracleDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.6.251/tripdata"></property>
+		<property name="user" value="indata"></property>
+		<property name="password" value="indata0987"></property>
+		<property name="maxPoolSize" value="100" />
+		<property name="minPoolSize" value="10" />
+		<property name="initialPoolSize" value="20" />
+		<!-- 数据库重连设置 -->
+		<property name="maxIdleTime" value="3600" />
+		<!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒-->		
+		<!-- <property name="testConnectionOnCheckin" value="true"/>-->		
+		<property name="idleConnectionTestPeriod" value="120" />
+		<!--c3p0将建一张名为C3p0Test的空表，并使用其自带的查询语句进行测试。 -->
+		<!--如果定义了这个参数那么属性preferredTestQuery将被忽略。-->
+	</bean>
+
+	
+	
+	
+	<!-- 注册sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="oracleDataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				 <prop key="hibernate.connection.autocommit">true</prop>
+				<!--<prop key="hibernate.show_sql">
+					true
+				</prop>
+				 -->
+			</props>
+		</property>
+		<!--
+			property name="mappingResources"> <list>
+			<value>com/iscreate/bizunit/vo/*.hbm.xml</value>
+			<value>com/iscreate/workflow/model/*.hbm.xml</value>
+			<value>jbpm.repository.hbm.xml</value>
+			<value>jbpm.execution.hbm.xml</value>
+			<value>jbpm.history.hbm.xml</value> <value>jbpm.task.hbm.xml</value>
+			<value>jbpm.identity.hbm.xml</value> </list> </property
+		-->
+		
+
+	</bean>
+	
+
+	<!-- 注册事务管理器 -->
+	<bean id="transactionManager" name="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<!-- helper -->
+	<bean id="gson" class="com.google.gson.Gson" />
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+</beans>

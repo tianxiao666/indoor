@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator
+END
+mocked_class.tpl.dist
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator/mocked_class.tpl.dist
+END
+unmocked_clone.tpl.dist
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator/unmocked_clone.tpl.dist
+END
+wsdl_class.tpl.dist
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator/wsdl_class.tpl.dist
+END
+wsdl_method.tpl.dist
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator/wsdl_method.tpl.dist
+END
+mocked_clone.tpl.dist
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator/mocked_clone.tpl.dist
+END
+mocked_method.tpl.dist
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator/mocked_method.tpl.dist
+END

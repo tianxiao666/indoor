@@ -1,0 +1,5 @@
+{if $wikilist}
+{html_checkboxes name='WIKI_ID' options=$wikilist  separator="&nbsp;"}
+{else}
+<span style="color:red">没搜索到结果！</span>
+{/if}

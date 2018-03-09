@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify
+END
+Packer.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/Packer.php
+END
+CommentPreserver.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/CommentPreserver.php
+END
+DebugDetector.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/DebugDetector.php
+END
+Source.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/Source.php
+END
+HTML.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/HTML.php
+END
+ImportProcessor.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/ImportProcessor.php
+END
+Build.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/Build.php
+END
+Lines.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/Lines.php
+END
+Logger.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/Logger.php
+END
+YUICompressor.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/YUICompressor.php
+END
+CSS.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/1/sf/library/minScript/vendors/minify/min/lib/Minify/CSS.php
+END

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/example/oauth
+END
+3_accesstoken.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/example/oauth/3_accesstoken.php
+END
+1_authorize.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/example/oauth/1_authorize.php
+END
+2_callback.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/example/oauth/2_callback.php
+END
+4_sessionkey.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/RenRenAPI/example/oauth/4_sessionkey.php
+END

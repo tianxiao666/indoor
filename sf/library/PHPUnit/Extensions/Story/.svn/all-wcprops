@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story
+END
+When.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/When.php
+END
+Step.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/Step.php
+END
+Given.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/Given.php
+END
+Then.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/Then.php
+END
+ResultPrinter.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/ResultPrinter.php
+END
+SeleniumTestCase.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/SeleniumTestCase.php
+END
+Scenario.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/Scenario.php
+END
+TestCase.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Story/TestCase.php
+END

@@ -1,0 +1,102 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+{/literal}
+<script language="javascript" type="text/javascript" src="./js/changepage.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function deleteAdmin()
+{
+	if(confirm('您确定要删除这个选项吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+</script>
+{/literal}
+
+
+<div class="content">
+  <div class="main">
+  <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=DictMgr">数据管理</a>&nbsp;&gt;&nbsp;{$CODE_TYPE}分类下选项列表</span></div>
+  <input type="hidden" id="subbarFlag" value="dict_mgr_bar" />
+ 
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /> <font color="#a40000" style="font-weight:bold;font-size:14px">{$CODE_TYPE}分类下选项列表</font></td>
+					<td  align="right"><a href="ea.php?r=DictMgr/Index" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[返回分类列表页]</font></a>{if $user_role.ADMIN}<a href="ea.php?r=DictOptionMgr/addView&CODE_TYPE={$CODE_TYPE}" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增选项]</font></a>{/if}</td>
+				</tr>
+			</table>
+<table class="itable">
+<thead>
+ <tr>
+                    <th width="20%" align="left">选项编码</th>
+                    <th width="20%">选项名称</th>
+<!--                    <th width="10%" align="left">选项类型</th>-->
+                    <th width="20%" align="left">父编码</th>
+                    <th width="20%" align="left">创建时间</th>
+					{if $user_role.ADMIN}<th align="left">&nbsp;相关操作</th>{/if}
+                </tr>
+</thead>
+<tbody>
+		{section name=i loop=$code_list}
+                <tr class="{cycle values='row0,row1'}">
+                    <td align="left">{$code_list[i].OPTION_VALUE}</td>
+                    <td align="left">{$code_list[i].OPTION_NAME}</td>
+<!--                    <td align="left">{$code_list[i].CODE_TYPE}</td>-->
+                  <td align="left">{$code_list[i].PARENT_OPTION_VALUE}</td>
+                    <td align="left">{$code_list[i].CREATE_TIME}</td>
+                    {if $user_role.ADMIN}
+					<td align="left">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td style="border:0px;"><a href="ea.php?r=DictOptionMgr/editView&OPTION_CODE_ID={$code_list[i].OPTION_CODE_ID}"><img src="images/icon/s_edit.gif" border="0" align="absmiddle" /><font color="#666">修改选项</font></a></td>
+								<td style="border:0px;"><a href="ea.php?r=DictOptionMgr/DeleteCode&OPTION_CODE_ID={$code_list[i].OPTION_CODE_ID}" target="bf" onclick="return deleteAdmin();"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">删除选项</font></a></td>
+							</tr>
+						</table>
+					</td>
+					{/if}
+                </tr>
+				{/section}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

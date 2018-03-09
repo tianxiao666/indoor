@@ -1,0 +1,202 @@
+body {
+	scrollbar-face-color: #E9E9E9; scrollbar-shadow-color: #CECECE; scrollbar-highlight-color: #FFFFFF; scrollbar-3dlight-color: #FFFFFF; scrollbar-darkshadow-color: #707070; scrollbar-track-color: #F2F2F2; scrollbar-arrow-color: #7E7E7E; 
+	margin:0px;	background-image: url(../images/pagebg.jpg); background-repeat: repeat-x; background-color: #FFFFFF; background-position: top;
+}
+
+/* -------------------------------------------------------------- */
+/* links                                                          */
+/* -------------------------------------------------------------- */
+a:link {
+	text-decoration: none; color: #104E8D;
+}
+a:visited {
+	text-decoration: none; color: #104E8D;
+}
+a:hover {
+	color: #FF6600;	text-decoration: underline;	right: 1px; bottom: 1px; position: relative; left: 1px; top: 1px; clip:  rect(   )
+}
+a:active {
+	text-decoration: none; color: #FF6600;
+}
+
+.menu:link {
+	font-size: 13px; text-decoration: none; color: #0339D5;
+}
+.menu:visited {
+	font-size: 13px; text-decoration: none; color: #0339D5;
+}
+.menu:hover {
+	font-size: 13px; text-decoration: none; color: #FF5000;
+}
+.menu:active {
+	font-size: 13px; text-decoration: none; color: #FF5000;
+}
+
+.tabon:link {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #000000;
+}
+.tabon:visited {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #000000;
+}
+.tabon:hover {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #FF5000;
+}
+.tabon:active {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #FF5000;
+}
+
+.taboff:link {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #555555;
+}
+.taboff:visited {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #555555;
+}
+.taboff:hover {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #FF5000;
+}
+.taboff:active {
+	font-size: 14px; font-weight: bold; text-decoration: none; color: #FF5000;
+}
+
+.footerLink:link {
+	text-decoration: none; color: #000000;
+}
+.footerLink:visited {
+	text-decoration: none; color: #000000;
+}
+.footerLink:hover {
+	text-decoration: none; color: #0000FF;
+}
+.footerLink:active {
+	text-decoration: none; color: #0000FF;
+}
+
+/* -------------------------------------------------------------- */
+/* txt styles                                                     */
+/* -------------------------------------------------------------- */
+td {
+	font-size: 12px; line-height: 18px;	color: #000000;
+}
+.nameChannel {
+	font-family: "ºÚÌå";
+	font-size: 20px;
+	color: #FFFFFF;
+	line-height: 24px;
+}
+.nameFunction {
+	font-size: 14px;
+	color: #FF5000;
+	font-weight: bold;
+	PADDING-LEFT: 5px; PADDING-TOP: 2px; PADDING-RIGHT: 5px; PADDING-BOTTOM: 2px;
+}
+
+/* -------------------------------------------------------------- */
+/* background table styles                                        */
+/* -------------------------------------------------------------- */
+.mainFrame {
+	background-color: #FFFFFF;
+	border-top: none;
+	border-right: 1px solid #035DB8;
+	border-bottom: 1px solid #035DB8;
+	border-left: 1px solid #035DB8;
+	padding-top: 20px;
+	padding-bottom: 30px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+.mainFrameShadow {
+	background-color: #CCCCCC;
+}
+.mainFrameTopline {
+	background-image: url(../images/frameline_top.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+
+/* -------------------------------------------------------------- */
+/* list table styles                                              */
+/* -------------------------------------------------------------- */
+TABLE.datalist {
+	BORDER-LEFT: #89A6E7 1px solid; BORDER-TOP: #89A6E7 1px solid; BORDER-RIGHT: #89A6E7 1px solid; MARGIN: 0px; BORDER-BOTTOM: #89A6E7 1px solid; WIDTH: 100%; PADDING-LEFT: 0px; PADDING-TOP: 0px; PADDING-RIGHT: 0px; PADDING-BOTTOM: 0px; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #ffffff; border-spacing: 0px
+}
+TABLE.datalist TH {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 12px; BACKGROUND: url(../images/table_thbg.gif); PADDING-BOTTOM: 2px; MARGIN: 0px; COLOR: #ffffff; PADDING-TOP: 6px; HEIGHT: 24px;TEXT-ALIGN: left; font-weight: bold;
+}
+TABLE.datalist TR.row0 {
+	BACKGROUND-COLOR: #F5F5F5
+}
+TABLE.datalist TR.row1 {
+	BACKGROUND-COLOR: #FFFFFF
+}
+TABLE.datalist TD {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; BORDER-BOTTOM: #DEDEDE 1px solid; COLOR: #6D6D6D
+}
+
+
+/* -------------------------------------------------------------- */
+/* form table styles                                              */
+/* -------------------------------------------------------------- */
+.formFrame {
+	background-color: #E6F3FF;
+	padding-top: 15px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	border: 1px solid #89A6E7;
+	width: 100%;
+}
+.formHelp {
+	color: #999999;
+}
+.formTitle {
+	color: #000000;
+	font-weight: bold;
+}
+.formRed {
+	color: #FF3300;
+}
+.formBtn
+{
+	height: 22px;
+	background-image: url(../images/btn_bg.gif);
+	background-color: #FFFFFF;
+	border: 1px solid #3697FB;
+	padding-top: 3px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+}
+.input {
+BORDER-RIGHT: #ababab 1px solid; BORDER-TOP: #ababab 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #ababab 1px solid; BORDER-BOTTOM: #ababab 1px solid; BACKGROUND-COLOR: #FFFFFF
+}
+
+/* -------------------------------------------------------------- */
+/* footer styles                                                  */
+/* -------------------------------------------------------------- */
+.footer {
+	color: #333333;
+	line-height: 22px;
+}
+.footerbg {
+	color: #333333;
+	line-height: 22px;
+	background-color: #B1D7FE;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
+	border: 1px solid #035DB8;
+}
+
+
+input {
+    font-size: 12px;
+}
+
+/* -----------------------------------------------------------------*/
+/* error message for jQuery validate styles
+/* -----------------------------------------------------------------*/
+span.invalid {
+	color:red;
+	padding-left:1em;
+}

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/Database
+END
+MySQL.sql
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/Database/MySQL.sql
+END
+SQLite3.sql
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Util/Log/Database/SQLite3.sql
+END

@@ -1,0 +1,143 @@
+
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+
+function changePage()
+{
+	var sep = (arguments[0].indexOf('?') != -1) ? '&' : '?';
+	location.href = arguments[0] + sep + 'page=' + arguments[1];
+}
+
+function SearchLog()
+{   
+	var start = document.getElementById("startDate").value;
+	var end   = document.getElementById("endDate").value;
+	if( (start!='') && (end!='') && (end < start))
+	{
+		alert("起始时间不能大于终止时间！");
+	}
+	else 
+	{
+	  var frm = document.log_search_form;
+	  frm.action='ea.php?r=StatAnaryse/SearchLog';
+	  frm.submit();
+	}
+}
+function drop_mouseover(pos){
+	 try{window.clearTimeout(timer);}catch(e){}
+	}
+	function drop_mouseout(pos){
+	 var posSel=document.getElementById(pos+"Sel").style.display;
+	 if(posSel=="block"){
+	  timer = setTimeout("drop_hide('"+pos+"')", 1000);
+	 }
+	}
+	function drop_hide(pos){
+	 document.getElementById(pos+"Sel").style.display="none";
+	}
+	function search_show(pos,searchType,href){
+	    document.getElementById(pos+"SearchType").value=searchType;
+	    document.getElementById(pos+"Sel").style.display="none";
+	    document.getElementById(pos+"Slected").innerHTML=href.innerHTML;
+	    document.getElementById(pos+'q').focus();
+	 try{window.clearTimeout(timer);}catch(e){}
+	 return false;
+	}
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;数据管理</span></div>
+  <input type="hidden" id="subbarFlag" value="log_mgr_bar" />
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  <div class="scenic_search">
+   <div class="chose">
+	<form id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px; width: 940px;">
+						<input id="step" name="step" type="hidden" value="2" />
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								{if $adminRole == 'ADMIN'}
+								<td height="25" align="left" class="formTitle"><span>用 户 名：</span></td>
+								<td width="140"><input name="log_user" id="log_user" type="text" id="log_user" style="font-size:12px;" value="{$condition.log_user}" maxlength="20" /></td>
+								{/if}
+                                <td height="25" align="left" class="formTitle"><span>起始时间：</span></td>
+                                <td><input type="text" id="startDate" name="startDate" value="{$condition.startDate}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td height="25" align="left" class="formTitle"><span>终止时间：</span></td>
+                                <td><input type="text" id="endDate" name="endDate" class="Wdate" value="{$condition.endDate}" onfocus="WdatePicker({literal}{readOnly:true}{/literal})" /></td>
+                                <td><input type="button" value="查询日志" style="font-size: 12px; width: 60px; height: 20px;" onclick="SearchLog();" />
+                                </td>
+                                  <td width="10px"></td>
+                            </tr>
+                        </table>
+						</form>
+						</div>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+  {if (!$sys_log)}
+  <div class="scenic_list">
+<table class="itable">
+<thead>
+<tr>
+ 	<th width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></th>
+</thead>
+
+</table>
+   </div>
+  {else}
+	<div class="scenic_list">
+<table class="itable">
+<thead>
+<tr>
+ 	<th width="15%" align="left">用户名</th>
+ 	<th width="15%">景区数</th>
+ 	<th width="15%" align="left">景点数</th>
+ 	<th width="15%" align="left">POI数</th>
+</tr>
+</thead>
+<tbody>
+		{foreach from=$sys_log item =li}
+			{if $li}
+                <tr class="{cycle values='row0,row1'}">
+                	
+                    <td align="left">{$li.name}</td>
+                    <td align="left">{$li.areacount}</td>
+                    <td align="left">{$li.soptcount}</td>
+                    <td align="left">{$li.poicount}</td>
+                </tr>
+                {/if}
+				{/foreach}
+</tbody>
+</table>
+   </div>
+   {/if}
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+	<input type="hidden" id="headMenu" value="statmanager">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+   </div>
+   </div> 
+   </div>
+
+{include file="footer.html"}
+
+

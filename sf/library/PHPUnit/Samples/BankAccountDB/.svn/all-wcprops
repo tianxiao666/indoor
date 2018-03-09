@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB
+END
+BankAccount.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/BankAccount.php
+END
+BankAccountDBTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/BankAccountDBTest.php
+END
+BankAccountDBTestMySQL.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Samples/BankAccountDB/BankAccountDBTestMySQL.php
+END

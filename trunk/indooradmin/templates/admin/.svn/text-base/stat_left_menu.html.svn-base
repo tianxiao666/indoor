@@ -1,0 +1,72 @@
+{literal}
+<script>
+var time1 = 0;
+$(function(){
+	$("#menu_button").click(function(){
+		$("#menu_button").hide();
+		$("#menu").show(300);
+	})
+	$("#hidden_menu").click(function(){
+		$("#menu").hide(300);
+		$("#menu_button").show();
+	})
+})
+
+startList = function(){
+	if(document.all&&document.getElementById) {
+		navRoot = document.getElementById("menu");
+		var allli = navRoot.getElementsByTagName("li")
+		for (i=0; i<allli.length; i++) {
+			node = allli[i];
+			node.onmouseover=function() {
+				this.className+=" current";
+			}
+			node.onmouseout=function() {
+				this.className=this.className.replace("current", "");
+			}
+		}
+	}
+}
+window.onload=startList;
+</script>
+<style type="text/css">
+body { font-family: Verdana; font-size: 12px; line-height: 1.5; }
+img { border-style: none; }
+a { color: #000; text-decoration: none; }
+a:hover { color: #F00; }
+#menu { width: 80px; border: 1px solid #CCC; border-bottom:none;display:none;}
+#menu ul { list-style: none; margin: 0px; padding: 0px; }
+#menu ul li { background: #eee; padding: 0px 8px; height: 26px; line-height: 26px; border-bottom: 1px solid #CCC; position:relative; }
+#menu ul li ul { display:none; position: absolute; left: 80px; top: 0px; width:100px; border:1px solid #ccc; border-bottom:none; }
+#menu ul li.current ul { display:block;}
+#menu ul li:hover ul { display:block;}
+</style>
+{/literal}
+<div style="position:absolute;top:165px;left:5px;z-index:99999;background-color:#eee">
+	<div id="menu_button" style="cursor:pointer;border:1px solid #ccc">
+		<span style="color:#E96D25">菜</span><br />
+		<span style="color:#E96D25">单</span><br />
+		<span style="color:#E96D25">栏</span><br />
+		<span style="color:#E96D25">&nbsp;◢</span>
+	</div>
+	<div id="menu">
+	
+	<ul>
+	<li><a href="ea.php?r=FunctionQuery" style="{if $type=='pv_statistics'}color:#F00;{/if}">PV(统计)</a></li>
+	<li><a href="ea.php?r=OPQuery" style="{if $type=='op_statistics'}color:#F00;{/if}">OP统计</a></li>
+	<li><a href="ea.php?r=StatConversion" style="{if $type=='stat_cr_list'}color:#F00;{/if}">转化率统计</a></li>
+	<li><a href="ea.php?r=LogTrackStats&type=SOUR" style="{if $type=='SOUR'}color:#F00;{/if}">来源统计</a></li>
+	<li><a href="ea.php?r=LogTrackStats&type=DEST" style="{if $type=='DEST'}color:#F00;{/if}">去向统计</a></li>
+	<li><a href="#" style="{if $type=='other_login' or $type=='other_active' or $type=='other_busi'}color:#F00;{/if}" id="other_stat">其它统计..</a>
+	<ul>
+	<li><a href="ea.php?r=LogOtherStats/CleOtherStats&type=login" style="{if $type=='other_login'}color:#F00;{/if}">登录次数统计</a></li>
+	<li style="display:none;"><a href="ea.php?r=LogOtherStats/CleOtherStats&=active" style="{if $type=='other_active'}color:#F00;{/if}">启动客户端</a></li>
+	<li><a href="ea.php?r=LogOtherStats/CleOtherStats&type=busi" style="{if $type=='other_busi'}color:#F00;{/if}">业务统计</a></li>
+	</ul>
+	</li>
+	<li><a href="ea.php?r=AnalysisReport" style="{if $type=='report'}color:#F00;{/if}">用户存留率</a></li>
+	<li><a href="ea.php?r=Syslogs" style="{if $type=='syslogs_list'}color:#F00;{/if}">日志详情</a></li>
+	<li><a href="#" id="hidden_menu" style="color:#E96D25">◤&nbsp;收起</a></li>
+	</ul>
+	</div>
+</div>

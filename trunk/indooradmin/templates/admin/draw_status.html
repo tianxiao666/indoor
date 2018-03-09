@@ -1,0 +1,56 @@
+<script language="javascript" src="js/jquery/jquery-1.4.2.min.js"></script>
+{literal}
+<style type="text/css">
+.button {
+	text-align:center;
+}
+</style>
+<script language="javascript" type="text/javascript">
+function Submit(){
+	var status = $("[name='radio']:checked").val();
+	
+	var map_id  = $('#MAP_ID').val();
+	if(status==undefined){
+        alert('请选择更改状态！');
+        return false;
+	}
+	//document.getElementById("CDAOLS_NEWS").submit();
+	$.ajax({
+		type    :  'POST',
+		url		:  'ea.php?r=AreaDraw/AjaxChangeStatus',
+		data	:  {status : status , map_id : map_id},
+		success :  function(result){
+			if(result){
+				//alert('更改成功！');
+				$('#error').hide();
+				$('#msg').show();
+				parent.location.reload();
+			}else{
+				//alert('更改失败！');
+				$('#error').show();
+			}
+		}
+	});
+}
+
+</script>
+{/literal}
+<div class="content">
+<form action=""  method="POST" id="CDAOLS_AREAMAP">
+    <input type="hidden" name="MAP_ID" id="MAP_ID" value="{$mapInfo.MAP_ID}">
+	<div class=""><span class="title">当前状态：</span><span>{$mapInfo.STATUS_NAME|strip_tags}</span></div>
+	<div class=""><span class="title">更改状态：</span><span>{html_radios options=$areaStatus checked=$mapInfo.STATUS}</span>
+	<span style="color:red">*</span>
+	</div>
+	<br>
+	<div class=""><span class="title">注：</span><span>正常状态是WEB网站可以显示，而编辑中、归档两种状态都只能在旅游数据管理系统中看到。</span></div>
+	<div class="button">
+      <span><input type="button" value="确定" onclick="Submit();"/></span>
+      <span class="button"><input onclick="window.parent.closeChangeStatus({$info.TOURISM_ID});" type="button" value="取消关闭" /></span>
+    </div>
+    <br>
+    <div style="color:red;font-size:28px;text-align:center;display:none" id="msg">修改成功！</div>
+    <div style="color:red;font-size:28px;text-align:center;display:none" id="error">修改失败！</div>
+</form>
+
+</div>

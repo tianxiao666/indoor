@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation
+END
+DeleteAll.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/DeleteAll.php
+END
+Truncate.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Truncate.php
+END
+Null.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Null.php
+END
+Composite.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Composite.php
+END
+Update.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Update.php
+END
+Insert.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Insert.php
+END
+RowBased.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/RowBased.php
+END
+Factory.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Factory.php
+END
+Delete.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Delete.php
+END
+Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Exception.php
+END
+IDatabaseOperation.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/IDatabaseOperation.php
+END
+Replace.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Extensions/Database/Operation/Replace.php
+END

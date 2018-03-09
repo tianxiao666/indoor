@@ -1,0 +1,391 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css"
+	rel="stylesheet" type="text/css" />
+<link href="js/calendar/my97datepicker/skin/WdatePicker.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js"></script>
+<script type="text/javascript"
+	src="{$mediaServer}js/jquery/jquery_plugins/jquery.validate.js"></script>
+<script type="text/javascript"
+	src="{$mediaServer}js/jquery/jquery_plugins/juery.validate.additional-methods.js"></script>
+<script type="text/javascript"
+	src="{$mediaServer}js/jquery/jquery_plugins/jquery.jfvalidate.helper.js"></script>
+{literal}
+<style>
+.itable td,table.itable th {
+	border: 0;
+	padding: 10px 0 10px 10px;
+}
+
+.a {
+	width: 700px;
+	float: left;
+	height: 40px;
+}
+
+.a1 {
+	width: 100px;
+	float: left;
+	height: 30px;
+}
+
+.a2 {
+	width: 190px;
+	float: left;
+	height: 30px;
+}
+</style>
+<script language="javascript" type="text/javascript">
+function showBuyCardFrm()
+{	
+	var real_name = $('#REAL_NAME').val();
+	if(isNaN($('#MOBILE').val())){
+		alert("手机号码必须是数字");
+		return false;
+	}
+	if(real_name=="")
+	{
+		alert("客户姓名不能为空");
+		return false;
+	}
+	if(strlen(real_name)>40)
+	{
+		alert("客户姓名不能超过40个字符，20个汉字！");
+		return false;
+	}
+	if($('#NOTE').val()=="")
+	{
+		alert("解答内容不能为空");
+		return false;
+	}
+	if(strlen($("#NOTE").val())>1024){
+		alert("解答内容不能超过1024个字符！");
+		return false;
+	}
+	$("#CDAOCW_WORK").submit();
+}
+
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function onkeyupPhone()
+{
+	var phone = $('#MOBILE').val();
+	if(phone)
+	{
+		$('#phoneDiv').hide();
+	}else{
+		$('#phoneDiv').show();
+	}
+}
+function onClickCard(cardid)
+{
+	if(cardid == "SALCRD")
+	{
+		document.getElementById('frmCustBuyCard').style.display='block';
+		document.getElementById('frmTelOrder').style.display='none';
+		document.getElementById('cunseing').style.display="none";
+		var newSrc = "ea.php?r=CustBuyCard&cardType="+cardid;
+		$('#frmCustBuyCard').attr('src', newSrc);
+	}else if(cardid == "BOOKIN")
+	{
+		document.getElementById('frmTelOrder').style.display='block';
+		document.getElementById('frmCustBuyCard').style.display='none';
+		document.getElementById('cunseing').style.display="none";
+		var Src = "ea.php?r=TelOrder&cardType="+cardid;
+		$('#frmTelOrder').attr('src', Src);
+	}else{
+		document.getElementById('frmTelOrder').style.display='none';
+		document.getElementById('frmCustBuyCard').style.display='none';
+		document.getElementById('cunseing').style.display="block";
+		document.getElementById(cardid).checked = true;
+	}
+}
+
+//判断中英文
+function strlen(str) 
+{
+   var strlength=0;
+   for (i=0;i<str.length;i++)
+  {
+     if (isChine(str.charAt(i))==true)
+        strlength=strlength + 2;
+     else
+        strlength=strlength + 1;
+ 	}
+	return strlength;
+}
+
+function isChine(str)
+{
+   var lst = /.*[\u4e00-\u9fa5]+.*$/;
+   return lst.test(str);      
+}
+function getRefule()
+{
+	if(document.getElementById("no_refute").style.display=='none'){
+		$('#no_refute').show();
+	}else{
+		$('#no_refute').hide();
+	}
+}
+function mobileChange()
+{
+	var mobile = $('#MOBILE').val();
+	if(!isNaN(mobile)&&mobile){
+		$.ajax({
+			type:'POST',
+			url:'ea.php?r=Card/AjaxName',
+			dataType:'json',
+			data:{moblie:mobile},
+			success:function(msg){
+				if(msg.REAL_NAME){
+					$('#REAL_NAME').val(msg.REAL_NAME);
+					$('#MOBILE').val(msg.MOBILE);
+					$('#CARD_NO').val(msg.CARD_NO);
+				}
+			}
+		});
+	}
+}
+function cardChange()
+{
+	var CARD_NO = $('#CARD_NO').val();
+	if(!isNaN(CARD_NO)&&CARD_NO){
+		$.ajax({
+			type:'POST',
+			url:'ea.php?r=Card/AjaxName',
+			dataType:'json',
+			data:{CARD_NO:CARD_NO},
+			success:function(msg){
+				if(msg.REAL_NAME){
+					$('#REAL_NAME').val(msg.REAL_NAME);
+					$('#MOBILE').val(msg.MOBILE);
+					$('#CARD_NO').val(msg.CARD_NO);
+				}
+			}
+		});
+	}
+}
+function searchInfo()
+{
+	var mobile = $('#MOBILE').val();
+	var CARD_NO = $('#CARD_NO').val();
+	 if(!isNaN(mobile)&&mobile||!isNaN(CARD_NO)&&CARD_NO){
+		 $("#ajax_memb_info").fadeIn("slow");
+		 $.ajax({
+			type:'POST',
+			url:'ea.php?r=CounseLing/AjaxSearchInfo',
+			data:  {mobile:mobile,CARD_NO:CARD_NO},
+			success:function(data){
+				if(data){
+					$('#memb_info').html(data);
+					$('#memb_info').show();
+				}
+			},
+			error : function(data){
+				$('#memb_info').empty();
+				$('#memb_info').append("<font color='#ff0000'>没有该客户信息！</font>");
+				$("#ajax_memb_info").fadeOut("slow");
+			},
+			complete : function(){
+				$("#ajax_memb_info").fadeOut("slow");
+			}
+		});
+	 }else{
+		 $('#memb_info').empty();
+		 $('#memb_info').append("(输入手机号或鹿鹿卡号查询客户信息！)");
+	 }
+}
+function OnchangeYes()
+{
+	if($("#YES:checked"))
+	{
+		document.getElementById('no_refute').style.display='block';
+		$('#REFUTE_MAN').attr("disabled",false);
+	}
+}
+function OnchangeNo()
+{
+	if($("#NO:checked"))
+	{
+		document.getElementById('no_refute').style.display='none';
+		document.getElementById('REFUTE_MAN').value='';
+		$('#REFUTE_MAN').attr("disabled",true);
+	}
+}
+</script>
+{/literal}
+<div class="content">
+<div class="main">
+<div class="crumb"><span>当前位置：<a
+	href="ea.php?r=CustServPriv">客服管理</a>&nbsp;&gt;&nbsp;客服受理</span></div>
+ <input type="hidden"
+	id="subbarFlag" value="counse_bar" /></div>
+<form id="CDAOCW_WORK" name="CDAOCW_WORK" action="ea.php?r=CounseLing"
+	method="post" style="margin: 0px; padding: 0px;">
+<div class="tabtext" id="tabtext1">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td valign="top" style="padding: 10px 10px 0;">
+		<div class="scenic_list">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="50%" align="left" class="nameFunction"><img
+					src="images/icon/m_user.gif" border="0" align="absmiddle" /><font
+					color="#a40000" style="font-weight: bold; font-size: 14px">
+				业务受理</font></td>
+				<td width="50%" align="right"><a href="ea.php?r=CounseLing/CounseList"><font
+					color="#666" style="font-weight: bold; font-size: 14px">[返回上一页]</font></a></td>
+			</tr>
+		</table>
+		<table class="itable" border="0">
+			<tr class="row0">
+				<td align="center">
+				<table border="0" cellspacing="0" cellpadding="0">
+					<tr id="route">
+						<td align="right" width="35%" style="border: 0px;">业务类型:</td>
+						<td align="left" style="border: 0px;">{foreach from=$ask_type
+						item=type key=key} {if $key !='SALCRD' && $key !='BOOKIN'} <input
+							type="radio" id="{$key}" name="CDAOCW_WORK[COUNSE]"
+							value="{$key}" {if $key== 'QUSTIN'}checked="checked"{/if}>{$type}&nbsp;&nbsp;
+						{/if} {/foreach}</td>
+
+					</tr>
+					<!-- 
+    						<tr>
+    						    <td align="right" style="border:0px;">用户名:</td>
+    						    <td align="left" style="border:0px;"><input type="text" name="CDAOCW_WORK[NAME]" id="NAME" value="" onchange="ajaxChange();"/></td>
+						    </tr> -->
+					<tr>
+						<td align="right" style="border: 0px;">手机号码:</td>
+						<td align="left" style="border: 0px;"><input type="text"
+							name="CDAOCW_WORK[MOBILE]" id="MOBILE" value="" maxLength="11"
+							onchange="mobileChange();searchInfo();" /></td>
+					</tr>
+					<tr>
+						<td align="right" style="border: 0px;">鹿鹿卡号:</td>
+						<td align="left" style="border: 0px;"><input type="text"
+							name="CDAOCW_WORK[CARD_NO]" id="CARD_NO" value="" maxLength="12"
+							onchange="cardChange();searchInfo();" /></td>
+					</tr>
+					<tr>
+						<td align="right" width="35%" style="border: 0px;"></td>
+						<td align="left" style="border: 0px;"><img
+							id="ajax_memb_info" width="20" height="20"
+							src="images/ajax-loading.gif" style="display: none;"><span
+							id="memb_info">(输入手机号或鹿鹿卡号查询客户信息！)</span></td>
+					</tr>
+					<tr>
+						<td align="right" style="border: 0px;">联系电话:</td>
+						<td align="left" style="border: 0px;"><input type="text"
+							name="CDAOCW_WORK[TEL]" id="TEL" maxLength="15" value="" /></td>
+					</tr>
+					<tr>
+						<td align="right" style="border: 0px;">客户姓名:</td>
+						<td align="left" style="border: 0px;"><input type="text"
+							name="CDAOCW_WORK[REAL_NAME]" id="REAL_NAME" value=""/><font
+							color="red" style="font-size: 12px;"> *</font></td>
+					</tr>
+					<tr>
+						<td align="right" style="border: 0px;">地&nbsp;&nbsp;&nbsp;&nbsp;区:</td>
+						<td align="left" style="border: 0px;"><input type="text"
+							name="CDAOCW_WORK[REGION]" id="REGION" value="" maxLength="10"/></td>
+					</tr>
+					<tr>
+						<td align="right" style="border: 0px;">信息来源:</td>
+						<td align="left" style="border: 0px;"><select class="WInput"
+							name="CDAOCW_WORK[SOURCE]" id="SOURCE">
+							<OPTION selected value="">- 请选择 -</OPTION>
+							{foreach from=$source_list key=key item=type}
+							<option value="{$type.OPTION_VALUE}">{$type.OPTION_NAME}</option>
+							{/foreach}
+						</select></td>
+					</tr>
+					<tr>
+						<td align="right" width="35%" style="border: 0px;">产品分类:</td>
+						<td align="left" style="border: 0px;"><select class="ipt2"
+							name="CDAOCW_WORK[TYPE]" id="TYPE">
+							<option value="">- 请选择 -</option>
+							{foreach from=$cardtype item=type}
+							<option value="{$type.PROD_CODE}">{$type.PROD_NAME}</option>
+							{/foreach}
+						</select><font color="red" style="font-size: 12px;"> *</font></td>
+
+					</tr>
+					<tr>
+						<td align="right" style="border: 0px;">来电内容:</td>
+						<td align="left" style="border: 0px;"><input type="text"
+							name="CDAOCW_WORK[TITLE]" id="TITLE" value="" size="51"
+							style="width: 442px;" /><font color="red"
+							style="font-size: 12px;"> *</font></td>
+					</tr>
+					<tr>
+						<td align="right" valign="top" style="border: 0px;">解答内容:</td>
+						<td align="left" style="border: 0px;"><textarea
+							name="CDAOCW_WORK[NOTE]" id="NOTE"
+							style="width: 442px; height: 120px"></textarea></td>
+					</tr>
+					<tr>
+						<td align="right" valign="top" style="border: 0px;">是否反馈:</td>
+						<td align="left" style="border: 0px;"><input type="radio"
+							name="YNO" id="YES" onchange="OnchangeYes();">是</input> <input
+							type="radio" name="YNO" id="NO" onchange="OnchangeNo();" checked>否</input>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" colspan="2">
+						<table style="display: none" id="no_refute">
+							<tr>
+								<td align="right" width="35%" style="border: 0px;">回馈任务人:</td>
+								<td align="left" style="border: 0px;"><select class="ipt2"
+									name="CDAOCW_WORK[REFUTE_MAN]" id="REFUTE_MAN" disabled>
+									<option value="">- 请选择 -</option>
+									{foreach from=$subsInfo item=subs}
+									<option value="{$subs.SUBS_ID}" {if $subs.SUBS_ID==$user.SYS_SUBS_ID}selected{/if}>{$subs.REAL_NAME}</option>
+									{/foreach}
+								</select> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+								&nbsp;受理时间: <input type="text" id="ACTUAL_DATE"
+									name="CDAOCW_WORK[REFUTE_ENTER_TIME]" class="Wdate" 
+									onfocus="WdatePicker({literal}{readOnly:true,lang:'zh-cn',dateFmt:'yyyy-M-d H:mm:ss'}{/literal})" 
+									value="{$now}" /></td>
+							</tr>
+						</table>
+						</td>
+
+					</tr>
+
+				</table>
+				</td>
+			</tr>
+		</table>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="30" align="center" valign="bottom"><input
+					type="button" value="确定添加"
+					style="font-size: 12px; width: 80px; height: 30px;"
+					onclick="javascript:showBuyCardFrm();" /> <input type="reset"
+					value="重置" style="font-size: 12px; width: 80px; height: 30px;" />
+			</tr>
+		</table>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top" style="padding: 10px;"></td>
+	</tr>
+</table>
+<input type="hidden" id="headMenu" value="custserv"></div>
+</form>
+</div>
+<script language="javascript">{$validatJs}</script>
+{include file="footer.html"}

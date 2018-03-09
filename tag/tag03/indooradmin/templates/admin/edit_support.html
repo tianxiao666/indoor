@@ -1,0 +1,484 @@
+{include file="header.html"}
+<link href="css/diet.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/xsbortsImg.css"  rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/popup.css"  rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_1_3_2.js"></script>
+<script src="{$mediaServer}js/xsbortsImageBrowser.js"  type="text/javascript"></script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/popup.js"></script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery.easydrag.handler.beta2.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+function tips(msg){
+	var width = 200;
+	var height = 100;
+	var top = 600;
+	var left = 450;
+    $.popup({
+    	content:msg,
+    	now:true,
+    	type:2,
+		width  : width,
+		height : height,
+		top    : top,
+		left   : left,
+    	title:"提示"
+    });
+    setTimeout("window.location.reload()",1500);
+}
+var arr = new Array(0,1,0,0,0,0);//用于标记是否已使用看了该上传框（新增和删除上传框）
+var all = 4;//一共可以新增4个上传框
+var time = 0;
+var t1;
+var t2;
+
+//添加一行
+function addRowInfo(i){
+
+	var length = $("#tphoto").find("tr").length;
+	if(length>3){
+		al();
+		return false;
+	}
+	
+	for(var j=2;j<=5;j++){
+		if(arr[j] == 0){
+			//var content = '<tr><td>选择图片'+j+'：</td>' +
+			var content = '<tr><td>选择图片</td>' +
+			'<td><input type="file" id="PIC'+j+'" name="PIC[]" onchange="onUploadImgChange(this,'+j+')"></td>' +
+			'<td><a onclick="deleteRow(this);" class="'+j+'"><img src="images/icon/s_delete.gif" alt="X" /></a></td>' +
+			'<td><label style="cursor:pointer;"><input name="Default" type="radio" value="'+j+'"/>默认图片</label></td>' + 
+			'<td id="preview_fake'+j+'"><img id="preview'+j+'" onload="onPreviewLoad(this)" style="display:none;"></td></tr>';
+			$(content).appendTo($('#tphoto'));
+			arr[j] = 1;//标记已经使用了该id
+			all -- ;//可上传总数
+			$("#remain").html(all);
+			break;
+			
+		}
+	}
+}
+
+//最多可以新增4个上传框闪亮提示
+function al()
+{   
+   time++;
+   if(time<=5){
+	   if(time % 2 == 0){
+		   t1 = setTimeout(function() {$('#remain').css('color','#0F0');al()}, 100); 
+	   }
+	   else{
+		   t2= setTimeout(function() {$('#remain').css('color','#F00');al()}, 100);
+	   }
+   }
+   if(time==6){
+	   clearTimeout(t1); 
+	   clearTimeout(t2); 
+	   time = 0;
+   }
+}
+
+//删除一个图片
+function deleteRow(obj){
+	$(obj).parent().parent().remove();
+	arr[parseInt($(obj).attr("class"))] = 0;//标记已经使用了该id
+	all ++ ;
+	$("#remain").html(all);
+}
+
+//上传预览
+function onUploadImgChange(sender,key){   
+    if( !sender.value.match( /.jpg|.gif|.png|.bmp/i ) ){   
+        return false;   
+    }
+    else{
+    
+	    var objPreview = document.getElementById('preview'+key);   
+	    var objPreviewFake = document.getElementById('preview_fake'+key);   
+	    var objPreviewSizeFake = document.getElementById('preview_size_fake'+key);
+	    if( sender.files &&  sender.files[0] ){   
+	        objPreview.style.display = 'block';   
+	        objPreview.style.width = 'auto';   
+	        objPreview.style.height = 'auto';
+	        $("#pic_span").hide();   
+	        // Firefox 因安全性问题已无法直接通过 input[file].value 获取完整的文件路径   
+	        objPreview.src = window.URL.createObjectURL(sender.files[0]);    
+	        if(!objPreview.src){
+	        	objPreview.src = sender.files[0].getAsDataURL();  
+	        }      
+	    }else if( objPreviewFake.filters ){  
+	        objPreview.style.display = 'block';   
+	        objPreview.style.width = '100px';   
+	        objPreview.style.height = '80px';
+	        $("#pic_span").hide();
+			$("#preview"+key).attr("src"," file:///"+$("#PIC").val());
+			autoSizePreview( objPreview, objPreview.offsetWidth, objPreview.offsetHeight );
+	    }   
+    }
+}   
+function onPreviewLoad(sender){
+    autoSizePreview( sender, sender.offsetWidth, sender.offsetHeight );   
+}   
+ //等比例缩放
+function autoSizePreview( objPre, originalWidth, originalHeight ){   
+    var zoomParam = clacImgZoomParam( 100, 80, originalWidth, originalHeight );   
+    objPre.style.width = zoomParam.width + 'px';   
+    objPre.style.height = zoomParam.height + 'px';   
+    objPre.style.marginTop = zoomParam.top + 'px';   
+    objPre.style.marginLeft = zoomParam.left + 'px';   
+}   
+
+function clacImgZoomParam( maxWidth, maxHeight, width, height ){   
+    var param = { width:width, height:height, top:0, left:0 };  
+    if( width>maxWidth || height>maxHeight ){   
+        rateWidth = width / maxWidth;   
+        rateHeight = height / maxHeight;   
+        if( rateWidth > rateHeight ){   
+            param.width =  maxWidth;   
+            param.height = height / rateWidth;   
+        }else{   
+            param.width = width / rateHeight;   
+            param.height = maxHeight;   
+        }   
+    }   
+    param.left = (maxWidth - param.width) / 2;   
+    param.top = (maxHeight - param.height) / 2;   
+    return param;   
+}
+
+//提示信息
+function AlertTips(msg){
+	var width = 200;
+	var height = 100;
+	var top = 400;
+	var left = 450;
+    $.popup({
+    	content:"<font color='red'>"+msg+"</font>",
+    	now:true,
+    	type:2,
+		width  : width,
+		height : height,
+		top    : top,
+		left   : left,
+    	title:"提示"
+    });
+    setTimeout("$.popup({close:true});",1500);
+}
+
+//判断中英文：
+function isChinese(str){
+    var lst = /[u00-uFF]/;      
+    return !lst.test(str);     
+}
+function strlen(str){
+	var strlength=0;
+	for (t=0;t<str.length;t++){
+	   if (isChinese(str.charAt(t))==true)
+	      strlength=strlength + 2;
+	   else
+	      strlength=strlength + 1;
+	}
+	return strlength;
+}
+
+
+function edit_support_submit(){
+	var HOTEL_FACL_NAME = document.Add_support_form.HOTEL_FACL_NAME.value;
+	var HOTEL_FACL_NOTE = document.Add_support_form.HOTEL_FACL_NOTE.value;
+	if(HOTEL_FACL_NAME.replace(/^\s*|\s*$/g,'')==''){
+		AlertTips('请填写配套名称！');
+		return false;
+	}
+	if(strlen(HOTEL_FACL_NAME.replace(/^\s*|\s*$/g,'')) > 50){
+		AlertTips('配套名称超过长度限制！');
+		return false;
+	}
+	
+	var checked = false;
+	var radios = document.getElementsByName('HOTEL_FACL_TYPE');
+	for (var x=0; x<radios.length; x++) {
+	    checked = checked || radios[x].checked;
+	}
+	if (!checked) {
+	    alert("请选择配套类型");
+	    return false;
+	}
+	
+	if(HOTEL_FACL_NOTE.replace(/^\s*|\s*$/g,'')==''){
+		if(strlen(HOTEL_FACL_NOTE.replace(/^\s*|\s*$/g,'')) > 4000){
+			AlertTips('配套说明超过长度限制！');
+			return false;
+		}
+	}
+
+	var radios = document.getElementsByName('Default');
+	var pic = document.getElementsByName('PIC[]');
+	var is_picture = false;//判断是否上传了图片
+	for (var x=0; x<pic.length; x++) {
+		if(pic[x].value != ''){
+			is_picture = true;
+		    if( !pic[x].value.match( /.jpg|.gif|.png|.bmp/i ) ){   
+		    	AlertTips('图片'+(x+1)+'格式无效！');   
+		        return false;   
+		    } 
+		}
+		if(radios[x].checked && pic[x].value == ''){
+			AlertTips('图片为空不能设置默认图！');
+			return false; 
+		}
+	}	
+	
+	if(is_picture){
+		var defalt_checked = false;
+		for (var x=0; x<radios.length; x++) {
+			defalt_checked = defalt_checked || radios[x].checked;
+		}
+		var default_pic = false;
+		if({/literal}{$hotel_facl_info.PROD_PIC_ID}{literal} > 0) default_pic = true;
+		if (!defalt_checked && !default_pic) {
+			AlertTips("必须选择一个默认图！");
+		    return false;
+		}
+	}
+	$("#Add_support_form").submit();
+}
+
+function writename(obj){
+	$("#HOTEL_FACL_NAME").val($(obj).parent().find("span").html());
+}
+
+//编辑图片
+function view_edit_pic(pic_id,flag){
+	var imgPicId = pic_id;
+	var width1 = 360;
+	var height1 = 360;
+	var top1 = 400;
+	var left1 = 450;
+    $.popup({
+    	url:"ea.php?r=ImageCommon/EditPic&id="+imgPicId+"&default_flag="+flag+"&type=ROOM_SUPPORT",
+    	now:true,
+    	type:1,
+		width  : width1,
+		height : height1,
+		top    : top1,
+		left   : left1,
+    	title:"编辑图片"
+    });
+}
+
+//设置默认图
+function view_setdefault_pic(pic_id){
+	var imgPicId = pic_id;
+	var hotel_facl_id = $('#HOTEL_FACL_ID').val();
+	$.ajax({
+		type: "get",
+		url: "ea.php?r=ImageCommon/UpdateDefaultPic&pic_id="+imgPicId+"&id="+hotel_facl_id+"&type=ROOM_SUPPORT",
+		dataType:	"json",
+		success :  function(msg){
+			if(msg.result === '1'){
+				tips('设置默认图片成功');
+			}
+			else if(msg.result === '2'){
+				AlertTips('归档的图片不能设置为默认图！');
+			}
+			else if(msg.result === '3'){
+				AlertTips('已经是默认图！');
+			}
+			else if(msg.result === '4'){
+				tips('设置默认图片失败！');
+			}
+		}
+	});
+}
+
+//自定义缩略图
+function view_cut_pic(pic_id){
+	var spot_id = $('#spot_id').val();
+	var imgPicId = pic_id;
+	window.top.location.href="ea.php?r=ScenicPriceAlbum/CutPrice&pic_id="+imgPicId+"&spot_id="+spot_id;
+}
+
+//查看大图
+function BigImageView(src){
+	var new_src = {/literal}'{$back_url}{literal}' + src;
+	window.open(new_src, 'newwindow');
+}
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+      <div class="crumb"><span>当前位置：<a href="ea.php?r=LsArea/AreaList">旅游数据管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=RoomMgr">住宿数据管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=RoomMgr/EditRoom&FACL_ID={$faclinfo.FACL_ID}">编辑{$faclinfo.FACL_NAME}住宿点</a>&nbsp;&gt;&nbsp;编辑住宿配套</span></div>
+      <div class="tabtext" id="tabtext1" ><div class="c"></div>
+      <table width="100%" class="diet_table">
+      <tr>
+        <td class="resource_menu_left_td">
+        {include file="resource_menu_left.html" info=$data resource_menu_file="room_menu_left.html"}
+        </td>
+       <td class="right_td">
+       <form action="ea.php?r=RoomMgr/DoEditSupport" method="post" id="Add_support_form" name="Add_support_form" enctype="multipart/form-data">
+       <input type="hidden" name="FACL_ID" value="{$data.FACL_ID}" id="FACL_ID" />
+       <input type="hidden" name="HOTEL_FACL_ID" value="{$data.PROD_ID}" id="HOTEL_FACL_ID" />
+       <table class="support">
+          <tr>
+              <td colspan="4"><div class="form_title">编辑信息</div></td>
+          </tr>
+          <tr>
+              <td class="title">配套类型:</td>
+              <td colspan="3">
+                {if $SUPPORT_TYPE_LIST}
+					{foreach from = $SUPPORT_TYPE_LIST item = list key = key}
+						<label style="cursor:pointer;"><input type="radio" name="HOTEL_FACL_TYPE" value="{$key}" onclick="writename(this)" {if $hotel_facl_info.ATTR_KEY eq $key} checked="checked" {/if}><span>{$list}</span></label>
+					{/foreach}
+				{/if}
+              <span class="invalid">（必填）</span></td>
+          </tr>
+          <tr>
+              <td class="title">配套名称:</td>
+              <td colspan="3"><input type="text" name="HOTEL_FACL_NAME" id="HOTEL_FACL_NAME" value="{$hotel_facl_info.NAME}">&nbsp;<span class="invalid">（必填）</span></td>
+          </tr>
+          <tr>
+              <td class="title">配套说明:</td>
+              <td colspan="3">
+                <textarea name="HOTEL_FACL_NOTE" id="HOTEL_FACL_NOTE">{$hotel_facl_info.NOTE}</textarea>
+              </td>
+          </tr>
+          <tr>
+              <td class="title">状态:</td>
+              <td colspan="3">
+                {$hotel_facl_info.STATUS_NAME}
+                {if $HOTEL_FACL_STATUS}
+					{foreach from = $HOTEL_FACL_STATUS item = list key = key}
+						<label style="cursor:pointer;"><input type="radio" name="STATUS" value="{$key}">{$list}</label>
+					{/foreach}
+				{/if}
+              </td>
+          </tr>
+    	</table>
+      	<table width="100%" class="support">
+          <tr>
+            <td class="title">外观图片（选填）</td>
+            <td><!-- 显示图片 -->
+				<table width="600px" border="0" cellspacing="5" cellpadding="0" style="float:left; ">
+				<tr>
+				<td id="picContainer">
+				{if $picArray}
+					<table width="600px" border="0" align="center" >
+						<tr>  
+							<th height="125" width="600px"    scope="row" align="center" >
+								<div id="imgSmallDiv" STYLE="position:relative; width:600px;overflow-x:auto; overflow-y:hidden;white-space:nowrap; font-size:0px; background:#999999" mce_STYLE="position:relative; width:480px;overflow-x:auto; overflow-y:hidden;white-space:nowrap; font-size:0px; background:#E1EEF5" ><div id="imgSmallDivInner" style="position:relative;overflow:visible;white-space:nowrap;font-size:0px;background:#E1EEF5" mce_style="position:relative;overflow:visible;white-space:nowrap;font-size:0px;background:#E1EEF5"></div></div>
+							</th>  
+						</tr>  
+						<tr>  
+							<td align="center" id="imgBigTdDesc"></td>  
+						</tr>  
+						<tr > 
+							<td align="center" id="imgBigTdX" style="height:250px;"></td>  
+						</tr>  
+					</table>
+				{/if}
+				</td>
+				</tr>
+				</table>
+            </td>
+          </tr>
+          <tr>
+          	<td></td>
+          	<td><a class="title" onclick="addRowInfo(0);" style="color:#00F;">+添加上传框</a>&emsp;还可以新增<b><font style="color:#F00;font-size:16px;" id="remain">4</font></b>个新的图片</td>
+          </tr>
+          <tr>
+          	<td></td>
+            <td colspan="3">
+					<table id="rphoto">
+					    <tr>
+					        <td>选择图片</td>
+					        <td><input type="file" id="PIC1" name="PIC[]" onchange="onUploadImgChange(this,1)"></td>
+							<td>
+							    &emsp;<!-- <a href="#!" class="1"><img src="images/icon/s_delete.gif" alt="X" /></a></td> -->
+							<td>
+							    <label style="cursor:pointer;"><input name="Default" type="radio" value="1" />默认封面</label>
+							</td>
+					        <td id="preview_fake1">
+								<img id="preview1" style="display:none;"  onload="onPreviewLoad(this)">
+							</td>
+					    </tr>
+					</table>
+					<table id="tphoto"></table>
+            </td>
+            </tr>
+	          <tr>
+	          <td></td>
+	          <td colspan="3"><input type="button" onclick="edit_support_submit();" value="确认修改"></td>
+	          </tr>
+          </table>
+          </form>
+      </td>
+      </tr>
+      </table>
+    </div>
+   </div>
+</div>
+{literal}
+<script language="javascript" type="text/javascript">
+var default_pic_id;//default_pic_id必须定义，用于显示设置的默认图，即是跟景点或景区的id
+if({/literal}{$hotel_facl_info.PROD_PIC_ID}{literal}) default_pic_id = {/literal}{$hotel_facl_info.PROD_PIC_ID}{literal};
+//相册列表数据注入到js数组中，用于显示相册
+var imgBigDesc=new Array({/literal}{foreach from=$picArray item=item key=key} ["{$item.PIC_TOPIC}","{$item.PATH}{$item.FILENAME}","{$item.PROD_PIC_ID}","{$item.STATUS}"]{if $picCount-1 !=$key},{/if}{/foreach}{literal});  
+var urlLoading="images/loading.gif";  
+var urlLeftArrow="url(images/left.cur),auto";  
+var urlRightArrow="url(images/right.cur),auto"; 
+var img_default_flag = 0;
+if(imgBigDesc[0]) {
+	var myImageBrowser=new xsbortsImageBrowser(imgBigDesc,"imgBigTdX","imgBigTdDesc","imgSmallDiv","imgSmallDivInner",urlLoading,urlLeftArrow,urlRightArrow);  
+	myImageBrowser.insertSmallImg("myImageBrowser");
+	if(default_pic_id == imgBigDesc[0][2]){
+		img_default_flag = 1;
+	}
+	myImageBrowser.imgChangeToBig(imgBigDesc[0][1],imgBigDesc[0][0],imgBigDesc[0][2],0,"myImageBrowser",img_default_flag);  
+	var myScript=myImageBrowser.createScriptHead();     
+	myScript+=myImageBrowser.createBigImgClick("myImageBrowser");  
+	myScript+=myImageBrowser.createBigImgMouseMove("myImageBrowser");  
+	myScript+=myImageBrowser.createBigImgMouseDown("myImageBrowser");  
+	myScript+=myImageBrowser.createBigImgMouseUp("myImageBrowser");  
+	myScript+=myImageBrowser.createAllSmallImgHover("myImageBrowser");
+	
+	myScript+=myImageBrowser.createScriptTail();  
+	$(myImageBrowser.jqBigImg).html(myScript);   
+}
+
+//当选项卡是在“已有图片”选项中时，等比例缩放大图，防止大图比弹出层大而走样。
+function changeImg(){
+	var scl=$("#imgBigX").width()/$("#imgBigX").height();
+    if($("#imgBigX").width()>480)  {
+          if(600/scl<450) {
+              $("#imgBigX").width(480);
+		      $("#imgBigX").height(480/scl);
+		   }
+		   else
+		   {
+              $("#imgBigX").height(250);
+		      $("#imgBigX").width(250*scl);	
+			   
+		   }
+     } 
+   else 
+     {
+      if($("#imgBigX").height()>250) 
+        {
+            $("#imgBigX").height(250);
+		    $("#imgBigX").width(250*scl);
+			$("#vwBigImgButton").toggle();
+        }
+	 }
+}
+function changeLatAndLongValue(){//重新定位父窗口的当前点的位置
+	   var name = document.getElementById("areaRelaName").value;
+	   var latitude = document.getElementById('latitude').value;
+	   var longitude = document.getElementById('longitude').value;
+	   if(window.parent.document.getElementById("map3d")){//父页面中有map3d这个元素
+	     window.parent.setPointPosition(latitude,longitude,name);
+	   }
+	}
+</script>
+{/literal}
+{include file="popup.html"}
+{include file="footer.html"}

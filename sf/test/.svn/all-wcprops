@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/srcsvn/indoor/!svn/ver/1/sf/test
+END
+CWebTestCase.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/srcsvn/indoor/!svn/ver/1/sf/test/CWebTestCase.php
+END
+CDbTestCase.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/srcsvn/indoor/!svn/ver/1/sf/test/CDbTestCase.php
+END
+CDbFixtureManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/srcsvn/indoor/!svn/ver/1/sf/test/CDbFixtureManager.php
+END
+CTestCase.php
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/srcsvn/indoor/!svn/ver/1/sf/test/CTestCase.php
+END

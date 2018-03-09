@@ -1,0 +1,101 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+{/literal}
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function deleteRole()
+{
+	if (confirm('警告：删除角色会导致所有属于此角色的用户被删除！\n\n您确定要删除这个角色吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+</script>
+{/literal}
+
+
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;角色管理</span></div>
+  <input type="hidden" id="subbarFlag" value="role_mgr_bar" />
+
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> 角色列表</font></td>
+					{if $user_role.ADMIN }<td width="50%" align="right"><a href="ea.php?r=RoleMgr/AddView" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增角色]</font></a></td>{/if}
+				</tr>
+	</table>
+<table class="itable">
+<thead>
+<tr>
+                    <th width="15%" align="left">角色编号</th>
+                    <th width="15%" align="left">角色名称</th>
+					<th width="15%" align="left">角色类型</th>
+                    <th width="15%" align="left">创建人</th>
+                    <th width="20%" align="left">角色说明</th>
+                    {if $user_role.ADMIN}
+					<th width="20%" align="left">&nbsp;相关操作</th>
+					{/if}
+                </tr>
+</thead>
+<tbody>
+		{section name=i loop=$sys_role}
+                <tr class="{cycle values='row0,row1'}">
+                    <td align="left">{$sys_role[i].ROLE_CODE}</td>
+					<td align="left">{$sys_role[i].ROLE_NAME}</td>
+                    <td align="left">{$sys_role[i].ROLE_TYPE_NAME}</td>
+                    <td align="left">{$sys_role[i].OWNER_NAME}</td>
+                    <td align="left">{$sys_role[i].NOTE}</td>
+                    {if $user_role.ADMIN}
+					<td align="left">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td style="border:0px;"><a href="ea.php?r=RoleMgr/EditView&role_code={$sys_role[i].ROLE_CODE}"><img src="images/icon/s_edit.gif" border="0" align="absmiddle" /><font color="#666">修改资料</font></a></td>
+								<!--<td style="border:0px;"><a href="ea.php?r=RoleMgr/DeleteRole&role_code={$sys_role[i].ROLE_CODE}" target="bf" onclick="return deleteRole();"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">删除角色</font></a></td>-->
+							</tr>
+						</table>
+					</td>
+					{/if}
+                </tr>
+				{/section}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

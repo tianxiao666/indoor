@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/srcsvn/indoor/!svn/ver/350/appinterface/conf/spring
+END
+datasource-appcontx.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/350/appinterface/conf/spring/datasource-appcontx.xml
+END
+indoor-appcontx.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/166/appinterface/conf/spring/indoor-appcontx.xml
+END

@@ -1,0 +1,44 @@
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_1_3_2.js"></script>
+<link href="css/msg.css" rel="stylesheet" type="text/css" />
+<link href="css/seloption.css" rel="stylesheet" type="text/css" />
+<script src="js/suggest/kissy.js"></script>
+<script src="js/suggest/suggest.js"></script>
+<script src="js/suggest/autoComplete.js"></script>
+{literal}
+<script type="text/javascript">
+function FormSubmit(){
+	var userCnt = $('#user_cnt').val();
+	if (/[^\d]/.test(userCnt) || userCnt==0){
+		$('#userErr').html("请输入正确的非0整数");
+		return false;
+	}
+	if(userCnt > 100){
+		$('#userErr').html("最多一次生成100个用户");
+		return false;
+	}
+	$('#addUserFrm').submit();
+}
+
+function hiddErr(){
+	$('#userErr').html("&nbsp;");
+}
+</script>
+{/literal}
+<form  action='{$phpSelf}?r=AdminMgr/BatchCreateUser'  method="POST" id="addUserFrm">
+<div class="msg">
+	<div class="m" id="title1">
+		<div class="cont1">
+		<div class="text" style="padding-top: 10px;">
+				<div class="l"><font color="#666666">生成用户数：</font><font style="color:RED">*</font></div>
+				<div class="r" style="padding: 8px 0 0;">
+				<input type="text" id="user_cnt" name="user_cnt" value="" style="width:353px;" onkeyup='hiddErr();'><br />
+				<span id="userErr" style="color:RED;font-size: 12px;">&nbsp;</span>
+				</div>
+		</div>
+	</div>
+	<div class="cont3">
+			<input type="button" style="width:70px;height:25px" value="确定" onclick="FormSubmit();">&nbsp;&nbsp;&nbsp;<input type="button" id="closeBtn" onclick="window.parent.closeFrm();" style="width:70px;height:25px"  value="关闭" >
+	</div>
+	</div>
+	</div>
+</form>

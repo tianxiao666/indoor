@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/srcsvn/indoor/!svn/ver/1/sf/collections
+END
+CMapIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/1/sf/collections/CMapIterator.php
+END
+CAttributeCollection.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/1/sf/collections/CAttributeCollection.php
+END
+CMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/srcsvn/indoor/!svn/ver/1/sf/collections/CMap.php
+END
+CQueueIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/collections/CQueueIterator.php
+END
+CQueue.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/srcsvn/indoor/!svn/ver/1/sf/collections/CQueue.php
+END
+CListIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/collections/CListIterator.php
+END
+CList.php
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/srcsvn/indoor/!svn/ver/1/sf/collections/CList.php
+END
+CConfiguration.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/collections/CConfiguration.php
+END
+CStackIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/collections/CStackIterator.php
+END
+CStack.php
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/srcsvn/indoor/!svn/ver/1/sf/collections/CStack.php
+END
+CTypedList.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/srcsvn/indoor/!svn/ver/1/sf/collections/CTypedList.php
+END

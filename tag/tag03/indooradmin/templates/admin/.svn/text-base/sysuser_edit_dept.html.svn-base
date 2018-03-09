@@ -1,0 +1,63 @@
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#MOVE_SELECTED").click(function(){
+		handelOptions();
+		if($("#channelLeft").val()=="") return false;
+		$("#channelRight").append($("#channelLeft").find("option:selected"));
+	});
+	$("#MOVE_ALL").click(function(){
+		handelOptions();
+		if($("#channelLeft").val()=="") return false;
+		$("#channelRight").append($("#channelLeft").find("option"));
+	});
+	$("#REMOVE_SELECTED").click(function(){
+		handelOptions();
+		if($("#channelRight").val()=="") return false;
+		$("#channelLeft").append($("#channelRight").find("option:selected"));
+	});
+	$("#REMOVE_ALL").click(function(){
+		handelOptions();
+		if($("#channelRight").val()=="") return false;
+		$("#channelLeft").append($("#channelRight").find("option"));
+	});
+});
+</script>
+{/literal}
+<table border="0" cellspacing="0" cellpadding="0">
+      <tr>
+         <td style="border:0px"> 
+             <select style="width:180px;height:200px;" multiple="multiple" id="channelLeft">
+                {foreach from=$dept_list key=key item=type}
+			       <option value="{$type.DEPT_ID}">{$type.DEPT_NAME}</option>
+						 {if $type.child}{foreach from=$type.child item=m}<option value="{$m.DEPT_ID}" >&nbsp;&nbsp;{$m.DEPT_NAME}</option>
+						 {if $m.child}{foreach from=$m.child item=n}<option value="{$n.DEPT_ID}" >&nbsp;&nbsp;&nbsp;&nbsp;{$n.DEPT_NAME}</option>
+						 {/foreach}{/if}
+						 {/foreach}
+						 {/if}
+			   {/foreach}
+                      </select>
+                   </td> 
+                 <td style="padding:0 10px 0 10px;border:0px;width:80px" align="center">
+                    <div style="padding-bottom: 4px">
+                      <input type="button" style="width:24px" id="MOVE_SELECTED" value="&gt;" title="添加选中项" />
+                    </div>
+                    <div style="padding-bottom: 4px">
+                      <input type="button" style="width:24px" id="MOVE_ALL" value="&gt;&gt;" title="添加所有项" />
+                    </div>
+                    <div style="padding-bottom: 4px">
+                      <input type="button" style="width:24px" id="REMOVE_SELECTED" value="&lt;" title="移除选中项" />
+                    </div>
+                    <div style="padding-bottom: 4px">
+                      <input type="button" style="width:24px" id="REMOVE_ALL" value="&lt;&lt;" title="移除所有项" />
+                    </div>
+                 </td>
+                  <td style="border:0px">
+                      <select  style="width:180px;height:200px;" multiple="multiple" id="channelRight" name="DEPT[]">
+                      {foreach from=$depts item=de}
+                      <option value="{$de.DEPT_ID}" {if $depts}selected{/if}>{$de.DEPT_NAME}</option>
+                      {/foreach}
+                   </select>
+           </td>
+      </tr>
+ </table>

@@ -1,0 +1,103 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<script language="javascript" type="text/javascript">
+function Log_Submit(){
+	var start = $("#START_TIME").val();
+	var end   = $("#END_TIME").val();
+	if( start!='' && end!='' && end < start)
+	{
+		alert(app+"开始日期不能大于终止日期！");
+		return false;
+	}
+	$("#log_search_form").submit();
+}
+</script>
+{/literal}
+<input type="hidden" id="app_name" value="{if $data.APP}{$data.APP}{else}WEB{/if}">
+<div class="content">
+	<div class="main">
+	    <div class="crumb"><span>当前位置：<a href="ea.php?r=StatAnaryse">统计分析</a>&nbsp;&gt;&nbsp;分析报表</span></div>
+		<div class="tabtext" id="tabtext1" >
+			<table>
+				<tr>
+					<td valign="top"  style="padding: 10px 10px 0;">
+						<table border="0" cellspacing="0" cellpadding="0" >
+							<tr> 
+								<td valign="top" colspan="2">
+									<div class="scenic_search" style="margin-left: 8px;">
+										<div class="chose">
+											<form action="ea.php?r=AnalysisReport/Report" id="log_search_form" name="log_search_form" method="post" style="margin: 0px; padding: 0px;width:600px;">
+												<input type="hidden" name="FLAG" value="1">
+												<table border="0" cellspacing="0" cellpadding="0">
+													<tbody>
+														<tr>
+															<td height="25" align="left" class="formTitle"><span>起始日期：</span></td>
+															<td><input type="text" id="START_TIME" name="START_TIME" value="{$data.START_TIME}" class="Wdate" onfocus="WdatePicker({literal}{readOnly:true,dateFmt:'yyyy-MM-dd 00:00:00'}{/literal})" /></td>
+															<td height="25" align="left" class="formTitle"><span>结束日期：</span></td>
+															<td><input type="text" id="END_TIME" name="END_TIME" class="Wdate" value="{$data.END_TIME}" onfocus="WdatePicker({literal}{readOnly:true,dateFmt:'yyyy-MM-dd 00:00:00'}{/literal})" /></td>
+															<td><div class="btn_search"><a onclick="Log_Submit();" style="cursor:pointer;"></a></div></td>
+														</tr>
+													</tbody>
+												</table>
+											</form>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top" style="padding:10px 10px 0;" colspan="2">
+								{if (!$resports)}
+								<div class="scenic_list">
+									<table class="itable">
+										<thead>
+											<tr>
+												<td width="15%" align="left"><div align="center" style="color: red;">没有找到任何记录</div></td>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								{else}
+								<div class="scenic_list">
+									<table class="itable">
+									<thead>
+									<tr>
+										<th width="15%" align="left">序号</th>
+										<th>条目</th>
+										<th width="20%" align="left">总数</th>
+										<th width="20%" align="left">操作</th>
+									</tr>
+									</thead>
+									<tbody>
+									{foreach from=$resports item=item key=key name=report}
+									<tr class="{cycle values='row0,row1'}">
+										<td align="left">{$smarty.foreach.report.iteration}</td>
+										<td align="left">{$item.FUNC_NAME}</td>
+										<td align="left">{if $item.CNT}{$item.CNT}{else}0{/if}</td>
+										<td align="left"><a href="ea.php?r=AnalysisReport/ReportDetail&func={$key}&START_TIME={$data.START_TIME}&END_TIME={$data.END_TIME}&FLAG=1">查看详情</a></td>
+									</tr>
+									{/foreach}
+									</tbody>
+									</table>
+								</div>
+								{/if}
+								</td>
+							</tr>
+							<tr> 
+								<td valign="top" style="padding:10px;" colspan="2">
+									<div class="pagebreak">
+										<div class="page">
+										{include file="page_info.html"}
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div> 
+</div>
+{include file="footer.html"}

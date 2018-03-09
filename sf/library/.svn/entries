@@ -1,0 +1,95 @@
+10
+
+dir
+410
+http://svn.hgicreate.com/srcsvn/indoor/sf/library
+http://svn.hgicreate.com/srcsvn/indoor
+
+
+
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+19b6460e-13a2-11e3-9178-4142410dca1f
+
+APISDK
+dir
+
+PHPUnit
+dir
+
+adodb
+dir
+
+fckeditor
+dir
+
+http_client
+dir
+
+image
+dir
+
+jquery
+dir
+
+mediawiki
+dir
+
+mime_type_lib.php
+file
+
+
+
+
+2017-02-21T07:08:25.838000Z
+3420a7751be8690bbdfdbe4cedd7c93e
+2013-09-02T08:02:43.167143Z
+1
+ma.l3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10517
+
+minScript
+dir
+
+phpmailer
+dir
+
+smarty
+dir
+

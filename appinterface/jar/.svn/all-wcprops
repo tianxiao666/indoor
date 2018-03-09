@@ -1,0 +1,785 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/srcsvn/indoor/!svn/ver/350/appinterface/jar
+END
+aspectjrt.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/aspectjrt.jar
+END
+jbpm-test-db-tests.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-test-db-tests.jar
+END
+jbpm-tomcat6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-tomcat6.jar
+END
+org.springframework.aspects-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.aspects-3.0.4.RELEASE.jar
+END
+jxl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jxl.jar
+END
+slf4j-jcl-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-jcl-1.5.8.jar
+END
+hibernate-core-3.3.1.GA.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/hibernate-core-3.3.1.GA.jar
+END
+antlr-2.7.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/antlr-2.7.6.jar
+END
+zxing.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/zxing.jar
+END
+slf4j-api-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-api-1.5.8.jar
+END
+mockrunner-0.4.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/mockrunner-0.4.1.jar
+END
+jstl-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jstl-1.2.jar
+END
+org.springframework.web.servlet-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.web.servlet-3.0.4.RELEASE.jar
+END
+stax-api-1.0-2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/stax-api-1.0-2.jar
+END
+bsh-2.0b5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/bsh-2.0b5.jar
+END
+livetribe-jsr223.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/livetribe-jsr223.jar
+END
+poi-ooxml-schemas-3.8-beta1-20110307.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/poi-ooxml-schemas-3.8-beta1-20110307.jar
+END
+jbpm-console-graphView-plugin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-console-graphView-plugin.jar
+END
+guice-servlet-2.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/guice-servlet-2.0.jar
+END
+httpclient-4.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/httpclient-4.1.1.jar
+END
+activation-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/activation-1.1.1.jar
+END
+freemarker-2.3.15.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/freemarker-2.3.15.jar
+END
+aspectjweaver.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/aspectjweaver.jar
+END
+commons-chain-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-chain-1.2.jar
+END
+doxia-module-apt-1.0-alpha-11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/doxia-module-apt-1.0-alpha-11.jar
+END
+doxia-core-1.0-alpha-11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/doxia-core-1.0-alpha-11.jar
+END
+org.springframework.context.support-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.context.support-3.0.4.RELEASE.jar
+END
+slf4j-simple-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-simple-1.5.8.jar
+END
+mockejb.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/mockejb.jar
+END
+commons-pool-1.5.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-pool-1.5.5.jar
+END
+jbpm-db.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-db.jar
+END
+commons-collections-3.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-collections-3.2.jar
+END
+junit-4.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/junit-4.4.jar
+END
+slf4j-jdk14-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-jdk14-1.5.8.jar
+END
+cglib.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/cglib.jar
+END
+antlr-runtime-3.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/antlr-runtime-3.1.1.jar
+END
+mail-1.4.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/mail-1.4.1.jar
+END
+slf4j-log4j12-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-log4j12-1.5.8.jar
+END
+dom4j-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/dom4j-1.6.1.jar
+END
+xwork-core-2.3.15.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/xwork-core-2.3.15.1.jar
+END
+httpmime-4.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/httpmime-4.1.1.jar
+END
+asm-1.5.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/asm-1.5.3.jar
+END
+slf4j-ext-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-ext-1.5.8.jar
+END
+commons-logging-api-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-logging-api-1.1.jar
+END
+log4j-1.2.15.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/log4j-1.2.15.jar
+END
+jbpm-console-reports.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-console-reports.jar
+END
+gson-1.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/gson-1.4.jar
+END
+wstx-lgpl-3.2.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/wstx-lgpl-3.2.6.jar
+END
+jta-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jta-1.1.jar
+END
+oscache-2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/oscache-2.1.jar
+END
+surefire-api-2.4.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/surefire-api-2.4.3.jar
+END
+commons-lang3-3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-lang3-3.1.jar
+END
+hibernate-entitymanager-3.4.0.GA.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/hibernate-entitymanager-3.4.0.GA.jar
+END
+org.springframework.core-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.core-3.0.4.RELEASE.jar
+END
+pinyin4j-2.5.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/pinyin4j-2.5.0.jar
+END
+jbpm-console-form-plugin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-console-form-plugin.jar
+END
+struts2-json-plugin-2.3.15.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/struts2-json-plugin-2.3.15.1.jar
+END
+surefire-booter-2.4.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/surefire-booter-2.4.3.jar
+END
+jpdl-migration-4.5-SNAPSHOT.jar
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jpdl-migration-4.5-SNAPSHOT.jar
+END
+org.springframework.web-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.web-3.0.4.RELEASE.jar
+END
+org.springframework.instrument-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.instrument-3.0.4.RELEASE.jar
+END
+commons-validator-1.3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-validator-1.3.1.jar
+END
+juli-6.0.20.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/juli-6.0.20.jar
+END
+slf4j-nop-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-nop-1.5.8.jar
+END
+juel-impl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/juel-impl.jar
+END
+hsqldb-1.8.0.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/hsqldb-1.8.0.7.jar
+END
+commons-digester-2.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-digester-2.0.jar
+END
+org.springframework.transaction-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.transaction-3.0.4.RELEASE.jar
+END
+commons-lang-2.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-lang-2.4.jar
+END
+spring-ldap-1.3.0.RELEASE-all.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/spring-ldap-1.3.0.RELEASE-all.jar
+END
+org.springframework.web.portlet-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.web.portlet-3.0.4.RELEASE.jar
+END
+c3p0-0.9.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/c3p0-0.9.1.jar
+END
+livetribe-jsr223-2.0.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/livetribe-jsr223-2.0.5.jar
+END
+quartz-all-1.8.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/quartz-all-1.8.4.jar
+END
+commons-logging-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-logging-1.1.1.jar
+END
+javassist-3.11.0.GA.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/javassist-3.11.0.GA.jar
+END
+org.springframework.orm-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.orm-3.0.4.RELEASE.jar
+END
+org.springframework.context-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.context-3.0.4.RELEASE.jar
+END
+guice-2.0-aopalliance.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/guice-2.0-aopalliance.jar
+END
+proxool-0.9.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/proxool-0.9.1.jar
+END
+jaxen-1.1-beta-6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jaxen-1.1-beta-6.jar
+END
+struts2-spring-plugin-2.3.15.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/struts2-spring-plugin-2.3.15.1.jar
+END
+xmlbeans-2.3.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/xmlbeans-2.3.0.jar
+END
+surefire-junit4-2.4.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/surefire-junit4-2.4.3.jar
+END
+hibernate-commons-annotations-3.1.0.GA.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/hibernate-commons-annotations-3.1.0.GA.jar
+END
+slf4j-migrator-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/slf4j-migrator-1.5.8.jar
+END
+org.springframework.test-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.test-3.0.4.RELEASE.jar
+END
+doxia-decoration-model-1.0-alpha-11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/doxia-decoration-model-1.0-alpha-11.jar
+END
+org.springframework.aop-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.aop-3.0.4.RELEASE.jar
+END
+guice-2.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/guice-2.0.jar
+END
+jbpm-bpmn.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-bpmn.jar
+END
+oracle-jdbc6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/oracle-jdbc6.jar
+END
+doxia-module-xhtml-1.0-alpha-11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/doxia-module-xhtml-1.0-alpha-11.jar
+END
+servlet-api-6.0.20.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/servlet-api-6.0.20.jar
+END
+org.springframework.jms-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.jms-3.0.4.RELEASE.jar
+END
+hibernate-annotations-3.4.0.GA.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/hibernate-annotations-3.4.0.GA.jar
+END
+proxool-cglib.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/proxool-cglib.jar
+END
+commons-io-1.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-io-1.4.jar
+END
+jsr250-api-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jsr250-api-1.0.jar
+END
+core-3.4.2.v_883_R34x.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/core-3.4.2.v_883_R34x.jar
+END
+oro-2.0.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/oro-2.0.8.jar
+END
+org.springframework.oxm-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.oxm-3.0.4.RELEASE.jar
+END
+poi-3.8-beta1-20110307.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/poi-3.8-beta1-20110307.jar
+END
+subethasmtp-wiser-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/subethasmtp-wiser-1.2.jar
+END
+org.springframework.jdbc-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.jdbc-3.0.4.RELEASE.jar
+END
+xml-apis-1.0.b2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/xml-apis-1.0.b2.jar
+END
+doxia-module-fml-1.0-alpha-11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/doxia-module-fml-1.0-alpha-11.jar
+END
+org.springframework.instrument.tomcat-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.instrument.tomcat-3.0.4.RELEASE.jar
+END
+org.springframework.web.struts-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.web.struts-3.0.4.RELEASE.jar
+END
+ehcache-1.2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/ehcache-1.2.3.jar
+END
+xmemcached-1.4.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/xmemcached-1.4.2.jar
+END
+subethasmtp-smtp-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/subethasmtp-smtp-1.2.jar
+END
+commons-fileupload-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-fileupload-1.2.1.jar
+END
+doxia-site-renderer-1.0-alpha-11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/doxia-site-renderer-1.0-alpha-11.jar
+END
+jbpm-examples-tests.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-examples-tests.jar
+END
+org.springframework.asm-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.asm-3.0.4.RELEASE.jar
+END
+doxia-module-xdoc-1.0-alpha-11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/doxia-module-xdoc-1.0-alpha-11.jar
+END
+poi-ooxml-3.8-beta1-20110307.jar
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/poi-ooxml-3.8-beta1-20110307.jar
+END
+juel-engine.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/juel-engine.jar
+END
+jbpm-jboss.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-jboss.jar
+END
+org.springframework.beans-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.beans-3.0.4.RELEASE.jar
+END
+org.springframework.expression-3.0.4.RELEASE.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/org.springframework.expression-3.0.4.RELEASE.jar
+END
+ognl-3.0.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/ognl-3.0.6.jar
+END
+jbpm-console-integration.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/jbpm-console-integration.jar
+END
+velocity-1.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/velocity-1.5.jar
+END
+guice-aopalliance.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/guice-aopalliance.jar
+END
+commons-beanutils-1.7.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/commons-beanutils-1.7.0.jar
+END
+struts2-core-2.3.15.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/struts2-core-2.3.15.1.jar
+END
+httpcore-4.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/httpcore-4.1.jar
+END
+log4j-over-slf4j-1.5.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/350/appinterface/jar/log4j-over-slf4j-1.5.8.jar
+END

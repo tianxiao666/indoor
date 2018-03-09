@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/408/trunk/indooradmin/class/controllers/api
+END
+GetBuildingFloorMapController.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/srcsvn/indoor/!svn/ver/354/trunk/indooradmin/class/controllers/api/GetBuildingFloorMapController.php
+END
+ApiController.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/srcsvn/indoor/!svn/ver/229/trunk/indooradmin/class/controllers/api/ApiController.php
+END
+GetLocationController.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/srcsvn/indoor/!svn/ver/366/trunk/indooradmin/class/controllers/api/GetLocationController.php
+END
+MtSignalCollectionController.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/srcsvn/indoor/!svn/ver/421/trunk/indooradmin/class/controllers/api/MtSignalCollectionController.php
+END
+GetFloorTypeListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/srcsvn/indoor/!svn/ver/271/trunk/indooradmin/class/controllers/api/GetFloorTypeListController.php
+END
+CheckNewVersionController.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/402/trunk/indooradmin/class/controllers/api/CheckNewVersionController.php
+END
+GetBuildingFloorListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/srcsvn/indoor/!svn/ver/336/trunk/indooradmin/class/controllers/api/GetBuildingFloorListController.php
+END
+GetMatchBuildingListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/srcsvn/indoor/!svn/ver/336/trunk/indooradmin/class/controllers/api/GetMatchBuildingListController.php
+END
+GetPoiListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/srcsvn/indoor/!svn/ver/388/trunk/indooradmin/class/controllers/api/GetPoiListController.php
+END
+GetBuildingTypeListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/srcsvn/indoor/!svn/ver/271/trunk/indooradmin/class/controllers/api/GetBuildingTypeListController.php
+END
+IdealApCollectionController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/srcsvn/indoor/!svn/ver/408/trunk/indooradmin/class/controllers/api/IdealApCollectionController.php
+END
+GetApListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/srcsvn/indoor/!svn/ver/378/trunk/indooradmin/class/controllers/api/GetApListController.php
+END
+GetMtSignalListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/srcsvn/indoor/!svn/ver/422/trunk/indooradmin/class/controllers/api/GetMtSignalListController.php
+END
+GetNearbyBuildingListController.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/srcsvn/indoor/!svn/ver/336/trunk/indooradmin/class/controllers/api/GetNearbyBuildingListController.php
+END

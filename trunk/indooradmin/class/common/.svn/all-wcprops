@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/391/trunk/indooradmin/class/common
+END
+CDict.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/391/trunk/indooradmin/class/common/CDict.php
+END
+CUserMgr.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/class/common/CUserMgr.php
+END
+StringTools.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/class/common/StringTools.php
+END
+SafetyFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/class/common/SafetyFilter.php
+END
+CPositionMgr.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/class/common/CPositionMgr.php
+END
+GPTools.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/class/common/GPTools.php
+END
+CWikiPartMgr.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/srcsvn/indoor/!svn/ver/1/trunk/indooradmin/class/common/CWikiPartMgr.php
+END
+Location.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/367/trunk/indooradmin/class/common/Location.php
+END

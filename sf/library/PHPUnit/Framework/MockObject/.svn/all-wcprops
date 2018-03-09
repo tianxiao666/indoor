@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject
+END
+InvocationMocker.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/InvocationMocker.php
+END
+Invokable.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Invokable.php
+END
+MockObject.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/MockObject.php
+END
+Stub.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Stub.php
+END
+Invocation.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Invocation.php
+END
+Matcher.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Matcher.php
+END
+Verifiable.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Verifiable.php
+END
+Generator.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/1/sf/library/PHPUnit/Framework/MockObject/Generator.php
+END

@@ -1,0 +1,115 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_1_3_2.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+	$("#button_add").click(function(){
+		if(confirm("确定添加此关键字?"))
+		{
+			var add_keywordvalue = $("#add_keywordvalue").val();
+			var add_keywordstate = $("#add_keywordstate").val();
+	        var add_keywordlevel = $("#add_keywordlevel").val();
+			if($.trim(add_keywordvalue) == '' || add_keywordvalue == undefined){//关键字为空
+				alert("请输入关键字！");
+				$("#add_keywordvalue").focus();
+				return false;
+		    }//end if
+		    //alert(1);
+			$.ajax({
+			       url:'ea.php?r=KeywordManager/AddKeywordAjax', //后台处理程序
+			       type:'post',         //数据发送方式
+			       dataType:'json',     //接受数据格式
+			       data: 'add_keywordvalue='+add_keywordvalue+'&add_keywordstate='+add_keywordstate+
+			             '&add_keywordlevel='+add_keywordlevel, 
+			       //data: 'one='+one+'&two='+two,          //要传递的数据
+			       success:function(json){ //回传函数(这里是函数名)
+			    	  if(json.existFlag == 'true'){
+			    		  alert("此关键字已经存在,不能重复添加!");
+			    		  return false;
+			    	   }//end if(json.existFlag)
+			    	   else if(json.existFlag == "false"){
+			    		   alert("添加成功!");
+			    		   document.getElementById("mainForm").submit();
+			    		   return false;
+			    	   }//end else if
+			    	 }//end success:function(json)
+			      });//end .ajax
+		}
+	});
+});
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+  <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;<a href="ea.php?r=KeywordManager">关键字管理</a>&nbsp;&gt;&nbsp;新增关键字</span></div>
+  <input type="hidden" id="subbarFlag" value="keyword_manager_bar" />
+<div class="tabtext" id="tabtext1" style="margin-top:35px;">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px">填写关键字信息</font></td>
+					<td width="50%" align="right"><a href="javascript:history.go(-1);"><font color="#666" style="font-weight:bold;font-size:14px">[返回上一页]</font></a></td>
+				</tr>
+			</table>
+<table class="itable">
+                 <tr class="row0">
+                    <td align="center">
+						<table border="0" cellspacing="0" cellpadding="0">
+    						<tr>
+        						<td align="right" width="40%" style="border:0px;">关键字</td>
+    						    <td align="left" style="border:0px;"><input type="text" name="add_keywordvalue" id="add_keywordvalue" size="20"></td>
+    						</tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">状态</td>
+    						    <td align="left" style="border:0px;">
+	    						    <select style="width:110px" name="add_keywordstate" id="add_keywordstate">
+		 			                   {foreach from=$state key=key item=value}
+		 							   <option value="{$key}">{$value}</option>
+		 						       {/foreach} 
+ 			                       </select>
+    						    </td>
+						    </tr>
+    						<tr>
+    						    <td align="right" style="border:0px;">级别</td>
+    						    <td align="left" style="border:0px;">
+    						    <select style="width:110px" name="add_keywordlevel" id="add_keywordlevel">
+		  				              {foreach from=$level key=key item=value}
+		                                  <option value="{$key}">{$value}</option>
+		                                {/foreach}
+  				                </select>
+    						    </td>
+						    </tr>
+						</table>
+					</td>
+                </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="30" align="center" width="90%" valign="bottom">
+					<input type="button" id="button_add" value="确定添加" style="font-size:12px;width:65px;height:20px;">
+					<input type="button" value="返回上一页" style="font-size:12px;width:70px;height:20px;" onclick="history.go(-1);" /></td>
+				<td>&nbsp;</td>
+				</tr>
+	</table>
+	<form action="ea.php?r=KeywordManager" id="mainForm" method="post">
+</form>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+  </td>
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="usercontentmgr"></div>
+   </div>
+   </form>
+   </div> 
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+

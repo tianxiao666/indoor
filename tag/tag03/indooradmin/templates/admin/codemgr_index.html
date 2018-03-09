@@ -1,0 +1,97 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+{/literal}
+<script language="javascript" type="text/javascript" src="./js/changepage.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function deleteAdmin()
+{
+	if(confirm('您确定要删除这个用户吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+</script>
+{/literal}
+
+
+<div class="content">
+  <div class="main">
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /> <font color="#a40000" style="font-weight:bold;font-size:14px">数据列表</font></td>
+					{if $user_role.ADMIN}<td width="50%" align="right"><a href="ea.php?r=CodeMgr/addView" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增数据]</font></a></td>{/if}
+				</tr>
+			</table>
+<table class="itable">
+<thead>
+ <tr>
+                    <th width="20%" align="left">编码名称</th>
+                    <th width="20%">编码类型</th>
+                    <th width="20%" align="left">编码说明</th>
+                    <th width="20%" align="left">创建时间</th>
+					{if $user_role.ADMIN}<th align="left">&nbsp;相关操作</th>{/if}
+                </tr>
+</thead>
+<tbody>
+		{section name=i loop=$code_list}
+                <tr class="{cycle values='row0,row1'}">
+                    <td align="left">{$code_list[i].CODE_NAME}</td>
+                    <td align="left">{$code_list[i].CODE_TYPE}</td>
+					<td align="left">{$code_list[i].CODE_NOTE}</td>
+                    <td align="left">{$code_list[i].CREATE_TIME}</td>
+                    {if $user_role.ADMIN}
+					<td align="left">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td style="border:0px;"><a href="ea.php?r=CodeMgr/editView&CODE_NAME={$code_list[i].CODE_NAME}"><img src="images/icon/s_edit.gif" border="0" align="absmiddle" /><font color="#666">修改资料</font></a></td>
+								<td style="border:0px;"><a href="ea.php?r=CodeMgr/DeleteCode&CODE_NAME={$code_list[i].CODE_NAME}" target="bf" onclick="return deleteAdmin();"><img src="images/icon/s_delete.gif" border="0" align="absmiddle" /><font color="#666">删除资料</font></a></td>
+							</tr>
+						</table>
+					</td>
+					{/if}
+                </tr>
+				{/section}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

@@ -1,0 +1,37 @@
+/*=================================
+智能旅游POI显示
+dateTime: 2010-12-29
+author: Monny
+=================================*/
+/*导入公共样式*/
+@import url("public.css");
+/*导入页头样式*/
+@import url("header.css");
+
+
+.tabtext{ min-width:978px; border:1px #cecece solid; -moz-border-radius:5px; -webkit-border-radius:5px; background:#fff; margin-top:10px;  }
+.con_left{ float:left; width:100%; border:1px #ddd solid; text-align:center; }
+
+
+
+
+.con_right{ float:right; width:238px; border:1px #ddd solid; -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px;}
+.con_right .tname{ float:left; width:220px; padding:15px 9px 0; background:url(../images/index/bg_tname.jpg) 0 0 repeat-x; height:25px;  }
+.con_right .tname label{ float:left; display:block;}
+.con_right .tname label input{ vertical-align:middle; margin-top:-3px; margin-right:3px;}
+.con_right .tname span{float:right; display:block;}
+.con_right .tname span a{ margin-right:8px;  }
+.con_right .tname span .btn_del{ background:url(../images/btn_del.gif) 0 0 no-repeat; padding-left:15px;}
+.con_right .tname span .btn_moveup{ background:url(../images/btn_moveup.gif) 0 0 no-repeat; padding-left:10px; }
+.con_right .tname span .btn_movedown{ background:url(../images/btn_movedown.gif) 0 0 no-repeat; padding-left:10px; }
+
+.con_right .tnlist { float:left; width:238px; }
+.con_right .tnlist ul{float:left; width:238px; height:508px;overflow:hidden; overflow-y:scroll; }
+.con_right .tnlist li{ float:left; width:220px; background:#fff url(../images/index/bg_tnlist.jpg) 0 bottom repeat-x; padding:8px 9px 5px; }
+.con_right .tnlist li label{float:left; display:block; width:220px; overflow:hidden;}
+.con_right .tnlist li label input{float:left; vertical-align:middle; margin-right:5px; margin-top:5px; }
+.con_right .tnlist li .tnorder{float:left; display:inline-block; width:19px; height:14px; background:url(../images/bg_tnorder.gif) 0 0 no-repeat; text-align:center; overflow:hidden; margin-right:5px; margin-top:5px;  }
+.con_right .tnlist li .txt{ float:left; text-align:left; width:165px; line-height:24px; }
+
+.np_btn{ float:left; width:100%; }
+.np_btn a{ display:inline-block; margin:6px 10px 16px;}

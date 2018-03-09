@@ -1,0 +1,315 @@
+{include file="header.html"}
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link href="{$mediaServer}css/popup.css"  rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.js"></script>
+<link href="{$mediaServer}js/jquery/jquery_plugins/jqmodal/jqModal.css"  rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.validate.js"></script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/juery.validate.additional-methods.js"></script>
+<script type="text/javascript" src="{$mediaServer}js/jquery/jquery_plugins/jquery.jfvalidate.helper.js"></script>
+
+{literal}
+<script type="text/javascript">
+jQuery(document).ready(function () {
+	
+		
+});
+
+</script>
+<style>
+ #bgDiv
+ {
+      border: 0px solid #666666;
+      position: relative;
+            
+  }
+  #dragDiv
+  {
+     border: 1px dashed #fff;
+     top: 50px;
+     left: 50px;
+     cursor: move;
+     position: absolute; z-index: 200; left: 0px; top: 0px;
+  }
+</style>
+{/literal}
+{include file="sceniczone_msg.html"}
+<div class="content">
+  <div class="main">
+ <div class="crumb"><span>当前位置：{if $dest_id}<a href="ea.php?r=LsCompany">景区产品管理</a>{else}<a href="ea.php?r=LsArea/AreaList">旅游数据管理</a>{/if}&nbsp;&gt;&nbsp;图片剪切</span></div>
+  </div>
+ <form  action='ea.php?r=ScenicPriceAlbum/CutPrice&pic_id={$pic_id}' method="POST" id="CDAOLS_AREA_PIC" enctype="multipart/form-data"> <div class="tabtext" id="tabtext1" >
+  <input type="hidden" name="CDAOLS_AREA_PIC[X]" id="X" value="" />
+  <input type="hidden" name="CDAOLS_AREA_PIC[Y]" id="Y" value="" />
+  <input type="hidden" name="CDAOLS_AREA_PIC[W]" id="W" value="" />
+  <input type="hidden" name="CDAOLS_AREA_PIC[H]" id="H" value="" />
+  <input type="hidden" name="CDAOLS_AREA_PIC[ALBUM_TYPE]" id="ALBUM_TYPE" value="{$album_type}"/>
+   <input type="hidden" name="CDAOLS_AREA_PIC[PIC_ID]" id="PIC_ID" value="{$pic_id}" />
+   <input type="hidden" name="CDAOLS_AREA_PIC[SPOT_ID]" id="SPOT_ID" value="{$spot_id}" />
+   <input type="hidden" name="CDAOLS_AREA_PIC[POI_ID]" id="POI_ID" value="{$poi_id}" />
+   <input type="hidden" name="CDAOLS_AREA_PIC[AREA_ID]" id="AREA_ID" value="{$area_id}">
+   <input type="hidden" name="CDAOLS_AREA_PIC[AREA]" id="AREA" value="{$area}">
+   <input type="hidden" name="CDAOLS_AREA_PIC[DEST_ID]" id="DEST_ID" value="{$dest_id}">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /><font color="#a40000" style="font-weight:bold;font-size:14px"> 自定义缩略图</font></td>
+					{if $area}<td width="50%" align="right"><a href="{if $dest_id}ea.php?r=DestinationsAlbum/Index&dest_id={$dest_id}&album_type={$album_type}{else}ea.php?r=ScenicAlbumMgr&flag=1&area_id={$area_id}&album_type={$album_type}&spot_id={$spot_id}&poi_id={$poi_id}{/if}"><font color="#666" style="font-weight:bold;font-size:14px">[返回上一页]</font></a></td>{/if}
+				</tr>
+			</table>
+<table class="itable" border="0">
+               <tr class="row0">
+                    <td >
+						<table border="0" cellspacing="0" cellpadding="0">
+						     <tr>
+						       <td>
+						       <input type="HIDDEN" name="CDAOLS_AREA_PIC[AREA_ID]" id="AREA_ID" value="{$area_id}">
+						          <div class='a'>
+						         
+	    						    <div class="a1" style="padding-left:440px;display: none">所属:
+	    						    {if $spot_name}
+    						    <input type="hidden" name="CDAOLS_AREA_PIC[SPOT_NAME]" id="SPOT_NAME" value="{$spot_name}">{$spot_name}
+    						      {elseif $poi_name}
+    						       <input type="hidden" name="CDAOLS_AREA_PIC[POI_NAME]" id="POI_NAME" value="{$poi_name}">{$name}--{$poi_name}
+    						       {elseif $area_name}
+    						        <input type="hidden" name="CDAOLS_AREA_PIC[AREA_NAME]" id="AREA_NAME" value="{$area_name}">{$area_name}
+    						        {else}
+    						      <input type="hidden" name="CDAOLS_AREA_PIC[TYPE_NAME]" id="TYPE_NAME" value="{$type_name}">{$type_name}
+    						    {/if}
+	    						    
+	    						    </div>
+	    						</div>
+	    						<div class='a' style="padding-top:10px">
+	    						    <div class="a1" style="padding-left:440px">相片:
+	    						    {$picInfo}<input type="hidden" name="CDAOLS_AREA_PIC[P_TOPIC]" id="P_TOPIC" value="{$picInfo}" />
+	    						    
+	    						    </div>
+	    						</div>
+	    						<div class='a' style="padding-top:10px">
+	    						    <div class="a1" style="padding-left:440px">规格:
+	    						    <input type="radio" name="CDAOLS_AREA_PIC[spec]" value="equal/" onclick="picCut(150,150,'{$imgUrl}');">1:1比例
+    						    	&nbsp;&nbsp;
+    						    	<input type="radio" name="CDAOLS_AREA_PIC[spec]" value="previews/" onclick="picCut(710,0,'{$imgUrl}');">宽幅比例
+	    						    </div>
+	    						</div>
+	    						<div class='a' style="padding-top:10px">
+	    						    <div class="a1" id ="a1" style="padding-left:140px">
+	    						    <div id="bgDiv">
+    						      <img alt="" src="{$imgUrl}" id="preview" style="width:800px;height: 550px">
+							        <div id="dragDiv">
+							        
+							           <div id="rRightDown">
+				                        </div>
+				                        <div id="rLeftDown">
+				                        </div>
+				                        <div id="rRightUp">
+				                        </div>
+				                        <div id="rLeftUp">
+				                        </div>
+				                        <div id="rRight">
+				                        </div>
+				                        <div id="rLeft">
+				                        </div>
+				                        <div id="rUp">
+				                        </div>
+				                        <div id="rDown">
+				                        </div>
+							        </div>
+							      </div>
+	    						    </div>
+	    						</div>
+						       </td>
+						       <td>
+						          <div id="viewDiv" ></div> <img id="imgCreat"  src="" style="display: none;" />
+						       </td>
+						      </tr>
+    						  
+							<tr>
+    						    <td style="border:0px;padding-left:470px;padding-top:20px" colspan="2"><input type="button" value="裁剪" style="font-size:12px;width:80px;height:30px;" onclick="ajaxPicCreateFormSubmit();"/> 
+    						    </td>
+						   </tr>
+						</table>
+					</td>
+                </tr>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+  </td>
+  </tr>
+</table>
+
+{literal}
+
+<script type="text/javascript">
+
+var isIE = (document.all) ? true : false;
+
+var isIE6 = isIE && ([/MSIE (\d)\.0/i.exec(navigator.userAgent)][0][1] == 6);
+
+var $ = function (id) {
+	return "string" == typeof id ? document.getElementById(id) : id;
+};
+
+var Class = {
+	create: function() {
+		return function() { this.initialize.apply(this, arguments); }
+	}
+}
+
+var Extend = function(destination, source) {
+	for (var property in source) {
+		destination[property] = source[property];
+	}
+}
+
+var Bind = function(object, fun) {
+	return function() {
+		return fun.apply(object, arguments);
+	}
+}
+
+var BindAsEventListener = function(object, fun) {
+	var args = Array.prototype.slice.call(arguments).slice(2);
+	return function(event) {
+		return fun.apply(object, [event || window.event].concat(args));
+	}
+}
+
+var CurrentStyle = function(element){
+	return element.currentStyle || document.defaultView.getComputedStyle(element, null);
+}
+
+function addEventHandler(oTarget, sEventType, fnHandler) {
+	if (oTarget.addEventListener) {
+		oTarget.addEventListener(sEventType, fnHandler, false);
+	} else if (oTarget.attachEvent) {
+		oTarget.attachEvent("on" + sEventType, fnHandler);
+	} else {
+		oTarget["on" + sEventType] = fnHandler;
+	}
+};
+
+function removeEventHandler(oTarget, sEventType, fnHandler) {
+    if (oTarget.removeEventListener) {
+        oTarget.removeEventListener(sEventType, fnHandler, false);
+    } else if (oTarget.detachEvent) {
+        oTarget.detachEvent("on" + sEventType, fnHandler);
+    } else { 
+        oTarget["on" + sEventType] = null;
+    }
+};
+</script>
+{/literal}
+  <script type="text/javascript" src="{$mediaServer}js/Drag.js"></script>
+<script type="text/javascript" src="{$mediaServer}js/Resize.js"></script>
+<script type="text/javascript" src="{$mediaServer}js/ImgCropper.js"></script>
+{literal}
+<script type="text/javascript">
+
+var ic;
+function picCut(width,height,imgurl){
+	
+	var imgs = document.getElementById("bgDiv").getElementsByTagName("img");
+	var viewimgs = document.getElementById("viewDiv").getElementsByTagName("img");
+	var images = new Image();
+	images.src= document.getElementById("preview").src;
+	
+	if(width ==710)
+	{
+		document.getElementById("preview").style.display="none";
+		document.getElementById("bgDiv").style.width="712px";
+		if(images.width>images.height)
+		{
+			document.getElementById("bgDiv").style.height="540px";
+		}
+		else{
+			document.getElementById("bgDiv").style.height="950px";
+		}
+		
+		document.getElementById("dragDiv").style.width="710px";
+		document.getElementById("dragDiv").style.height="350px";
+		document.getElementById("viewDiv").style.width="400px";
+		document.getElementById("viewDiv").style.height="350px";
+		for(var j=0;j<imgs.length;j++){
+			if(imgs[j].style.width="200px")
+			{
+				imgs[j].style.display="none";
+			}
+		}
+		for(var j=0;j<viewimgs.length;j++){
+			if(viewimgs[j].style.width="200px")
+			{
+				viewimgs[j].style.display="none";
+			}
+		}			
+	}else{
+		if(images.width>images.height)
+		{
+			document.getElementById("bgDiv").style.width="200px";
+			document.getElementById("bgDiv").style.height="150px";
+		}
+		else{
+			document.getElementById("bgDiv").style.width="150px";
+			document.getElementById("bgDiv").style.height="200px";
+		}
+		document.getElementById("preview").style.display="none";
+		
+		document.getElementById("dragDiv").style.width="148px";
+		document.getElementById("dragDiv").style.height="148px";
+		document.getElementById("viewDiv").style.width="200px";
+		document.getElementById("viewDiv").style.height="200px";
+		for(var j=0;j<imgs.length;j++){
+			if(imgs[j].style.width!="200px")
+			{
+				imgs[j].style.display="none";
+			}
+		}
+		for(var j=0;j<viewimgs.length;j++){
+			if(viewimgs[j].style.width!="200px")
+			{
+				viewimgs[j].style.display="none";
+			}
+		}	
+	}
+	
+	ic = new ImgCropper("bgDiv", "dragDiv", imgurl, {
+		Width: width, Height: height, Color: "#000",
+		Resize: true,
+		Right: "rRight", Left: "rLeft", Up:	"rUp", Down: "rDown",
+		RightDown: "rRightDown", LeftDown: "rLeftDown", RightUp: "rRightUp", LeftUp: "rLeftUp",
+		Preview: "viewDiv", viewWidth: 200, viewHeight: 200
+	})
+}
+function ajaxPicCreateFormSubmit()
+{
+	var p = ic.Url, o = ic.GetPos(),
+	y = o.Left,
+	x = o.Top,
+	
+	w = o.Width,
+	h = o.Height,
+	pw = ic._layBase.width,
+	ph = ic._layBase.height;
+	
+	document.getElementById("X").value=x;
+	document.getElementById("Y").value=y;
+	document.getElementById("W").value=w;
+	document.getElementById("H").value=h;
+	document.getElementById("CDAOLS_AREA_PIC").submit();
+}
+
+</script>
+{/literal}
+   </div>
+   </form>
+   </div>
+   <script language="javascript">{$validatJs}</script>
+ 
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

@@ -1,0 +1,164 @@
+{include file="header.html"}
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/search.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+{literal}
+<style>
+.itable td{padding:3px 0 3px 10px;border:1px solid #ccc;  color:#666; }
+</style>
+{/literal}
+<script language="javascript" type="text/javascript" src="./js/changepage.js"></script>
+{literal}
+<script language="javascript" type="text/javascript">
+function confirmLogout()
+{
+	if(confirm('您确定要退出登录吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function deleteAdmin()
+{
+	if(confirm('您确定要删除这个用户吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function toSubmit(){
+	var frm = document.headSearchForm;
+	  frm.action='ea.php?r=SysUserMgr/SearchUser';
+	  frm.submit();
+}
+
+function dodisable()
+{
+	if(confirm('您确定要禁用吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+
+function doactive()
+{
+	if(confirm('您确定要激活吗？'))
+	{
+		return true;
+	}
+	return false;
+}
+</script>
+{/literal}
+
+
+<div class="content">
+  <div class="main">
+    <div class="crumb"><span>当前位置：<a href="ea.php?r=roleMgr">后台管理</a>&nbsp;&gt;&nbsp;员工管理</span></div>
+  <input type="hidden" id="subbarFlag" value="sysuser_mgr_bar" />
+
+
+ 
+  <div class="tabtext" id="tabtext1" >
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+   <tr>
+   <td valign="top" style="padding:10px 10px 0;">
+   <div class="scenic_search">
+   <div class="chose">
+   <form method="post" name="headSearchForm" id="headSearchForm" >
+   <span>账号/姓名：</span><input type="text" name="NAME" id="NAME" class="intxt" tabIndex="1" value="{$condition.NAME}"/>
+   <span>邮箱：</span><input type="text" name="EMAIL" id="EMAIL" class="intxt" tabIndex="1" value="{$condition.EMAIL}"/>
+   <span>状态：</span><select id="U_STATUS" name="U_STATUS" style="width:80px">
+					  <option value="">全部</option>
+					  {html_options options=$STATE selected=$condition.U_STATUS}</select>
+   <span>部门：</span>
+   <select id="DEPT" name="DEPT" style="width:150px">
+		<option value="">全部</option>
+			   {foreach from=$dept_list key=key item=type}
+			       <option value="{$type.DEPT_ID}" {if $type.DEPT_ID == $condition.DEPT}selected {/if}>{$type.DEPT_NAME}</option>
+						 {if $type.child}{foreach from=$type.child item=m}<option value="{$m.DEPT_ID}" {if $m.DEPT_ID == $condition.DEPT}selected {/if}>&nbsp;&nbsp;{$m.DEPT_NAME}</option>
+						 {if $m.child}{foreach from=$m.child item=n}<option value="{$n.DEPT_ID}" {if $n.DEPT_ID == $condition.DEPT}selected {/if}>&nbsp;&nbsp;&nbsp;&nbsp;{$n.DEPT_NAME}</option>
+						 {/foreach}{/if}
+						 {/foreach}
+						 {/if}
+			   {/foreach}
+			    
+	</select>
+   <input type="button" value="搜索" style="font-size: 12px; width: 60px; height: 20px;" onclick="toSubmit();">
+   </form></div></div>
+   </td></tr>
+  <tr> 
+  <td valign="top" style="padding:10px 10px 0;">
+	<div class="scenic_list">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="50%" align="left" class="nameFunction"><img src="images/icon/m_user.gif" border="0" align="absmiddle" /> <font color="#a40000" style="font-weight:bold;font-size:14px">员工列表</font></td>
+					{if $user_role.ADMIN}<td width="50%" align="right"><a href="ea.php?r=SysUserMgr/AddUser" class="taboff"><font color="#666" style="font-weight:bold;font-size:14px">[新增员工]</font></a></td>{/if}
+				</tr>
+			</table>
+<table class="itable">
+<thead>
+ <tr>
+                    <th width="8%" align="left">账号</th>
+                    <th width="8%" align="left">姓名</th>
+                    <th width="12%" align="left">邮箱</th>
+                    <th width="20%" align="left">所属部门</th>
+					<th width="10%" align="left">创建日期</th>
+					<th width="10%" align="left">最后一次登陆</th>
+					<th width="20%" align="left">角色</th>
+					{if $user_role.ADMIN}<th width="12%" align="left">&nbsp;相关操作</th>{/if}
+                </tr>
+</thead>
+<tbody>
+{if $user_list}
+	{section name=i loop=$user_list}
+		<tr class="{cycle values='row0,row1'}">
+			<td align="left">{$user_list[i].NAME}</td>
+			<td align="left">{$user_list[i].REAL_NAME}</td>
+			<td align="left">{$user_list[i].EMAIL}</td>
+            <td align="left">{foreach from=$user_list[i].DEPTS item=dept}
+                    {$dept.DEPT_NAME}&nbsp;
+                    {/foreach}</td>
+            <td align="left">{$user_list[i].CREATE_TIME|date_format:"%Y-%m-%d"}</td>
+            <td align="left">{$user_list[i].VISIT_TIME}</td>
+            <td align="left">{foreach from=$user_list[i].ROLES item=role}{$role.ROLE_NAME}&nbsp;{/foreach}</td>
+            {if $user_role.ADMIN}
+			<td align="left">
+				{if $user_list[i].STATE eq 'A'}<a href="ea.php?r=SysUserMgr/EditUser&id={$user_list[i].SYS_SUBS_ID}"><font color="#666">编辑</font></a>{/if}
+					{if $user_list[i].STATE eq 'A'}
+					<a href="ea.php?r=SysUserMgr/ChangeState&id={$user_list[i].SYS_SUBS_ID}&state=X"><font color="#666">禁用</font></a>
+					{elseif $user_list[i].STATE eq 'X'}
+					<a href="ea.php?r=SysUserMgr/ChangeState&id={$user_list[i].SYS_SUBS_ID}&state=A"><font color="#666">激活</font></a>
+					{/if}
+			</td>
+			{/if}
+    	</tr>
+	{/section}
+{else}
+<th width="15%" align="left" colspan="8"><div align="center" style="color: red;">没有找到任何记录</div></th>
+{/if}
+</tbody>
+</table>
+   </div>
+  </td>
+  </tr>
+  <tr> 
+  <td valign="top" style="padding:10px;">
+	<div class="pagebreak">
+<div class="page">
+{include file="page_info.html"}
+</div>
+</div>
+  </td>
+
+  </tr>
+</table>
+	<input type="hidden" id="headMenu" value="backmanager">
+   </div>
+   </div> 
+   </div>
+{include file="footer.html"}
+<iframe id="bf" name="bf" src="about:blank" width="0" height="0" frameborder="0" scrolling="no"></iframe>

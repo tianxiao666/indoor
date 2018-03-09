@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf
+END
+perf-oci8.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf/perf-oci8.inc.php
+END
+perf-mssqlnative.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf/perf-mssqlnative.inc.php
+END
+perf-informix.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf/perf-informix.inc.php
+END
+perf-postgres.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf/perf-postgres.inc.php
+END
+perf-mysql.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf/perf-mysql.inc.php
+END
+perf-db2.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf/perf-db2.inc.php
+END
+perf-mssql.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/perf/perf-mssql.inc.php
+END

@@ -1,0 +1,121 @@
+{include file="header.html"}
+<link href="css/public.css" rel="stylesheet" type="text/css" />
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key={$miyao}" type="text/javascript" charset="gb2312"></script>
+<script type="text/javascript" src="js/jquery/jquery_1_3_2.js"></script>
+<script type="text/javascript" src="{$mediaServer}js/thickbox.js"></script>
+{literal}
+<script language="JavaScript">
+function init()
+{
+	var map;   
+    
+    if(GBrowserIsCompatible()){//≈–∂œ‰Ø¿¿∆˜ºÊ»›–‘  
+		 var icon = new GIcon();
+		 icon.image = "./images/marker/mm_20_red.png";
+	   
+		 icon.iconSize = new GSize(10, 18);
+		
+		 icon.iconAnchor = new GPoint(6, 20);
+		 icon.infoWindowAnchor = new GPoint(5, 1);
+        map = new GMap(document.getElementById("map_canvas"));  
+        var ent_lng = $('#C_LONGITUDE').val();
+        var c_long  = (ent_lng/3600)/1000;
+        var ent_lat = $('#C_LATITUDE').val();
+        var c_lat   = (ent_lat/3600)/1000;
+        var areaname= $('#AREA_NAME').val();
+        var darwent_lng = $('#ENT_LONGITUDE').val();
+        var darwent_lat = $('#ENT_LATITUDE').val();
+        var areaname= $('#AREA_NAME').val();
+        if(c_lat && c_long){
+        	map.setCenter(new GLatLng(c_lat,c_long),14);  
+        }else{
+			map.setCenter(new GLatLng(darwent_lat,darwent_lng),14);
+        }
+		
+		map.setMapType(G_SATELLITE_MAP);
+		map.enableScrollWheelZoom();  
+        //map.disableDragging();
+        //∂‡±ﬂ–Œœ‘ æ
+        var pointrangeid = $('#RANGE_ID').val();
+        var point_range_id = pointrangeid.split('/');
+        var pointsopt = $('#POINT_SPOT_ID').val();
+        var pointsopt_id = pointsopt.split('/');
+        var pointlng  = $('#LONGITUDE').val();
+        var point_lng = pointlng.split('/');
+        var pointlat  = $('#LATITUDE').val();
+        var point_lat = pointlat.split('/');
+		for(var j=0;j<pointsopt_id.length && j<point_lng.length && j<point_lat.length;j++){
+			var pointsopts_id  = pointsopt_id[j].split('-');
+	        var pointent_lng   = point_lng[j].split('-');
+	        var pointent_lat   = point_lat[j].split('-');
+	        var triangleCoords = Array();
+			for(i=0;i<pointent_lng.length && i<pointent_lat.length;i++){
+				var lat = (pointent_lat[i]/3600)/1000;
+				var lng = (pointent_lng[i]/3600)/1000;
+				triangleCoords[i] = new GLatLng(lat,lng);
+			}
+			var bermudaTriangle  = new GPolygon(triangleCoords, "#00FF00", 0, 1, "#00FF00", 0.1);
+			if(pointsopt_id[j]){
+				addListener(bermudaTriangle,pointsopt_id[j]);
+			}
+			map.addOverlay(bermudaTriangle);
+	   }
+	   var e_longitude = $('#E_LONGITUDE').val();
+	   var e_long = (e_longitude/3600)/1000;
+	   var n_latitude  = $('#N_LATITUDE').val();
+	   var n_lat  = (n_latitude/3600)/1000;
+	   var w_longitude = $('#W_LONGITUDE').val();
+	   var w_long = (w_longitude/3600)/1000;
+	   var s_latitude  = $('#S_LATITUDE').val();
+	   var s_lat  = (s_latitude/3600)/1000;
+	   var trianglelonglat = [
+	           new GLatLng(s_lat,w_long),
+	           new GLatLng(s_lat,e_long),
+	           new GLatLng(n_lat,e_long),
+	           new GLatLng(n_lat,w_long),
+	           new GLatLng(s_lat,w_long)     		
+	   ];
+
+	   var longlat = new GPolygon(trianglelonglat, "#f33f00", 1, 0.5, "", 0.1);
+	   map.addOverlay(longlat);
+    }      
+  
+}
+
+function addListener(marker,id)
+{
+	GEvent.addListener(marker,'click',function(){
+        window.open("ea.php?r=ScenicSpots/index&id="+id,"_blank") ;
+    });
+}
+window.onload = init;
+</script>
+{/literal}
+<div class="content">
+  <div class="main">
+  <div class="tabox">
+  <div class="c"></div>
+  
+     <center><p style="font-size: 15px">{$area_name}</p></center>
+  <div class="tabtip"></div>
+  <div class="c"></div>
+  <br/>
+  <center><div id="map_canvas" style="width: 1800px; height:1800px">  
+  </div></center>
+  </div> 
+   
+   </div>
+   </div> 
+  	<input type="hidden" id="E_LONGITUDE" name="E_LONGITUDE" value="{$e_longitude}"></input>
+    <input type="hidden" id="N_LATITUDE" name="N_LATITUDE" value="{$n_latitude}"></input>
+    <input type="hidden" id="W_LONGITUDE" name="W_LONGITUDE" value="{$w_longitude}"></input>
+    <input type="hidden" id="S_LATITUDE" name="S_LATITUDE" value="{$s_latitude}"></input>
+     <input type="hidden" id="ENT_LONGITUDE" name="ENT_LONGITUDE" value="{$ent_longitude}"></input>
+    <input type="hidden" id="ENT_LATITUDE" name="ENT_LATITUDE" value="{$ent_latitude}"></input>
+    <input type="hidden" id="C_LONGITUDE" name="C_LONGITUDE" value="{$c_longitude}"></input>
+    <input type="hidden" id="C_LATITUDE" name="C_LATITUDE" value="{$c_latitude}"></input>
+    <input type="hidden" id="POINT_SPOT_ID" name="POINT_SPOT_ID" value="{$point_spot}"></input>
+    <input type="hidden" id="LONGITUDE" name="LONGITUDE" value="{$point_lng}"></input>
+    <input type="hidden" id="LATITUDE" name="LATITUDE" value="{$point_lat}"></input>
+    <input type="hidden" id="RANGE_ID" name="RANGE_ID" value="{$point_rangeid}"></input>

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget
+END
+IndoorImageView.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/IndoorImageView.java
+END
+AccelerometerEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/AccelerometerEvent.java
+END
+checkNewVersionThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/checkNewVersionThread.java
+END
+PopupDownloadApkAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/PopupDownloadApkAsyncTask.java
+END
+PlaneGraphFrameLayout.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/PlaneGraphFrameLayout.java
+END
+OverLayerImageView.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/OverLayerImageView.java
+END
+requestDataThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/requestDataThread.java
+END
+CustomAlertDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/srcsvn/indoor/!svn/ver/347/tag/app_tag03/src/com/iscreate/mobile/indoormap/widget/CustomAlertDialog.java
+END

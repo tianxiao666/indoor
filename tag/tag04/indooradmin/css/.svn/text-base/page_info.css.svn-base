@@ -1,0 +1,6 @@
+/* ·­Ò³ start*/
+.thumb {margin:15px auto 0; float:right;}
+.thumb a {display:inline-block; margin:0 1px; height:25px; line-height:25px; padding:0 8px; border:1px solid #b8b8b8; font-weight:bold; color:#8a8a8a; text-decoration:none;}
+.thumb .current {color:#fff; background:#1bacd1;}
+.thumb a:hover { background:#1bacd1; color:#fff;}
+ /* ·­Ò³ start*/

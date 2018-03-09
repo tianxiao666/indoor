@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/TencentAPI
+END
+Services_JSON.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/TencentAPI/Services_JSON.php
+END
+OpenSDK_Tencent_Weibo.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/TencentAPI/OpenSDK_Tencent_Weibo.php
+END
+OpenSDK_Util.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/TencentAPI/OpenSDK_Util.php
+END
+OpenSDK_OAuth_Client.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/TencentAPI/OpenSDK_OAuth_Client.php
+END
+OpenSDK_OAuth_Interface.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/srcsvn/indoor/!svn/ver/1/sf/library/APISDK/TencentAPI/OpenSDK_OAuth_Interface.php
+END

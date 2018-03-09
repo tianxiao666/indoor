@@ -1,0 +1,47 @@
+{if $page.totalpage gt 1}
+<link type="text/css" rel="stylesheet" href="css/text.css">
+<div class="page">
+	{if $page.page ne $page.firstpage}<a href="javascript:void(0)" onclick="change_page({$page.prevpage})" class="last">上一页</a>{/if}
+	<span class="num">
+	
+	{if $page.totalpage lt 7}
+		{*if less than 7 page, show all*}
+		{foreach from=$page.allpage item=num}
+			{if $page.page eq $num}
+				<a href="javascript:void(0)" class="cur" ><span>{$num}</span></a>
+			{else}
+				<a href="javascript:void(0)" onclick="change_page({$num})" ><span>{$num}</span></a>
+			{/if}
+		{/foreach}
+		
+	{else}
+	
+		{*first page*}
+		{if $page.page eq $page.firstpage}
+			<a href="javascript:void(0)" class="cur" ><span>{$page.firstpage}</span></a>
+		{else}
+			<a href="javascript:void(0)" onclick="change_page({$page.firstpage})"><span>{$page.firstpage}</span></a>
+		{/if}
+
+		{if $page.showPage.startPage gt 2}<a onclick="change_page({$page.showPage.startPage-1})"><span>...</span></a>{/if}
+		{foreach from=$page.showPage.num item=num}
+			{if $page.page eq $num}
+				<a href="javascript:void(0)" class="cur" ><span>{$num}</span></a>
+			{else}
+				<a href="javascript:void(0)" onclick="change_page({$num})" ><span>{$num}</span></a>
+			{/if}
+		{/foreach}
+		{if $page.showPage.endPage lt $page.lastpage-1}<a href="javascript:void(0)" onclick="change_page({$page.showPage.endPage+1})"><span>...</span></a>{/if}
+		
+		{*last page*}
+		{if $page.page eq $page.lastpage}
+			<a href="javascript:void(0)" class="cur" ><span>{$page.lastpage}</span></a>
+		{else}
+			<a href="javascript:void(0)" onclick="change_page({$page.lastpage})"><span>{$page.lastpage}</span></a>
+		{/if}
+
+	{/if}
+	</span>
+	{if $page.page ne $page.lastpage}<a href="javascript:void(0)" onclick="change_page({$page.nextpage})" class="next">下一页</a>{/if}
+</div>
+{/if}

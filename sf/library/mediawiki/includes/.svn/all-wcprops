@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/srcsvn/indoor/!svn/ver/1/sf/library/mediawiki/includes
+END
+GlobalFunctions.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/srcsvn/indoor/!svn/ver/1/sf/library/mediawiki/includes/GlobalFunctions.php
+END
+StringUtils.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/1/sf/library/mediawiki/includes/StringUtils.php
+END
+ZhConversion.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/library/mediawiki/includes/ZhConversion.php
+END
+XmlFunctions.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/srcsvn/indoor/!svn/ver/1/sf/library/mediawiki/includes/XmlFunctions.php
+END

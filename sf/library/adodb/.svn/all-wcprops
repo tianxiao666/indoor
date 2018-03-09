@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb
+END
+tohtml.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/tohtml.inc.php
+END
+adodb-exceptions.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-exceptions.inc.php
+END
+xmlschema03.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/xmlschema03.dtd
+END
+adodb-memcache.lib.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-memcache.lib.inc.php
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/license.txt
+END
+adodb-pear.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-pear.inc.php
+END
+adodb.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb.inc.php
+END
+adodb-errorpear.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-errorpear.inc.php
+END
+adodb-perf.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-perf.inc.php
+END
+pivottable.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/pivottable.inc.php
+END
+toexport.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/toexport.inc.php
+END
+adodb-time.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-time.inc.php
+END
+adodb-iterator.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-iterator.inc.php
+END
+server.php
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/server.php
+END
+adodb-xmlschema.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-xmlschema.inc.php
+END
+adodb-active-record.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-active-record.inc.php
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/readme.txt
+END
+adodb-xmlschema03.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-xmlschema03.inc.php
+END
+rsfilter.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/rsfilter.inc.php
+END
+adodb-php4.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-php4.inc.php
+END
+adodb-pager.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-pager.inc.php
+END
+adodb-csvlib.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-csvlib.inc.php
+END
+adodb-lib.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-lib.inc.php
+END
+adodb-datadict.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-datadict.inc.php
+END
+adodb-active-recordx.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-active-recordx.inc.php
+END
+xmlschema.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/xmlschema.dtd
+END
+adodb-errorhandler.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-errorhandler.inc.php
+END
+adodb-error.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/srcsvn/indoor/!svn/ver/1/sf/library/adodb/adodb-error.inc.php
+END

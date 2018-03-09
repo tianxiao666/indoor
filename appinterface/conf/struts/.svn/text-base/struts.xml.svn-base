@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<include file="struts/*.xml" />
+	
+	<package name="indoor-default" extends="struts-default">
+		 <action name="signalHandle" class="signalHandleAction" method="signalHandleAction"></action>
+		 <action name="getNearbyIndoormapBuildingList" class="getNearbyIndoormapBuildingListAction" method="indexAction"></action>
+		 <action name="getIndoormapBuildingFloorList" class="getIndoormapBuildingFloorListAction" method="indexAction"></action>
+		 <action name="getIndoormapBuildingFloorMapUrl" class="getIndoormapBuildingFloorMapUrlAction" method="indexAction"></action>
+		 <action name="getIndoormapBuildingFloorFastSearchKeyList" class="getIndoormapBuildingFloorFastSearchKeyListAction" method="indexAction"></action>
+	     <action name="doIndoormapBuildingFloorSearch" class="doIndoormapBuildingFloorSearchAction" method="indexAction"></action>
+	     <action name="checkHasNewVersion" class="checkHasNewVersionAction" method="indexAction"></action>
+	     
+	     <action name="triangulationLocation" class="triangulationLocationAction" method="getLocation"></action>
+	
+	     <action name="getCenterLocation" class="getCenterLocationAction" method="getLocation"></action>
+	</package>
+	
+</struts>
